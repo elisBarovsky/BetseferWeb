@@ -272,6 +272,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
 
     protected void ClearAll()
     {
+        BDAYtb.Text = "";
         UserIDTB.Text = "";
         FNameTB.Text = "";
         LNameTB.Text = "";
@@ -478,61 +479,4 @@ public partial class Admin_Update_User : System.Web.UI.Page
                 break;
         }
     }
-
-    //protected void FillDays()
-    //{
-    //    List<string> days = new List<string>();
-
-    //    for (int i = 1; i <= 31; i++)
-    //    {
-    //        if (i < 10)
-    //        {
-    //            days.Add("0" + i.ToString());
-    //        }
-    //        else
-    //        {
-    //            days.Add(i.ToString());
-    //        }
-    //    }
-
-    //    DDLday.DataSource = days;
-    //    DDLday.DataBind();
-    //    DDLday.Items.Insert(0, new ListItem("יום"));
-    //}
-
-    //protected void FillMonth()
-    //{
-    //    List<string> months = new List<string>();
-
-    //    for (int i = 1; i <= 12; i++)
-    //    {
-    //        if (i < 10)
-    //        {
-    //            months.Add("0" + i.ToString());
-    //        }
-    //        else
-    //        {
-    //            months.Add(i.ToString());
-    //        }
-    //    }
-
-    //    DDLmonth.DataSource = months;
-    //    DDLmonth.DataBind();
-    //    DDLmonth.Items.Insert(0, new ListItem("חודש"));
-    //}
-
-    //protected void FillYear()
-    //{
-    //    int year = 1930;
-    //    List<string> years = new List<string>();
-
-    //    for (int i = 0; year < 2011; i++, year++)
-    //    {
-    //        years.Add(year.ToString());
-    //    }
-
-    //    DDLyear.DataSource = years;
-    //    DDLyear.DataBind();
-    //    DDLyear.Items.Insert(0, new ListItem("שנה"));
-    //}
 }
