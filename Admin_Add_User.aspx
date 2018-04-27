@@ -136,10 +136,10 @@
                             </ul>
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu p-ph-res"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <li class="dropdown user user-menu p-ph-res"><a href="#" class="dropdown-toggle" data-toggle="dropdown" >
                             <asp:Image ID="UserImg1" runat="server" class="user-image" />
                             <span class="hidden-xs"></span></a>
-                            <ul class="dropdown-menu right">
+                            <ul class="dropdown-menu right" style="float:right">
                                 <li class="user-header right">
                                     <div class="pull-left user-img" runat="server">
                                         <asp:Image ID="UserImgimg" runat="server" class="img-responsive" />
@@ -147,12 +147,12 @@
                                     <p class="text-left" id="UserName" runat="server"><small>some mail</small> </p>
                                     <div class="view-link text-right"><a href="#">צפה בפרופיל</a> </div>
                                 </li>
-                                <li><a href="#"><i class="icon-profile-male "></i>הפרופיל שלי</a></li>
-                                <li><a href="#"><i class="icon-envelope"></i>הודעות</a></li>
+                                <li ><a href="#" class="view-link text-right">הפרופיל שלי   <i class="icon-profile-male" ></i></a></li>
+                                <li><a href="#" class="view-link text-right">הודעות   <i class="icon-envelope"></i></a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="icon-gears"></i>הגדרות משתמש</a></li>
+                                <li><a href="#" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="login.aspx"><i class="fa fa-power-off"></i>התנתק</a></li>
+                                <li><a href="login.aspx" class="view-link text-right">התנתק  <i class="fa fa-power-off"></i></a></li>
                             </ul>
                         </li>
                     </ul>

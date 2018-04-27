@@ -156,13 +156,13 @@
                                     <p class="text-left" id="UserName" runat="server"><small>some mail</small> </p>
                                     <div class="view-link text-right"><a href="#">צפה בפרופיל</a> </div>
                                 </li>
-                                <li><a href="#"><i class="icon-profile-male "></i>הפרופיל שלי</a></li>
-                                <li><a href="#"><i class="icon-envelope"></i>הודעות</a></li>
+                                <li ><a href="#" class="view-link text-right">הפרופיל שלי   <i class="icon-profile-male" ></i></a></li>
+                                <li><a href="#" class="view-link text-right">הודעות   <i class="icon-envelope"></i></a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="icon-gears"></i>הגדרות משתמש</a></li>
+                                <li><a href="#" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="login.aspx"><i class="fa fa-power-off"></i>התנתק</a></li>
-                            </ul>
+                                <li><a href="login.aspx" class="view-link text-right">התנתק  <i class="fa fa-power-off"></i></a></li>
+                              </ul>
                         </li>
                     </ul>
                 </div>
