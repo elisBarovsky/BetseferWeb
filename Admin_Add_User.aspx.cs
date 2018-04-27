@@ -25,9 +25,6 @@ public partial class Admin_Add_User : System.Web.UI.Page
             AddUserBTN.Visible = false;
             FillNumChilds();
             HideChildTBID(false);
-            FillDays();
-            FillMonth();
-            FillYear();
         }
     }
 
@@ -145,26 +142,25 @@ public partial class Admin_Add_User : System.Web.UI.Page
             FileUpload1.SaveAs(folderPath + FileUpload1.FileName);
             ImgPath = "/Images/" + FileUpload1.FileName;
         }
-        string day = DDLday.SelectedValue, month = DDLmonth.SelectedValue, year = DDLyear.SelectedValue;
-        if (day == "יום" || month == "חודש" || year == "שנה")
-        {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תאריך הלידה לא יכול להיות ריק');", true);
-            return;
 
-        }
-        else if (!u.IsLegalBday(day, month))
+        string newBDATe = date1.Value;
+
+        if (newBDATe == "")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תאריך הלידה לא תקני.');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תאריך לא יכול להיות ריק');", true);
             return;
         }
+
+       
         else if (ClassOtDLL.SelectedValue == "בחר")
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('לא נבחרה כיתה.');", true);
             return;
         }
-        string newBday = date1.ToString() ;
-        string bDay = day + "/" + month + "/" + year;
-        Users NewUser = new Users(UserIDTB.Text, FNameTB.Text, LNameTB.Text, bDay, ImgPath, "", PasswordTB.Text, TelephoneNumberTB.Text, UserTypeDLL.SelectedValue);
+
+        string Bday = newBDATe.Substring(8, 2) + "/" + newBDATe.Substring(5, 2) + "/" + newBDATe.Substring(0, 4);
+
+        Users NewUser = new Users(UserIDTB.Text, FNameTB.Text, LNameTB.Text, Bday, ImgPath, "", PasswordTB.Text, TelephoneNumberTB.Text, UserTypeDLL.SelectedValue);
         int res1 = NewUser.AddUser(NewUser);
         if (res1 == 1)
         {
@@ -218,9 +214,6 @@ public partial class Admin_Add_User : System.Web.UI.Page
         UserIDTB.Text = "";
         FNameTB.Text = "";
         LNameTB.Text = "";
-        DDLday.SelectedValue = "יום";
-        DDLmonth.SelectedValue = "חודש";
-        DDLyear.SelectedValue = "שנה";
         PasswordTB.Text = "";
         TelephoneNumberTB.Text = "";
         MainTeacherCB.Checked = false;
@@ -232,63 +225,6 @@ public partial class Admin_Add_User : System.Web.UI.Page
         ChildI4DTB.Text = "";
         ChildI5DTB.Text = "";
         ChildI6DTB.Text = "";
-    }
-
-    protected void FillDays()
-    {
-        List<string> days = new List<string>();
-
-        for (int i = 1; i <= 31; i++)
-        {
-            if (i < 10)
-            {
-                days.Add("0" + i.ToString());
-            }
-            else
-            {
-                days.Add(i.ToString());
-            }
-        }
-
-        DDLday.DataSource = days;
-        DDLday.DataBind();
-        DDLday.Items.Insert(0, new ListItem("יום"));
-    }
-
-    protected void FillMonth()
-    {
-        List<string> months = new List<string>();
-
-        for (int i = 1; i <= 12; i++)
-        {
-            if (i < 10)
-            {
-                months.Add("0" + i.ToString());
-            }
-            else
-            {
-                months.Add(i.ToString());
-            }
-        }
-
-        DDLmonth.DataSource = months;
-        DDLmonth.DataBind();
-        DDLmonth.Items.Insert(0, new ListItem("חודש"));
-    }
-
-    protected void FillYear()
-    {
-        int year = 1930;
-        List<string> years = new List<string>();
-
-        for (int i = 0; year < 2011; i++, year++)
-        {
-            years.Add(year.ToString());
-        }
-
-        DDLyear.DataSource = years;
-        DDLyear.DataBind();
-        DDLyear.Items.Insert(0, new ListItem("שנה"));
     }
 
     protected void MainTeacherCB_CheckedChanged(object sender, EventArgs e)

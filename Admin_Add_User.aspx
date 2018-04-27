@@ -28,16 +28,7 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-    <%--   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>--%>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
@@ -221,113 +212,106 @@
             <section class="content">
                 <div class="info-box" runat="server">
                     <form runat="server">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item" runat="server"><a class="nav-link active" onclick="UserTypeDLL_CheckedChanged" data-toggle="tab" href="#Admin" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span><span class="hidden-xs-down">אדמיניסטרטור</span></a> </li>
-                            <li class="nav-item" runat="server"><a class="nav-link" onclick="UserTypeDLL_CheckedChanged" data-toggle="tab" href="#Teacher" role="tab" ><span class="hidden-sm-up"><i class="ti-user"></i></span><span class="hidden-xs-down">מורה</span></a> </li>
-                            <li class="nav-item" runat="server"><a class="nav-link" onclick="UserTypeDLL_CheckedChanged" data-toggle="tab" href="#Parent" role="tab" ><span class="hidden-sm-up"><i class="ti-email"></i></span><span class="hidden-xs-down">הורה</span></a> </li>
-                            <li class="nav-item" runat="server"><a class="nav-link" onclick="UserTypeDLL_CheckedChanged" data-toggle="tab" href="#Pupil" role="tab" ><span class="hidden-sm-up"><i class="ti-email"></i></span><span class="hidden-xs-down">תלמיד</span></a> </li>
-                        </ul>
+                        <div class="card-body">
+                            <div class="row">
+                                <table class="table" align="center">
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="Label1" runat="server" Text="סוג משתמש"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:DropDownList ID="UserTypeDLL" runat="server" CssClass="form-control" data-toggle="dropdown" OnSelectedIndexChanged="UserTypeDLL_CheckedChanged" DataSourceID="SqlDataSource2" DataTextField="CodeUserName" DataValueField="CodeUserType" AutoPostBack="true" RepeatDirection="Horizontal"></asp:DropDownList>
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT * FROM [UserType]"></asp:SqlDataSource>
+                                        </td>
+                                        <td>
 
-                        <table class="auto-style1" align="center">
-                            <tr>
-                                <td>
-                                    <%-- <asp:Label ID="MainTeacher" runat="server" Text=" האם מחנך"></asp:Label>--%>
-                                </td>
-                                <td>
-                                    <%--                                    <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />--%>
-                                </td>
+                                        </td>
+                                        <td>
 
-                                <td>
-                                    <%--<asp:Label ID="Label1" runat="server" Text="סוג משתמש"></asp:Label>--%>
-                                </td>
-                                <td>
-                                    <asp:RadioButtonList ID="UserTypeDLL" runat="server" OnSelectedIndexChanged="UserTypeDLL_CheckedChanged" DataSourceID="SqlDataSource2" DataTextField="CodeUserName" DataValueField="CodeUserType" AutoPostBack="true" RepeatDirection="Horizontal"></asp:RadioButtonList>
-                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT * FROM [UserType]"></asp:SqlDataSource>
-                                </td>
+                                        </td>
 
-                            </tr>
-                            <tr>
-                                <td>שם משפחה</td>
-                                <td>
-                                    <asp:TextBox ID="LNameTB" runat="server" required="required" class="form-control"></asp:TextBox>
-                                </td>
+                                        <td>
+                            <asp:Button ID="AddUserBTN" runat="server" CssClass="btn btn-outline-primary" Text="הוסף משתמש" OnClick="AddUserBTN_Click" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>שם משפחה</td>
+                                        <td>
+                                            <asp:TextBox ID="LNameTB" runat="server" required="required" class="form-control"></asp:TextBox>
+                                        </td>
 
-                                <td>שם פרטי</td>
-                                <td>
-                                    <asp:TextBox ID="FNameTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox>
-                                </td>
+                                        <td>שם פרטי</td>
+                                        <td>
+                                            <asp:TextBox ID="FNameTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>תעודת זהות</td>
+                                        <td>
+                                            <asp:TextBox ID="UserIDTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox>
+                                            <asp:RegularExpressionValidator runat="server" ControlToValidate="UserIDTB"
+                                                ErrorMessage="מצחיקול! הזן בשדה רק מספרים." ForeColor="Red" ValidationExpression="^[0-9]*$" />
+                                        </td>
 
-                            </tr>
-                            <tr>
-                                <td>תעודת זהות</td>
-                                <td>
-                                    <asp:TextBox ID="UserIDTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox>
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="UserIDTB"
-                                        ErrorMessage="מצחיקול! הזן בשדה רק מספרים." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                </td>
+                                        <td>תאריך לידה</td>
+                                        <td>
 
-                                <td>תאריך לידה</td>
-                                <td>
-                                    <asp:DropDownList ID="DDLyear" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown"></asp:DropDownList>/
-                    <asp:DropDownList ID="DDLmonth" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown"></asp:DropDownList>/
-                    <asp:DropDownList ID="DDLday" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown"></asp:DropDownList>
-                                    <div class="form-group" runat="server">
-                                        <input class="form-control" id="date1" type="date" runat="server">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>תמונה</td>
-                                <td>
-                                    <fieldset class="form-group" runat="server">
-                                        <label class="custom-file center-block block">
-                                            <asp:FileUpload ID="FileUpload1" runat="server" class="custom-file-input" />
-                                            <span class="custom-file-control"></span>
-                                        </label>
-                                    </fieldset>
+                                            <div class="form-group" runat="server">
+                                                <input class="form-control" id="date1" type="date" runat="server">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>תמונה</td>
+                                        <td>
+                                            <fieldset class="form-group" runat="server">
+                                                <label class="custom-file center-block block">
+                                                    <asp:FileUpload ID="FileUpload1" runat="server" class="custom-file-input" />
+                                                    <span class="custom-file-control"></span>
+                                                </label>
+                                            </fieldset>
 
-                                </td>
-                                <td>
-                                    <%--<asp:Label ID="ClassLBL" runat="server" Text=" בחר כיתה"></asp:Label>--%>
-                                </td>
-                                <td>
-                                    <%--<asp:DropDownList ID="ClassOtDLL" Style="direction: rtl;" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" OnLoad="FillFirstItem"></asp:DropDownList>--%>
-                                    <%--<asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>--%>
-                                </td>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="ClassLBL" runat="server" Text=" בחר כיתה"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:DropDownList ID="ClassOtDLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" OnLoad="FillFirstItem"></asp:DropDownList>
+                                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>
+                                        </td>
 
-                            </tr>
-                            <tr>
-                                <td>טלפון</td>
-                                <td>
-                                    <asp:TextBox ID="TelephoneNumberTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox>
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="TelephoneNumberTB"
-                                        ErrorMessage="מצחיקול! הזן בשדה רק מספרים." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                    <br />
-                                </td>
-                                <td>סיסמה</td>
-                                <td>
-                                    <asp:TextBox ID="PasswordTB" runat="server" required="required" class="form-control"></asp:TextBox>
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="PasswordTB"
-                                        ErrorMessage="סיסמא חייבת להכיל לפחות 4 תוים." ValidationExpression=".{4}.*" />
-                                </td>
+                                    </tr>
+                                    <tr>
+                                        <td>טלפון</td>
+                                        <td>
+                                            <asp:TextBox ID="TelephoneNumberTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox>
+                                            <asp:RegularExpressionValidator runat="server" ControlToValidate="TelephoneNumberTB"
+                                                ErrorMessage="מצחיקול! הזן בשדה רק מספרים." ForeColor="Red" ValidationExpression="^[0-9]*$" />
+                                            <br />
+                                        </td>
+                                        <td>סיסמה</td>
+                                        <td>
+                                            <asp:TextBox ID="PasswordTB" runat="server" required="required" class="form-control"></asp:TextBox>
+                                            <asp:RegularExpressionValidator runat="server" ControlToValidate="PasswordTB"
+                                                ErrorMessage="סיסמא חייבת להכיל לפחות 4 תוים." ValidationExpression=".{4}.*" />
+                                        </td>
 
-                            </tr>
-                            <tr>
-                                <td>
-                                    <%--<asp:Label ID="NumChildLBL" runat="server" Text="מספר ילדים רשומים"></asp:Label>--%>
-                                </td>
-                                <td>
-                                    <%--<asp:DropDownList ID="NumOfChildDDL" Style="direction: rtl;" runat="server" AutoPostBack="true" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnSelectedIndexChanged="NumOfChildDDL_SelectedIndexChanged"></asp:DropDownList>--%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="MainTeacher" runat="server" Text=" האם מחנך"></asp:Label>
+                                        </td>
+                                        <td>
+                                                                                <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
 
-                                <td>
-                                    <%--<asp:Label ID="ChildIDLBL" runat="server" Text=" :הזן תעודת זהות ילד"></asp:Label>--%>
-                                </td>
-                                <td>
-                         <%--           <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
+                                            <%--<asp:DropDownList ID="NumOfChildDDL" Style="direction: rtl;" runat="server" AutoPostBack="true" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnSelectedIndexChanged="NumOfChildDDL_SelectedIndexChanged"></asp:DropDownList>--%></td>
+
+                                        <td>
+                                            <%--<asp:Label ID="ChildIDLBL" runat="server" Text=" :הזן תעודת זהות ילד"></asp:Label>--%>
+                                        </td>
+                                        <td>
+                                            <%--         
+
                                     <asp:TextBox ID="ChildI1DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
                                     <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI1DTB"
                                         ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
@@ -346,77 +330,40 @@
                                     <asp:TextBox ID="ChildI6DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox>
                                     <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI6DTB"
                                         ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />--%>
-                                </td>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <asp:Label ID="NumChildLBL" runat="server" Text="מספר ילדים רשומים"></asp:Label>
 
-                            </tr>
-                            <tr>
-                            </tr>
-
-                        </table>
-                        <!-- Tab panes -->
-                        <div class="tab-content tabcontent-border" runat="server">
-                            <div class="tab-pane active" id="Admin" role="tabpanel" runat="server">
-                                <div class="pad-20">
-                                </div>
-                            </div>
-                            <div class="tab-pane  p-20" id="Teacher" role="tabpanel" runat="server">
-                                <div class="pad-20"  runat="server">
-                                    <asp:Label ID="MainTeacher" runat="server" Text=" האם מחנך"></asp:Label>
-                                    <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
-                                    <%--<asp:Label ID="ClassLBL" runat="server" Text=" בחר כיתה"></asp:Label>--%>
-
-                                    <%--<asp:DropDownList ID="ClassOtDLL" Style="direction: rtl;" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" OnLoad="FillFirstItem"></asp:DropDownList>--%>
-                                    <%--<asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>--%>
-                                </div>
-                            </div>
-                            <div class="tab-pane p-20" id="Parent" role="tabpanel" runat="server">
-                                <div class="pad-20"  runat="server">
-                              <asp:Label ID="NumChildLBL" runat="server" Text="מספר ילדים רשומים"></asp:Label>
-                               
-                                    <asp:DropDownList ID="NumOfChildDDL" Style="direction: rtl;" runat="server" AutoPostBack="true" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnSelectedIndexChanged="NumOfChildDDL_SelectedIndexChanged"></asp:DropDownList></td>
+                                <asp:DropDownList ID="NumOfChildDDL" Style="direction: rtl;" runat="server" AutoPostBack="true" CssClass="form-control" data-toggle="dropdown" OnSelectedIndexChanged="NumOfChildDDL_SelectedIndexChanged"></asp:DropDownList></td>
 
                                
                                     <asp:Label ID="ChildIDLBL" runat="server" Text=" :הזן תעודת זהות ילד"></asp:Label>
-                              
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <asp:TextBox ID="ChildI1DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI1DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                    <asp:TextBox ID="ChildI2DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI2DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                    <asp:TextBox ID="ChildI3DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI3DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                    <asp:TextBox ID="ChildI4DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI4DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                    <asp:TextBox ID="ChildI5DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI5DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                    <asp:TextBox ID="ChildI6DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox>
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI6DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />        </div>
-                            </div>
-                            <div class="tab-pane p-20" id="Pupil" role="tabpanel" runat="server">
-                                <div class="pad-20"  runat="server">
-                                    <asp:Label ID="ClassLBL" runat="server" Text=" בחר כיתה"></asp:Label>
 
-                                    <asp:DropDownList ID="ClassOtDLL" Style="direction: rtl;" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" OnLoad="FillFirstItem"></asp:DropDownList>
-                                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>
-                              </div>
+                                <asp:TextBox ID="ChildI1DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
+                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI1DTB"
+                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
+                                <asp:TextBox ID="ChildI2DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
+                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI2DTB"
+                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
+                                <asp:TextBox ID="ChildI3DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
+                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI3DTB"
+                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
+                                <asp:TextBox ID="ChildI4DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
+                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI4DTB"
+                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
+                                <asp:TextBox ID="ChildI5DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
+                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI5DTB"
+                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
+                                <asp:TextBox ID="ChildI6DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox>
+                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI6DTB"
+                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
                             </div>
                         </div>
-
-                        <div align="center">
-                            <asp:Button ID="AddUserBTN" runat="server" CssClass="btn btn-outline-primary" Text="הוסף משתמש" OnClick="AddUserBTN_Click" />
-
+                        <div class="tab-pane p-20" id="Pupil" role="tabpanel" runat="server">
+                            <div class="pad-20" runat="server">
+                            </div>
                         </div>
-
                     </form>
                 </div>
             </section>

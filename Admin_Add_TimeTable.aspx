@@ -28,16 +28,7 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-    <%--   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>--%>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
@@ -222,25 +213,20 @@
                 <div class="info-box">
                     <form runat="server">
                         <div class="table-responsive">
-
-                            <table >
-                                <tr>
-                                    <td>                                                                                                                   <%--   OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged"--%>
+                                            <div style="float: right; position: relative">                                                                                <%--   OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged"--%>
                                         <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" DataValueField="ClassCode"  AutoPostBack="True"></asp:DropDownList>
                                         <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT ClassCode, TotalName FROM Class WHERE (ClassCode NOT IN (SELECT Class_1.ClassCode FROM Class AS Class_1 INNER JOIN Timetable ON Class_1.ClassCode = Timetable.ClassCode))"></asp:SqlDataSource>
-                                    </td>
-                                </tr>
-                            </table>
+                        </div>
+                                 <div style="float: left; position: relative;padding-bottom:20px;">
+                            <asp:Button ID="ButtonSave" CssClass="btn btn-outline-primary" runat="server" Text="שמור" Visible="true" OnClick="ButtonSave_Click" />
 
+                            </div>
                             <div runat="server" id="AlertBox" class="alertBox" visible="false">
                                 <div runat="server" id="AlertBoxMessage"></div>
                                 <button onclick="closeAlert.call(this, event)">Ok</button>
                             </div>
                             <asp:Table ID="TimeTable" runat="server" align="center" class="table table-bordered table-striped" data-name="cool-table">
                             </asp:Table>
-                            <br />
-                            <br />
-                            <asp:Button ID="ButtonSave" CssClass="btn btn-outline-primary" runat="server" Text="שמור" Visible="true" OnClick="ButtonSave_Click" />
                         </div>
 
                     </form>

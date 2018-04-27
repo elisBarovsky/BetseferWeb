@@ -223,17 +223,19 @@
                     <form runat="server">
                         <div class="table-responsive">
 
-                            <table>
+                            <%--  <table>
                                 <tr>
-                                    <td>
-                                        <asp:DropDownList ID="ddl_clasesEdit" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForEdit" DataTextField="TotalName" DataValueField="ClassCode" OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
-                                        <asp:SqlDataSource ID="DSclassesForEdit" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT distinct Class.ClassCode, Class.TotalName FROM Class INNER JOIN Timetable ON Class.ClassCode = Timetable.ClassCode AND Class.ClassCode = Timetable.ClassCode
+                                    <td>--%>
+                            <div style="float: right; position: relative">
+                                <asp:DropDownList ID="ddl_clasesEdit" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForEdit" DataTextField="TotalName" DataValueField="ClassCode" OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                <asp:SqlDataSource ID="DSclassesForEdit" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT distinct Class.ClassCode, Class.TotalName FROM Class INNER JOIN Timetable ON Class.ClassCode = Timetable.ClassCode AND Class.ClassCode = Timetable.ClassCode
                                                 order by Class.TotalName"></asp:SqlDataSource>
-                                  
-                                        </td>
-                                </tr>
-                            </table>
+                            </div>
 
+                            <div style="float: left; position: relative;padding-bottom:20px;">
+                                <asp:Button ID="ButtonUpdate" CssClass="btn btn-outline-primary" runat="server" Text="עדכן" OnClick="ButtonUpdate_Click" />
+
+                            </div>
                             <div runat="server" id="AlertBox" class="alertBox" visible="false">
                                 <div runat="server" id="AlertBoxMessage"></div>
                                 <button onclick="closeAlert.call(this, event)">Ok</button>
@@ -242,7 +244,6 @@
                             </asp:Table>
                             <br />
                             <br />
-                            <asp:Button ID="ButtonUpdate" CssClass="btn btn-outline-primary" runat="server" Text="עדכן" OnClick="ButtonUpdate_Click" />
                         </div>
 
                     </form>
@@ -261,7 +262,5 @@
 
         <!-- template -->
         <script src="dist/js/niche.js"></script>
-
-  
 </body>
 </html>
