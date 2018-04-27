@@ -226,7 +226,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <asp:DropDownList ID="ddl_clasesEdit" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForEdit" DataTextField="TotalName" DataValueField="ClassCode" OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
+                                        <asp:DropDownList ID="ddl_clasesEdit" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForEdit" DataTextField="TotalName" DataValueField="ClassCode" OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
                                         <asp:SqlDataSource ID="DSclassesForEdit" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT distinct Class.ClassCode, Class.TotalName FROM Class INNER JOIN Timetable ON Class.ClassCode = Timetable.ClassCode AND Class.ClassCode = Timetable.ClassCode
                                                 order by Class.TotalName"></asp:SqlDataSource>
                                   

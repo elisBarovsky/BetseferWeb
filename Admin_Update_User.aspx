@@ -220,6 +220,7 @@
 
             <!-- Main content -->
             <section class="content">  
+                 <div class="info-box">
                    <div style="width:200px;height:200px;position:absolute;">
                                 <asp:Image ID="ImgUser" runat="server" class="img-circle img-responsive" />
 
@@ -230,7 +231,7 @@
                                    <td>
                                 <asp:Label ID="Label1" runat="server" Text="סוג משתמש"></asp:Label></td>
                             <td>
-                                <asp:RadioButtonList ID="UserTypeDLL" runat="server" DataSourceID="SqlDataSource2" OnSelectedIndexChanged="UserTypeDLL_CheckedChanged" DataTextField="CodeUserName" DataValueField="CodeUserType" AutoPostBack="true" RepeatDirection="Horizontal"></asp:RadioButtonList>
+                                <asp:DropDownList ID="UserTypeDLL" CssClass="form-control"  runat="server" DataSourceID="SqlDataSource2" OnSelectedIndexChanged="UserTypeDLL_CheckedChanged" DataTextField="CodeUserName" DataValueField="CodeUserType" AutoPostBack="true" RepeatDirection="Horizontal"></asp:DropDownList>
                                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT * FROM [UserType]"></asp:SqlDataSource>
                             </td>
                               <td>                             
@@ -281,11 +282,6 @@
                                 <asp:TextBox ID="UserIDTB" runat="server" required="required" class="form-control"></asp:TextBox></td>
                             <td>תאריך לידה</td>
                             <td>
-                                <br />
-                                <asp:DropDownList ID="DDLday" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" ></asp:DropDownList>/
-                                <asp:DropDownList ID="DDLmonth" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" ></asp:DropDownList>/
-                                <asp:DropDownList ID="DDLyear" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" ></asp:DropDownList>
-                                <br />
                                   <div class="form-group" runat="server">
                                     <input class="form-control" id="date1" type="date" runat="server">
                                 </div>
@@ -366,6 +362,7 @@
                     </div>
 
                 </form>
+                     </div>
             </section>
             <!-- /.content -->
         </div>

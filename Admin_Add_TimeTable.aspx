@@ -226,7 +226,7 @@
                             <table >
                                 <tr>
                                     <td>                                                                                                                   <%--   OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged"--%>
-                                        <asp:DropDownList ID="ddl_clasesAdd" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" DataValueField="ClassCode"  AutoPostBack="True"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" DataValueField="ClassCode"  AutoPostBack="True"></asp:DropDownList>
                                         <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT ClassCode, TotalName FROM Class WHERE (ClassCode NOT IN (SELECT Class_1.ClassCode FROM Class AS Class_1 INNER JOIN Timetable ON Class_1.ClassCode = Timetable.ClassCode))"></asp:SqlDataSource>
                                     </td>
                                 </tr>

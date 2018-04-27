@@ -219,6 +219,7 @@
 
             <!-- Main content -->
             <section class="content">
+                <div class="info-box">
                 <form runat="server">
                     <table class="auto-style1" align="center">
                         <tr>
@@ -251,6 +252,7 @@
                         </tr>
                     </table>
                 </form>
+                    </div>
             </section>
             <!-- /.content -->
         </div>
