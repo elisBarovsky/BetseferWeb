@@ -147,13 +147,10 @@
                                     <p class="text-left" id="UserName" runat="server"><small>some mail</small> </p>
                                     <div class="view-link text-right"><a href="#">צפה בפרופיל</a> </div>
                                 </li>
-                              <li ><a href="#" class="view-link text-right">הפרופיל שלי   <i class="icon-profile-male" ></i></a></li>
-                                <li><a href="#" class="view-link text-right">הודעות   <i class="icon-envelope"></i></a></li>
-                                <li role="separator" class="divider"></li>
                                 <li><a href="#" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="login.aspx" class="view-link text-right">התנתק  <i class="fa fa-power-off"></i></a></li>
-                                </ul>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -164,6 +161,12 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
+                <div class="user-panel">
+                    <div class="image text-center"></div>
+                    <div class="info">
+                        <a href="#">ברוך הבא ☺</a>
+                    </div>
+                </div>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="treeview"><a href="AdminDashbord.aspx"><i class="fa fa-home"></i><span>דף הבית</span> </a>
@@ -213,12 +216,13 @@
                 <div class="info-box">
                     <form runat="server">
                         <div class="table-responsive">
-                                            <div style="float: right; position: relative">                                                                                <%--   OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged"--%>
-                                        <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" DataValueField="ClassCode"  AutoPostBack="True"></asp:DropDownList>
-                                        <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT ClassCode, TotalName FROM Class WHERE (ClassCode NOT IN (SELECT Class_1.ClassCode FROM Class AS Class_1 INNER JOIN Timetable ON Class_1.ClassCode = Timetable.ClassCode))"></asp:SqlDataSource>
-                        </div>
-                                 <div style="float: left; position: relative;padding-bottom:20px;">
-                            <asp:Button ID="ButtonSave" CssClass="btn btn-outline-primary" runat="server" Text="שמור" Visible="true" OnClick="ButtonSave_Click" />
+                            <div style="float: right; position: relative">
+                                <%--   OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged"--%>
+                                <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="True"></asp:DropDownList>
+                                <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT ClassCode, TotalName FROM Class WHERE (ClassCode NOT IN (SELECT Class_1.ClassCode FROM Class AS Class_1 INNER JOIN Timetable ON Class_1.ClassCode = Timetable.ClassCode))"></asp:SqlDataSource>
+                            </div>
+                            <div style="float: left; position: relative; padding-bottom: 20px;">
+                                <asp:Button ID="ButtonSave" CssClass="btn btn-outline-primary" runat="server" Text="שמור" Visible="true" OnClick="ButtonSave_Click" />
 
                             </div>
                             <div runat="server" id="AlertBox" class="alertBox" visible="false">
@@ -245,7 +249,5 @@
 
         <!-- template -->
         <script src="dist/js/niche.js"></script>
-
-
 </body>
 </html>
