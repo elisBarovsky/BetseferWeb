@@ -81,24 +81,28 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
             {
                 TableCell cell = new TableCell();
                 cell.CssClass = "DDL_TD";
-                DropDownList dSubject = new DropDownList();
-                dSubject.CssClass = "DDL_sub";
-                dSubject.ID = "DDLsubject" + counter;
-                dSubject.DataTextField = "Value";
-                dSubject.DataValueField = "Key";
-                dSubject.DataSource = subjects;
-                dSubject.DataBind();
-                cell.Controls.Add(dSubject);
+                Image onclickImg = new Image();
+                onclickImg.ImageUrl = "Images/editIcon.png";
+                onclickImg.Style.Add("height", "20px");
+                onclickImg.Attributes.Add("onclick", "window.open('Admin_New_TT_form.aspx', 'mynewwin', 'width=600,height=600')");
+                //DropDownList dSubject = new DropDownList();
+                //dSubject.CssClass = "DDL_sub";
+                //dSubject.ID = "DDLsubject" + counter;
+                //dSubject.DataTextField = "Value";
+                //dSubject.DataValueField = "Key";
+                //dSubject.DataSource = subjects;
+                //dSubject.DataBind();
+                cell.Controls.Add(onclickImg);
                 //cell.Controls.Add(new HtmlGenericControl("br"));
 
-                DropDownList dTeacher = new DropDownList();
-                dTeacher.CssClass = "DDL_teach";
-                dTeacher.ID = "DDLteacher" + counter;
-                dTeacher.DataSource = teachers;
-                dTeacher.DataValueField = "Key";
-                dTeacher.DataTextField = "Value";
-                dTeacher.DataBind();
-                cell.Controls.Add(dTeacher);
+                //DropDownList dTeacher = new DropDownList();
+                //dTeacher.CssClass = "DDL_teach";
+                //dTeacher.ID = "DDLteacher" + counter;
+                //dTeacher.DataSource = teachers;
+                //dTeacher.DataValueField = "Key";
+                //dTeacher.DataTextField = "Value";
+                //dTeacher.DataBind();
+                //cell.Controls.Add(dTeacher);
                 tr.Cells.Add(cell);
                 //cell.Controls.Add(new HtmlGenericControl("br"));
 
