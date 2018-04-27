@@ -215,154 +215,146 @@
             <!-- Content Header (Page header) -->
             <section class="content-header sty-one">
                 <h1>עדכון משתמש</h1>
-                   
+
             </section>
 
             <!-- Main content -->
-            <section class="content">  
-                 <div class="info-box">
-                   <div style="width:200px;height:200px;position:absolute;">
-                                <asp:Image ID="ImgUser" runat="server" class="img-circle img-responsive" />
-
-                                </div>
-                <form runat="server">                
-                    <table class="auto-style1" align="center">                        
-                        <tr>
-                                   <td>
-                                <asp:Label ID="Label1" runat="server" Text="סוג משתמש"></asp:Label></td>
-                            <td>
-                                <asp:DropDownList ID="UserTypeDLL" CssClass="form-control"  runat="server" DataSourceID="SqlDataSource2" OnSelectedIndexChanged="UserTypeDLL_CheckedChanged" DataTextField="CodeUserName" DataValueField="CodeUserType" AutoPostBack="true" RepeatDirection="Horizontal"></asp:DropDownList>
-                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT * FROM [UserType]"></asp:SqlDataSource>
-                            </td>
-                              <td>                             
-                                <asp:Label ID="Class1LBL" runat="server" Text=" בחר כיתה"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:DropDownList ID="ClassOt1DLL" Style="direction: rtl;" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown"  AutoPostBack="true" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
-                                <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>
-                            </td>
-                         
-                        
-                        </tr>
-                        <tr>
-                             <td></td>
-                            <td >
-                         
-                            </td>
-                           
-                               <td>
-                                <asp:Label ID="ChoosePupilLBL" runat="server" Text="בחר תלמיד"></asp:Label>
-                                <asp:Label ID="ChooseOtherUsers" runat="server" Text="בחר משתמש"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:DropDownList ID="PupilDLL" Style="direction: rtl;" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown"  OnSelectedIndexChanged="UserChosed" AutoPostBack="true"></asp:DropDownList>
-                                <asp:DropDownList ID="OtherUsersDLL" Style="direction: rtl;" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown"  OnSelectedIndexChanged="UserChosed" AutoPostBack="true"></asp:DropDownList>
-                            </td>
-                         
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td class="auto-style2"></td>
-                            <td></td>
-                            <td></td>
-                            
-                        </tr>
-                        <tr>
-                            <td>שם משפחה</td>
-                            <td class="auto-style2">
-                                <asp:TextBox ID="LNameTB" runat="server" required="required" class="form-control"></asp:TextBox></td>
-                             <td>שם פרטי</td>
-                            <td>
-                                <asp:TextBox ID="FNameTB" runat="server" required="required" class="form-control"></asp:TextBox></td>
-                           
-                        </tr>
-                        <tr>
-                            <td>תעודת זהות</td>
-                            <td class="auto-style2">
-                                <asp:TextBox ID="UserIDTB" runat="server" required="required" class="form-control"></asp:TextBox></td>
-                            <td>תאריך לידה</td>
-                            <td>
-                                  <div class="form-group" runat="server">
-                                    <input class="form-control" id="date1" type="date" runat="server">
-                                </div>
-
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                                   <td>טלפון 
-                            </td>
-                            <td>
-                                <asp:TextBox ID="TelephoneNumberTB" runat="server" required="required" class="form-control"></asp:TextBox>
-                            </td>
-                              <td>תמונה</td>
-                            <td>
-                                <fieldset class="form-group" runat="server">
-                                    <label class="custom-file center-block block">
-                                        <asp:FileUpload ID="FileUpload1" runat="server" class="custom-file-input" />
-                                        <span class="custom-file-control"></span>
-                                    </label>
-                                </fieldset>
-                            </td>
-                          
-                         
-                        </tr>
-                        <tr>
-                              <td>סיסמה</td>
-                            <td>
-                                <asp:TextBox ID="PasswordTB" runat="server" required="required" class="form-control"></asp:TextBox>
-
-                            </td>
-                              <td>
-                                <asp:Label ID="NumChildLBL" runat="server" Text="מספר ילדים"></asp:Label>
-                                <asp:Label ID="Class2LBL" runat="server" Text=" בחר כיתה"></asp:Label>
-                            </td>
-                            <td>
-                                <%--<asp:DropDownList ID="NumChildDDL" runat="server"></asp:DropDownList>--%>
-                                   <asp:Label ID="ChoosenNumChildLBL" runat="server" Text="כמות ילדים להוספה"></asp:Label>
-                                <br />
-                                <asp:DropDownList ID="ClassOt2DLL" Style="direction: rtl;" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="false" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
-                                <asp:DropDownList ID="ChoosenNumChildDDL" runat="server" AutoPostBack="true" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnSelectedIndexChanged="NumChildDDL_SelectedIndexChanged"></asp:DropDownList>
-                             
-                            </td>
-                         
-                           
-                        </tr>
-                        <tr>
-                            <td>                             
-                                <asp:Label ID="ChildIDLBL" runat="server" Text=" הזן תעודת זהות"></asp:Label>
-                                  <br />
-                            </td>
-                            <td>
-
-                                <asp:TextBox ID="ChildI1DTB" runat="server" required="required"></asp:TextBox><br />
-                                <asp:TextBox ID="ChildI2DTB" runat="server" required="required"></asp:TextBox><br />
-                                <asp:TextBox ID="ChildI3DTB" runat="server" required="required"></asp:TextBox><br />
-                                <asp:TextBox ID="ChildI4DTB" runat="server" required="required"></asp:TextBox><br />
-                                <asp:TextBox ID="ChildI5DTB" runat="server" required="required"></asp:TextBox><br />
-                                <asp:TextBox ID="ChildI6DTB" runat="server" required="required"></asp:TextBox>
-                                <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [CodePgroup], [GroupName] FROM [PupilsGroup]"></asp:SqlDataSource>
-                            </td>
-                             <td>
-                                <asp:Label ID="MainTeacher" runat="server" Text=" האם מחנך"></asp:Label>
-
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
-                                <asp:CheckBox ID="UpdateChild" runat="server" AutoPostBack="true" Text="לעדכן ילדים?" OnCheckedChanged="UpdateChild_CheckedChanged" />
-                            </td>
-                       
-                        </tr>
-
-                    </table>
-                    <br />
-                    <div align="center">
-                        <asp:Button ID="UpdateUserBTN" runat="server" CssClass="btn btn-outline-primary" Text="עדכן משתמש" OnClick="UpdateUserBTN_Click" />
+            <section class="content">
+                <div class="info-box">
+                    <div style="width: 200px; height: 200px; position: absolute;">
+                        <asp:Image ID="ImgUser" runat="server" class="img-circle img-responsive" />
 
                     </div>
+                    <form runat="server">
+                        <table class="auto-style1" align="center">
+                            <tr>
+                                <td>
+                                    <asp:Label ID="Label1" runat="server" Text="סוג משתמש"></asp:Label></td>
+                                <td>
+                                    <asp:DropDownList ID="UserTypeDLL" CssClass="form-control" runat="server" DataSourceID="SqlDataSource2" OnSelectedIndexChanged="UserTypeDLL_CheckedChanged" DataTextField="CodeUserName" DataValueField="CodeUserType" AutoPostBack="true" RepeatDirection="Horizontal"></asp:DropDownList>
+                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT * FROM [UserType]"></asp:SqlDataSource>
+                                </td>
+                                <td>
+                                    <asp:Label ID="Class1LBL" runat="server" Text=" בחר כיתה"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ClassOt1DLL" Style="direction: rtl;" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" AutoPostBack="true" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
+                                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>
+                                </td>
 
-                </form>
-                     </div>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label ID="ChoosePupilLBL" runat="server" Text="בחר תלמיד"></asp:Label>
+                                    <asp:Label ID="ChooseOtherUsers" runat="server" Text="בחר משתמש"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="PupilDLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" OnSelectedIndexChanged="UserChosed" AutoPostBack="true"></asp:DropDownList>
+                                    <asp:DropDownList ID="OtherUsersDLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" OnSelectedIndexChanged="UserChosed" AutoPostBack="true"></asp:DropDownList>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="auto-style2"></td>
+                                <td></td>
+                                <td></td>
+
+                            </tr>
+                            <tr>
+                                <td>שם משפחה</td>
+                                <td class="auto-style2">
+                                    <asp:TextBox ID="LNameTB" runat="server" required="required" class="form-control"></asp:TextBox></td>
+                                <td>שם פרטי</td>
+                                <td>
+                                    <asp:TextBox ID="FNameTB" runat="server" required="required" class="form-control"></asp:TextBox></td>
+
+                            </tr>
+                            <tr>
+                                <td>תעודת זהות</td>
+                                <td class="auto-style2">
+                                    <asp:TextBox ID="UserIDTB" runat="server" required="required" class="form-control"></asp:TextBox></td>
+                                <td>תאריך לידה</td>
+                                <td>
+                                    <asp:TextBox ID="BDAYtb" readonly value="You can't update me :P"  class="form-control" runat="server"  required="required" ></asp:TextBox>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>טלפון 
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="TelephoneNumberTB" runat="server" required="required" class="form-control"></asp:TextBox>
+                                </td>
+                                <td>תמונה</td>
+                                <td>
+                                    <fieldset class="form-group" runat="server">
+                                        <label class="custom-file center-block block">
+                                            <asp:FileUpload ID="FileUpload1" runat="server" class="custom-file-input" />
+                                            <span class="custom-file-control"></span>
+                                        </label>
+                                    </fieldset>
+                                </td>
+
+
+                            </tr>
+                            <tr>
+                                <td>סיסמה</td>
+                                <td>
+                                    <asp:TextBox ID="PasswordTB" runat="server" required="required" class="form-control"></asp:TextBox>
+
+                                </td>
+                                <td>
+                                    <asp:Label ID="NumChildLBL" runat="server" Text="מספר ילדים"></asp:Label>
+                                    <asp:Label ID="Class2LBL" runat="server" Text=" בחר כיתה"></asp:Label>
+                                </td>
+                                <td>
+                                    <%--<asp:DropDownList ID="NumChildDDL" runat="server"></asp:DropDownList>--%>
+                                    <asp:Label ID="ChoosenNumChildLBL" runat="server" Text="כמות ילדים להוספה"></asp:Label>
+                                    <br />
+                                    <asp:DropDownList ID="ClassOt2DLL" Style="direction: rtl;" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="false" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
+                                    <asp:DropDownList ID="ChoosenNumChildDDL" runat="server" AutoPostBack="true" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnSelectedIndexChanged="NumChildDDL_SelectedIndexChanged"></asp:DropDownList>
+
+                                </td>
+
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label ID="ChildIDLBL" runat="server" Text=" הזן תעודת זהות"></asp:Label>
+                                    <br />
+                                </td>
+                                <td>
+
+                                    <asp:TextBox ID="ChildI1DTB" runat="server" required="required"></asp:TextBox><br />
+                                    <asp:TextBox ID="ChildI2DTB" runat="server" required="required"></asp:TextBox><br />
+                                    <asp:TextBox ID="ChildI3DTB" runat="server" required="required"></asp:TextBox><br />
+                                    <asp:TextBox ID="ChildI4DTB" runat="server" required="required"></asp:TextBox><br />
+                                    <asp:TextBox ID="ChildI5DTB" runat="server" required="required"></asp:TextBox><br />
+                                    <asp:TextBox ID="ChildI6DTB" runat="server" required="required"></asp:TextBox>
+                                    <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [CodePgroup], [GroupName] FROM [PupilsGroup]"></asp:SqlDataSource>
+                                </td>
+                                <td>
+                                    <asp:Label ID="MainTeacher" runat="server" Text=" האם מחנך"></asp:Label>
+
+                                </td>
+                                <td>
+                                    <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
+                                    <asp:CheckBox ID="UpdateChild" runat="server" AutoPostBack="true" Text="לעדכן ילדים?" OnCheckedChanged="UpdateChild_CheckedChanged" />
+                                </td>
+
+                            </tr>
+
+                        </table>
+                        <br />
+                        <div align="center">
+                            <asp:Button ID="UpdateUserBTN" runat="server" CssClass="btn btn-outline-primary" Text="עדכן משתמש" OnClick="UpdateUserBTN_Click" />
+
+                        </div>
+
+                    </form>
+                </div>
             </section>
             <!-- /.content -->
         </div>

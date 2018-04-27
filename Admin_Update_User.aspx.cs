@@ -27,9 +27,9 @@ public partial class Admin_Update_User : System.Web.UI.Page
           //  NumChildDDL.Visible = false;
             VisibleParent(false);
             ChoosenNumChildLBL.Visible = false;
-            FillDays();
-            FillMonth();
-            FillYear();
+          //  FillDays();
+         //   FillMonth();
+          //  FillYear();
             HideChildTBID(false);
         }
     }
@@ -200,11 +200,8 @@ public partial class Admin_Update_User : System.Web.UI.Page
         UserIDTB.Text = UserID;
         FNameTB.Text = UserInfo[0];
         LNameTB.Text = UserInfo[1];
-        string bDay = UserInfo[2];
-        string[] splitBday = bDay.Split('/');
-        DDLday.SelectedValue = splitBday[0];
-        DDLmonth.SelectedValue = splitBday[1];
-        DDLyear.SelectedValue = bDay.Substring(bDay.Length - 4, 4);
+        BDAYtb.Text = UserInfo[2];
+
         PasswordTB.Text = UserInfo[3];
         TelephoneNumberTB.Text = UserInfo[4];
 
@@ -292,9 +289,6 @@ public partial class Admin_Update_User : System.Web.UI.Page
         ChildI4DTB.Text = "";
         ChildI5DTB.Text = "";
         ChildI6DTB.Text = "";
-        DDLmonth.SelectedIndex = -1;
-        DDLyear.SelectedIndex = -1;
-        DDLday.SelectedIndex = -1;
         ChildI1DTB.Visible = false;
         ChildI2DTB.Visible = false;
         ChildI3DTB.Visible = false;
@@ -316,22 +310,25 @@ public partial class Admin_Update_User : System.Web.UI.Page
         string folderPath = Server.MapPath("~/Images/");
         int res1 = 0;
         Users NewUser = new Users();
-        string day = DDLday.SelectedValue, month = DDLmonth.SelectedValue, year = DDLyear.SelectedValue;
-        string Bday = day + "/" + month + "/" + year;
-        if (day == "יום" || month == "חודש" || year == "שנה")
+
+       // string newBDATe = date1.Value;
+
+        if (BDAYtb.Text == "")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תאריך הלידה לא יכול להיות ריק');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תאריך לא יכול להיות ריק');", true);
             return;
         }
 
+      //  string Bday = newBDATe.Substring(8, 2) + "/" + newBDATe.Substring(5, 2) + "/" + newBDATe.Substring(0, 4);
+
         if (FileUpload1.FileName == "")
         {
-            res1 = NewUser.UpdateUser(UserIDTB.Text, FNameTB.Text, LNameTB.Text, Bday, "", "", PasswordTB.Text, TelephoneNumberTB.Text);
+            res1 = NewUser.UpdateUser(UserIDTB.Text, FNameTB.Text, LNameTB.Text, BDAYtb.Text, "", "", PasswordTB.Text, TelephoneNumberTB.Text);
         }
         else
         {
             FileUpload1.SaveAs(folderPath + FileUpload1.FileName);
-            res1 = NewUser.UpdateUser(UserIDTB.Text, FNameTB.Text, LNameTB.Text, Bday, "Images/" + FileUpload1.FileName, "", PasswordTB.Text, TelephoneNumberTB.Text);
+            res1 = NewUser.UpdateUser(UserIDTB.Text, FNameTB.Text, LNameTB.Text, BDAYtb.Text, "Images/" + FileUpload1.FileName, "", PasswordTB.Text, TelephoneNumberTB.Text);
         }                                                                                                                       //Images // להוריד ירוק כשיהיה לא בשרת
 
         if (res1 == 1)
@@ -482,60 +479,60 @@ public partial class Admin_Update_User : System.Web.UI.Page
         }
     }
 
-    protected void FillDays()
-    {
-        List<string> days = new List<string>();
+    //protected void FillDays()
+    //{
+    //    List<string> days = new List<string>();
 
-        for (int i = 1; i <= 31; i++)
-        {
-            if (i < 10)
-            {
-                days.Add("0" + i.ToString());
-            }
-            else
-            {
-                days.Add(i.ToString());
-            }
-        }
+    //    for (int i = 1; i <= 31; i++)
+    //    {
+    //        if (i < 10)
+    //        {
+    //            days.Add("0" + i.ToString());
+    //        }
+    //        else
+    //        {
+    //            days.Add(i.ToString());
+    //        }
+    //    }
 
-        DDLday.DataSource = days;
-        DDLday.DataBind();
-        DDLday.Items.Insert(0, new ListItem("יום"));
-    }
+    //    DDLday.DataSource = days;
+    //    DDLday.DataBind();
+    //    DDLday.Items.Insert(0, new ListItem("יום"));
+    //}
 
-    protected void FillMonth()
-    {
-        List<string> months = new List<string>();
+    //protected void FillMonth()
+    //{
+    //    List<string> months = new List<string>();
 
-        for (int i = 1; i <= 12; i++)
-        {
-            if (i < 10)
-            {
-                months.Add("0" + i.ToString());
-            }
-            else
-            {
-                months.Add(i.ToString());
-            }
-        }
+    //    for (int i = 1; i <= 12; i++)
+    //    {
+    //        if (i < 10)
+    //        {
+    //            months.Add("0" + i.ToString());
+    //        }
+    //        else
+    //        {
+    //            months.Add(i.ToString());
+    //        }
+    //    }
 
-        DDLmonth.DataSource = months;
-        DDLmonth.DataBind();
-        DDLmonth.Items.Insert(0, new ListItem("חודש"));
-    }
+    //    DDLmonth.DataSource = months;
+    //    DDLmonth.DataBind();
+    //    DDLmonth.Items.Insert(0, new ListItem("חודש"));
+    //}
 
-    protected void FillYear()
-    {
-        int year = 1930;
-        List<string> years = new List<string>();
+    //protected void FillYear()
+    //{
+    //    int year = 1930;
+    //    List<string> years = new List<string>();
 
-        for (int i = 0; year < 2011; i++, year++)
-        {
-            years.Add(year.ToString());
-        }
+    //    for (int i = 0; year < 2011; i++, year++)
+    //    {
+    //        years.Add(year.ToString());
+    //    }
 
-        DDLyear.DataSource = years;
-        DDLyear.DataBind();
-        DDLyear.Items.Insert(0, new ListItem("שנה"));
-    }
+    //    DDLyear.DataSource = years;
+    //    DDLyear.DataBind();
+    //    DDLyear.Items.Insert(0, new ListItem("שנה"));
+    //}
 }
