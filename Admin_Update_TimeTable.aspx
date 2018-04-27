@@ -226,10 +226,11 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <asp:DropDownList ID="ddl_clasesEdit" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForEdit" DataTextField="TotalName" DataValueField="ClassCode" OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
+                                        <asp:DropDownList ID="ddl_clasesEdit" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForEdit" DataTextField="TotalName" DataValueField="ClassCode" OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
                                         <asp:SqlDataSource ID="DSclassesForEdit" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT distinct Class.ClassCode, Class.TotalName FROM Class INNER JOIN Timetable ON Class.ClassCode = Timetable.ClassCode AND Class.ClassCode = Timetable.ClassCode
                                                 order by Class.TotalName"></asp:SqlDataSource>
-                                    </td>
+                                  
+                                        </td>
                                 </tr>
                             </table>
 
@@ -261,28 +262,6 @@
         <!-- template -->
         <script src="dist/js/niche.js"></script>
 
-        <!-- DataTable -->
-        <script src="dist/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="dist/plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <script>
-            $(function () {
-                $('#example1').DataTable()
-                $('#example2').DataTable({
-                    'paging': true,
-                    'lengthChange': false,
-                    'searching': false,
-                    'ordering': true,
-                    'info': true,
-                    'autoWidth': false
-                })
-            })
-        </script>
-
-        <script src="dist/plugins/table-expo/filesaver.min.js"></script>
-        <script src="dist/plugins/table-expo/xls.core.min.js"></script>
-        <script src="dist/plugins/table-expo/tableexport.js"></script>
-        <script>
-            $("table").tableExport({ formats: ["xlsx", "xls", "csv", "txt"], });
-        </script>
+  
 </body>
 </html>
