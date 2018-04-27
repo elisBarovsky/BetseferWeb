@@ -27,10 +27,6 @@ Designed By: UXLiner
 	+ copyrights
 --------------------------------------------------------*/
 
-.center {
-   text-align: center;
-}
-
 /* Layout */
 html, body {
 	height: 100%
@@ -99,12 +95,12 @@ a:hover, a:active, a:focus {
 }
 }
 @media (max-width:767px) {
-    .sidebar-open .content-wrapper, .sidebar-open .main-footer {
-        -webkit-transform: translate(0px, 0);
-        -ms-transform: translate(0px, 0);
-        -o-transform: translate(230px, 0);
-        transform: translate(0px, 0)
-    }
+.sidebar-open .content-wrapper, .sidebar-open .main-footer {
+	-webkit-transform: translate(230px, 0);
+	-ms-transform: translate(230px, 0);
+	-o-transform: translate(230px, 0);
+	transform: translate(230px, 0)
+}
 }
 .content-wrapper {
 	min-height: 100%;
@@ -561,13 +557,13 @@ ul.list-icons li {
 ul.list-icons li a {
     color: #666f73;
 }
-.fontawesome-icon-list div, .icon-section div, .weater-icon-list div, .simple-icon-list div, .flag-icon-list div{
+.fontawesome-icon-list div, .icon-div div, .weater-icon-list div, .simple-icon-list div, .flag-icon-list div{
     cursor: pointer;
     line-height: 40px;
     white-space: nowrap;
     color: #67757c;
 }
-.fontawesome-icon-list i, .icon-section span, .weater-icon-list i, .simple-icon-list i, .flag-icon-list i{
+.fontawesome-icon-list i, .icon-div span, .weater-icon-list i, .simple-icon-list i, .flag-icon-list i{
     font-size: 16px;
     margin: 0 15px 0 10px;
 }
@@ -786,10 +782,10 @@ ul.fa-ul{
 }
 @media (max-width:767px) {
 .main-sidebar {
-	-webkit-transform: translate(-230px, 0);
-	-ms-transform: translate(-230px, 0);
-	-o-transform: translate(-230px, 0);
-	transform: translate(-230px, 0)
+	-webkit-transform: translate(320px, 0);
+	-ms-transform: translate(320px, 0);
+	-o-transform: translate(320px, 0);
+	transform: translate(320px, 0)
 }
 }
 @media (min-width:768px) {
@@ -1637,7 +1633,7 @@ input[type="file"] {
 .form-control-feedback {
     position: absolute;
     margin-top: -34px;
-    right: 34px;
+    left: 34px;
     z-index: 2;
     display: block;
     width: 34px;
@@ -5704,7 +5700,6 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e73f7c', endCo
 	padding:20px 15px;
 }
 
-
 /*----------------------------- RESPONSIVE STYLES ---------------------------------- */
 
 @media only screen and (min-width: 1000px) and (max-width: 1169px) {
@@ -5735,12 +5730,18 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e73f7c', endCo
 .main-header .navbar .navbar-nav > li.p-ph-res > a {
 	padding: 22px 18px 21px 18px;
 }
-    .main-sidebar {
-        right: 0;
-        left: auto;
-    }
+.main-sidebar {
+	right:0;
+	left:auto;
+}
 .content-wrapper, .main-footer{
 	margin-right:0;
+}
+.sidebar-open .content-wrapper, .sidebar-open .main-footer {
+	-webkit-transform: translate(0px, 0);
+	-ms-transform: translate(0px, 0);
+	-o-transform: translate(230px, 0);
+	transform: translate(0px, 0)
 }
 }
 @media only screen and (min-width: 480px) and (max-width: 639px) {
@@ -5753,14 +5754,19 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e73f7c', endCo
 .main-header .navbar .navbar-nav > li.p-ph-res > a {
 	padding: 22px 18px 21px 18px;
 }
-    .main-sidebar {
-        right: 0;
-        left: auto;
-    }
+.main-sidebar {
+	right:0;
+	left:auto;
+}
 .content-wrapper, .main-footer{
 	margin-right:0;
 }
-
+.sidebar-open .content-wrapper, .sidebar-open .main-footer {
+	-webkit-transform: translate(0px, 0);
+	-ms-transform: translate(0px, 0);
+	-o-transform: translate(230px, 0);
+	transform: translate(0px, 0)
+}
 }
 @media only screen and (max-width: 479px) {
 .hidden-xs {
@@ -5773,11 +5779,16 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e73f7c', endCo
 	padding: 22px 18px 21px 18px;
 }
 .main-sidebar {
-	left:0;
-	right:auto;
+	right:0;
+	left:auto;
 }
 .content-wrapper, .main-footer{
 	margin-right:0;
 }
-
+.sidebar-open .content-wrapper, .sidebar-open .main-footer {
+	-webkit-transform: translate(0px, 0);
+	-ms-transform: translate(0px, 0);
+	-o-transform: translate(230px, 0);
+	transform: translate(0px, 0)
+}
 }
