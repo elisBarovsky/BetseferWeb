@@ -22,22 +22,16 @@
     <link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
     <link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
 
+    <!-- DataTables -->
+    <link rel="stylesheet" href="dist/plugins/datatables/css/dataTables.bootstrap.min.css">
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-    <%--   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>--%>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
@@ -202,9 +196,9 @@
                                 <li><a href="#.aspx"><i class="fa fa-plus"></i><span>עדכון</span> </a>
                         </ul>
                     </li>
-                   <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>דף קשר</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>דף קשר</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li ><a href="Teacher_ContactsList.aspx"><i class="fa fa-plus"></i><span>צפייה</span> </a>
+                            <li><a href="Teacher_ContactsList.aspx"><i class="fa fa-plus"></i><span>צפייה</span> </a>
                         </ul>
                     </li>
                     <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>לוח שנה</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -230,7 +224,7 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header sty-one">
-                <div style="text-align: center; /*color: palevioletred;*/ font-size: 20px" runat="server">
+                <div style="text-align: center; /*color: palevioletred; */ font-size: 20px" runat="server">
                     <asp:Label ID="className" runat="server" Text="" CssClass="glyphicon-text-color:red"></asp:Label>
                 </div>
             </section>
@@ -254,6 +248,7 @@
     </div>
     <!-- ./wrapper -->
 
+
     <!-- jQuery 3 -->
     <script src="dist/js/jquery.min.js"></script>
 
@@ -263,37 +258,28 @@
     <!-- template -->
     <script src="dist/js/niche.js"></script>
 
-    <!-- Chartjs JavaScript -->
-    <script src="dist/plugins/chartjs/chart.min.js"></script>
-    <script src="dist/plugins/chartjs/chart-int.js"></script>
+    <!-- DataTable -->
+    <script src="dist/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="dist/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
+            })
+        })
+    </script>
 
-    <!-- Chart Peity JavaScript -->
-    <script src="dist/plugins/peity/jquery.peity.min.js"></script>
-    <script src="dist/plugins/functions/jquery.peity.init.js"></script>
-
-    <%--  <div class="w3-sidebar w3-bar-block w3-card w3-dark-grey w3-xlarge" style="width: 10%; right: 0;">
-            <h3 class="w3-bar-item"></h3>
-            <a href="Admin.aspx" class="w3-bar-item w3-button"><i class="fa fa-home" style="padding-left: 50%"></i></a>
-            <a href="ATimeTable.aspx" class="w3-bar-item w3-button w3-hover-green" style="text-align: right">מערכת שעות</a>
-            <a href="AdminMasseges.aspx" class="w3-bar-item w3-button w3-hover-blue" style="text-align: right">הודעות</a>
-            <a href="AAddNewUser.aspx" class="w3-bar-item w3-button w3-hover-red" style="text-align: right">ניהול משתמשים</a>
-            <a href="AAddClasses.aspx" class="w3-bar-item w3-button w3-hover-blue" style="text-align: right">ניהול כיתות</a>
-            <a href="AAddLessons.aspx" class="w3-bar-item w3-button w3-hover-red" style="text-align: right">ניהול מקצועות</a>
-            <a href="Login.aspx" class="w3-bar-item w3-button"><i class="fa fa-sign-out" style="padding-left: 50%"></i></a>
-
-        </div>
-
-
-        <div style="margin-right: 10%">
-
-            <div class="w3-container w3-dark-grey" style="height: 50px">
-                <img src="Images/Betsefer.png" style="padding-top: 5px; height: 50px">
-            </div>
-
-            <br />
-            <br />
-            <br />--%>
-
-    <%--</div>--%>
+    <script src="dist/plugins/table-expo/filesaver.min.js"></script>
+    <script src="dist/plugins/table-expo/xls.core.min.js"></script>
+    <script src="dist/plugins/table-expo/tableexport.js"></script>
+    <script>
+        $("table").tableExport({ formats: ["xlsx", "xls"], });
+    </script>
 </body>
 </html>

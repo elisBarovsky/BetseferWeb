@@ -278,8 +278,7 @@
     </footer>--%>
     </div>
     <!-- ./wrapper -->
-
-    <!-- jQuery 3 -->
+  <!-- jQuery 3 -->
     <script src="dist/js/jquery.min.js"></script>
 
     <!-- v4.0.0-alpha.6 -->
@@ -288,37 +287,28 @@
     <!-- template -->
     <script src="dist/js/niche.js"></script>
 
-    <!-- Chartjs JavaScript -->
-    <script src="dist/plugins/chartjs/chart.min.js"></script>
-    <script src="dist/plugins/chartjs/chart-int.js"></script>
+    <!-- DataTable -->
+    <script src="dist/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="dist/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
+            })
+        })
+    </script>
 
-    <!-- Chart Peity JavaScript -->
-    <script src="dist/plugins/peity/jquery.peity.min.js"></script>
-    <script src="dist/plugins/functions/jquery.peity.init.js"></script>
-
-    <%--  <div class="w3-sidebar w3-bar-block w3-card w3-dark-grey w3-xlarge" style="width: 10%; right: 0;">
-            <h3 class="w3-bar-item"></h3>
-            <a href="Admin.aspx" class="w3-bar-item w3-button"><i class="fa fa-home" style="padding-left: 50%"></i></a>
-            <a href="ATimeTable.aspx" class="w3-bar-item w3-button w3-hover-green" style="text-align: right">מערכת שעות</a>
-            <a href="AdminMasseges.aspx" class="w3-bar-item w3-button w3-hover-blue" style="text-align: right">הודעות</a>
-            <a href="AAddNewUser.aspx" class="w3-bar-item w3-button w3-hover-red" style="text-align: right">ניהול משתמשים</a>
-            <a href="AAddClasses.aspx" class="w3-bar-item w3-button w3-hover-blue" style="text-align: right">ניהול כיתות</a>
-            <a href="AAddLessons.aspx" class="w3-bar-item w3-button w3-hover-red" style="text-align: right">ניהול מקצועות</a>
-            <a href="Login.aspx" class="w3-bar-item w3-button"><i class="fa fa-sign-out" style="padding-left: 50%"></i></a>
-
-        </div>
-
-
-        <div style="margin-right: 10%">
-
-            <div class="w3-container w3-dark-grey" style="height: 50px">
-                <img src="Images/Betsefer.png" style="padding-top: 5px; height: 50px">
-            </div>
-
-            <br />
-            <br />
-            <br />--%>
-
-    <%--</div>--%>
+    <script src="dist/plugins/table-expo/filesaver.min.js"></script>
+    <script src="dist/plugins/table-expo/xls.core.min.js"></script>
+    <script src="dist/plugins/table-expo/tableexport.js"></script>
+    <script>
+        $("#GridView1").tableExport({ formats: ["xlsx", "xls"], });
+    </script>
 </body>
 </html>
