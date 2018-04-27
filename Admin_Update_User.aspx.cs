@@ -388,7 +388,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
                 }
             }
 
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('משתמש עודכן בהצלחה'); location.href='AUpdateUser.aspx';", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('משתמש עודכן בהצלחה'); location.href='Admin_Update_User.aspx';", true);
         }
         else
         {
@@ -401,10 +401,12 @@ public partial class Admin_Update_User : System.Web.UI.Page
         if (MainTeacherCB.Checked)
         {
             ClassOt2DLL.Visible = true;
+            Class2LBL.Visible = true;
         }
         else
         {
             ClassOt2DLL.Visible = false;
+            Class2LBL.Visible = false;
         }
     }
 

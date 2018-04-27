@@ -295,33 +295,32 @@
                                                 </label>
                                             </fieldset>
                                         </td>
-
-
                                     </tr>
                                     <tr>
                                         <td>סיסמה</td>
                                         <td>
                                             <asp:TextBox ID="PasswordTB" runat="server" required="required" class="form-control"></asp:TextBox>
-
                                         </td>
                                         <td>
                                             <asp:Label ID="NumChildLBL" runat="server" Text="מספר ילדים"></asp:Label>
-                                            <asp:Label ID="Class2LBL" runat="server" Text=" בחר כיתה"></asp:Label>
+                                            <asp:Label ID="MainTeacher" runat="server" Text=" האם מחנך"></asp:Label>
                                         </td>
                                         <td>
                                             <%--<asp:DropDownList ID="NumChildDDL" runat="server"></asp:DropDownList>--%>
                                             <asp:Label ID="ChoosenNumChildLBL" runat="server" Text="כמות ילדים להוספה"></asp:Label>
-                                            <asp:DropDownList ID="ClassOt2DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="false" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
                                             <asp:DropDownList ID="ChoosenNumChildDDL" runat="server" AutoPostBack="true" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnSelectedIndexChanged="NumChildDDL_SelectedIndexChanged"></asp:DropDownList>
-
+                                           
+                                            <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <asp:Label ID="ChildIDLBL" runat="server" Text=" הזן תעודת זהות"></asp:Label>
-                                            <br />
+                                            <asp:Label ID="Class2LBL" runat="server" Text=" בחר כיתה"></asp:Label>
+
                                         </td>
                                         <td>
+                                            <asp:DropDownList ID="ClassOt2DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="false" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
 
                                             <asp:TextBox ID="ChildI1DTB" runat="server" required="required"></asp:TextBox><br />
                                             <asp:TextBox ID="ChildI2DTB" runat="server" required="required"></asp:TextBox><br />
@@ -332,22 +331,12 @@
                                             <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [CodePgroup], [GroupName] FROM [PupilsGroup]"></asp:SqlDataSource>
                                         </td>
                                         <td>
-                                            <asp:Label ID="MainTeacher" runat="server" Text=" האם מחנך"></asp:Label>
-
-                                        </td>
-                                        <td>
-                                            <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
                                             <asp:CheckBox ID="UpdateChild" runat="server" AutoPostBack="true" Text="לעדכן ילדים?" OnCheckedChanged="UpdateChild_CheckedChanged" />
                                         </td>
-
-                                    </tr>
-
+                                        </tr>
                                 </table>
                             </div>
                         </div>
-                        <br />
-
-
                     </form>
                 </div>
             </section>
