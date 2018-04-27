@@ -179,7 +179,7 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="active treeview"><a href="Teacher_Dashbord.aspx"><i class="fa fa-home"></i><span>דף הבית</span> </a>
                     </li>
-                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                    <li class="treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li ><a href="Teacher_TimeTable.aspx"><i class="fa fa-plus"></i><span>צפייה</span> </a>
                         </ul>
