@@ -310,9 +310,10 @@ public partial class Admin_Update_User : System.Web.UI.Page
     {
         string folderPath = Server.MapPath("~/Images/");
         int res1 = 0;
-        Users NewUser = new Users();
+        Administrator NewUser = new Administrator();
 
-       // string newBDATe = date1.Value;
+
+        // string newBDATe = date1.Value;
 
         if (BDAYtb.Text == "")
         {
@@ -320,7 +321,15 @@ public partial class Admin_Update_User : System.Web.UI.Page
             return;
         }
 
-      //  string Bday = newBDATe.Substring(8, 2) + "/" + newBDATe.Substring(5, 2) + "/" + newBDATe.Substring(0, 4);
+        //  string Bday = newBDATe.Substring(8, 2) + "/" + newBDATe.Substring(5, 2) + "/" + newBDATe.Substring(0, 4);
+
+        //string day = DDLday.SelectedValue, month = DDLmonth.SelectedValue, year = DDLyear.SelectedValue;
+        //string Bday = day + "/" + month + "/" + year;
+        //if (day == "יום" || month == "חודש" || year == "שנה")
+        //{
+        //    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תאריך הלידה לא יכול להיות ריק');", true);
+        //    return;
+        //}
 
         if (FileUpload1.FileName == "")
         {
@@ -336,12 +345,12 @@ public partial class Admin_Update_User : System.Web.UI.Page
         {
             if (UserTypeDLL.SelectedValue == "4")
             {
-                Users PupilUser = new Users();
+                Administrator PupilUser = new Administrator();
                 int num = PupilUser.UpdatePupil(UserIDTB.Text, ClassOt2DLL.SelectedValue);
             }
             else if (UserTypeDLL.SelectedValue == "2")
             {
-                Users TeacherUser = new Users();
+                Administrator TeacherUser = new Administrator();
                 string IsMain = "0";
                 if (MainTeacherCB.Checked)
                 {
@@ -351,15 +360,15 @@ public partial class Admin_Update_User : System.Web.UI.Page
                     {
                         for (int i = 0; i < Classes.Count; i++)
                         {
-                            Users TeacherDeleteClass = new Users();
+                            Administrator TeacherDeleteClass = new Administrator();
                             TeacherDeleteClass.DeleteMainTeacherToClass(Classes[i]);
                         }
                     }
-                    Users MainTeacherUpdateClass = new Users();
+                    Administrator MainTeacherUpdateClass = new Administrator();
                     int res13 = MainTeacherUpdateClass.AddMainTeacherToClass(UserIDTB.Text, ClassOt2DLL.SelectedItem.ToString());
                 }
 
-                Users MainTeacherUserCheck = new Users();
+                Administrator MainTeacherUserCheck = new Administrator();
                 int res = MainTeacherUserCheck.UpdateTeacher(UserIDTB.Text, IsMain);
             }
             else if (UserTypeDLL.SelectedValue == "3")
@@ -381,14 +390,14 @@ public partial class Admin_Update_User : System.Web.UI.Page
                         {
                             Users GetPupilClass = new Users();
                             string ChildCodeClass = GetPupilClass.GetPupilOtClass(ChildID[i]);
-                            Users AddMoreThanOneChild = new Users();
+                            Administrator AddMoreThanOneChild = new Administrator();
                             AddMoreThanOneChild.UpdateParent(UserIDTB.Text, ChildID[i], ChildCodeClass);
                         }
                     }
                 }
             }
 
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('משתמש עודכן בהצלחה'); location.href='Admin_Update_User.aspx';", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('משתמש עודכן בהצלחה'); location.href='AUpdateUser.aspx';", true);
         }
         else
         {
