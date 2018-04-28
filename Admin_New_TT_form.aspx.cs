@@ -10,11 +10,10 @@ public partial class Admin_New_TT_form : System.Web.UI.Page
     string objSenderID;
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (Request.Cookies["UserID"] == null || Request.Cookies["UserPassword"] == null)
-        //{
-        //    Response.Redirect("login.aspx");
-        //}
-
+        if (Request.Cookies["UserID"] == null || Request.Cookies["UserPassword"] == null)
+        {
+            Response.Redirect("login.aspx");
+        }
         objSenderID = ((System.Web.UI.Page)sender).ClientQueryString;
         
         if (!IsPostBack)

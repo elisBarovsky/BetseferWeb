@@ -230,7 +230,8 @@
 
                             </div>
                             <div style="float: left; position: relative;padding-left: 20px">
-                                <asp:CheckBox ID="CheckBox1" runat="server" Text="האם לפרסם" />
+                                <asp:CheckBox ID="CheckBox1" runat="server"  />
+                                <asp:Label ID="Label1" runat="server" Text="האם לפרסם?"></asp:Label>
                             </div>
 
                             <div runat="server" id="AlertBox" class="alertBox" visible="false">
