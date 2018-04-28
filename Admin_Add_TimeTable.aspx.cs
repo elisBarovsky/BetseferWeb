@@ -25,27 +25,22 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
     {
         string AdminId = Request.Cookies["UserID"].Value;
         Users UserInfo_ = new Users();
-      //  AdminIMG.Visible = true;
 
         List<string> UserInfo = new List<string>();
         UserInfo = UserInfo_.GetUserInfo(AdminId);
-        // AdminNameLBL.Text = "שלום " + UserInfo[0] + " " + UserInfo[1];
 
         UserName.InnerText= UserInfo[0] + " " + UserInfo[1];
-     //   username2.InnerText= UserInfo[0] + " " + UserInfo[1];
         if (UserInfo[5] == "")
         {
            UserImgimg.ImageUrl = "/Images/NoImg.png";
             UserImg.ImageUrl = "/Images/NoImg.png";
             UserImg1.ImageUrl = "/Images/NoImg.png";
-            // UserImg.ImageUrl = 
         }
         else
         {
             UserImgimg.ImageUrl = UserInfo[5];
             UserImg.ImageUrl = UserInfo[5];
             UserImg1.ImageUrl = UserInfo[5];
-            //   UserImg.ImageUrl =
         }
     }
 
@@ -76,15 +71,22 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         {
             TableRow tr = new TableRow();
 
+            TableCell lessonNumber = new TableCell();
+            lessonNumber.Text = (i + 1).ToString();
+            lessonNumber.CssClass = "DDL_TD";
+            tr.Cells.Add(lessonNumber);
+
             //the days <>
             for (int j = 0; j < 6; j++)
             {
                 TableCell cell = new TableCell();
                 cell.CssClass = "DDL_TD";
-                Image onclickImg = new Image();
+
+                ImageButton onclickImg = new ImageButton();
                 onclickImg.ImageUrl = "Images/editIcon.png";
-                onclickImg.Style.Add("height", "20px");
-                onclickImg.Attributes.Add("onclick", "window.open('Admin_New_TT_form.aspx', 'mynewwin', 'width=600,height=600')");
+                onclickImg.Style.Add("height", "20px");  
+                string id= "WeekDay_" + (j + 1).ToString() + "-lesson_" + (i + 1).ToString();
+                onclickImg.Attributes.Add("onclick", "window.open('Admin_New_TT_form.aspx?cellID="+ id + "', 'mynewwin', 'width=600,height=600')");
                 //DropDownList dSubject = new DropDownList();
                 //dSubject.CssClass = "DDL_sub";
                 //dSubject.ID = "DDLsubject" + counter;
@@ -108,12 +110,8 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
 
                 counter++;
             }
-
-            TableCell lessonNumber = new TableCell();
-            lessonNumber.Text = (i + 1).ToString();
-            lessonNumber.CssClass = "DDL_TD";
-            tr.Cells.Add(lessonNumber);
-
+         
+          
             TimeTable.Rows.Add(tr);
         }
 
@@ -121,7 +119,7 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
 
     protected void FillDaysTitles()
     {
-        string[] days = new string[] { "שישי", "חמישי", "רביעי", "שלישי", "שני", "ראשון", "שיעור" };
+        string[] days = new string[] { "שיעור", "ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי" };
         //TimeTable;
         TableRow tr = new TableRow();
 
