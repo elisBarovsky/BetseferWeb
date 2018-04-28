@@ -22,9 +22,14 @@ public class TimeTable
         return db.InsertTimeTable(matrix, classCode);
     }
 
-    public int InsertTempTimeTable(string date, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId)
+    public int InsertTempTimeTable(string date, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId, int ClassNum)
     {
-        return db.InsertTempTimeTable(date, CodeWeekDay, ClassTimeCode, CodeLesson, TeacherId);
+        return db.InsertTempTimeTable(date, CodeWeekDay, ClassTimeCode, CodeLesson, TeacherId, ClassNum);
+    }//GetCellInfo
+
+    public List<string> GetCellInfo(string date, int WeekDay,int LessonNum, int ClassNmum)
+    {
+        return db.GetCellInfo(date, WeekDay, LessonNum, ClassNmum);
     }
 
     public List<Dictionary<string, string>> GetTimeTableAcordingToClassCode(int classCode)

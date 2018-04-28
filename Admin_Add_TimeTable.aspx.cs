@@ -17,9 +17,10 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         if (!IsPostBack)
         {
             LoadUser();
-         //   CreateEmptyTimeTable();
         }
-        CreateEmptyTimeTable();
+       
+        //ddl_clasesAdd_SelectedIndexChanged(sender, e);
+
     }
 
     public void LoadUser()
@@ -86,13 +87,27 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
                 ImageButton onclickImg = new ImageButton();
                 onclickImg.ImageUrl = "Images/editIcon.png";
                 onclickImg.Style.Add("height", "20px");  
-                string id= "WeekDay_" + (j + 1).ToString() + "-lesson_" + (i + 1).ToString();
-                onclickImg.Attributes.Add("onclick", "window.open('Admin_New_TT_form.aspx?cellID="+ id + "', 'mynewwin', 'width=600,height=600')");
+                string id= "WeekDay_" + (j + 1).ToString() + "-lesson_" + (i + 1).ToString()+"-ChoosenClass_"+ ddl_clasesAdd.SelectedItem.Value;
+                onclickImg.Attributes.Add("onclick", "event.preventDefault(); window.open('Admin_New_TT_form.aspx?cellID=" + id + "', 'mynewwin', 'width=600,height=600')");
                 cell.Controls.Add(onclickImg);
 
-                //TextBox info = new TextBox();
-                //info.Text = "";
-                //cell.Controls.Add(info);
+
+
+                Label info = new Label();
+
+                TimeTable TT = new TimeTable();
+                List<string> CellInfush = TT.GetCellInfo(DateTime.Today.ToShortDateString(),(j+1),(i+1), int.Parse(ddl_clasesAdd.SelectedItem.Value));
+
+                if (CellInfush.Count==0)
+                {
+                    info.Text = "";
+                }
+                else
+                {
+                    info.Text = CellInfush[0] + " " + CellInfush[1];
+                }
+
+                cell.Controls.Add(info);
 
                 tr.Cells.Add(cell);
 
@@ -227,17 +242,6 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
 
     }
 
-    //protected void ddl_clases_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    if (ButtonUpdate.Visible == true)
-    //    {
-    //        int classCode = int.Parse(ddl_clasesEdit.SelectedValue.ToString());
-    //        FillTimeTableAccordingToClassCode(classCode);
-    //        return;
-    //    }
-
-    //}
-
     protected void FillTimeTableAccordingToClassCode(int classCode)
     {
         Subject subject = new Subject();
@@ -293,4 +297,10 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         return lessonInTT;
     }
 
+
+    protected void ddl_clasesAdd_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CreateEmptyTimeTable();
+
+    }
 }

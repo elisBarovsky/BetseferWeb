@@ -656,13 +656,12 @@ public class DBconnection
         return num;
     }
 
-    public int InsertTempTimeTable(string date, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId)
+    public int InsertTempTimeTable(string date, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId ,int ClassNum)
     {
         string cStr;
         int num = 0;
-        //check empty cells.
 
-        cStr = "INSERT INTO [dbo].[TempTimetableLesson] ([dateString],[CodeWeekDay],[ClassTimeCode],[CodeLesson],[TeacherId]) values ('" + date + "',"+ CodeWeekDay +","+ ClassTimeCode+","+ CodeLesson+",'"+ TeacherId+"')";
+        cStr = "INSERT INTO [dbo].[TempTimetableLesson] ([dateString],[CodeWeekDay],[ClassTimeCode],[CodeLesson],[TeacherId],[CodeChoosenClass]) values ('" + date + "',"+ CodeWeekDay +","+ ClassTimeCode+","+ CodeLesson+",'"+ TeacherId+"',"+ ClassNum + ")";
 
         num = ExecuteNonQuery(cStr);
 
@@ -750,6 +749,46 @@ public class DBconnection
                 NumChilds = dr["num"].ToString();
             }
             return NumChilds;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<string> GetCellInfo(string date, int WeekDay, int LessonNum, int ClassNum)
+    {
+        String cStr = "select ([UserFName]+' '+[UserLName]) as FullName from [dbo].[Users] where [UserID]=(select  [TeacherId] from [dbo].[TempTimetableLesson] where [dateString] ='"+ date + "' and [CodeWeekDay]="+ WeekDay + " and [ClassTimeCode]="+ LessonNum + "and CodeChoosenClass="+ ClassNum + ") union " +
+                        "select [LessonName] from [dbo].[Lessons] where [CodeLesson]=(select CodeLesson from [dbo].[TempTimetableLesson] where [dateString] ='"+ date + "' and [CodeWeekDay]=" + WeekDay + " and [ClassTimeCode]="+ LessonNum + "and CodeChoosenClass=" + ClassNum + ") ";
+        List<string> listInfo = new List<string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(cStr, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                string info =dr["FullName"].ToString();
+                listInfo.Add(info) ;
+            }
+            return listInfo;
         }
         catch (Exception ex)
         {
