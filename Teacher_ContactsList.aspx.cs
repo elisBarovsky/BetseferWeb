@@ -69,6 +69,11 @@ public partial class Teacher_ContactsList : System.Web.UI.Page
 
     protected void TLBTN_Click(object sender, EventArgs e)
     {
+        if (ChooseClassDLL.SelectedValue == "בחר")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('עליך לבחור כיתה');", true);
+            return;
+        }
         string UserTypeFilter = FilterNotes.SelectedValue;
 
         Dictionary<string, string> List = new Dictionary<string, string>();
