@@ -17,9 +17,9 @@ public class TimeTable
         //
     }
 
-    public int InsertTimeTable(List<Dictionary<string, string>> matrix, string classCode)
+    public int InsertTimeTable(string date, int classCode,bool publish)
     {
-        return db.InsertTimeTable(matrix, classCode);
+        return db.InsertTimeTable(date, classCode, publish);
     }
 
     public int InsertTempTimeTable(string date, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId, int ClassNum)

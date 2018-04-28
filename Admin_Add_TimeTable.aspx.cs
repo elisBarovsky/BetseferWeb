@@ -181,10 +181,11 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
 
         //        counter++;
         //    }
-       // }
+        // }
         //if (!flag)
         //{
-            int rowsAffected = TT.InsertTimeTable(DateTime.Today.ToShortDateString, int.Parse(ddl_clasesAdd.SelectedItem.Value), CheckBox1.Checked);
+      //  int setNewCode =;
+            int rowsAffected = TT.InsertTimeTable(DateTime.Today.ToShortDateString(), int.Parse(ddl_clasesAdd.SelectedItem.Value), CheckBox1.Checked);
             if (rowsAffected > 0)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת נשמרה בהצלחה'); location.href='Admin_Add_TimeTable.aspx';", true);
