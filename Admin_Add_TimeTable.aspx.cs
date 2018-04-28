@@ -18,9 +18,6 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         {
             LoadUser();
         }
-       
-        //ddl_clasesAdd_SelectedIndexChanged(sender, e);
-
     }
 
     public void LoadUser()
@@ -131,61 +128,11 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         TimeTable.DataBind();
     }
 
-    protected void ButtonSave_Click(object sender, EventArgs e)
+    protected void ButtonPublish_Click(object sender, EventArgs e)
     {
         TimeTable TT = new TimeTable();
 
-        // List<Dictionary<string, string>> matrix = new List<Dictionary<string, string>>();
-        //string classCode = ddl_clasesAdd.SelectedValue;
-        //string CodeLesson; //מקצוע
-        //string teacherID;
-        //int counter = 1;
-        //bool flag = false;
-        //// rows - ^.
-        //for (int i = 1; !flag && i < TimeTable.Rows.Count; i++)
-        //{
-        //    // cells - the days <>.
-        //    for (int j = 1; j < TimeTable.Rows[i].Cells.Count; j++)
-        //    {
-        //        string subjectID = "DDLsubject" + counter;
-        //        string TID = "DDLteacher" + counter;
-        //        CodeLesson = (TimeTable.Rows[i].Cells[j].FindControl(subjectID) as DropDownList).SelectedValue;
-        //        teacherID = (TimeTable.Rows[i].Cells[j].FindControl(TID) as DropDownList).SelectedValue;
-        //        if (CodeLesson == "0" && teacherID != "0")
-        //        {
-        //            flag = true;
-        //            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('לא ניתן להזין מורה ללא מקצוע נלמד.');", true);
-        //        }
-        //        else if (CodeLesson != "0" && teacherID == "0")
-        //        {
-        //            flag = true;
-        //            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('שים לב! לא ניתן להזין מקצוע ללא מורה.');", true);
-        //        }
-        //        else if (CodeLesson != "0" && teacherID != "0")
-        //        {
-        //            Dictionary<string, string> lessonInTimeTable = new Dictionary<string, string>();
-        //            lessonInTimeTable.Add("classCode", classCode); //className
-        //            lessonInTimeTable.Add("CodeWeekDay", j.ToString()); //numDay
-        //            lessonInTimeTable.Add("ClassTimeCode", i.ToString()); //numLesson - 1 is the first lesson.
-        //            lessonInTimeTable.Add("CodeLesson", CodeLesson);
-        //            lessonInTimeTable.Add("TeacherID", teacherID);
-
-        //            matrix.Add(lessonInTimeTable);
-        //        }
-        //        else
-        //        {
-        //            Dictionary<string, string> empty = new Dictionary<string, string>();
-        //            empty.Add("classCode", "empty");
-        //            matrix.Add(empty);
-        //        }
-
-        //        counter++;
-        //    }
-        // }
-        //if (!flag)
-        //{
-      //  int setNewCode =;
-            int rowsAffected = TT.InsertTimeTable(DateTime.Today.ToShortDateString(), int.Parse(ddl_clasesAdd.SelectedItem.Value), CheckBox1.Checked);
+            int rowsAffected = TT.InsertTimeTable(DateTime.Today.ToShortDateString(), int.Parse(ddl_clasesAdd.SelectedItem.Value), true);
             if (rowsAffected > 0)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת נשמרה בהצלחה'); location.href='Admin_Add_TimeTable.aspx';", true);
@@ -194,12 +141,11 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('קרתה תקלה בעת שמירת המערכת. נא צור קשר עם שירות הלקוחות בטלפון: 1-800-400-400');", true);
             }
-
     }
 
     protected void PreparePageToUpdate(object sender, EventArgs e)
     {
-        ButtonSave.Visible = false;
+        ButtonPublish.Visible = false;
         ddl_clasesAdd.ClearSelection();
         ddl_clasesAdd.Visible = false;
         ClearTimeTable();
@@ -207,7 +153,7 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
 
     protected void PreparePageToAddNew(object sender, EventArgs e)
     {
-        ButtonSave.Visible = true;
+        //ButtonSave.Visible = true;
         ddl_clasesAdd.SelectedValue = "0";
         ddl_clasesAdd.Visible = true;
         ClearTimeTable();
@@ -232,44 +178,6 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
 
     }
 
-    protected void FillTimeTableAccordingToClassCode(int classCode)
-    {
-        Subject subject = new Subject();
-        //Users user = new Users();
-        int counter = 1;
-        TimeTable TT = new TimeTable();
-
-        //TT from the DB
-        List<Dictionary<string, string>> allLessons = TT.GetTimeTableAcordingToClassCode(classCode);
-        //CreateEmptyTimeTable();
-        //rows ^
-        for (int i = 1; i < TimeTable.Rows.Count; i++)
-        {
-
-            for (int j = 1; j < TimeTable.Rows[i].Cells.Count; j++)
-            {
-                Dictionary<string, string> lessonInTT = ReturnIfLessonExsistsInTT(i, j, allLessons);
-                string subjectID = "DDLsubject" + counter;
-                string TID = "DDLteacher" + counter;
-
-                if (lessonInTT.Count > 0)
-                {
-
-                    (TimeTable.Rows[i].Cells[j].FindControl(subjectID) as DropDownList).SelectedValue = lessonInTT["CodeLesson"];
-                    (TimeTable.Rows[i].Cells[j].FindControl(TID) as DropDownList).SelectedValue = lessonInTT["TeacherId"];
-                }
-                else
-                {
-                    (TimeTable.Rows[i].Cells[j].FindControl(subjectID) as DropDownList).SelectedValue = "0";
-                    (TimeTable.Rows[i].Cells[j].FindControl(TID) as DropDownList).SelectedValue = "0";
-                }
-
-                counter++;
-            }
-
-        }
-    }
-
     protected Dictionary<string, string> ReturnIfLessonExsistsInTT(int lessonNumber, int weekDay, List<Dictionary<string, string>> TimeTable)
     {
         //return just the specific lesson if exists in row number and day.
@@ -287,8 +195,16 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         return lessonInTT;
     }
 
-    protected void ddl_clasesAdd_SelectedIndexChanged(object sender, EventArgs e)
+    protected void SelectedIndexChanged(object sender, EventArgs e)
     {
         CreateEmptyTimeTable();
+    }
+
+    protected void ddl_clasesAdd_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddl_clasesAdd.SelectedItem.Text != "בחר כיתה")
+        {
+
+        }
     }
 }
