@@ -57,6 +57,11 @@ public partial class Admin_Update_User : System.Web.UI.Page
     //    ChoosenNumChildDDL.DataBind();
     //}
 
+    protected void FillFirstItem(object sender, EventArgs e)
+    {
+        (sender as DropDownList).Items.Insert(0, new ListItem("בחר", "0"));
+    }
+
     public void LoadUser()
     {
         string AdminId = Request.Cookies["UserID"].Value;
