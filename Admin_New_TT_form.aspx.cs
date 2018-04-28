@@ -14,15 +14,12 @@ public partial class Admin_New_TT_form : System.Web.UI.Page
         //{
         //    Response.Redirect("login.aspx");
         //}
-        //  string id = Request["onclickImg.ID"];
-        //object gfhgf = (Button)sender;
 
         objSenderID = ((System.Web.UI.Page)sender).ClientQueryString;
         
         if (!IsPostBack)
         {
-           // FillClassesOt();
-          //  FillClassesNum();
+
         }
     }
 
@@ -34,9 +31,7 @@ public partial class Admin_New_TT_form : System.Web.UI.Page
         int lessonCode = int.Parse(DDLlessons.SelectedItem.Value.ToString()); 
         string TeacherCode = TeachersDDL.SelectedItem.Value.ToString();
 
-        //int TimeTableCode, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId
-        TimeTable TT = new TimeTable();
-        
+        TimeTable TT = new TimeTable();     
 
         int res=  TT.InsertTempTimeTable( DateTime.Today.ToShortDateString(), DayNum, LessonNum, lessonCode, TeacherCode, ClassNum);
 

@@ -91,8 +91,6 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
                 onclickImg.Attributes.Add("onclick", "event.preventDefault(); window.open('Admin_New_TT_form.aspx?cellID=" + id + "', 'mynewwin', 'width=600,height=600')");
                 cell.Controls.Add(onclickImg);
 
-
-
                 Label info = new Label();
 
                 TimeTable TT = new TimeTable();

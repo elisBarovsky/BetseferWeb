@@ -222,12 +222,17 @@
                                 <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT ClassCode, TotalName FROM Class WHERE (ClassCode NOT IN (SELECT Class_1.ClassCode FROM Class AS Class_1 INNER JOIN Timetable ON Class_1.ClassCode = Timetable.ClassCode))"></asp:SqlDataSource>
                                 </div>
                             <div style="float: right; position: relative;padding-right: 20px">
-                                <asp:Button ID="Button1" runat="server" CssClass="btn btn-outline-primary" Text="אישור"  OnClick="ddl_clasesAdd_SelectedIndexChanged" />
+                                <asp:Button ID="Button1" runat="server" CssClass="btn btn-outline-info" Text="אישור"  OnClick="ddl_clasesAdd_SelectedIndexChanged" />
                             </div>
+                            
                             <div style="float: left; position: relative; padding-bottom: 20px;">
                                 <asp:Button ID="ButtonSave" CssClass="btn btn-outline-primary" runat="server" Text="שמור" Visible="true" OnClick="ButtonSave_Click" />
 
                             </div>
+                            <div style="float: left; position: relative;padding-left: 20px">
+                                <asp:CheckBox ID="CheckBox1" runat="server" Text="האם לפרסם" />
+                            </div>
+
                             <div runat="server" id="AlertBox" class="alertBox" visible="false">
                                 <div runat="server" id="AlertBoxMessage"></div>
                                 <button onclick="closeAlert.call(this, event)">Ok</button>
