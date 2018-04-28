@@ -224,7 +224,7 @@
                                         <td>
                                             <asp:Label ID="Label1" class="control-label" runat="server" Text="סוג משתמש"></asp:Label></td>
                                         <td>
-                                            <asp:DropDownList ID="UserTypeDLL" CssClass="form-control" runat="server" DataSourceID="SqlDataSource2" OnSelectedIndexChanged="UserTypeDLL_CheckedChanged" DataTextField="CodeUserName" DataValueField="CodeUserType" AutoPostBack="true" RepeatDirection="Horizontal"></asp:DropDownList>
+                                            <asp:DropDownList ID="UserTypeDLL" CssClass="form-control" runat="server" DataSourceID="SqlDataSource2" OnDataBound="FillFirstItem" OnSelectedIndexChanged="UserTypeDLL_CheckedChanged" DataTextField="CodeUserName" DataValueField="CodeUserType" AutoPostBack="true" RepeatDirection="Horizontal"></asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT * FROM [UserType]"></asp:SqlDataSource>
                                         </td>
                                         <td>
