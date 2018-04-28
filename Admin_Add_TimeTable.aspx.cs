@@ -17,6 +17,7 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         if (!IsPostBack)
         {
             LoadUser();
+         //   CreateEmptyTimeTable();
         }
         CreateEmptyTimeTable();
     }
@@ -29,8 +30,8 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         List<string> UserInfo = new List<string>();
         UserInfo = UserInfo_.GetUserInfo(AdminId);
 
-        UserName.InnerText= UserInfo[0] + " " + UserInfo[1];
-        if (UserInfo[5] == "")
+        UserName.InnerText= UserInfo[1] + " " + UserInfo[2];
+        if (UserInfo[6] == "")
         {
            UserImgimg.ImageUrl = "/Images/NoImg.png";
             UserImg.ImageUrl = "/Images/NoImg.png";
@@ -38,9 +39,9 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         }
         else
         {
-            UserImgimg.ImageUrl = UserInfo[5];
-            UserImg.ImageUrl = UserInfo[5];
-            UserImg1.ImageUrl = UserInfo[5];
+            UserImgimg.ImageUrl = UserInfo[6];
+            UserImg.ImageUrl = UserInfo[6];
+            UserImg1.ImageUrl = UserInfo[6];
         }
     }
 
@@ -87,34 +88,19 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
                 onclickImg.Style.Add("height", "20px");  
                 string id= "WeekDay_" + (j + 1).ToString() + "-lesson_" + (i + 1).ToString();
                 onclickImg.Attributes.Add("onclick", "window.open('Admin_New_TT_form.aspx?cellID="+ id + "', 'mynewwin', 'width=600,height=600')");
-                //DropDownList dSubject = new DropDownList();
-                //dSubject.CssClass = "DDL_sub";
-                //dSubject.ID = "DDLsubject" + counter;
-                //dSubject.DataTextField = "Value";
-                //dSubject.DataValueField = "Key";
-                //dSubject.DataSource = subjects;
-                //dSubject.DataBind();
                 cell.Controls.Add(onclickImg);
-                //cell.Controls.Add(new HtmlGenericControl("br"));
 
-                //DropDownList dTeacher = new DropDownList();
-                //dTeacher.CssClass = "DDL_teach";
-                //dTeacher.ID = "DDLteacher" + counter;
-                //dTeacher.DataSource = teachers;
-                //dTeacher.DataValueField = "Key";
-                //dTeacher.DataTextField = "Value";
-                //dTeacher.DataBind();
-                //cell.Controls.Add(dTeacher);
+                //TextBox info = new TextBox();
+                //info.Text = "";
+                //cell.Controls.Add(info);
+
                 tr.Cells.Add(cell);
-                //cell.Controls.Add(new HtmlGenericControl("br"));
 
                 counter++;
             }
          
-          
             TimeTable.Rows.Add(tr);
         }
-
     }
 
     protected void FillDaysTitles()

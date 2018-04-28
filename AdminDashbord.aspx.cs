@@ -24,27 +24,22 @@ public partial class AdminDashbord : System.Web.UI.Page
     {
         string AdminId = Request.Cookies["UserID"].Value;
         Users UserInfo_ = new Users();
-      //  AdminIMG.Visible = true;
 
         List<string> UserInfo = new List<string>();
         UserInfo = UserInfo_.GetUserInfo(AdminId);
-        // AdminNameLBL.Text = "שלום " + UserInfo[0] + " " + UserInfo[1];
 
-        UserName.InnerText= UserInfo[0] + " " + UserInfo[1];
-     //   username2.InnerText= UserInfo[0] + " " + UserInfo[1];
-        if (UserInfo[5] == "")
+        UserName.InnerText = UserInfo[1] + " " + UserInfo[2];
+        if (UserInfo[6] == "")
         {
-           UserImgimg.ImageUrl = "/Images/NoImg.png";
+            UserImgimg.ImageUrl = "/Images/NoImg.png";
             UserImg.ImageUrl = "/Images/NoImg.png";
             UserImg1.ImageUrl = "/Images/NoImg.png";
-            // UserImg.ImageUrl = 
         }
         else
         {
-            UserImgimg.ImageUrl = UserInfo[5];
-            UserImg.ImageUrl = UserInfo[5];
-            UserImg1.ImageUrl = UserInfo[5];
-            //   UserImg.ImageUrl =
+            UserImgimg.ImageUrl = UserInfo[6];
+            UserImg.ImageUrl = UserInfo[6];
+            UserImg1.ImageUrl = UserInfo[6];
         }
     }
 }

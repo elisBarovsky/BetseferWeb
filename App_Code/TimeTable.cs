@@ -22,6 +22,16 @@ public class TimeTable
         return db.InsertTimeTable(matrix, classCode);
     }
 
+    public int SelectMaxCodeTempTable()
+    {
+        return db.SelectMaxCodeTempTable();
+    }
+
+    public int InsertTempTimeTable(int TimeTableCode, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId)
+    {
+        return db.InsertTempTimeTable(TimeTableCode, CodeWeekDay, ClassTimeCode, CodeLesson, TeacherId);
+    }
+
     public List<Dictionary<string, string>> GetTimeTableAcordingToClassCode(int classCode)
     {
         return db.GetTimeTableAcordingToClassCode(classCode);

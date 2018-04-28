@@ -656,6 +656,57 @@ public class DBconnection
         return num;
     }
 
+    public int InsertTempTimeTable(int TimeTableCode, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId)
+    {
+        string cStr;
+        int num = 0;
+        //check empty cells.
+
+        cStr = "INSERT INTO [dbo].[TempTimetableLesson] [TimeTableCode],[CodeWeekDay],[ClassTimeCode],[CodeLesson],[TeacherId] values (" + TimeTableCode + ","+ CodeWeekDay +","+ ClassTimeCode+","+ CodeLesson+",'"+ TeacherId+"')";
+        ExecuteNonQuery(cStr);
+
+        num = ExecuteNonQuery(cStr);
+
+        return num;
+    }
+
+     public int SelectMaxCodeTempTable()
+    {
+        int TTC = 0;
+        String cStr = "select max([TimeTableCode]) from dbo.[TempTimetableLesson]";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(cStr, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                TTC = int.Parse(dr[0].ToString());
+            }
+            return TTC;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
     public int GetLastTimeTableCode()
     {
         int TTC = 0;
