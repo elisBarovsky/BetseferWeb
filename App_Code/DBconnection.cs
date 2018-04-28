@@ -656,19 +656,6 @@ public class DBconnection
         return num;
     }
 
-    public int InsertTempTimeTable(string date, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId)
-    {
-        string cStr;
-        int num = 0;
-        //check empty cells.
-
-        cStr = "INSERT INTO [dbo].[TempTimetableLesson] ([dateString],[CodeWeekDay],[ClassTimeCode],[CodeLesson],[TeacherId]) values ('" + date + "',"+ CodeWeekDay +","+ ClassTimeCode+","+ CodeLesson+",'"+ TeacherId+"')";
-
-        num = ExecuteNonQuery(cStr);
-
-        return num;
-    }
-
     public int GetLastTimeTableCode()
     {
         int TTC = 0;
@@ -1613,6 +1600,50 @@ public class DBconnection
                 PupilId.Add(dr[0].ToString());
             }
             return PupilId;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<string> GetParentsIdsByPupilId(string pupilID)
+    {
+        List<string> parents = new List<string>();
+
+        String selectSTR = "SELECT dbo.PupilsParent.ParentID FROM dbo.UserType INNER JOIN " +
+                            "dbo.Users ON dbo.UserType.CodeUserType = dbo.Users.CodeUserType INNER JOIN " +
+                            "dbo.PupilsParent ON dbo.Users.UserID = dbo.PupilsParent.ParentID " +
+                            "where dbo.PupilsParent.PupilID = '" + pupilID + "'";
+
+
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                parents.Add(dr[0].ToString());
+            }
+            return parents;
         }
         catch (Exception ex)
         {
