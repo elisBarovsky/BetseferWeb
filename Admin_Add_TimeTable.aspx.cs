@@ -195,7 +195,6 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('קרתה תקלה בעת שמירת המערכת. נא צור קשר עם שירות הלקוחות בטלפון: 1-800-400-400');", true);
             }
 
-       // }
     }
 
     protected void PreparePageToUpdate(object sender, EventArgs e)

@@ -647,8 +647,9 @@ public class DBconnection
                     {
                         while (reader.Read())
                         {
-                            num = 1;
+                           
                         }
+                        num = 1;
                     }
                 }
             }
