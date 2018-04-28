@@ -14,7 +14,7 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
         //    Response.Redirect("login.aspx");
         //}
 
-        if (!IsPostBack)
+        //if (!IsPostBack)
         {
             LoadUser();
             CreatePupilsListByClassCode();
@@ -56,7 +56,7 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
         List<Dictionary<string, string>> pupils = new List<Dictionary<string, string>>();
         Users u = new Users();
         pupils = u.getPupilsByClassCode(ClassCode);
-        string[] titles = new string[] { "ציון", "שם", "ת.ז." };
+        string[] titles = new string[] {  "ת.ז.", "שם", "ציון" };
         TableRow tr = new TableRow();
         int counter = 0;
         for (int i = 0; i < 3; i++)
@@ -73,6 +73,18 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
         {
             TableRow row = new TableRow();
 
+            TableCell id = new TableCell();
+            id.CssClass = "DDL_TD";
+            id.ID = "id" + counter;
+            id.Text = pupils[i]["UserId"];
+            row.Cells.Add(id);
+
+            TableCell name = new TableCell();
+            name.CssClass = "DDL_TD";
+            name.ID = "name" + counter;
+            name.Text = pupils[i]["UserName"];
+            row.Cells.Add(name);
+
             TableCell grade = new TableCell();
             grade.CssClass = "DDL_TD";
             grade.ID = "grade" + counter;
@@ -83,17 +95,6 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
             grade.Controls.Add(tb);
             row.Cells.Add(grade);
 
-            TableCell name = new TableCell();
-            name.CssClass = "DDL_TD";
-            name.ID = "name" + counter;
-            name.Text = pupils[i]["UserName"];
-            row.Cells.Add(name);
-
-            TableCell id = new TableCell();
-            id.CssClass = "DDL_TD";
-            id.ID = "id" + counter;
-            id.Text = pupils[i]["UserId"];
-            row.Cells.Add(id);
 
             tableGrades.Rows.Add(row);
             counter++;
@@ -139,8 +140,8 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
                 return;
             }
 
-            int grade = int.Parse((tableGrades.Rows[i].Cells[0].FindControl(gradeID) as TextBox).Text);
-            string pupilId = tableGrades.Rows[i].Cells[2].Text;
+            int grade = int.Parse((tableGrades.Rows[i].Cells[2].FindControl(gradeID) as TextBox).Text);
+            string pupilId = tableGrades.Rows[i].Cells[0].Text;
             Grades g = new Grades();
             num += g.InsertGrade(pupilId, teacherId, codeLesson, ExamDate, grade);
         }
