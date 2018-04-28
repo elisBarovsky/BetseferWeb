@@ -294,7 +294,7 @@ public partial class Admin_Update_TimeTable : System.Web.UI.Page
             }
             if (!flag)
             {
-                int rowsAffected = TT.InsertTimeTable(matrix, classCode);
+                int rowsAffected = TT.InsertTimeTable("fgh", 1,true);
                 if (rowsAffected > 0)
                 {
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת נשמרה בהצלחה'); location.href='Admin_Update_TimeTable.aspx';", true);

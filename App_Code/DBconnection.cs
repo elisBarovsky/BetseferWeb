@@ -628,29 +628,42 @@ public class DBconnection
         return ExecuteNonQuery(cStr);
     }
 
-    public int InsertTimeTable(List<Dictionary<string, string>> matrix, string classCode)
+    public int InsertTimeTable(string date, int classCode, bool publish)
     {
-        string cStr;
         int num = 0;
-        //check empty cells.
-
-        cStr = "INSERT INTO [dbo].[Timetable] (ClassCode) values (" + classCode + ")";
-        ExecuteNonQuery(cStr);
-
-        for (int i = 0; i < matrix.Count; i++)
+        try
         {
-            SqlConnection conn = connect("Betsefer");
-
-            if (matrix[i]["classCode"] != "empty")
+            using (var con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Betsefer"].ConnectionString))
             {
-                int TimeTableCode = GetLastTimeTableCode();
-                int CodeWeekDay = int.Parse(matrix[i]["CodeWeekDay"]);
-                int ClassTimeCode = int.Parse(matrix[i]["ClassTimeCode"]);
-                int CodeLesson = int.Parse(matrix[i]["CodeLesson"]);
-                string TeacherId = matrix[i]["TeacherID"];
+                using (var cmd = new SqlCommand("UpdateTimeTable", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@classCode", classCode);
+                    cmd.Parameters.AddWithValue("@publish", publish);
+                    con.Open();
 
-                cStr = "INSERT INTO [dbo].[TimetableLesson] (TimeTableCode, CodeWeekDay, ClassTimeCode, CodeLesson, TeacherId) values (" + TimeTableCode + ", " + CodeWeekDay + ", " + ClassTimeCode + ", " + CodeLesson + ", '" + TeacherId + "')";
-                num = ExecuteNonQuery(cStr);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                           
+                        }
+                        num = 1;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
             }
         }
         return num;
