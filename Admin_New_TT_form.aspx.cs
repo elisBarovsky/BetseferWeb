@@ -35,8 +35,22 @@ public partial class Admin_New_TT_form : System.Web.UI.Page
 
         //int TimeTableCode, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId
         TimeTable TT = new TimeTable();
-        int TableTempNum= TT.SelectMaxCodeTempTable();
-        int res=  TT.InsertTempTimeTable((TableTempNum+1), DayNum, LessonNum, lessonCode, TeacherCode);
+       
 
+        int res=  TT.InsertTempTimeTable( DateTime.Today.ToShortDateString(), DayNum, LessonNum, lessonCode, TeacherCode);
+
+        if (res==1)
+        {
+            string close = @"<script type='text/javascript'>
+                                window.returnValue = true;
+                                window.close();
+                                window.opener.location.reload();
+                                </script>";
+            base.Response.Write(close);
+        }
+        else
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הייתה בעיה, נסה שנית.');", true);
+        }
     }
 }
