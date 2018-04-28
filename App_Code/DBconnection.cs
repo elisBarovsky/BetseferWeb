@@ -656,7 +656,6 @@ public class DBconnection
         return num;
     }
 
-<<<<<<< HEAD
     public int InsertTempTimeTable(string date, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId ,int ClassNum)
     {
         string cStr;
@@ -669,8 +668,6 @@ public class DBconnection
         return num;
     }
 
-=======
->>>>>>> 2327ea85daef8fe28791653b87b0943e6bc27eae
     public int GetLastTimeTableCode()
     {
         int TTC = 0;
