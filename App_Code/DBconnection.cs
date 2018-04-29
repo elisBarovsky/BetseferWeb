@@ -1524,9 +1524,9 @@ public class DBconnection
         return ExecuteNonQuery(selectSTR);
     }
 
-    public int DeleteTempTT(string date, string classcode)  //***********************
+    public int DeleteTempTT(string date, string classcode)  
     {
-        String selectSTR = "DELETE FROM dbo.TempTimetableLesson where ClassCode = " + classcode;
+        String selectSTR = "DELETE FROM dbo.TempTimetableLesson where [dateString] = '" + date + "'[CodeChoosenClass] = "+ classcode;
         return ExecuteNonQuery(selectSTR);
     }
 

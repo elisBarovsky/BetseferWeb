@@ -159,7 +159,7 @@
                                 <li><a href="#" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="login.aspx" class="view-link text-right">התנתק  <i class="fa fa-power-off"></i></a></li>
-                              </ul>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -170,7 +170,7 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                 <div class="user-panel">
+                <div class="user-panel">
                     <div class="image text-center"></div>
                     <div class="info">
                         <a href="#">ברוך הבא ☺</a>
@@ -184,6 +184,7 @@
                         <ul class="treeview-menu">
                             <li><a href="Admin_Add_TimeTable.aspx"><i class="fa fa-plus"></i><span>יצירת מערכת</span> </a>
                                 <li><a href="Admin_Update_TimeTable.aspx"><i class="fa fa-edit"></i><span>עדכון מערכת</span> </a>
+                                    <li><a href="Admin_Saved_TimeTable.aspx"><i class="fa fa-edit"></i><span>מערכות בתהליך</span> </a>
                         </ul>
                     </li>
                     <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ניהול משתמשים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -222,41 +223,41 @@
 
             <!-- Main content -->
             <section class="content">
-                 <div class="info-box">
-                <form runat="server">
-                    <table class="auto-style1" align="center">
-                        <tr>
-                            <td style="text-align: right">הזן שם מקצוע
-                            </td>
-                            <td style="text-align: right">
-                                <asp:TextBox ID="LessonsNameTB" class="form-control" runat="server"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right">
-                                <br />
-                                <br />
-                                מקצועות קיימים
-                            </td>
-                            <td style="text-align: right">
-                                <br />
-                                <br />
-                                <asp:DropDownList ID="DDLlessons" CssClass="form-control" Style="direction: rtl;" runat="server" DataSourceID="subjects" DataTextField="LessonName" DataValueField="CodeLesson" AutoPostBack="True"></asp:DropDownList>
-                                <asp:SqlDataSource ID="subjects" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [CodeLesson], [LessonName] FROM [Lessons] ORDER BY [LessonName]"></asp:SqlDataSource>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right"></td>
-                            <td style="text-align: right">
-                                <br />
-                                <br />
-                                <br />
-                                <asp:Button ID="AddLessonsBTN" runat="server" CssClass="btn btn-outline-primary" Text="הוסף מקצוע" OnClick="AddLessonsBTN_Click" />
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-                     </div>
+                <div class="info-box">
+                    <form runat="server">
+                        <table class="auto-style1" align="center">
+                            <tr>
+                                <td style="text-align: right">הזן שם מקצוע
+                                </td>
+                                <td style="text-align: right">
+                                    <asp:TextBox ID="LessonsNameTB" class="form-control" runat="server"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">
+                                    <br />
+                                    <br />
+                                    מקצועות קיימים
+                                </td>
+                                <td style="text-align: right">
+                                    <br />
+                                    <br />
+                                    <asp:DropDownList ID="DDLlessons" CssClass="form-control" Style="direction: rtl;" runat="server" DataSourceID="subjects" DataTextField="LessonName" DataValueField="CodeLesson" AutoPostBack="True"></asp:DropDownList>
+                                    <asp:SqlDataSource ID="subjects" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [CodeLesson], [LessonName] FROM [Lessons] ORDER BY [LessonName]"></asp:SqlDataSource>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right"></td>
+                                <td style="text-align: right">
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <asp:Button ID="AddLessonsBTN" runat="server" CssClass="btn btn-outline-primary" Text="הוסף מקצוע" OnClick="AddLessonsBTN_Click" />
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
             </section>
             <!-- /.content -->
         </div>

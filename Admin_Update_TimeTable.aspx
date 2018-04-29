@@ -159,7 +159,7 @@
                                 <li><a href="#" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="login.aspx" class="view-link text-right">התנתק  <i class="fa fa-power-off"></i></a></li>
-                              </ul>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -168,12 +168,12 @@
 
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
-             <div class="user-panel">
-                    <div class="image text-center"></div>
-                    <div class="info">
-                        <a href="#">ברוך הבא ☺</a>
-                    </div>
+            <div class="user-panel">
+                <div class="image text-center"></div>
+                <div class="info">
+                    <a href="#">ברוך הבא ☺</a>
                 </div>
+            </div>
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -184,6 +184,8 @@
                         <ul class="treeview-menu">
                             <li><a href="Admin_Add_TimeTable.aspx"><i class="fa fa-plus"></i><span>יצירת מערכת</span> </a>
                                 <li class="active"><a href="Admin_Update_TimeTable.aspx"><i class="fa fa-edit"></i><span>עדכון מערכת</span> </a>
+                                    <li><a href="Admin_Saved_TimeTable.aspx"><i class="fa fa-edit"></i><span>מערכות בתהליך</span> </a>
+
                         </ul>
                     </li>
                     <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ניהול משתמשים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -235,7 +237,7 @@
                                                 order by Class.TotalName"></asp:SqlDataSource>
                             </div>
 
-                            <div style="float: left; position: relative;padding-bottom:20px;">
+                            <div style="float: left; position: relative; padding-bottom: 20px;">
                                 <asp:Button ID="ButtonUpdate" CssClass="btn btn-outline-primary" runat="server" Text="עדכן" OnClick="ButtonUpdate_Click" />
 
                             </div>

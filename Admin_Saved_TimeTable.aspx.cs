@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Admin_Add_TimeTable : System.Web.UI.Page
+public partial class Admin_Saved_TimeTable : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -205,7 +205,6 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
 
         if (ddl_clasesAdd.SelectedItem.Text != "בחר כיתה" && count != "0")
         {
-            ModalPopupExtender1.Show();
             Response.Cookies["counter"].Value = 0.ToString();
         }
         else

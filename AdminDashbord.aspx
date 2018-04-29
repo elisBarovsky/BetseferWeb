@@ -71,7 +71,8 @@
                                         <li><a href="#">
                                             <div class="pull-left" runat="server">
                                                 <asp:Image ID="UserImg" runat="server" class="img-circle" />
-                                                <span class="profile-status online pull-right"></span></div>
+                                                <span class="profile-status online pull-right"></span>
+                                            </div>
                                             <h4 id="UserNameplace">Alex C. Patton</h4>
                                             <p>I've finished it! See you so...</p>
                                             <p><span class="time">9:30 AM</span></p>
@@ -79,7 +80,8 @@
                                         <li><a href="#">
                                             <div class="pull-left">
                                                 <img src="dist/img/img3.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status offline pull-right"></span></div>
+                                                <span class="profile-status offline pull-right"></span>
+                                            </div>
                                             <h4>Nikolaj S. Henriksen</h4>
                                             <p>I've finished it! See you so...</p>
                                             <p><span class="time">10:15 AM</span></p>
@@ -87,7 +89,8 @@
                                         <li><a href="#">
                                             <div class="pull-left">
                                                 <img src="dist/img/img2.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status away pull-right"></span></div>
+                                                <span class="profile-status away pull-right"></span>
+                                            </div>
                                             <h4>Kasper S. Jessen</h4>
                                             <p>I've finished it! See you so...</p>
                                             <p><span class="time">8:45 AM</span></p>
@@ -95,7 +98,8 @@
                                         <li><a href="#">
                                             <div class="pull-left">
                                                 <img src="dist/img/img4.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status busy pull-right"></span></div>
+                                                <span class="profile-status busy pull-right"></span>
+                                            </div>
                                             <h4>Florence S. Kasper</h4>
                                             <p>I've finished it! See you so...</p>
                                             <p><span class="time">12:15 AM</span></p>
@@ -149,7 +153,8 @@
                             <ul class="dropdown-menu right">
                                 <li class="user-header right">
                                     <div class="pull-left user-img" runat="server">
-                                        <asp:Image ID="UserImgimg" runat="server" class="img-responsive" /></div>
+                                        <asp:Image ID="UserImgimg" runat="server" class="img-responsive" />
+                                    </div>
                                     <p class="text-left" id="UserName" runat="server"><small>some mail</small> </p>
                                     <div class="view-link text-right"><a href="#">צפה בפרופיל</a> </div>
                                 </li>
@@ -167,7 +172,7 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                 <div class="user-panel">
+                <div class="user-panel">
                     <div class="image text-center"></div>
                     <div class="info">
                         <a href="#">ברוך הבא ☺</a>
@@ -181,6 +186,8 @@
                         <ul class="treeview-menu">
                             <li><a href="Admin_Add_TimeTable.aspx"><i class="fa fa-plus"></i><span>יצירת מערכת</span> </a>
                                 <li><a href="Admin_Update_TimeTable.aspx"><i class="fa fa-edit"></i><span>עדכון מערכת</span> </a>
+                                    <li><a href="Admin_Saved_TimeTable.aspx"><i class="fa fa-edit"></i><span>מערכות בתהליך</span> </a>
+
                         </ul>
                     </li>
                     <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ניהול משתמשים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>

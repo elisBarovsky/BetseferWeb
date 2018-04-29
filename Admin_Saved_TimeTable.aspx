@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Admin_Update_User.aspx.cs" Inherits="Admin_Update_User" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Admin_Saved_TimeTable.aspx.cs" Inherits="Admin_Saved_TimeTable" %>
 
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
@@ -28,7 +28,8 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
+    <style>
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
@@ -45,7 +46,7 @@
             <nav class="navbar blue-bg navbar-static-top">
                 <!-- Sidebar toggle button-->
                 <ul class="nav navbar-nav pull-left">
-                    <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a></li>
+                    <li><a class="sidebar-toggle" data-toggle="push-menu" href="#"></a></li>
                 </ul>
                 <div class="navbar-custom-menu" runat="server">
                     <ul class="nav navbar-nav">
@@ -171,18 +172,17 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="treeview"><a href="AdminDashbord.aspx"><i class="fa fa-home"></i><span>דף הבית</span> </a>
                     </li>
-                    <li class="treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                    <li class="active treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li><a href="Admin_Add_TimeTable.aspx"><i class="fa fa-plus"></i><span>יצירת מערכת</span> </a>
                                 <li><a href="Admin_Update_TimeTable.aspx"><i class="fa fa-edit"></i><span>עדכון מערכת</span> </a>
-                                    <li><a href="Admin_Saved_TimeTable.aspx"><i class="fa fa-edit"></i><span>מערכות בתהליך</span> </a>
-
+                                    <li class="active"><a href="Admin_Saved_TimeTable.aspx"><i class="fa fa-edit"></i><span>מערכות בתהליך</span> </a>
                         </ul>
                     </li>
-                    <li class="active treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ניהול משתמשים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ניהול משתמשים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li><a href="Admin_Add_User.aspx"><i class="fa fa-plus"></i><span>הוספת משתמשים</span> </a>
-                                <li class="active"><a href="Admin_Update_User.aspx"><i class="fa fa-edit"></i><span>עדכון משתמשים</span> </a>
+                                <li><a href="Admin_Update_User.aspx"><i class="fa fa-edit"></i><span>עדכון משתמשים</span> </a>
                         </ul>
                     </li>
                     <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ניהול כיתות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -210,147 +210,46 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header sty-one">
-                <h1>עדכון משתמש</h1>
-
+                <h1>הוספת מערכת שעות</h1>
             </section>
 
             <!-- Main content -->
             <section class="content">
                 <div class="info-box">
-
-                    <form runat="server">
-                        <div class="card-body">
-                            <div class="row">
-                                <table class="table" align="center">
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="Label1" class="control-label" runat="server" Text="סוג משתמש"></asp:Label></td>
-                                        <td>
-                                            <asp:DropDownList ID="UserTypeDLL" CssClass="form-control" runat="server" DataSourceID="SqlDataSource2" OnDataBound="FillFirstItem" OnSelectedIndexChanged="UserTypeDLL_CheckedChanged" DataTextField="CodeUserName" DataValueField="CodeUserType" AutoPostBack="true" RepeatDirection="Horizontal"></asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT * FROM [UserType]"></asp:SqlDataSource>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="Class1LBL" class="control-label" runat="server" Text=" בחר כיתה"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList ID="ClassOt1DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" AutoPostBack="true" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>
-                                        </td>
-
-                                        <td>
-                                            <asp:Button ID="UpdateUserBTN" runat="server" CssClass="btn btn-outline-primary" Text="עדכן משתמש" OnClick="UpdateUserBTN_Click" />
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="ChoosePupilLBL" runat="server" Text="בחר תלמיד"></asp:Label>
-                                            <asp:Label ID="ChooseOtherUsers" runat="server" Text="בחר משתמש"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList ID="PupilDLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" OnSelectedIndexChanged="UserChosed" AutoPostBack="true"></asp:DropDownList>
-                                            <asp:DropDownList ID="OtherUsersDLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" OnSelectedIndexChanged="UserChosed" AutoPostBack="true"></asp:DropDownList>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="auto-style2"></td>
-                                        <td></td>
-                                        <td></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>שם משפחה</td>
-                                        <td>
-                                            <asp:TextBox ID="LNameTB" runat="server" required="required" class="form-control"></asp:TextBox></td>
-                                        <td>שם פרטי</td>
-                                        <td>
-                                            <asp:TextBox ID="FNameTB" runat="server" required="required" class="form-control"></asp:TextBox></td>
-                                        <td>
-                                            <div style="position: fixed;">
-                                                <asp:Image ID="ImgUser" runat="server" class="img-circle img-responsive" Style="width: 200px; height: 300px;" />
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>תעודת זהות</td>
-                                        <td>
-                                            <asp:TextBox ID="UserIDTB" runat="server" required="required" class="form-control"></asp:TextBox></td>
-                                        <td>תאריך לידה</td>
-                                        <td>
-                                            <asp:TextBox ID="BDAYtb" ReadOnly value="" class="form-control" runat="server" required="required"></asp:TextBox>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>טלפון 
-                                        </td>
-                                        <td>
-                                            <asp:TextBox ID="TelephoneNumberTB" runat="server" required="required" class="form-control"></asp:TextBox>
-                                        </td>
-                                        <td>תמונה</td>
-                                        <td>
-                                            <fieldset class="form-group" runat="server">
-                                                <label class="custom-file center-block block">
-                                                    <asp:FileUpload ID="FileUpload1" runat="server" class="custom-file-input" />
-                                                    <span class="custom-file-control"></span>
-                                                </label>
-                                            </fieldset>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>סיסמה</td>
-                                        <td>
-                                            <asp:TextBox ID="PasswordTB" runat="server" required="required" class="form-control"></asp:TextBox>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="NumChildLBL" runat="server" Text="מספר ילדים"></asp:Label>
-                                            <asp:Label ID="MainTeacher" runat="server" Text=" האם מחנך"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <%--<asp:DropDownList ID="NumChildDDL" runat="server"></asp:DropDownList>--%>
-                                            <asp:Label ID="ChoosenNumChildLBL" runat="server" Text="כמות ילדים להוספה"></asp:Label>
-                                            <asp:DropDownList ID="ChoosenNumChildDDL" runat="server" AutoPostBack="true" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnSelectedIndexChanged="NumChildDDL_SelectedIndexChanged"></asp:DropDownList>
-
-                                            <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="ChildIDLBL" runat="server" Text=" הזן תעודת זהות"></asp:Label>
-                                            <asp:Label ID="Class2LBL" runat="server" Text=" בחר כיתה"></asp:Label>
-
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList ID="ClassOt2DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="false" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
-
-                                            <asp:TextBox ID="ChildI1DTB" runat="server" required="required"></asp:TextBox><br />
-                                            <asp:TextBox ID="ChildI2DTB" runat="server" required="required"></asp:TextBox><br />
-                                            <asp:TextBox ID="ChildI3DTB" runat="server" required="required"></asp:TextBox><br />
-                                            <asp:TextBox ID="ChildI4DTB" runat="server" required="required"></asp:TextBox><br />
-                                            <asp:TextBox ID="ChildI5DTB" runat="server" required="required"></asp:TextBox><br />
-                                            <asp:TextBox ID="ChildI6DTB" runat="server" required="required"></asp:TextBox>
-                                            <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [CodePgroup], [GroupName] FROM [PupilsGroup]"></asp:SqlDataSource>
-                                        </td>
-                                        <td>
-                                            <asp:CheckBox ID="UpdateChild" runat="server" AutoPostBack="true" Text="לעדכן ילדים?" OnCheckedChanged="UpdateChild_CheckedChanged" />
-                                        </td>
-                                    </tr>
-                                </table>
+                    <form runat="server" autopostback="false">               
+                        <div class="table-responsive">
+                            <div style="float: right; position: relative">
+                                <%--   OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged"--%>
+                                <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" AutoPostBack="true" DataValueField="ClassCode" OnSelectedIndexChanged="ddl_clasesAdd_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT ClassCode, TotalName FROM Class WHERE (ClassCode NOT IN (SELECT Class_1.ClassCode FROM Class AS Class_1 INNER JOIN Timetable ON Class_1.ClassCode = Timetable.ClassCode))"></asp:SqlDataSource>
                             </div>
+                            <div style="float: right; position: relative; padding-right: 20px">
+                                <asp:Button ID="Button1" runat="server" CssClass="btn btn-outline-info" Text="אישור" OnClick="SelectedIndexChanged" />
+                            </div>
+
+                            <div style="float: left; position: relative; padding-bottom: 20px;">
+                                <asp:Button ID="ButtonPublish" CssClass="btn btn-outline-success" runat="server" Text="שמור ופרסם" Visible="true" OnClick="ButtonPublish_Click" />
+
+                            </div>
+                            <div style="float: left; position: relative; padding-left: 20px">
+                                <asp:Button ID="Button2" CssClass="btn btn-outline-primary" runat="server" Text="שמור" Visible="true" />
+
+                            </div>
+
+                            <div runat="server" id="AlertBox" class="alertBox" visible="false">
+                                <div runat="server" id="AlertBoxMessage"></div>
+                                <button onclick="closeAlert.call(this, event)">Ok</button>
+                            </div>
+                            <asp:Table ID="TimeTable" runat="server" align="center" class="table table-bordered table-striped" AutoPostBack="false" data-name="cool-table">
+                            </asp:Table>
                         </div>
+
                     </form>
                 </div>
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <%-- <footer class="main-footer">
-    <div class="pull-left hidden-xs">Copyright © 2018 Ellis & Dikla. All rights reserved</div>
-    </footer>--%>
     </div>
     <!-- ./wrapper -->
 
@@ -362,13 +261,5 @@
 
     <!-- template -->
     <script src="dist/js/niche.js"></script>
-
-    <!-- Chartjs JavaScript -->
-    <script src="dist/plugins/chartjs/chart.min.js"></script>
-    <script src="dist/plugins/chartjs/chart-int.js"></script>
-
-    <!-- Chart Peity JavaScript -->
-    <script src="dist/plugins/peity/jquery.peity.min.js"></script>
-    <script src="dist/plugins/functions/jquery.peity.init.js"></script>
 </body>
 </html>
