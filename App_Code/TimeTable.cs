@@ -25,7 +25,7 @@ public class TimeTable
     public int InsertTempTimeTable(string date, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId, int ClassNum)
     {
         return db.InsertTempTimeTable(date, CodeWeekDay, ClassTimeCode, CodeLesson, TeacherId, ClassNum);
-    }//GetCellInfo
+    }
 
     public List<string> GetCellInfo(string date, int WeekDay,int LessonNum, int ClassNmum)
     {
@@ -55,6 +55,11 @@ public class TimeTable
     public int DeleteTimeTable(string classCode)
     {
         return db.DeleteTimeTable(classCode);
+    }
+
+    public int DeleteTempTT(string date, string classcode)
+    {
+        return db.DeleteTempTT(date, classcode);
     }
 
     public string GetLessonNameByLessonCode(string lessonCode)

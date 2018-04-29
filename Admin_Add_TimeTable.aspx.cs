@@ -128,6 +128,12 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         TimeTable.DataBind();
     }
 
+    protected void No_Option(object sender, EventArgs e)
+    {
+        TimeTable TT = new TimeTable();
+        TT.DeleteTempTT("date","class code");
+    }
+
     protected void ButtonPublish_Click(object sender, EventArgs e)
     {
         TimeTable TT = new TimeTable();
@@ -175,7 +181,6 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
                 counter++;
             }
         }
-
     }
 
     protected Dictionary<string, string> ReturnIfLessonExsistsInTT(int lessonNumber, int weekDay, List<Dictionary<string, string>> TimeTable)
@@ -199,12 +204,18 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
     {
         CreateEmptyTimeTable();
     }
-
     protected void ddl_clasesAdd_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (ddl_clasesAdd.SelectedItem.Text != "בחר כיתה")
+        string count = Request.Cookies["counter"].Value;
+        
+        if (ddl_clasesAdd.SelectedItem.Text != "בחר כיתה" && count != "0")
         {
-
+            ModalPopupExtender1.Show();
+            Response.Cookies["counter"].Value = 0.ToString();
+        }
+        else
+        {
+            Response.Cookies["counter"].Value = 1.ToString(); 
         }
     }
 }
