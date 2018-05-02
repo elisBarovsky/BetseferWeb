@@ -272,7 +272,7 @@
 
                             </div>
                             <div style="float: left; position: relative; padding-left: 20px">
-                                <asp:Button ID="Button2" CssClass="btn btn-outline-primary" runat="server" Text="שמור" Visible="true" />
+                                <asp:Button ID="Button2" CssClass="btn btn-outline-primary" runat="server" Text="שמור" OnClick="Button2_Click" Visible="true" />
 
                             </div>
 

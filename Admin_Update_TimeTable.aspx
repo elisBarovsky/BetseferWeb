@@ -232,11 +232,13 @@
                                 <tr>
                                     <td>--%>
                             <div style="float: right; position: relative">
-                                <asp:DropDownList ID="ddl_clasesEdit" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForEdit" DataTextField="TotalName" DataValueField="ClassCode" OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                <asp:DropDownList ID="ddl_clasesEdit" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForEdit" DataTextField="TotalName" DataValueField="ClassCode"></asp:DropDownList>
                                 <asp:SqlDataSource ID="DSclassesForEdit" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT distinct Class.ClassCode, Class.TotalName FROM Class INNER JOIN Timetable ON Class.ClassCode = Timetable.ClassCode AND Class.ClassCode = Timetable.ClassCode
                                                 order by Class.TotalName"></asp:SqlDataSource>
                             </div>
-
+                              <div style="float: right; position: relative; padding-right: 20px">
+                                <asp:Button ID="Button1" runat="server" CssClass="btn btn-outline-info" Text="אישור" OnClick="SelectedIndexChanged" />
+                            </div>
                             <div style="float: left; position: relative; padding-bottom: 20px;">
                                 <asp:Button ID="ButtonUpdate" CssClass="btn btn-outline-primary" runat="server" Text="עדכן" OnClick="ButtonUpdate_Click" />
 
@@ -247,8 +249,6 @@
                             </div>
                             <asp:Table ID="TimeTable" runat="server" align="center" class="table table-bordered table-striped" data-name="cool-table">
                             </asp:Table>
-                            <br />
-                            <br />
                         </div>
 
                     </form>
