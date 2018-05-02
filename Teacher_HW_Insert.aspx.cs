@@ -28,6 +28,7 @@ public partial class Teacher_HW_Insert : System.Web.UI.Page
         List<string> UserInfo = new List<string>();
         UserInfo = UserInfo_.GetUserInfo(AdminId);
 
+
         UserName.InnerText = UserInfo[1] + " " + UserInfo[2];
         if (UserInfo[6] == "")
         {

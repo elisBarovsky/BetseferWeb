@@ -249,13 +249,20 @@
                                             <label class="control-label">בחר כיתה</label>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ChooseClassDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
+                                            <asp:DropDownList ID="ChooseClassDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ChooseClasssDLL_SelectedIndexChanged" DataSourceID="DDLclassesAccordingTeacherId" DataTextField="TotalName" DataValueField="ClassCode" OnDataBound="FillFirstItem"></asp:DropDownList>
+                                            <asp:SqlDataSource ID="DDLclassesAccordingTeacherId" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT distinct dbo.Class.ClassCode, dbo.Class.TotalName
+FROM dbo.Timetable INNER JOIN  dbo.Class ON dbo.Timetable.ClassCode = dbo.Class.ClassCode AND dbo.Timetable.ClassCode = dbo.Class.ClassCode INNER JOIN dbo.TimetableLesson ON Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode
+where  dbo.TimetableLesson.TeacherId =@TID">
+                                                <SelectParameters>
+                                                    <asp:CookieParameter CookieName="UserID" Name="TID" />
+                                                </SelectParameters>
+                                            </asp:SqlDataSource>
                                         </td>
                                         <td>
                                             <label class="control-label">בחר מקצוע</label>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ChooseLessonsDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server"></asp:DropDownList>
+                                            <asp:DropDownList ID="ChooseLessonsDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" AutoPostBack="True" OnSelectedIndexChanged="FillPupils" OnDataBound="FillFirstItem"></asp:DropDownList>
                                         </td>
                                     </tr>
                                     <tr>

@@ -249,14 +249,29 @@
                                             <label class="control-label">בחר כיתה</label>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ChooseClassDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" DataSourceID="DSclasses" DataTextField="TotalName" DataValueField="ClassCode" OnSelectedIndexChanged="ChooseClassDLL_SelectedIndexChanged" AutoPostBack="true" OnDataBound="FillFirstItem"></asp:DropDownList>
+                                            <asp:DropDownList ID="ChooseClassDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" DataSourceID="DDLclassesAccordingToTeacherID" DataTextField="TotalName" DataValueField="ClassCode" OnSelectedIndexChanged="ChooseClassDLL_SelectedIndexChanged" AutoPostBack="True" OnDataBound="FillFirstItem"></asp:DropDownList>
+                                            <asp:SqlDataSource ID="DDLclassesAccordingToTeacherID" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT  distinct  dbo.Class.ClassCode, dbo.Class.TotalName
+FROM   dbo.TimetableLesson INNER JOIN  dbo.Timetable ON dbo.TimetableLesson.TimeTableCode = dbo.Timetable.TimeTableCode INNER JOIN
+dbo.Class ON dbo.Timetable.ClassCode = dbo.Class.ClassCode AND dbo.Timetable.ClassCode = dbo.Class.ClassCode
+where dbo.TimetableLesson.TeacherId=@TID">
+                                                <SelectParameters>
+                                                    <asp:CookieParameter CookieName="UserID" Name="TID" />
+                                                </SelectParameters>
+                                            </asp:SqlDataSource>
                                             <asp:SqlDataSource ID="DSclasses" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>
                                         </td>
                                         <td>
                                             <label class="control-label">בחר מקצוע</label>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ChooseLessonsDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server"></asp:DropDownList>
+                                            <asp:DropDownList ID="ChooseLessonsDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" DataSourceID="DDLsubjectsAccordingToTeacher" DataTextField="LessonName" DataValueField="CodeLesson"  OnDataBound="FillFirstItem"></asp:DropDownList>
+                                            <asp:SqlDataSource ID="DDLsubjectsAccordingToTeacher" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT  dbo.Lessons.CodeLesson, dbo.Lessons.LessonName
+FROM  dbo.Lessons INNER JOIN dbo.TeachersTeachesSubjects ON dbo.Lessons.CodeLesson = dbo.TeachersTeachesSubjects.CodeLessons
+where  dbo.TeachersTeachesSubjects.TeacherID=@TID">
+                                                <SelectParameters>
+                                                    <asp:CookieParameter CookieName="UserID" Name="TID" />
+                                                </SelectParameters>
+                                            </asp:SqlDataSource>
                                         </td>
                                     </tr>
                                     <tr>

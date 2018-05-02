@@ -382,6 +382,98 @@ public class DBconnectionTeacher
             }
         }
     }
+
+    public Dictionary<string, string> FillClassOtAccordingTeacherIdAndSubjectCode(string teacherID, string LessonCode)
+    {
+        string selectSTR = "SELECT  distinct  dbo.Class.ClassCode, dbo.Class.TotalName FROM dbo.TimetableLesson INNER " +
+                           "JOIN dbo.Timetable ON dbo.TimetableLesson.TimeTableCode = dbo.Timetable.TimeTableCode INNER JOIN "+
+                           "dbo.Class ON dbo.Timetable.ClassCode = dbo.Class.ClassCode AND dbo.Timetable.ClassCode = " +
+                           "dbo.Class.ClassCode where dbo.TimetableLesson.TeacherId = '" + teacherID +
+                           "' and dbo.TimetableLesson.CodeLesson = " + LessonCode;
+
+        Dictionary<string, string> classesAccordingTeacherIdAndSubjectCode = new Dictionary<string, string>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                classesAccordingTeacherIdAndSubjectCode.Add(dr["ClassCode"].ToString(), dr["TotalName"].ToString());
+            }
+            return classesAccordingTeacherIdAndSubjectCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public Dictionary<string, string> FillLessonsAccordingTeacherIdAndClassCode(string teacherID, string ClassCode)
+    {
+        string selectSTR = "SELECT distinct dbo.Lessons.CodeLesson, dbo.Lessons.LessonName FROM dbo.Lessons INNER " +
+                           "JOIN dbo.TimetableLesson ON dbo.Lessons.CodeLesson = dbo.TimetableLesson.CodeLesson "+
+                           "INNER JOIN dbo.Timetable ON dbo.TimetableLesson.TimeTableCode = dbo.Timetable.TimeTableCode " +
+                           "where dbo.TimetableLesson.TeacherId = '" + teacherID + "' and dbo.Timetable.ClassCode = " + ClassCode;
+
+        Dictionary<string, string> lessonsAccordingTeacherIdAndClassCode = new Dictionary<string, string>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                string CodeLesson = dr["CodeLesson"].ToString();
+                string LessonName = dr["LessonName"].ToString();
+                lessonsAccordingTeacherIdAndClassCode.Add(dr["CodeLesson"].ToString(), dr["LessonName"].ToString());
+            }
+            return lessonsAccordingTeacherIdAndClassCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public DataTable FillBySubjectHomeWork(string PupilID, string ChooseSubjectCode) //webService
     {
         string selectSTR = " SELECT dbo.HomeWork.HWGivenDate,(dbo.Users.UserFName+' ' +dbo.Users.UserLName) as TeacherName, dbo.Lessons.LessonName ,dbo.HomeWork.HWInfo, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha" +

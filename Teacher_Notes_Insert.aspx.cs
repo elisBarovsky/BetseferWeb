@@ -17,8 +17,6 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         if (!IsPostBack)
         {
             LoadUser();
-            FillClasses();
-            FillSubjects();
             FillNotes();
         }
     }
@@ -48,10 +46,7 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
 
     protected void FillPupils(object sender, EventArgs e)
     {
-        string ClassCode = "";
-        Dictionary<string, string> Classes = new Dictionary<string, string>();
-        Classes = (Dictionary<string, string>)(Session["ClassesList"]);
-        ClassCode = KeyByValue(Classes, ChooseClassDLL.SelectedValue);
+        string ClassCode = ChooseClassDLL.SelectedValue;
 
         Users Pupil = new Users();
         Dictionary<string, string> pupils = new Dictionary<string, string>();
@@ -70,26 +65,6 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         NotesDLL.DataSource = Notes.Values;
         NotesDLL.DataBind();
         Session["NotesList"] = Notes;
-    }
-
-    protected void FillClasses()
-    {
-        Dictionary<string, string> Classes = new Dictionary<string, string>();
-        Grades ClassGrade = new Grades();
-        Classes = ClassGrade.FillClassOt();
-        ChooseClassDLL.DataSource = Classes.Values;
-        ChooseClassDLL.DataBind();
-        Session["ClassesList"] = Classes;
-    }
-
-    protected void FillSubjects()
-    {
-        Dictionary<string, string> Lessons = new Dictionary<string, string>();
-        Grades ClassGrade = new Grades();
-        Lessons = ClassGrade.FillLessons();
-        ChooseLessonsDLL.DataSource = Lessons.Values;
-        ChooseLessonsDLL.DataBind();
-        Session["LessonsList"] = Lessons;
     }
 
     public static string KeyByValue(Dictionary<string, string> dict, string val)
@@ -116,12 +91,12 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         Dictionary<string, string> PupilList = new Dictionary<string, string>();
         PupilList = (Dictionary<string, string>)(Session["PupilsList"]);
 
-        Dictionary<string, string> LessonsList = new Dictionary<string, string>();
-        LessonsList = (Dictionary<string, string>)(Session["LessonsList"]);
+        //Dictionary<string, string> LessonsList = new Dictionary<string, string>();
+        //LessonsList = (Dictionary<string, string>)(Session["LessonsList"]);
 
         string PupilID = KeyByValue(PupilList, PupilsDLL.SelectedValue);
         string NoteID = KeyByValue(NotesList, NotesDLL.SelectedValue);
-        string LessonID = KeyByValue(LessonsList, ChooseLessonsDLL.SelectedValue);
+        string LessonID = ChooseLessonsDLL.SelectedValue;
 
         Notes InsertPupilNote = new Notes();
 
@@ -134,5 +109,26 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הייתה בעיה בהוספת הערת משמעת, בדוק נתונים');", true);
         }
+    }
+
+    protected void ChooseClasssDLL_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ChooseLessonsDLL.Items.Clear();
+
+        Dictionary<string, string> Lessons = new Dictionary<string, string>();
+        Teacher ClassesBySubject = new Teacher();
+        string techerID = Request.Cookies["UserID"].Value;
+        string classCode = ChooseClassDLL.SelectedValue;
+        Lessons = ClassesBySubject.FillLessonsAccordingTeacherIdAndClassCode(techerID, classCode);
+        ChooseLessonsDLL.DataSource = Lessons;
+        ChooseLessonsDLL.DataTextField = "value";
+        ChooseLessonsDLL.DataValueField = "key";
+        ChooseLessonsDLL.DataBind();
+    }
+
+    protected void FillFirstItem(object sender, EventArgs e)
+    {
+        (sender as DropDownList).Items.Insert(0, new ListItem("בחר", "0"));
+
     }
 }

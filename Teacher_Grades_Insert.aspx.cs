@@ -190,7 +190,14 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
 
     protected void ChooseLessonsDLL_SelectedIndexChanged(object sender, EventArgs e)
     {
-        ChooseLessonsDLL.Enabled = false;
-        ChooseClassDLL.Visible = true;
+        ChooseClassDLL.Items.Clear();
+
+        Dictionary<string, string> Classes = new Dictionary<string, string>();
+        Teacher ClassesBySubject = new Teacher();
+        string techerID = Request.Cookies["UserID"].Value;
+        string lessonCode = ChooseLessonsDLL.SelectedValue;
+        Classes = ClassesBySubject.FillClassOtAccordingTeacherIdAndSubjectCode(techerID, lessonCode);
+        ChooseClassDLL.DataSource = Classes.Values;
+        ChooseClassDLL.DataBind();
     }
 }
