@@ -28,6 +28,8 @@ public partial class login : System.Web.UI.Page
         Response.Cookies["UserPassword"].Expires = DateTime.Now.AddMinutes(90);
         Response.Cookies["counter"].Value = 0.ToString();
         Response.Cookies["counter"].Expires = DateTime.Now.AddMinutes(90);
+        Response.Cookies["IsSaveClicked"].Value = "false";
+        Response.Cookies["IsSaveClicked"].Expires = DateTime.Now.AddMinutes(90);
     }
 
     protected void Login1_Authenticate(object sender, EventArgs e)

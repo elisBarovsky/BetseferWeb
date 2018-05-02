@@ -27,9 +27,19 @@ public class TimeTable
         return db.InsertTempTimeTable(date, CodeWeekDay, ClassTimeCode, CodeLesson, TeacherId, ClassNum);
     }
 
+    public int InsertUpdateTimeTable(string TableCode, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId)
+    {
+        return db.InsertUpdateTimeTable(TableCode, CodeWeekDay, ClassTimeCode, CodeLesson, TeacherId);
+    }
+
     public List<string> GetCellInfo(string date, int WeekDay,int LessonNum, int ClassNmum)
     {
         return db.GetCellInfo(date, WeekDay, LessonNum, ClassNmum);
+    }
+
+    public List<string> GetCellInfoUPDATE(string codeTable, int WeekDay, int LessonNum, int ClassNmum)
+    {
+        return db.GetCellInfoUPDATE(codeTable, WeekDay, LessonNum, ClassNmum);
     }
 
     public List<Dictionary<string, string>> GetTimeTableAcordingToClassCode(int classCode)
@@ -45,6 +55,11 @@ public class TimeTable
     public bool IsClassHasTimeTable(string classCodee)
     {
         return db.IsClassHasTimeTable(classCodee);
+    }
+
+    public string GetCellInfoUPDATECodeTable(string classCode)
+    {
+        return db.GetCellInfoUPDATECodeTable(classCode);
     }
 
     public int DeleteTimeTableLessons(string classCode)

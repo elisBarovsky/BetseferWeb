@@ -681,6 +681,18 @@ public class DBconnection
         return num;
     }
 
+    public int InsertUpdateTimeTable(string TimeTableCode, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId)
+    {
+        string cStr;
+        int num = 0;
+
+        cStr = "INSERT INTO [dbo].[TimetableLesson] ([TimeTableCode],[CodeWeekDay],[ClassTimeCode],[CodeLesson],[TeacherId]) values ('" + TimeTableCode + "'," + CodeWeekDay + "," + ClassTimeCode + "," + CodeLesson + ",'" + TeacherId + ")";
+
+        num = ExecuteNonQuery(cStr);
+
+        return num;
+    }
+
     public int GetLastTimeTableCode()
     {
         int TTC = 0;
@@ -762,6 +774,46 @@ public class DBconnection
                 NumChilds = dr["num"].ToString();
             }
             return NumChilds;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<string> GetCellInfoUPDATE(string TableCode, int WeekDay, int LessonNum, int ClassNum)
+    {
+        String cStr = "select ([UserFName]+' '+[UserLName]) as FullName from [dbo].[Users] where [UserID]=(select  [TeacherId] from [dbo].[TimetableLesson] where [TimeTableCode] ='" + TableCode + "' and [CodeWeekDay]=" + WeekDay + " and [ClassTimeCode]=" + LessonNum + "and [CodeLesson]=" + ClassNum + ") union " +
+                        "select [LessonName] from [dbo].[Lessons] where [CodeLesson]=(select CodeLesson from [dbo].[TimetableLesson] where [TimeTableCode] ='" + TableCode + "' and [CodeWeekDay]=" + WeekDay + " and [ClassTimeCode]=" + LessonNum + "and [CodeLesson]=" + ClassNum + ") ";
+        List<string> listInfo = new List<string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(cStr, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                string info = dr["FullName"].ToString();
+                listInfo.Add(info);
+            }
+            return listInfo;
         }
         catch (Exception ex)
         {
@@ -1530,6 +1582,43 @@ public class DBconnection
         return ExecuteNonQuery(selectSTR);
     }
 
+    public string GetCellInfoUPDATECodeTable(string ClassCode)
+    {
+        String selectSTR = "select [TimeTableCode]  from [dbo].[Timetable] where [ClassCode]=" + ClassCode;
+        string TableCode = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                TableCode = dr[0].ToString();
+            }
+            return TableCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public string GetLessonNameByLessonCode(string lessonCode)
     {
         String selectSTR = "SELECT LessonName FROM Lessons where CodeLesson = " + lessonCode;
@@ -1566,6 +1655,7 @@ public class DBconnection
             }
         }
     }
+
     public Dictionary<string, string> GetSubjectsByClassCode(string classCode)
     {
         String selectSTR = "SELECT distinct dbo.Lessons.CodeLesson, dbo.Lessons.LessonName FROM dbo.Timetable " +
