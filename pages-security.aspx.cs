@@ -44,10 +44,10 @@ public partial class pages_security : System.Web.UI.Page
                 switch (int.Parse(User4.GetUserType(id, Request.Cookies["UserPassword"].Value)))
                 {
                     case 1:
-                        Response.Redirect("Admin.aspx");
+                        Response.Redirect("AdminDashbord.aspx");
                         break;
                     case 2:
-                        Response.Redirect("Teacher.aspx");
+                        Response.Redirect("Teacher_Dashbord.aspx");
                         break;
                 }
             }
