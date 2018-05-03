@@ -71,10 +71,12 @@ public partial class Admin_Saved_TimeTable : System.Web.UI.Page
         //rows ^
         for (int i = 0; i < 9; i++)
         {
+            string[] hours = new string[] { "8:00-8:45", "8:45-9:30", "10:00-10:45", "10:45-11:30", "11:45-12:30", "12:30-13:15", "13:25-14:10", "14:15-15:00", "15:00-15:45" };
+
             TableRow tr = new TableRow();
 
             TableCell lessonNumber = new TableCell();
-            lessonNumber.Text = (i + 1).ToString();
+            lessonNumber.Text = (i + 1).ToString() + " - " + hours[i];
             lessonNumber.CssClass = "DDL_TD";
             tr.Cells.Add(lessonNumber);
 
