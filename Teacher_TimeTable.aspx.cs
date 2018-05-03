@@ -86,6 +86,11 @@ public partial class Teacher_TimeTable : System.Web.UI.Page
             lessonNumber.CssClass = "DDL_TD";
             tr.Cells.Add(lessonNumber);
 
+
+            lessonNumber.Text = (i + 1).ToString();
+            lessonNumber.CssClass = "DDL_TD";
+            tr.Cells.Add(lessonNumber);
+
             //the days <>
             for (int j = 0; j < 6; j++)
             {
@@ -110,9 +115,7 @@ public partial class Teacher_TimeTable : System.Web.UI.Page
 
                 counter++;
             }
-            lessonNumber.Text = (i + 1).ToString();
-            lessonNumber.CssClass = "DDL_TD";
-            tr.Cells.Add(lessonNumber);
+      
 
             TimeTable.Rows.Add(tr);
         }
@@ -120,7 +123,7 @@ public partial class Teacher_TimeTable : System.Web.UI.Page
 
     protected void FillDaysTitles()
     {
-        string[] days = new string[] { "שישי", "חמישי", "רביעי", "שלישי", "שני", "ראשון", "שיעור" };
+        string[] days = new string[] { "שיעור", "ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי" };
         //TimeTable;
         TableRow tr = new TableRow();
 
