@@ -92,7 +92,7 @@ public partial class Admin_Update_TimeTable : System.Web.UI.Page
                 Label info = new Label();
 
                 TimeTable TT = new TimeTable();
-                List<string> CellInfush = TT.GetCellInfoUPDATE(TableCode, (j + 1), (i + 1), int.Parse(ddl_clasesEdit.SelectedItem.Value));
+                List<string> CellInfush = TT.GetCellInfoUPDATE(TableCode, (j + 1), (i + 1));
 
                 if (CellInfush.Count == 0)
                 {

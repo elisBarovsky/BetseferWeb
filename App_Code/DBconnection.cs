@@ -686,7 +686,7 @@ public class DBconnection
         string cStr;
         int num = 0;
 
-        cStr = "INSERT INTO [dbo].[TimetableLesson] ([TimeTableCode],[CodeWeekDay],[ClassTimeCode],[CodeLesson],[TeacherId]) values ('" + TimeTableCode + "'," + CodeWeekDay + "," + ClassTimeCode + "," + CodeLesson + ",'" + TeacherId + ")";
+        cStr = "INSERT INTO [dbo].[TimetableLesson] ([TimeTableCode],[CodeWeekDay],[ClassTimeCode],[CodeLesson],[TeacherId]) values ('" + TimeTableCode + "'," + CodeWeekDay + "," + ClassTimeCode + "," + CodeLesson + ",'" + TeacherId + "')";
 
         num = ExecuteNonQuery(cStr);
 
@@ -789,10 +789,10 @@ public class DBconnection
         }
     }
 
-    public List<string> GetCellInfoUPDATE(string TableCode, int WeekDay, int LessonNum, int ClassNum)
+    public List<string> GetCellInfoUPDATE(string TableCode, int WeekDay, int LessonNum)
     {
-        String cStr = "select ([UserFName]+' '+[UserLName]) as FullName from [dbo].[Users] where [UserID]=(select  [TeacherId] from [dbo].[TimetableLesson] where [TimeTableCode] ='" + TableCode + "' and [CodeWeekDay]=" + WeekDay + " and [ClassTimeCode]=" + LessonNum + "and [CodeLesson]=" + ClassNum + ") union " +
-                        "select [LessonName] from [dbo].[Lessons] where [CodeLesson]=(select CodeLesson from [dbo].[TimetableLesson] where [TimeTableCode] ='" + TableCode + "' and [CodeWeekDay]=" + WeekDay + " and [ClassTimeCode]=" + LessonNum + "and [CodeLesson]=" + ClassNum + ") ";
+        String cStr = "select ([UserFName]+' '+[UserLName]) as FullName from [dbo].[Users] where [UserID]=(select  [TeacherId] from [dbo].[TimetableLesson] where [TimeTableCode] ='" + TableCode + "' and [CodeWeekDay]=" + WeekDay + " and [ClassTimeCode]=" + LessonNum + ") union " +
+                        "select [LessonName] from [dbo].[Lessons] where [CodeLesson]=(select CodeLesson from [dbo].[TimetableLesson] where [TimeTableCode] ='" + TableCode + "' and [CodeWeekDay]=" + WeekDay + " and [ClassTimeCode]=" + LessonNum + ") ";
         List<string> listInfo = new List<string>();
         try
         {

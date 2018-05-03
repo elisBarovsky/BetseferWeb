@@ -37,9 +37,9 @@ public class TimeTable
         return db.GetCellInfo(date, WeekDay, LessonNum, ClassNmum);
     }
 
-    public List<string> GetCellInfoUPDATE(string codeTable, int WeekDay, int LessonNum, int ClassNmum)
+    public List<string> GetCellInfoUPDATE(string codeTable, int WeekDay, int LessonNum)
     {
-        return db.GetCellInfoUPDATE(codeTable, WeekDay, LessonNum, ClassNmum);
+        return db.GetCellInfoUPDATE(codeTable, WeekDay, LessonNum);
     }
 
     public List<Dictionary<string, string>> GetTimeTableAcordingToClassCode(int classCode)
