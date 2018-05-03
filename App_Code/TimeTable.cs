@@ -22,6 +22,11 @@ public class TimeTable
         return db.InsertTimeTable(date, classCode, publish);
     }
 
+    public int UpdateStatusTT(string ClassCode, bool publish)
+    {
+        return db.UpdateStatusTT(ClassCode, publish);
+    }
+
     public int InsertTempTimeTable(string date, int CodeWeekDay, int ClassTimeCode, int CodeLesson, string TeacherId, int ClassNum)
     {
         return db.InsertTempTimeTable(date, CodeWeekDay, ClassTimeCode, CodeLesson, TeacherId, ClassNum);
@@ -75,6 +80,11 @@ public class TimeTable
     public int DeleteTempTT(string date, string classcode)
     {
         return db.DeleteTempTT(date, classcode);
+    }
+
+    public int DeleteTT( string classcode)
+    {
+        return db.DeleteTT(classcode);
     }
 
     public string GetLessonNameByLessonCode(string lessonCode)

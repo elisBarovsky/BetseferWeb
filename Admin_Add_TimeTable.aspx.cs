@@ -133,6 +133,8 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         TimeTable TT = new TimeTable();
         string classCode = Request.Cookies["SelectedCodeClass"].Value;
         TT.DeleteTempTT(DateTime.Today.ToShortDateString(), classCode);
+
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת לא נשמרה.'); location.href='Admin_Add_TimeTable.aspx';", true);
     }
 
     protected void ButtonPublish_Click(object sender, EventArgs e)
@@ -205,11 +207,11 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
 
         Response.Cookies["SelectedCodeClass"].Value = ddl_clasesAdd.SelectedItem.Value;
 
-        if (ddl_clasesAdd.SelectedItem.Text != "בחר כיתה" && count != "0" && IsSaveClicked != "false")
+        if (ddl_clasesAdd.SelectedItem.Text != "בחר כיתה" && count != "0" && IsSaveClicked == "false")
         {
             ModalPopupExtender1.Show();
             Response.Cookies["counter"].Value = 0.ToString();
-            Response.Cookies["IsSaveClicked"].Value = "false";
+           // Response.Cookies["IsSaveClicked"].Value = "false";
         }
         else
         {
@@ -220,5 +222,18 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
     protected void Button2_Click(object sender, EventArgs e)
     {
         Response.Cookies["IsSaveClicked"].Value = "true";
+
+        TimeTable TT = new TimeTable();
+
+        int rowsAffected = TT.InsertTimeTable(DateTime.Today.ToShortDateString(), int.Parse(ddl_clasesAdd.SelectedItem.Value), false);
+        if (rowsAffected > 0)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת נשמרה בהצלחה'); location.href='Admin_Add_TimeTable.aspx';", true);
+        }
+        else
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('קרתה תקלה בעת שמירת המערכת. נא צור קשר עם שירות הלקוחות בטלפון: 1-800-400-400');", true);
+        }
+
     }
 }

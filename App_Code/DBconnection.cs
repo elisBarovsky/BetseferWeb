@@ -621,6 +621,11 @@ public class DBconnection
         return ExecuteNonQuery(cStr); // execute the command   
     }
 
+    public int UpdateStatusTT(string classCode, bool publish)
+    {
+        String cStr = "UPDATE [dbo].[Timetable]  SET [IsPublish] ='"+ publish+ "'WHERE [ClassCode]="+ classCode;
+        return ExecuteNonQuery(cStr); // execute the command   
+    }
     public int AddUser(Users NewUser)
     {
         string cStr = "INSERT INTO [dbo].[Users] ([UserID],[UserFName],[UserLName],[BirthDate],[UserImg],[LoginName],[LoginPassword],[PhoneNumber],[CodeUserType],[SecurityQ1Code],[SecurityQ1Answer],[alreadyLogin],[SecurityQ2Code],[SecurityQ2Answer])" +
@@ -1580,6 +1585,45 @@ public class DBconnection
     {
         String selectSTR = "DELETE FROM dbo.TempTimetableLesson where [dateString] = '" + date + "'[CodeChoosenClass] = "+ classcode;
         return ExecuteNonQuery(selectSTR);
+    }
+
+    public int DeleteTT(string classCode)
+    {
+        int num = 0;
+        try
+        {
+            using (var con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Betsefer"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("DeleteTempTT", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@classCode", classCode);
+                    con.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                        }
+                        num = 1;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+        return num;
     }
 
     public string GetCellInfoUPDATECodeTable(string ClassCode)

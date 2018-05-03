@@ -180,16 +180,6 @@ public partial class Admin_Update_TimeTable : System.Web.UI.Page
 
     protected void ButtonUpdate_Click(object sender, EventArgs e)
     {
-        TimeTable TT = new TimeTable();
-
-        int rowsAffected = TT.InsertTimeTable(DateTime.Today.ToShortDateString(), int.Parse(ddl_clasesEdit.SelectedItem.Value), true);
-        if (rowsAffected > 0)
-        {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת עודכנה בהצלחה'); location.href='Admin_Update_TimeTable.aspx';", true);
-        }
-        else
-        {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('קרתה תקלה בעת שמירת המערכת. נא צור קשר עם שירות הלקוחות בטלפון: 1-800-400-400');", true);
-        }
     }
 }
