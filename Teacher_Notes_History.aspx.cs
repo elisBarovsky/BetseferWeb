@@ -56,7 +56,7 @@ public partial class Teacher_Notes_History : System.Web.UI.Page
             hide(false);
             ChooseLessonsDLL.Visible = true;
         }
-        else if (FilterNotes.SelectedValue == "2")//הערת משמעת
+        else if (FilterNotes.SelectedValue == "2")//סוג הערה
         {
             hide(false);
             NotesDLL.Visible = true;
@@ -66,7 +66,7 @@ public partial class Teacher_Notes_History : System.Web.UI.Page
             hide(false);
             ChooseClassDLL.Visible = true;
         }
-        else//מורה
+        else//הכל
         {
             hide(false);
         }

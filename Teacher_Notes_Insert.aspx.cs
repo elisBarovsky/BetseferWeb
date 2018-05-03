@@ -55,6 +55,7 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         PupilsDLL.DataSource = pupils.Values;
         PupilsDLL.DataBind();
         Session["PupilsList"] = pupils;
+        PupilsDLL.Enabled = true;
     }
 
     protected void FillNotes()
@@ -124,6 +125,7 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         ChooseLessonsDLL.DataTextField = "value";
         ChooseLessonsDLL.DataValueField = "key";
         ChooseLessonsDLL.DataBind();
+        ChooseLessonsDLL.Enabled = true;
     }
 
     protected void FillFirstItem(object sender, EventArgs e)

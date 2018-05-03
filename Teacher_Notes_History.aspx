@@ -249,9 +249,9 @@
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="FilterNotes" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" RepeatDirection="Horizontal" AutoPostBack="true" OnSelectedIndexChanged="FilterNotes_SelectedIndexChanged" Width="365px">
-                                           <asp:ListItem Text="הערות שניתנו על ידך" Value="4" />
+                                           <asp:ListItem Text="הכל" Value="4" />
                                             <asp:ListItem Text="מקצוע" Value="1" />
-                                            <asp:ListItem Text="הערת משמעת" Value="2" />
+                                            <asp:ListItem Text="סוג הערה" Value="2" />
                                             <asp:ListItem Text="תלמיד" Value="3" />
                                         </asp:DropDownList>
                                     </td>
