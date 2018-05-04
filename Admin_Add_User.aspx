@@ -281,9 +281,9 @@
                                             <asp:Label ID="ClassLBL" runat="server" Text=" בחר כיתה"></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ClassOtDLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" OnLoad="FillFirstItem"></asp:DropDownList>
+                                            <asp:DropDownList ID="ClassOtDLL" Style="direction: ltr;" runat="server" CssClass="form-control" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" OnLoad="FillFirstItem"></asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>
-                                        </td>
+                                            </td>
 
                                     </tr>
                                     <tr>
@@ -307,8 +307,10 @@
                                             <asp:Label ID="MainTeacher" runat="server" Text=" האם מחנך"></asp:Label>
                                         </td>
                                         <td>
-                                                                                <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
-
+                                            <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
+                                            <asp:DropDownList ID="ClassesWithoutMainTeacher" Style="width: 70px" runat="server" CssClass="form-control" data-toggle="dropdown" OnLoad="FillFirstItem" DataSourceID="SqlDataSource1" DataTextField="TotalName" DataValueField="ClassCode" Visible="False"></asp:DropDownList>
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class] WHERE ([MainTeacherID] IS NULL) ORDER BY [OtClass], [NumClass]"></asp:SqlDataSource>
+                                        
                                             <%--<asp:DropDownList ID="NumOfChildDDL" Style="direction: rtl;" runat="server" AutoPostBack="true" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnSelectedIndexChanged="NumOfChildDDL_SelectedIndexChanged"></asp:DropDownList>--%></td>
 
                                         <td>

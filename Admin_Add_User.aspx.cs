@@ -220,19 +220,20 @@ public partial class Admin_Add_User : System.Web.UI.Page
         ChildI4DTB.Text = "";
         ChildI5DTB.Text = "";
         ChildI6DTB.Text = "";
+        ClassesWithoutMainTeacher.Visible = false;
     }
 
     protected void MainTeacherCB_CheckedChanged(object sender, EventArgs e)
     {
         if (MainTeacherCB.Checked)
         {
-            ClassOtDLL.Visible = true;
-            ClassLBL.Visible = true;
+            ClassesWithoutMainTeacher.Visible = true;
+            //ClassLBL.Visible = true;
         }
         else
         {
-            ClassOtDLL.Visible = false;
-            ClassLBL.Visible = false;
+            ClassesWithoutMainTeacher.Visible = false;
+            //ClassLBL.Visible = false;
         }
     }
 

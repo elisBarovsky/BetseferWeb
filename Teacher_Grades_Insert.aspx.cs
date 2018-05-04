@@ -18,7 +18,6 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
         //if (!IsPostBack)
         //{
             LoadUser();
-        CreatePupilsListByClassCode();
         //}
     }
 
@@ -52,7 +51,7 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
 
     protected void CreatePupilsListByClassCode()
     {
-        //tableGrades.Rows.Clear();
+        tableGrades.Rows.Clear();
         string ClassTotalName = ChooseClassDLL.SelectedValue;
         Classes c = new Classes();
         string ClassCode = c.GetClassCodeAccordingToClassFullName(ClassTotalName);
@@ -105,6 +104,7 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
             counter++;
         }
         tableGrades.DataBind();
+
     }
 
 
