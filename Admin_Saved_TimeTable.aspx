@@ -28,7 +28,24 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-    <style>
+      <style>
+        .modalBackground {
+            /*background-color:Gray;*/
+            filter: alpha(opacity=50);
+            opacity: 0.7;
+        }
+
+        .pnlBackGround {
+            position: fixed;
+            top: 10%;
+            left: 10px;
+            width: 300px;
+            height: 125px;
+            text-align: center;
+            background-color: White;
+            border: solid 3px black;
+            border-radius: 20px;
+        }
     </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -210,18 +227,41 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header sty-one">
-                <h1>הוספת מערכת שעות</h1>
+                <h1>מערכת שעות בתהליך עבודה</h1>
             </section>
 
             <!-- Main content -->
             <section class="content">
                 <div class="info-box">
-                    <form runat="server" autopostback="false">               
+                    <form runat="server" autopostback="false">  
+                              <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                        <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" BackgroundCssClass="modalBackground" CancelControlID="Button4" runat="server" TargetControlID="lblstupid" PopupControlID="Panel1"></ajaxToolkit:ModalPopupExtender>
+
+                        <asp:Label ID="lblstupid" runat="server" Text=""></asp:Label>
+                        <asp:Panel ID="Panel1" runat="server" Width="400px" Height="180px" CssClass="pnlBackGround">
+                            <br />
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <p style="font-size: x-large;">האם ברצונך לשמור שינויים ?</p>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-1" style="float: right; position: relative">
+                                    <asp:Button ID="Button3" CssClass="btn btn-danger" runat="server" Text="לא" OnClick="No_Option" />
+                                </div>
+                                <div class="col-md-4 col-md-offset-1" style="float: left; position: relative">
+                                    <asp:Button ID="Button4" CssClass="btn btn-primary" runat="server" Text="כן" />
+                                </div>
+                            </div>
+
+                        </asp:Panel>
                         <div class="table-responsive">
                             <div style="float: right; position: relative">
-                                <%--   OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged"--%>
-                                <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" AutoPostBack="true" DataValueField="ClassCode" OnSelectedIndexChanged="ddl_clasesAdd_SelectedIndexChanged"></asp:DropDownList>
-                                <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT ClassCode, TotalName FROM Class WHERE (ClassCode NOT IN (SELECT Class_1.ClassCode FROM Class AS Class_1 INNER JOIN Timetable ON Class_1.ClassCode = Timetable.ClassCode))"></asp:SqlDataSource>
+                                <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" DataValueField="ClassCode"  AutoPostBack="true" OnSelectedIndexChanged="ddl_clasesAdd_SelectedIndexChanged" ></asp:DropDownList>
+                                <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT DISTINCT dbo.Class.ClassCode, dbo.Class.TotalName FROM dbo.Class INNER JOIN  dbo.Timetable ON dbo.Class.ClassCode = dbo.Timetable.ClassCode
+                                                                                                AND dbo.Class.ClassCode = dbo.Timetable.ClassCode where dbo.Timetable.IsPublish=0 ORDER BY dbo.Class.TotalName"></asp:SqlDataSource>
                             </div>
                             <div style="float: right; position: relative; padding-right: 20px">
                                 <asp:Button ID="Button1" runat="server" CssClass="btn btn-outline-info" Text="אישור" OnClick="SelectedIndexChanged" />
@@ -232,7 +272,7 @@
 
                             </div>
                             <div style="float: left; position: relative; padding-left: 20px">
-                                <asp:Button ID="Button2" CssClass="btn btn-outline-primary" runat="server" Text="שמור" Visible="true" />
+                                <asp:Button ID="Button2" CssClass="btn btn-outline-primary" runat="server" Text="שמור" Visible="true" OnClick="Button2_Click" />
 
                             </div>
 

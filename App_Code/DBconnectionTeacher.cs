@@ -178,7 +178,7 @@ public class DBconnectionTeacher
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con);
-            ds = new DataSet("NotesDS"); daa.Fill(ds);
+            ds = new DataSet("NotesDS");
             daa.Fill(ds);
             return dtt = ds.Tables[0];
         }

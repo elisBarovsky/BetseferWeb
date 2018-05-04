@@ -68,10 +68,12 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         //rows ^
         for (int i = 0; i < 9; i++)
         {
+            string[] hours = new string[] { "8:00-8:45", "8:45-9:30", "10:00-10:45", "10:45-11:30", "11:45-12:30", "12:30-13:15", "13:25-14:10", "14:15-15:00","15:00-15:45" };
+
             TableRow tr = new TableRow();
 
             TableCell lessonNumber = new TableCell();
-            lessonNumber.Text = (i + 1).ToString();
+            lessonNumber.Text = (i + 1).ToString() + " - "+ hours[i];
             lessonNumber.CssClass = "DDL_TD";
             tr.Cells.Add(lessonNumber);
 
@@ -133,6 +135,8 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         TimeTable TT = new TimeTable();
         string classCode = Request.Cookies["SelectedCodeClass"].Value;
         TT.DeleteTempTT(DateTime.Today.ToShortDateString(), classCode);
+
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת לא נשמרה.'); location.href='Admin_Add_TimeTable.aspx';", true);
     }
 
     protected void ButtonPublish_Click(object sender, EventArgs e)
@@ -205,11 +209,11 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
 
         Response.Cookies["SelectedCodeClass"].Value = ddl_clasesAdd.SelectedItem.Value;
 
-        if (ddl_clasesAdd.SelectedItem.Text != "בחר כיתה" && count != "0" && IsSaveClicked != "false")
+        if (ddl_clasesAdd.SelectedItem.Text != "בחר כיתה" && count != "0" && IsSaveClicked == "false")
         {
             ModalPopupExtender1.Show();
             Response.Cookies["counter"].Value = 0.ToString();
-            Response.Cookies["IsSaveClicked"].Value = "false";
+           // Response.Cookies["IsSaveClicked"].Value = "false";
         }
         else
         {
@@ -220,5 +224,18 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
     protected void Button2_Click(object sender, EventArgs e)
     {
         Response.Cookies["IsSaveClicked"].Value = "true";
+
+        TimeTable TT = new TimeTable();
+
+        int rowsAffected = TT.InsertTimeTable(DateTime.Today.ToShortDateString(), int.Parse(ddl_clasesAdd.SelectedItem.Value), false);
+        if (rowsAffected > 0)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת נשמרה בהצלחה'); location.href='Admin_Add_TimeTable.aspx';", true);
+        }
+        else
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('קרתה תקלה בעת שמירת המערכת. נא צור קשר עם שירות הלקוחות בטלפון: 1-800-400-400');", true);
+        }
+
     }
 }
