@@ -17,6 +17,12 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         if (!IsPostBack)
         {
             LoadUser();
+            //if (Request.Cookies["SelectedCodeClass"].Value != "")
+            //{
+            //    string ClassCode= Request.Cookies["SelectedCodeClass"].Value;
+            //    ddl_clasesAdd.SelectedValue = ClassCode;
+            //    CreateEmptyTimeTable(ClassCode);
+            //}
         }
     }
 
@@ -55,7 +61,7 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         (sender as DropDownList).Items.Insert(0, new ListItem(Value, "0"));
     }
 
-    protected void CreateEmptyTimeTable()
+    protected void CreateEmptyTimeTable(/*string ClaasCode*/)
     {
         Subject subject = new Subject();
         Users user = new Users();
@@ -85,15 +91,23 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
 
                 ImageButton onclickImg = new ImageButton();
                 onclickImg.ImageUrl = "Images/editIcon.png";
-                onclickImg.Style.Add("height", "20px");  
-                string id= "WeekDay_" + (j + 1).ToString() + "-lesson_" + (i + 1).ToString()+"-ChoosenClass_"+ ddl_clasesAdd.SelectedItem.Value;
+                onclickImg.Style.Add("height", "20px");
+                string id = "";
+                //if (ClaasCode=="")
+                //{
+                    id = "WeekDay_" + (j + 1).ToString() + "-lesson_" + (i + 1).ToString() + "-ChoosenClass_" + ddl_clasesAdd.SelectedItem.Value;
+                //}
+                //else
+                //{
+                //    id = "WeekDay_" + (j + 1).ToString() + "-lesson_" + (i + 1).ToString() + "-ChoosenClass_" + ClaasCode;
+                //}
                 onclickImg.Attributes.Add("onclick", "event.preventDefault(); window.open('Admin_New_TT_form.aspx?cellID=" + id + "', 'mynewwin', 'width=600,height=600')");
                 cell.Controls.Add(onclickImg);
 
                 Label info = new Label();
 
                 TimeTable TT = new TimeTable();
-                List<string> CellInfush = TT.GetCellInfo(DateTime.Today.ToShortDateString(),(j+1),(i+1), int.Parse(ddl_clasesAdd.SelectedItem.Value));
+                List<string> CellInfush = TT.GetCellInfo(DateTime.Today.ToShortDateString(),(j+1),(i+1), ddl_clasesAdd.SelectedItem.Value);
 
                 if (CellInfush.Count==0)
                 {

@@ -46,7 +46,6 @@ public partial class Admin_New_TT_form : System.Web.UI.Page
                                 window.close();
                                 window.opener.location.reload();
                                 </script>";
-            
             base.Response.Write(close);
         }
         else

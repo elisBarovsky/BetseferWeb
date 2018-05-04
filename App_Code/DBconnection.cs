@@ -834,10 +834,10 @@ public class DBconnection
         }
     }
 
-    public List<string> GetCellInfo(string date, int WeekDay, int LessonNum, int ClassNum)
+    public List<string> GetCellInfo(string date, int WeekDay, int LessonNum, string ClassNum)
     {
-        String cStr = "select ([UserFName]+' '+[UserLName]) as FullName from [dbo].[Users] where [UserID]=(select  [TeacherId] from [dbo].[TempTimetableLesson] where [dateString] ='"+ date + "' and [CodeWeekDay]="+ WeekDay + " and [ClassTimeCode]="+ LessonNum + "and CodeChoosenClass="+ ClassNum + ") union " +
-                        "select [LessonName] from [dbo].[Lessons] where [CodeLesson]=(select CodeLesson from [dbo].[TempTimetableLesson] where [dateString] ='"+ date + "' and [CodeWeekDay]=" + WeekDay + " and [ClassTimeCode]="+ LessonNum + "and CodeChoosenClass=" + ClassNum + ") ";
+        String cStr = "select ([UserFName]+' '+[UserLName]) as FullName from [dbo].[Users] where [UserID]=(select  [TeacherId] from [dbo].[TempTimetableLesson] where [dateString] ='"+ date + "' and [CodeWeekDay]="+ WeekDay + " and [ClassTimeCode]="+ LessonNum + "and CodeChoosenClass='"+ ClassNum + "') union " +
+                        "select [LessonName] from [dbo].[Lessons] where [CodeLesson]=(select CodeLesson from [dbo].[TempTimetableLesson] where [dateString] ='"+ date + "' and [CodeWeekDay]=" + WeekDay + " and [ClassTimeCode]="+ LessonNum + " and CodeChoosenClass='" + ClassNum + "')";
         List<string> listInfo = new List<string>();
         try
         {
