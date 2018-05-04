@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,10 +16,10 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
         //}
 
         //if (!IsPostBack)
-        {
+        //{
             LoadUser();
-            CreatePupilsListByClassCode();
-        }
+        CreatePupilsListByClassCode();
+        //}
     }
 
     public void LoadUser()
@@ -51,8 +52,11 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
 
     protected void CreatePupilsListByClassCode()
     {
-        tableGrades.Rows.Clear();
-        string ClassCode = ChooseClassDLL.SelectedValue;
+        //tableGrades.Rows.Clear();
+        string ClassTotalName = ChooseClassDLL.SelectedValue;
+        Classes c = new Classes();
+        string ClassCode = c.GetClassCodeAccordingToClassFullName(ClassTotalName);
+
         List<Dictionary<string, string>> pupils = new List<Dictionary<string, string>>();
         Users u = new Users();
         pupils = u.getPupilsByClassCode(ClassCode);
@@ -91,7 +95,8 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
             TextBox tb = new TextBox();
             tb.ID = "gradeTB" + counter;
             tb.Attributes["type"] = "number";
-            tb.Text = "";
+            tb.Attributes["min"] = "0";
+            tb.Attributes["max"] = "100";
             grade.Controls.Add(tb);
             row.Cells.Add(grade);
 
@@ -101,6 +106,7 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
         }
         tableGrades.DataBind();
     }
+
 
     protected void FillFirstItem(object sender, EventArgs e)
     {
@@ -120,27 +126,36 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
         string codeLesson = ChooseLessonsDLL.SelectedValue;
         string teacherId = Request.Cookies["UserID"].Value;
         string NewDate = date1.Value;
-        if (NewDate == "")
+        string today = DateTime.Today.ToShortDateString();
+
+        
+        if (NewDate == "" || ChooseLessonsDLL.SelectedValue == "0" || ChooseClassDLL.SelectedValue == "0")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('לא נבחר תאריך בחינה.');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('לא ניתן להשאיר שדות רקים');", true);
             return;
         }
 
         string ExamDate = NewDate.Substring(8, 2) + "/" + NewDate.Substring(5, 2) + "/" + NewDate.Substring(0, 4);
+        DateTime d = DateTime.Parse(ExamDate);
 
+        if (DateTime.Today < d)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('אופס! תאריך הבחינה עוד לא הגיע');", true);
+            return;
+        }
 
         int num = 0;
-        for (int i = 1; i < tableGrades.Rows.Count; i++)
+        for (int i = 0; i < tableGrades.Rows.Count; i++)
         {
             string gradeID = "gradeTB" + (i - 1);
             string idID = "id" + (i - 1);
+            int grade;
             if (IsGradeMiss())
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('לא ניתן להשאיר את השדה - ציון ריק.');", true);
-                return;
+                grade = 0;
             }
 
-            int grade = int.Parse((tableGrades.Rows[i].Cells[2].FindControl(gradeID) as TextBox).Text);
+            grade = int.Parse((tableGrades.Rows[i].Cells[2].FindControl(gradeID) as TextBox).Text);
             string pupilId = tableGrades.Rows[i].Cells[0].Text;
             Grades g = new Grades();
             num += g.InsertGrade(pupilId, teacherId, codeLesson, ExamDate, grade);

@@ -40,6 +40,44 @@ public class DBconnection
         return cmd;
     }
 
+    public string GetClassCodeAccordingToClassFullName(string classTotalName)
+    {
+        String selectSTR = "SELECT ClassCode FROM Class where TotalName  = '" + classTotalName + "'";
+        string codeClass = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                codeClass = dr["ClassCode"].ToString();
+            }
+            return codeClass;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public string GetUserType(string UserID, string password)
     {
         String selectSTR = "SELECT CodeUserType  FROM Users where UserID  = '" + UserID + "' and LoginPassword  = '" + password + "'";
@@ -1013,8 +1051,9 @@ public class DBconnection
 
     public List<Dictionary<string, string>> getPupilsByClassCode(string classCode)
     {
+
         String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS PupilName" +
-           "  FROM dbo.Pupil INNER JOIN   dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID   where dbo.Pupil.CodeClass='" + classCode + "'";
+           "  FROM dbo.Pupil INNER JOIN   dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID   where dbo.Pupil.CodeClass='" + classCode +"'";
         List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
         try
         {

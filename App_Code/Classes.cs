@@ -34,4 +34,9 @@ public class Classes
     {
         return db.ClassesExites(ClassOt, ClassNum);
     }
+
+    public string GetClassCodeAccordingToClassFullName(string classTotalName)
+    {
+        return db.GetClassCodeAccordingToClassFullName(classTotalName);
+    }
 }
