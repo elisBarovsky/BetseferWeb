@@ -37,7 +37,7 @@ public class TimeTable
         return db.InsertUpdateTimeTable(TableCode, CodeWeekDay, ClassTimeCode, CodeLesson, TeacherId);
     }
 
-    public List<string> GetCellInfo(string date, int WeekDay,int LessonNum, int ClassNmum)
+    public List<string> GetCellInfo(string date, int WeekDay,int LessonNum, string ClassNmum)
     {
         return db.GetCellInfo(date, WeekDay, LessonNum, ClassNmum);
     }

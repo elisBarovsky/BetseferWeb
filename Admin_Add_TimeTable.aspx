@@ -233,57 +233,63 @@
             <!-- Main content -->
             <section class="content">
                 <div class="info-box">
-                    <form runat="server" autopostback="false">
+                    <form runat="server" autopostback="true">
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" BackgroundCssClass="modalBackground" CancelControlID="Button4" runat="server" TargetControlID="lblstupid" PopupControlID="Panel1"></ajaxToolkit:ModalPopupExtender>
+                             <asp:Label ID="lblstupid" runat="server" Text=""></asp:Label>
+                                <asp:Panel ID="Panel1" runat="server" Width="400px" Height="180px" CssClass="pnlBackGround">
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <p style="font-size: x-large;">האם ברצונך לשמור שינויים ?</p>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-offset-1" style="float: right; position: relative">
+                                            <asp:Button ID="Button3" CssClass="btn btn-danger" runat="server" Text="לא" OnClick="No_Option" />
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-1" style="float: left; position: relative">
+                                            <asp:Button ID="Button4" CssClass="btn btn-primary" runat="server" Text="כן" />
+                                        </div>
+                                    </div>
 
-                        <asp:Label ID="lblstupid" runat="server" Text=""></asp:Label>
-                        <asp:Panel ID="Panel1" runat="server" Width="400px" Height="180px" CssClass="pnlBackGround">
-                            <br />
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <p style="font-size: x-large;">האם ברצונך לשמור שינויים ?</p>
+                                </asp:Panel>
+<%--                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+
+                            <ContentTemplate>--%>
+                           
+                                <div class="table-responsive">
+                                    <div style="float: right; position: relative">
+                                        <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="true" OnSelectedIndexChanged="ddl_clasesAdd_SelectedIndexChanged"></asp:DropDownList>
+                                        <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT ClassCode, TotalName FROM Class WHERE (ClassCode NOT IN (SELECT Class_1.ClassCode FROM Class AS Class_1 INNER JOIN Timetable ON Class_1.ClassCode = Timetable.ClassCode))"></asp:SqlDataSource>
+                                    </div>
+                                    <div style="float: right; position: relative; padding-right: 20px">
+                                        <asp:Button ID="Button1" runat="server" CssClass="btn btn-outline-info" Text="אישור" OnClick="SelectedIndexChanged" />
+                                    </div>
+
+                                    <div style="float: left; position: relative; padding-bottom: 20px;">
+                                        <asp:Button ID="ButtonPublish" CssClass="btn btn-outline-success" runat="server" Text="שמור ופרסם" Visible="true" OnClick="ButtonPublish_Click" />
+
+                                    </div>
+                                    <div style="float: left; position: relative; padding-left: 20px">
+                                        <asp:Button ID="Button2" CssClass="btn btn-outline-primary" runat="server" Text="שמור" OnClick="Button2_Click" Visible="true" />
+
+                                    </div>
+
+                                    <div runat="server" id="AlertBox" class="alertBox" visible="false">
+                                        <div runat="server" id="AlertBoxMessage"></div>
+                                        <button onclick="closeAlert.call(this, event)">Ok</button>
+                                    </div>
+                                   
                                 </div>
-                            </div>
-                            <br />
-                            <br />
-                            <div class="row">
-                                <div class="col-md-4 col-md-offset-1" style="float: right; position: relative">
-                                    <asp:Button ID="Button3" CssClass="btn btn-danger" runat="server" Text="לא" OnClick="No_Option" />
-                                </div>
-                                <div class="col-md-4 col-md-offset-1" style="float: left; position: relative">
-                                    <asp:Button ID="Button4" CssClass="btn btn-primary" runat="server" Text="כן" />
-                                </div>
-                            </div>
-
-                        </asp:Panel>
-                        <div class="table-responsive">
-                            <div style="float: right; position: relative">
-                                <%--   OnSelectedIndexChanged="ddl_clases_SelectedIndexChanged"--%>
-                                <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName"  DataValueField="ClassCode" AutoPostBack="true" OnSelectedIndexChanged="ddl_clasesAdd_SelectedIndexChanged"></asp:DropDownList>
-                                <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT ClassCode, TotalName FROM Class WHERE (ClassCode NOT IN (SELECT Class_1.ClassCode FROM Class AS Class_1 INNER JOIN Timetable ON Class_1.ClassCode = Timetable.ClassCode))"></asp:SqlDataSource>
-                            </div>
-                            <div style="float: right; position: relative; padding-right: 20px">
-                                <asp:Button ID="Button1" runat="server" CssClass="btn btn-outline-info" Text="אישור" OnClick="SelectedIndexChanged" />
-                            </div>
-
-                            <div style="float: left; position: relative; padding-bottom: 20px;">
-                                <asp:Button ID="ButtonPublish" CssClass="btn btn-outline-success" runat="server" Text="שמור ופרסם" Visible="true" OnClick="ButtonPublish_Click" />
-
-                            </div>
-                            <div style="float: left; position: relative; padding-left: 20px">
-                                <asp:Button ID="Button2" CssClass="btn btn-outline-primary" runat="server" Text="שמור" OnClick="Button2_Click" Visible="true" />
-
-                            </div>
-
-                            <div runat="server" id="AlertBox" class="alertBox" visible="false">
-                                <div runat="server" id="AlertBoxMessage"></div>
-                                <button onclick="closeAlert.call(this, event)">Ok</button>
-                            </div>
-                            <asp:Table ID="TimeTable" runat="server" align="center" class="table table-bordered table-striped" AutoPostBack="false" data-name="cool-table">
-                            </asp:Table>
-                        </div>
-
+                                  <asp:Table ID="TimeTable" runat="server" align="center" class="table table-bordered table-striped" AutoPostBack="false" data-name="cool-table">
+                                    </asp:Table>
+<%--                            </ContentTemplate>
+                            
+                        </asp:UpdatePanel>--%>
+                       
                     </form>
                 </div>
             </section>
