@@ -44,7 +44,7 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         }
     }
 
-    protected void FillPupils(object sender, EventArgs e)
+    protected void FillPupils()
     {
         string ClassCode = ChooseClassDLL.SelectedValue;
 
@@ -126,6 +126,7 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         ChooseLessonsDLL.DataValueField = "key";
         ChooseLessonsDLL.DataBind();
         ChooseLessonsDLL.Enabled = true;
+        FillPupils();
     }
 
     protected void FillFirstItem(object sender, EventArgs e)

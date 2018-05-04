@@ -262,7 +262,7 @@ where  dbo.TimetableLesson.TeacherId =@TID">
                                             <label class="control-label">בחר מקצוע</label>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ChooseLessonsDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" AutoPostBack="True" OnSelectedIndexChanged="FillPupils" OnDataBound="FillFirstItem" Enabled="false"></asp:DropDownList>
+                                            <asp:DropDownList ID="ChooseLessonsDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" AutoPostBack="True" OnDataBound="FillFirstItem" Enabled="false"></asp:DropDownList>
                                         </td>
                                     </tr>
                                     <tr>
