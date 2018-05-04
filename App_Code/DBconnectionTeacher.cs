@@ -157,12 +157,12 @@ public class DBconnectionTeacher
         }
     }
 
-    public DataTable FilterNotes(string FilterType, string ValueFilter)
+    public DataTable FilterNotes(string FilterType, string ValueFilter, string teacherID)
     {
         string selectSTR = " SELECT  dbo.Pupil.UserID as 'תעודת זהות תלמיד' ,(dbo.Users.UserFName +' '+ dbo.Users.UserLName) as 'שם תלמיד' , dbo.NoteType.NoteName AS 'הערת משמעת', dbo.Lessons.LessonName AS 'שיעור', dbo.GivenNotes.NoteDate AS 'תאריך' ,dbo.GivenNotes.Comment AS 'הערת מורה'" +
                           " FROM  dbo.Users inner JOIN dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID inner JOIN dbo.GivenNotes " +
                           "ON dbo.Users.UserID = dbo.GivenNotes.PupilID  inner JOIN dbo.NoteType ON dbo.GivenNotes.CodeNoteType = dbo.NoteType.CodeNoteType  INNER JOIN  dbo.Lessons ON dbo.GivenNotes.LessonsCode = dbo.Lessons.CodeLesson " +
-                          " where " + FilterType + "='" + ValueFilter + "'";
+                          " where " + FilterType + "='" + ValueFilter + "' and dbo.GivenNotes.TeacherID = '" + teacherID  + "'";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
@@ -459,6 +459,98 @@ public class DBconnectionTeacher
                 lessonsAccordingTeacherIdAndClassCode.Add(dr["CodeLesson"].ToString(), dr["LessonName"].ToString());
             }
             return lessonsAccordingTeacherIdAndClassCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public Dictionary<string, string> FillLessonsAccordingTeacherId(string teacherID)
+    {
+        string selectSTR = "SELECT  dbo.Lessons.CodeLesson, dbo.Lessons.LessonName FROM  dbo.Lessons " +
+                           "INNER JOIN dbo.TeachersTeachesSubjects ON dbo.Lessons.CodeLesson = " +
+                           "dbo.TeachersTeachesSubjects.CodeLessons where dbo.TeachersTeachesSubjects.TeacherID = '" + teacherID + "'";
+
+        Dictionary<string, string> lessonsAccordingTeacherId = new Dictionary<string, string>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                string CodeLesson = dr["CodeLesson"].ToString();
+                string LessonName = dr["LessonName"].ToString();
+                lessonsAccordingTeacherId.Add(dr["CodeLesson"].ToString(), dr["LessonName"].ToString());
+            }
+            return lessonsAccordingTeacherId;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public Dictionary<string, string> FillClassOtAccordingTeacherId(string teacherID)
+    {
+        string selectSTR = "SELECT  distinct  dbo.Class.ClassCode, dbo.Class.TotalName FROM dbo.TimetableLesson " +
+                           "INNER JOIN dbo.Timetable ON dbo.TimetableLesson.TimeTableCode = " +
+                           "dbo.Timetable.TimeTableCode INNER JOIN dbo.Class ON dbo.Timetable.ClassCode = " +
+                           "dbo.Class.ClassCode AND dbo.Timetable.ClassCode = dbo.Class.ClassCode where " +
+                           "dbo.TimetableLesson.TeacherId = '" + teacherID + "'";
+
+        Dictionary<string, string> classesAccordingTeacherId = new Dictionary<string, string>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                string CodeClass = dr["ClassCode"].ToString();
+                string ClassName = dr["TotalName"].ToString();
+                classesAccordingTeacherId.Add(dr["ClassCode"].ToString(), dr["TotalName"].ToString());
+            }
+            return classesAccordingTeacherId;
         }
         catch (Exception ex)
         {

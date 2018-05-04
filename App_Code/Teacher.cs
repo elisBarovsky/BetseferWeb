@@ -37,4 +37,21 @@ public class Teacher: Users
 
         return dbt.FillLessonsAccordingTeacherIdAndClassCode(teacherID, classCode);
     }
+
+    public Dictionary<string, string> FillLessonsAccordingTeacherId(string teacherID)
+    {
+        Dictionary<string, string> d = new Dictionary<string, string>();
+        DBconnectionTeacher dbt = new DBconnectionTeacher();
+
+        return dbt.FillLessonsAccordingTeacherId(teacherID);
+    }
+
+    
+    public Dictionary<string, string> FillClassOtAccordingTeacherId(string teacherID)
+    {
+        Dictionary<string, string> d = new Dictionary<string, string>();
+        DBconnectionTeacher dbt = new DBconnectionTeacher();
+
+        return dbt.FillClassOtAccordingTeacherId(teacherID);
+    }
 }

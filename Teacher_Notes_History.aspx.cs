@@ -93,6 +93,7 @@ public partial class Teacher_Notes_History : System.Web.UI.Page
     {
         Dictionary<string, string> Notes = new Dictionary<string, string>();
         Notes PupilNote = new Notes();
+        string teacherID = Request.Cookies["UserID"].Value;
         Notes = PupilNote.FillNotes();
         NotesDLL.DataSource = Notes.Values;
         NotesDLL.DataBind();
@@ -102,8 +103,10 @@ public partial class Teacher_Notes_History : System.Web.UI.Page
     protected void FillClasses()
     {
         Dictionary<string, string> Classes = new Dictionary<string, string>();
-        Grades ClassGrade = new Grades();
-        Classes = ClassGrade.FillClassOt();
+        string teacherID = Request.Cookies["UserID"].Value;
+        Teacher t = new Teacher();
+        Classes = t.FillClassOtAccordingTeacherId(teacherID);
+
         ChooseClassDLL.DataSource = Classes.Values;
         ChooseClassDLL.DataBind();
         Session["ClassesList"] = Classes;
@@ -112,9 +115,12 @@ public partial class Teacher_Notes_History : System.Web.UI.Page
     protected void FillSubjects()
     {
         Dictionary<string, string> Lessons = new Dictionary<string, string>();
-        Grades ClassGrade = new Grades();
-        Lessons = ClassGrade.FillLessons();
-        ChooseLessonsDLL.DataSource = Lessons.Values;
+        Teacher t = new Teacher();
+        string teacherID = Request.Cookies["UserID"].Value;
+        Lessons = t.FillLessonsAccordingTeacherId(teacherID);
+        ChooseLessonsDLL.DataSource = Lessons;
+        ChooseLessonsDLL.DataTextField = "value";
+        ChooseLessonsDLL.DataValueField = "key";
         ChooseLessonsDLL.DataBind();
         Session["LessonsList"] = Lessons;
     }
@@ -145,6 +151,7 @@ public partial class Teacher_Notes_History : System.Web.UI.Page
     {
         string FilterType = "";
         string ValueFilter = "";
+        string teacherID = Request.Cookies["UserID"].Value;
 
         if (FilterNotes.SelectedValue == "1")//מקצוע
         {
@@ -171,7 +178,7 @@ public partial class Teacher_Notes_History : System.Web.UI.Page
         }
 
         Notes FilterNote = new Notes();
-        GridView1.DataSource = FilterNote.FilterNotes(FilterType, ValueFilter);
+        GridView1.DataSource = FilterNote.FilterNotes(FilterType, ValueFilter, teacherID);
         GridView1.DataBind();
     }
 }
