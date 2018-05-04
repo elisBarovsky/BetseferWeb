@@ -159,11 +159,15 @@ public partial class Teacher_Notes_History : System.Web.UI.Page
         string ValueFilter = "";
         string teacherID = Request.Cookies["UserID"].Value;
 
+        if (FilterNotes.SelectedValue == "0") //בחר
+        {
+            return;
+        }
         if (FilterNotes.SelectedValue == "1")//מקצוע
         {
             List = (Dictionary<string, string>)(Session["LessonsList"]);
             FilterType = "dbo.GivenNotes.LessonsCode";
-            ValueFilter = KeyByValue(List, ChooseLessonsDLL.SelectedValue);
+            ValueFilter = ChooseLessonsDLL.SelectedValue;
         }
         else if (FilterNotes.SelectedValue == "2")//הערת משמעת
         {

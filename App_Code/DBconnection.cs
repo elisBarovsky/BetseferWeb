@@ -988,7 +988,7 @@ public class DBconnection
             SqlCommand cmd = new SqlCommand(selectSTR, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
-            l.Add("1", "בחר תלמיד");
+            l.Add("1", "בחר");
             while (dr.Read())
             {
                 UserID = dr["UserID"].ToString();

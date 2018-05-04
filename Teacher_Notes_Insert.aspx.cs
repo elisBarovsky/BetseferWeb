@@ -44,7 +44,7 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         }
     }
 
-    protected void FillPupils(object sender, EventArgs e)
+    protected void FillPupils()
     {
         string ClassCode = ChooseClassDLL.SelectedValue;
 
@@ -84,32 +84,39 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
 
     protected void AddNotes_Click(object sender, EventArgs e)
     {
-        string date = DateTime.Today.ToShortDateString();
-        string TeacherId = Request.Cookies["UserID"].Value;
-        Dictionary<string, string> NotesList = new Dictionary<string, string>();
-        NotesList = (Dictionary<string, string>)(Session["NotesList"]);
-
-        Dictionary<string, string> PupilList = new Dictionary<string, string>();
-        PupilList = (Dictionary<string, string>)(Session["PupilsList"]);
-
-        //Dictionary<string, string> LessonsList = new Dictionary<string, string>();
-        //LessonsList = (Dictionary<string, string>)(Session["LessonsList"]);
-
-        string PupilID = KeyByValue(PupilList, PupilsDLL.SelectedValue);
-        string NoteID = KeyByValue(NotesList, NotesDLL.SelectedValue);
-        string LessonID = ChooseLessonsDLL.SelectedValue;
-
-        Notes InsertPupilNote = new Notes();
-
-        int res1 = InsertPupilNote.InsertNotes(PupilID, NoteID, date, TeacherId, LessonID, TNoteTB.Text);
-        if (res1 == 1)
+        if (ChooseClassDLL.SelectedValue != "0" && ChooseLessonsDLL.SelectedValue != "0" && PupilsDLL.SelectedValue != "0" && NotesDLL.SelectedValue != "0")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הערה נוספה בהצלחה'); location.href='Teacher_Notes_Insert.aspx';", true);
+
+
+            string date = DateTime.Today.ToShortDateString();
+            string TeacherId = Request.Cookies["UserID"].Value;
+            Dictionary<string, string> NotesList = new Dictionary<string, string>();
+            NotesList = (Dictionary<string, string>)(Session["NotesList"]);
+
+            Dictionary<string, string> PupilList = new Dictionary<string, string>();
+            PupilList = (Dictionary<string, string>)(Session["PupilsList"]);
+
+            //Dictionary<string, string> LessonsList = new Dictionary<string, string>();
+            //LessonsList = (Dictionary<string, string>)(Session["LessonsList"]);
+
+            string PupilID = KeyByValue(PupilList, PupilsDLL.SelectedValue);
+            string NoteID = KeyByValue(NotesList, NotesDLL.SelectedValue);
+            string LessonID = ChooseLessonsDLL.SelectedValue;
+
+            Notes InsertPupilNote = new Notes();
+
+            int res1 = InsertPupilNote.InsertNotes(PupilID, NoteID, date, TeacherId, LessonID, TNoteTB.Text);
+            if (res1 == 1)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הערה נוספה בהצלחה'); location.href='Teacher_Notes_Insert.aspx';", true);
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הייתה בעיה בהוספת הערת משמעת, בדוק נתונים');", true);
+            }
         }
-        else
-        {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הייתה בעיה בהוספת הערת משמעת, בדוק נתונים');", true);
-        }
+
+        else ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('נתונים חסרים, אנא מלא את כל השדות');", true);
     }
 
     protected void ChooseClasssDLL_SelectedIndexChanged(object sender, EventArgs e)
@@ -126,6 +133,7 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         ChooseLessonsDLL.DataValueField = "key";
         ChooseLessonsDLL.DataBind();
         ChooseLessonsDLL.Enabled = true;
+        FillPupils();
     }
 
     protected void FillFirstItem(object sender, EventArgs e)

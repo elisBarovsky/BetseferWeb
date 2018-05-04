@@ -249,7 +249,8 @@
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="FilterNotes" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" RepeatDirection="Horizontal" AutoPostBack="true" OnSelectedIndexChanged="FilterNotes_SelectedIndexChanged" Width="365px">
-                                           <asp:ListItem Text="הכל" Value="4" />
+                                            <asp:ListItem Text="בחר" Value="0" />
+                                            <asp:ListItem Text="הכל" Value="4" />
                                             <asp:ListItem Text="מקצוע" Value="1" />
                                             <asp:ListItem Text="סוג הערה" Value="2" />
                                             <asp:ListItem Text="תלמיד" Value="3" />
@@ -257,7 +258,7 @@
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ChooseLessonsDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem"></asp:DropDownList>
-                                        <asp:DropDownList ID="NotesDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem"></asp:DropDownList>
+                                        <asp:DropDownList ID="NotesDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server"></asp:DropDownList>
                                         <asp:DropDownList ID="ChooseClassDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FillPupils" OnDataBound="FillFirstItem"></asp:DropDownList>
 
                                     </td>
