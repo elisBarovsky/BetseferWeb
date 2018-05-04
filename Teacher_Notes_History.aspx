@@ -258,7 +258,7 @@
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ChooseLessonsDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem"></asp:DropDownList>
-                                        <asp:DropDownList ID="NotesDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem"></asp:DropDownList>
+                                        <asp:DropDownList ID="NotesDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server"></asp:DropDownList>
                                         <asp:DropDownList ID="ChooseClassDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FillPupils" OnDataBound="FillFirstItem"></asp:DropDownList>
 
                                     </td>
