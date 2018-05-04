@@ -57,7 +57,7 @@
                                 <td style="text-align: right">בחר מקצוע
                                 </td>
                                 <td style="text-align: right">
-                                    <asp:DropDownList ID="DDLlessons" CssClass="form-control" Style="direction: rtl;" runat="server" DataSourceID="subjects" DataTextField="LessonName" DataValueField="CodeLesson" ></asp:DropDownList>
+                                    <asp:DropDownList ID="DDLlessons" CssClass="form-control" Style="direction: rtl;" runat="server" DataSourceID="subjects" DataTextField="LessonName" DataValueField="CodeLesson" AutoPostBack="true" OnDataBound="FillFirstItem"></asp:DropDownList>
                                     <asp:SqlDataSource ID="subjects" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [CodeLesson], [LessonName] FROM [Lessons] ORDER BY [LessonName]"></asp:SqlDataSource>
                                 </td>
                             </tr>
@@ -70,9 +70,15 @@
                                 <td style="text-align: right">
                                     <br />
                                     <br />
-                                    <asp:DropDownList ID="TeachersDDL" CssClass="form-control" data-toggle="dropdown" runat="server" DataSourceID="SqlDataSource1" DataTextField="TeacherName" DataValueField="UserID"></asp:DropDownList>
-                                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="select [UserID],([UserFName]+' '+[UserLName]) as TeacherName from [dbo].[Users]
-where [CodeUserType]=2"></asp:SqlDataSource>
+                                    <asp:DropDownList ID="TeachersDDL" CssClass="form-control" data-toggle="dropdown" runat="server" DataSourceID="SqlDataSource1" DataTextField="TeacherName" DataValueField="TeacherID" AutoPostBack="true" OnDataBound="FillFirstItem"></asp:DropDownList>
+                                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT           ( dbo.Users.UserFName+ ' ' +dbo.Users.UserLName) as TeacherName, dbo.TeachersTeachesSubjects.CodeLessons, dbo.TeachersTeachesSubjects.TeacherID
+FROM            dbo.Users INNER JOIN
+                         dbo.TeachersTeachesSubjects ON dbo.Users.UserID = dbo.TeachersTeachesSubjects.TeacherID
+where dbo.TeachersTeachesSubjects.CodeLessons=@LesCode">
+                                        <SelectParameters>
+                                            <asp:ControlParameter ControlID="DDLlessons" Name="LesCode" PropertyName="SelectedValue" />
+                                        </SelectParameters>
+                                    </asp:SqlDataSource>
                                 </td>
                             </tr>
                             <tr>

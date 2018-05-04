@@ -22,6 +22,12 @@ public partial class Admin_New_TT_form : System.Web.UI.Page
         }
     }
 
+    protected void FillFirstItem(object sender, EventArgs e)
+    {
+        (sender as DropDownList).Items.Insert(0, new ListItem("בחר", "0"));
+
+    }
+
     protected void AddClassBTN_Click(object sender, EventArgs e)
     {
         int LessonNum = int.Parse(objSenderID.Substring(24, 1));
