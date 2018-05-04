@@ -60,8 +60,8 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         Subject subject = new Subject();
         Users user = new Users();
         int counter = 1;
-        Dictionary<int, string> subjects = subject.getSubjects();
-        Dictionary<string, string> teachers = user.GetTeachers();
+        //Dictionary<int, string> subjects = subject.getSubjects();
+        //Dictionary<string, string> teachers = new Dictionary<string, string>();
 
         FillDaysTitles();
 

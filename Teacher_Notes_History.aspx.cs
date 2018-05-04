@@ -125,6 +125,12 @@ public partial class Teacher_Notes_History : System.Web.UI.Page
         Session["LessonsList"] = Lessons;
     }
 
+    protected void FillFirstItem(object sender, EventArgs e)
+    {
+        (sender as DropDownList).Items.Insert(0, new ListItem("בחר", "0"));
+
+    }
+
     public static string KeyByValue(Dictionary<string, string> dict, string val)
     {
         string key = null;
