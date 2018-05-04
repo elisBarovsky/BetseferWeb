@@ -249,8 +249,7 @@
                                             <label class="control-label">בחר כיתה</label>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ChooseClassDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server"></asp:DropDownList>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator_Class" runat="server" ControlToValidate="ChooseClassDLL" ErrorMessage="עליך לבחור כיתה" InitialValue="0"></asp:RequiredFieldValidator>
+                                            <asp:DropDownList ID="ChooseClassDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem"></asp:DropDownList>
 
                                         </td>
                                         <td>
@@ -258,6 +257,7 @@
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="FilterNotes" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" runat="server" RepeatDirection="Horizontal" Width="349px">
+                                                <asp:ListItem Text="בחר" Value="0" />
                                                 <asp:ListItem Text="הורים" Value="3" />
                                                 <asp:ListItem Text="תלמידים" Value="4" />
                                             </asp:DropDownList>

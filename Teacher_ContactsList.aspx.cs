@@ -46,8 +46,9 @@ public partial class Teacher_ContactsList : System.Web.UI.Page
     protected void FillClasses()
     {
         Dictionary<string, string> Classes = new Dictionary<string, string>();
-        Grades ClassGrade = new Grades();
-        Classes = ClassGrade.FillClassOt();
+        Teacher ClassesAccordingToTeacherID = new Teacher();
+        string teacherID = Request.Cookies["UserID"].Value;
+        Classes = ClassesAccordingToTeacherID.FillClassOtAccordingTeacherId(teacherID);
         ChooseClassDLL.DataSource = Classes.Values;
         ChooseClassDLL.DataBind();
         Session["ClassesList"] = Classes;
@@ -67,11 +68,22 @@ public partial class Teacher_ContactsList : System.Web.UI.Page
         return key;
     }
 
+    protected void FillFirstItem(object sender, EventArgs e)
+    {
+        (sender as DropDownList).Items.Insert(0, new ListItem("בחר", "0"));
+
+    }
+
     protected void TLBTN_Click(object sender, EventArgs e)
     {
-        if (ChooseClassDLL.SelectedValue == "בחר")
+        if (ChooseClassDLL.SelectedValue == "0")
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('עליך לבחור כיתה');", true);
+            return;
+        }
+        if (FilterNotes.SelectedValue == "0")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('עליך לבחור קבוצה');", true);
             return;
         }
         string UserTypeFilter = FilterNotes.SelectedValue;
