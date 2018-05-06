@@ -57,4 +57,18 @@ public class Parent : Users
         }
         return pupils;
     }
+
+    public Dictionary<string, string> ChildrenToDictionary()
+    {
+        Dictionary<string, string> pupils = new Dictionary<string, string>();
+        for (int i = 0; i < children.Count; i++)
+        {
+            pupils.Add(children[i].UserID1, children[i].UserLName1 + " " + children[i].UserFName1);
+        }
+        return pupils;
+    }
+
+    public void deleteChild(string childID) {
+
+    }
 }

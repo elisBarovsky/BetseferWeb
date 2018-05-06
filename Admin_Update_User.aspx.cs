@@ -22,14 +22,11 @@ public partial class Admin_Update_User : System.Web.UI.Page
             VisibleOtherUsers(false);
             ClearAll();
             UpdateUserBTN.Visible = false;
-        //    FillNumChilds();
-            NumChildLBL.Visible = false;
-          //  NumChildDDL.Visible = false;
+            //    FillNumChilds();
+            ChildDDL.Visible = false;
+            //  NumChildDDL.Visible = false;
             VisibleParent(false);
-            ChoosenNumChildLBL.Visible = false;
-          //  FillDays();
-         //   FillMonth();
-          //  FillYear();
+            //ChoosenNumChildLBL.Visible = false;
             HideChildTBID(false);
         }
     }
@@ -62,6 +59,11 @@ public partial class Admin_Update_User : System.Web.UI.Page
         (sender as DropDownList).Items.Insert(0, new ListItem("בחר", "0"));
     }
 
+    protected void FillFirstItemChildrenList(object sender, EventArgs e)
+    {
+        (sender as DropDownList).Items.Insert(0, new ListItem("תלמידים", "0"));
+    }
+
     public void LoadUser()
     {
         string AdminId = Request.Cookies["UserID"].Value;
@@ -85,6 +87,20 @@ public partial class Admin_Update_User : System.Web.UI.Page
         }
     }
 
+    protected void FillChildren(object sender, EventArgs e)
+    {
+        Dictionary<string, string> Children = new Dictionary<string, string>();
+        Dictionary<string, string> Children2 = new Dictionary<string, string>();
+        Users c = new Users();
+        Parent p = new Parent(UserIDTB.Text);
+
+        Children = p.ChildrenToDictionary();
+
+        ChildDDL.DataSource = Children;
+        ChildDDL.DataValueField = "key";
+        ChildDDL.DataTextField = "value";
+        ChildDDL.DataBind();
+    }
 
     protected void UserTypeDLL_CheckedChanged(object sender, EventArgs e)
     {
@@ -190,9 +206,10 @@ public partial class Admin_Update_User : System.Web.UI.Page
             else if (UserTypeDLL.SelectedValue == "3")
             {
                 Users QuntityChiled = new Users();
-              //  NumChildDDL.Visible = true;
-                NumChildLBL.Visible = true;
-               // NumChildDDL.SelectedValue = QuntityChiled.GetNumChild(UserID);
+                //  NumChildDDL.Visible = true;
+                //NumChildLBL.Visible = true;
+                // NumChildDDL.SelectedValue = QuntityChiled.GetNumChild(UserID);
+                //FillChildren();
             }
         }
 
@@ -203,12 +220,12 @@ public partial class Admin_Update_User : System.Web.UI.Page
         UserInfo = UserInfo_.GetUserInfo(UserID);
 
         UserIDTB.Text = UserID;
-        FNameTB.Text = UserInfo[0];
-        LNameTB.Text = UserInfo[1];
-        BDAYtb.Text = UserInfo[2];
+        FNameTB.Text = UserInfo[1];
+        LNameTB.Text = UserInfo[2];
+        BDAYtb.Text = UserInfo[3];
 
-        PasswordTB.Text = UserInfo[3];
-        TelephoneNumberTB.Text = UserInfo[4];
+        PasswordTB.Text = UserInfo[4];
+        TelephoneNumberTB.Text = UserInfo[5];
 
         if (UserInfo[5] == "")
         {
@@ -216,7 +233,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
         }
         else
         {
-            ImgUser.ImageUrl = UserInfo[5];
+            ImgUser.ImageUrl = UserInfo[6];
         }
     }
 
@@ -265,8 +282,11 @@ public partial class Admin_Update_User : System.Web.UI.Page
 
     protected void VisibleParent(bool ans)
     {
-        UpdateChild.Visible = ans;
-        ChoosenNumChildDDL.Visible = false;
+        ChildDDL.Visible = ans;
+        //UpdateChild.Visible = ans;
+        //ChoosenNumChildDDL.Visible = false;
+        DeleteChild.Visible = ans;
+        AddChild.Visible = ans;
     }
 
     protected void VisibleTeacherUsers(bool ans)
@@ -301,13 +321,13 @@ public partial class Admin_Update_User : System.Web.UI.Page
         ChildI4DTB.Visible = false;
         ChildI5DTB.Visible = false;
         ChildI6DTB.Visible = false;
-        UpdateChild.Visible = false;
-        NumChildLBL.Visible = false;
+        //UpdateChild.Visible = false;
+        //NumChildLBL.Visible = false;
      //   NumChildDDL.Visible = false;
-        ChoosenNumChildLBL.Visible = false;
-        ChoosenNumChildDDL.Visible = false;
+        //ChoosenNumChildLBL.Visible = false;
+        //ChoosenNumChildDDL.Visible = false;
       //  ChoosenNumChildDDL.SelectedIndex = 0;
-        UpdateChild.Checked = false;
+        //UpdateChild.Checked = false;
         ChildIDLBL.Visible = false;
     }
 
@@ -378,28 +398,28 @@ public partial class Admin_Update_User : System.Web.UI.Page
             }
             else if (UserTypeDLL.SelectedValue == "3")
             {
-                if (UpdateChild.Checked)
-                {
-                    string[] ChildID = new string[6];
+                //if (UpdateChild.Checked)
+                //{
+                //    string[] ChildID = new string[6];
 
-                    ChildID[0] = ChildI1DTB.Text;
-                    ChildID[1] = ChildI2DTB.Text;
-                    ChildID[2] = ChildI3DTB.Text;
-                    ChildID[3] = ChildI4DTB.Text;
-                    ChildID[4] = ChildI5DTB.Text;
-                    ChildID[5] = ChildI6DTB.Text;
+                //    ChildID[0] = ChildI1DTB.Text;
+                //    ChildID[1] = ChildI2DTB.Text;
+                //    ChildID[2] = ChildI3DTB.Text;
+                //    ChildID[3] = ChildI4DTB.Text;
+                //    ChildID[4] = ChildI5DTB.Text;
+                //    ChildID[5] = ChildI6DTB.Text;
 
-                    for (int i = 0; i < ChildID.Length; i++)
-                    {
-                        if (ChildID[i] != "")
-                        {
-                            Users GetPupilClass = new Users();
-                            string ChildCodeClass = GetPupilClass.GetPupilOtClass(ChildID[i]);
-                            Administrator AddMoreThanOneChild = new Administrator();
-                            AddMoreThanOneChild.UpdateParent(UserIDTB.Text, ChildID[i], ChildCodeClass);
-                        }
-                    }
-                }
+                //    for (int i = 0; i < ChildID.Length; i++)
+                //    {
+                //        if (ChildID[i] != "")
+                //        {
+                //            Users GetPupilClass = new Users();
+                //            string ChildCodeClass = GetPupilClass.GetPupilOtClass(ChildID[i]);
+                //            Administrator AddMoreThanOneChild = new Administrator();
+                //            AddMoreThanOneChild.UpdateParent(UserIDTB.Text, ChildID[i], ChildCodeClass);
+                //        }
+                //    }
+                //}
             }
 
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('משתמש עודכן בהצלחה'); location.href='AUpdateUser.aspx';", true);
@@ -424,75 +444,96 @@ public partial class Admin_Update_User : System.Web.UI.Page
         }
     }
 
-    protected void UpdateChild_CheckedChanged(object sender, EventArgs e)
+    protected void AddNewChild(object sender, EventArgs e)
     {
-        if (UpdateChild.Checked)
+        TBaddNewChild.Visible = true;
+    }
+
+    protected void DeleteChildFunction(object sender, EventArgs e)
+    {
+        string childID = ChildDDL.SelectedValue;
+        if (childID == "0")
         {
-          //  NumChildDDL.Visible = true;
-            ChoosenNumChildDDL.Visible = true;
-            ChoosenNumChildLBL.Visible = true;
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('לא נבחר ילד למחיקה');", true);
+            return;
         }
         else
         {
-            //NumChildDDL.Visible = false;
-            ChoosenNumChildDDL.Visible = false;
-            ChoosenNumChildLBL.Visible = false;
+            Parent p = new Parent();
+
+            int answer = p.DeleteChild(UserIDTB.Text, childID);
         }
     }
 
-    protected void NumChildDDL_SelectedIndexChanged(object sender, EventArgs e)
+    protected void UpdateChild_CheckedChanged(object sender, EventArgs e)
     {
-        ChildIDLBL.Visible = true;
-        switch (ChoosenNumChildDDL.SelectedValue)
+        //if (UpdateChild.Checked)
+        //{
+        //  //  NumChildDDL.Visible = true;
+        //    //ChoosenNumChildDDL.Visible = true;
+        //    //ChoosenNumChildLBL.Visible = true;
+        //}
+        //else
         {
-            case "1":
-                ChildI1DTB.Visible = true;
-                ChildI2DTB.Visible = false;
-                ChildI3DTB.Visible = false;
-                ChildI4DTB.Visible = false;
-                ChildI5DTB.Visible = false;
-                ChildI6DTB.Visible = false;
-                break;
-            case "2":
-                ChildI1DTB.Visible = true;
-                ChildI2DTB.Visible = true;
-                ChildI3DTB.Visible = false;
-                ChildI4DTB.Visible = false;
-                ChildI5DTB.Visible = false;
-                ChildI6DTB.Visible = false;
-                break;
-            case "3":
-                ChildI1DTB.Visible = true;
-                ChildI2DTB.Visible = true;
-                ChildI3DTB.Visible = true;
-                ChildI4DTB.Visible = false;
-                ChildI5DTB.Visible = false;
-                ChildI6DTB.Visible = false;
-                break;
-            case "4":
-                ChildI1DTB.Visible = true;
-                ChildI2DTB.Visible = true;
-                ChildI3DTB.Visible = true;
-                ChildI4DTB.Visible = true;
-                ChildI5DTB.Visible = false;
-                ChildI6DTB.Visible = false;
-                break;
-            case "5":
-                ChildI1DTB.Visible = true;
-                ChildI2DTB.Visible = true;
-                ChildI3DTB.Visible = true;
-                ChildI4DTB.Visible = true;
-                ChildI5DTB.Visible = true;
-                ChildI6DTB.Visible = false;
-                break;
-            case "6":
-                ChildI1DTB.Visible = true;
-                ChildI2DTB.Visible = true;
-                ChildI3DTB.Visible = true;
-                ChildI4DTB.Visible = true;
-                ChildI5DTB.Visible = true;
-                ChildI6DTB.Visible = true;
-                break;
+            //NumChildDDL.Visible = false;
+            //ChoosenNumChildDDL.Visible = false;
+            //ChoosenNumChildLBL.Visible = false;
         }
     }
+
+    //protected void NumChildDDL_SelectedIndexChanged(object sender, EventArgs e)
+    //{
+    //    ChildIDLBL.Visible = true;
+    //    switch (ChoosenNumChildDDL.SelectedValue)
+    //    {
+    //        case "1":
+    //            ChildI1DTB.Visible = true;
+    //            ChildI2DTB.Visible = false;
+    //            ChildI3DTB.Visible = false;
+    //            ChildI4DTB.Visible = false;
+    //            ChildI5DTB.Visible = false;
+    //            ChildI6DTB.Visible = false;
+    //            break;
+    //        case "2":
+    //            ChildI1DTB.Visible = true;
+    //            ChildI2DTB.Visible = true;
+    //            ChildI3DTB.Visible = false;
+    //            ChildI4DTB.Visible = false;
+    //            ChildI5DTB.Visible = false;
+    //            ChildI6DTB.Visible = false;
+    //            break;
+    //        case "3":
+    //            ChildI1DTB.Visible = true;
+    //            ChildI2DTB.Visible = true;
+    //            ChildI3DTB.Visible = true;
+    //            ChildI4DTB.Visible = false;
+    //            ChildI5DTB.Visible = false;
+    //            ChildI6DTB.Visible = false;
+    //            break;
+    //        case "4":
+    //            ChildI1DTB.Visible = true;
+    //            ChildI2DTB.Visible = true;
+    //            ChildI3DTB.Visible = true;
+    //            ChildI4DTB.Visible = true;
+    //            ChildI5DTB.Visible = false;
+    //            ChildI6DTB.Visible = false;
+    //            break;
+    //        case "5":
+    //            ChildI1DTB.Visible = true;
+    //            ChildI2DTB.Visible = true;
+    //            ChildI3DTB.Visible = true;
+    //            ChildI4DTB.Visible = true;
+    //            ChildI5DTB.Visible = true;
+    //            ChildI6DTB.Visible = false;
+    //            break;
+    //        case "6":
+    //            ChildI1DTB.Visible = true;
+    //            ChildI2DTB.Visible = true;
+    //            ChildI3DTB.Visible = true;
+    //            ChildI4DTB.Visible = true;
+    //            ChildI5DTB.Visible = true;
+    //            ChildI6DTB.Visible = true;
+    //            break;
+    //    }
+    //}
 }

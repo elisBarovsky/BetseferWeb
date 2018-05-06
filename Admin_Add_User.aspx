@@ -345,7 +345,7 @@
                                 <asp:DropDownList ID="NumOfChildDDL" Style="direction: rtl;" runat="server" AutoPostBack="true" CssClass="form-control" data-toggle="dropdown" OnSelectedIndexChanged="NumOfChildDDL_SelectedIndexChanged"></asp:DropDownList></td>
 
                                
-                                    <asp:Label ID="ChildIDLBL" runat="server" Text=" :הזן תעודת זהות ילד"></asp:Label>
+                                    <asp:Label ID="ChildIDLBL" runat="server" Text=" הזן ת.ז. ילד:"></asp:Label>
 
                                 <asp:TextBox ID="ChildI1DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
                                 <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI1DTB"
