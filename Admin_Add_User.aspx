@@ -198,7 +198,7 @@
                     <li class="treeview"><a href="#"><i class="fa fa-envelope-o "></i><span>הודעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li><a href="apps-mailbox.html">הודעות נכנסות</a></li>
-                            <li><a href="apps-compose-mail.html">הודעה חדשה</a></li>
+                            <li><a href="Admin_Add_Messages.aspx">הודעה חדשה</a></li>
                         </ul>
                     </li>
                 </ul>

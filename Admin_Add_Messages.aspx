@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Teacher_Grades_Insert.aspx.cs" Inherits="Teacher_Grades_Insert" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Admin_Add_Messages.aspx.cs" Inherits="Admin_Messages" %>
 
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
@@ -56,8 +56,6 @@
                 <ul class="nav navbar-nav pull-left">
                     <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a></li>
                 </ul>
-                <!-- search form -->
-                <!--</div>-->
                 <div class="navbar-custom-menu" runat="server">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
@@ -180,42 +178,29 @@
                 </div>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="treeview"><a href="Teacher_Dashbord.aspx"><i class="fa fa-home"></i><span>דף הבית</span> </a>
+                    <li class="treeview"><a href="AdminDashbord.aspx"><i class="fa fa-home"></i><span>דף הבית</span> </a>
                     </li>
                     <li class="treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li><a href="Teacher_TimeTable.aspx"><i class="fa fa-plus"></i><span>צפייה</span> </a>
+                            <li><a href="Admin_Add_TimeTable.aspx"><i class="fa fa-plus"></i><span>יצירת מערכת</span> </a>
+                            <li><a href="Admin_Update_TimeTable.aspx"><i class="fa fa-edit"></i><span>עדכון מערכת</span> </a>
+                            <li><a href="Admin_Saved_TimeTable.aspx"><i class="fa fa-edit"></i><span>מערכות בתהליך</span> </a>
                         </ul>
                     </li>
-                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>הערות משמעת</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ניהול משתמשים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li><a href="Teacher_Notes_Insert.aspx"><i class="fa fa-plus"></i><span>הוספת הערה</span> </a>
-                                <li><a href="Teacher_Notes_History.aspx"><i class="fa fa-edit"></i><span>צפייה</span> </a>
+                            <li><a href="Admin_Add_User.aspx"><i class="fa fa-plus"></i><span>הוספת משתמשים</span> </a>
+                                <li><a href="Admin_Update_User.aspx"><i class="fa fa-edit"></i><span>עדכון משתמשים</span> </a>
                         </ul>
                     </li>
-                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>שיעורי בית</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                    <li class="active treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ניהול כיתות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li><a href="Teacher_HW_Insert.aspx"><i class="fa fa-plus"></i><span>הוספת שיעורים</span> </a>
-                                <li><a href="Teacher_HW_History.aspx"><i class="fa fa-plus"></i><span>צפייה ועדכון</span> </a>
+                            <li class="active"><a href="Admin_Add_Class.aspx"><i class="fa fa-plus"></i><span>הוספת כיתה</span> </a>
                         </ul>
                     </li>
-                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ציונים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ניהול מקצועות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li><a href="Teacher_Grades_Insert.aspx"><i class="fa fa-plus"></i><span>הוספת ציונים</span> </a>
-                                <li><a href="#.aspx"><i class="fa fa-plus"></i><span>עדכון</span> </a>
-                        </ul>
-                    </li>
-                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>דף קשר</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                        <ul class="treeview-menu">
-                            <li><a href="Teacher_ContactsList.aspx"><i class="fa fa-plus"></i><span>צפייה</span> </a>
-                        </ul>
-                    </li>
-                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>לוח שנה</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                    </li>
-                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>יום הורים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                        <ul class="treeview-menu">
-                            <li><a href="#.aspx"><i class="fa fa-plus"></i><span>יצירה</span> </a>
-                                <li><a href="#.aspx"><i class="fa fa-plus"></i><span>צפייה ועדכון</span> </a>
+                            <li><a href="Admin_Add_lessons.aspx"><i class="fa fa-plus"></i><span>הוספת מקצוע</span> </a>
                         </ul>
                     </li>
                     <li class="treeview"><a href="#"><i class="fa fa-envelope-o "></i><span>הודעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -233,59 +218,85 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header sty-one">
-                <h1>הוספת ציונים</h1>
-
+                <h1>יצירת הודעה</h1>
             </section>
 
             <!-- Main content -->
             <section class="content">
                 <div class="info-box">
-                    <form runat="server">
-                        <div class="card-body">
-                            <div class="row">
-                                <table class="table" align="center">
-                                    <tr>
-                                        <td>
-                                            <label class="control-label">תאריך בחינה</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control" id="date1" type="date" runat="server">
-                                        </td>
-                                        <td>
-                                            <label class="control-label">בחר מקצוע</label>
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList ID="ChooseLessonsDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" AutoPostBack="True" DataSourceID="DDLsubjectsAccordingToTeacherID" OnDataBound="FillFirstItem" DataTextField="LessonName" DataValueField="CodeLesson" OnSelectedIndexChanged="ChooseLessonsDLL_SelectedIndexChanged"></asp:DropDownList>
-                                            <asp:SqlDataSource ID="DDLsubjectsAccordingToTeacherID" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT  dbo.Lessons.CodeLesson, dbo.Lessons.LessonName
-FROM  dbo.Lessons INNER JOIN dbo.TeachersTeachesSubjects ON dbo.Lessons.CodeLesson = dbo.TeachersTeachesSubjects.CodeLessons
-where  dbo.TeachersTeachesSubjects.TeacherID=@TID">
-                                                <SelectParameters>
-                                                    <asp:CookieParameter CookieName="UserID" Name="TID" />
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>
-                                        </td>
-                                        <td>
-                                            <label class="control-label">בחר כיתה</label>
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList ID="ChooseClassDLL" CssClass="btn btn-default dropdown-toggle" Style="direction: rtl;" runat="server" AutoPostBack="True" OnDataBound="FillFirstItem" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <div class="table-responsive">
-                                    <asp:Table ID="tableGrades" runat="server" class="table table-bordered table-striped"></asp:Table>
-                                </div>
-                            </div>
-                        </div>
+                <form runat="server">
+                         <asp:Table ID="Table1" runat="server" Width="100%">
+                             <asp:TableRow>
+                                 <asp:TableCell Width="20%">
+                                     <asp:Label ID="sugLBL" runat="server" Text="סוג הודעה:"></asp:Label>
+                                 </asp:TableCell>
+                                 <asp:TableCell>
+                                     <asp:RadioButtonList ID="messageTypeRBL" runat="server" RepeatDirection="Horizontal" AutoPostBack="true" OnSelectedIndexChanged="TypeMessageChoosen">
+                                        <asp:ListItem Text="אישי" Value="private" Selected="true"></asp:ListItem>
 
-                        <br />
-                        <div align="center">
-                            <asp:Button ID="AddGrades" runat="server" CssClass="btn btn-outline-primary" Text="הוסף ציונים" OnClick="AddGrades_Click" />
-                        </div>
-                    </form>
-                </div>
+                                        <asp:ListItem Text="קולקטיבי" Value="kolektive"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                 </asp:TableCell>
+                             </asp:TableRow>
+                             <asp:TableRow>
+                                 <asp:TableCell Width="20%">
+                                     <asp:Label ID="classLBL" runat="server" Text="כיתה:"></asp:Label>
+                                 </asp:TableCell>
+                                 <asp:TableCell>
+                                     <asp:DropDownList ID="classDDL" runat="server" CssClass="form-control" DataSourceID="classes_DS" DataTextField="TotalName" DataValueField="ClassCode"></asp:DropDownList>
+                                     <asp:SqlDataSource runat="server" ID="classes_DS" ConnectionString='<%$ ConnectionStrings:Betsefer %>' SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>
+                                 </asp:TableCell>
+                             </asp:TableRow>
+                         <asp:TableRow>
+                                 <asp:TableCell Width="20%">
+                                     <asp:Label ID="groupTypeLBL" runat="server" Text="נמענים:"></asp:Label>
+                                 </asp:TableCell>
+                                 <asp:TableCell>
+                                     <asp:RadioButtonList ID="userTypeRBL" runat="server" RepeatDirection="Horizontal" AutoPostBack="true" OnSelectedIndexChanged="TypeUserChoosen">
+                                        <asp:ListItem Text="הורים" Value="parents" Selected="true" ></asp:ListItem>
+
+                                        <asp:ListItem Text="תלמידים" Value="pupils"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                 </asp:TableCell>
+                             </asp:TableRow>
+                             <asp:TableRow>
+                                 <asp:TableCell Width="20%">
+                                     <asp:Label ID="forLBL" runat="server" Text="נמען:"></asp:Label>
+                                 </asp:TableCell>
+                                 <asp:TableCell>
+                                     <asp:DropDownList ID="userDDL" runat="server" Width="100%" CssClass="form-control"></asp:DropDownList>
+                                 </asp:TableCell>
+
+                             </asp:TableRow>
+                             
+                             <asp:TableRow>
+                                 <asp:TableCell ColumnSpan="2">
+                                     <br />
+                                      <div class="form-group">
+                                        <input class="form-control" placeholder="נושא">
+                                      </div>
+                                      <div class="form-group">
+                                        <textarea id="compose-textarea" class="form-control" style="height: 300px"></textarea>
+                                      </div>
+                                      <h6><i class="fa fa-paperclip"></i> נספחים</h6>
+                                      <form action="#" class="dropzone">
+                                        <div class="fallback">
+                                          <input name="file" type="file" multiple />
+                                        </div>
+                                      </form>
+                                 </asp:TableCell>
+                             </asp:TableRow>
+                             <asp:TableRow>
+                                 <asp:TableCell ColumnSpan="2">
+                                 </asp:TableCell>
+                                 <asp:TableCell>
+                                     <asp:ImageButton ID="ImageButton2" runat="server" src="Images/paperPlane.png" Height="100px"/>
+                                 </asp:TableCell>
+                             </asp:TableRow>
+                             </asp:Table>
+                </form>
+                    </div>
             </section>
-
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -311,30 +322,5 @@ where  dbo.TeachersTeachesSubjects.TeacherID=@TID">
     <!-- Chart Peity JavaScript -->
     <script src="dist/plugins/peity/jquery.peity.min.js"></script>
     <script src="dist/plugins/functions/jquery.peity.init.js"></script>
-
-    <%--  <div class="w3-sidebar w3-bar-block w3-card w3-dark-grey w3-xlarge" style="width: 10%; right: 0;">
-            <h3 class="w3-bar-item"></h3>
-            <a href="Admin.aspx" class="w3-bar-item w3-button"><i class="fa fa-home" style="padding-left: 50%"></i></a>
-            <a href="ATimeTable.aspx" class="w3-bar-item w3-button w3-hover-green" style="text-align: right">מערכת שעות</a>
-            <a href="AdminMasseges.aspx" class="w3-bar-item w3-button w3-hover-blue" style="text-align: right">הודעות</a>
-            <a href="AAddNewUser.aspx" class="w3-bar-item w3-button w3-hover-red" style="text-align: right">ניהול משתמשים</a>
-            <a href="AAddClasses.aspx" class="w3-bar-item w3-button w3-hover-blue" style="text-align: right">ניהול כיתות</a>
-            <a href="AAddLessons.aspx" class="w3-bar-item w3-button w3-hover-red" style="text-align: right">ניהול מקצועות</a>
-            <a href="Login.aspx" class="w3-bar-item w3-button"><i class="fa fa-sign-out" style="padding-left: 50%"></i></a>
-
-        </div>
-
-
-        <div style="margin-right: 10%">
-
-            <div class="w3-container w3-dark-grey" style="height: 50px">
-                <img src="Images/Betsefer.png" style="padding-top: 5px; height: 50px">
-            </div>
-
-            <br />
-            <br />
-            <br />--%>
-
-    <%--</div>--%>
 </body>
 </html>
