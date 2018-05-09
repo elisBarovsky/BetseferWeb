@@ -309,7 +309,7 @@
                                         <td>
                                             <%--<asp:Label ID="NumChildLBL" runat="server" Text="מספר ילדים"></asp:Label>--%>
                                             <asp:Label ID="MainTeacher" runat="server" Text=" האם מחנך"></asp:Label>
-                                            <asp:DropDownList ID="ChildDDL" runat="server" AutoPostBack="True" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnDataBound="FillFirstItemChildrenList"></asp:DropDownList>
+                                            <asp:DropDownList ID="ChildDDL" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnDataBound="FillFirstItemChildrenList"></asp:DropDownList>
                                             <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup52_test2ConnectionString %>" SelectCommand="SELECT [PupilID] FROM [PupilsParent] WHERE ([ParentID] = @ParentID)">
                                                 <SelectParameters>
                                                     <asp:ControlParameter ControlID="UserIDTB" Name="ParentID" PropertyName="Text" Type="String"/>
@@ -326,6 +326,7 @@
                                             <%--<asp:DropDownList ID="NumChildDDL" runat="server"></asp:DropDownList>--%>
                                             <%--<asp:Label ID="ChildLBL" runat="server" Text="תלמידים:"></asp:Label>--%>
                                             <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
+                                            <asp:Button ID="SaveChild" runat="server" Text="הוסף" visible="false" OnClick="SaveNewChildToParent"/>
                                         </td>
                                     </tr>
                                     <tr>

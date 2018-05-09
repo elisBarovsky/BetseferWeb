@@ -287,6 +287,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
         //ChoosenNumChildDDL.Visible = false;
         DeleteChild.Visible = ans;
         AddChild.Visible = ans;
+        SaveChild.Visible = false;
     }
 
     protected void VisibleTeacherUsers(bool ans)
@@ -462,8 +463,14 @@ public partial class Admin_Update_User : System.Web.UI.Page
             Parent p = new Parent();
 
             int answer = p.DeleteChild(UserIDTB.Text, childID);
+            if (answer > 0)
+            {
+                ChildDDL.DataBind();
+            }
         }
     }
+
+
 
     protected void UpdateChild_CheckedChanged(object sender, EventArgs e)
     {
@@ -536,4 +543,35 @@ public partial class Admin_Update_User : System.Web.UI.Page
     //            break;
     //    }
     //}
+
+    protected void SaveNewChildToParent(object sender, EventArgs e)
+    {
+        string childID = TBaddNewChild.Text,
+            parentID = UserIDTB.Text;
+
+        Users child = new Users();
+        Parent p = new Parent();
+
+        string answer = child.IsStudentUserNotThisParentYet(childID, parentID);
+        switch (answer)
+        {
+            case "userTypeNotStudent":
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תלמיד לא קיים במערכת');", true);
+                return;
+            case "everythingGood":
+                int num = p.SaveChildAndParent(parentID, childID);
+                if (num > 0)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תלמיד נוסף בהצלחה');", true);
+                }
+                else ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('עקב תקלה לא ניתן להוסיף תלמיד להורה');", true);
+                ChildDDL.DataBind();
+                TBaddNewChild.Text = "";
+                TBaddNewChild.Visible = false;
+                break;
+            case "connectionExists":
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תלמיד כבר משוייך להורה');", true);
+                return;
+        }
+    }
 }

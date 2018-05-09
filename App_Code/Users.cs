@@ -339,5 +339,12 @@ public class Users
         DBconnection db = new DBconnection();
         return db.GetPupilIdByParentId(UserId);
     }
+
+    public string IsStudentUserNotThisParentYet(string childID, string parentID)
+    {
+        return db.IsStudentUserNotThisParentYet(childID, parentID);
+
+        
+    }
 }
 

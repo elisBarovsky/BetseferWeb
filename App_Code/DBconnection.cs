@@ -40,6 +40,13 @@ public class DBconnection
         return cmd;
     }
 
+    public int DeleteChild(string parentID, string childID)
+    {
+        String selectSTR = "DELETE FROM dbo.PupilsParent where [ParentID] = '" + parentID + "' and [PupilID] = '" + childID +"'";
+        return ExecuteNonQuery(selectSTR);
+
+    }
+
     public string GetClassCodeAccordingToClassFullName(string classTotalName)
     {
         String selectSTR = "SELECT ClassCode FROM Class where TotalName  = '" + classTotalName + "'";
@@ -1901,6 +1908,82 @@ public class DBconnection
                 con.Close();
             }
         }
+    }
+
+    public string IsStudentUserNotThisParentYet(string childID, string parentID)
+    {
+        String STRuserType = "SELECT CodeUserType FROM dbo.Users where UserID = '" + childID + "'",
+            STRcheckIfConnectionExists = "SELECT count(ParentID) from PupilsParent where ParentID = '" + parentID +
+            "' and PupilID = '" + childID + "'",
+            codeUserType = "", answer = "";
+        int numConnections = -1;
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(STRuserType, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                codeUserType = dr[0].ToString();
+            }
+
+            if (codeUserType == "4")
+            {
+                try
+                {
+                    cmd = new SqlCommand(STRcheckIfConnectionExists, con);
+                    dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    while (dr.Read())
+                    {
+                        numConnections = int.Parse(dr[0].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    throw (ex);
+                }
+            }
+            else answer = "userTypeNotStudent";
+
+            if (numConnections == 0)
+            {
+                answer = "everythingGood";
+            }
+            else if (numConnections > 0)
+            {
+                answer = "connectionExists";
+            }
+            return answer;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public int SaveChildAndParent(string parentID, string childID)
+    {
+        string codeClass = GetPupilOtClass(childID);
+        String cStr = "INSERT INTO [dbo].[PupilsParent] VALUES ('" + parentID + "', '"+ childID + "', '"+ codeClass +"')";
+        return ExecuteNonQuery(cStr);
     }
 
     //public List<Dictionary<string, string>> GetPupilsByParentId(string parentID)
