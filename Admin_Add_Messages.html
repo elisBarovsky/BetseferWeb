@@ -26,18 +26,6 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-
-
     <script src="Admin_Add_Messages_JS.js"></script>
     <script src="Admin_Add_Messages_AJAX.js"></script>
 
@@ -258,77 +246,102 @@
             <!-- Main content -->
             <section class="content">
                 <div class="info-box">
-                        <Table ID="Table1" width="100%">
-                            <tr>
-                                <td Width="20%">
-                                    <Label ID="sugLBL">סוג הודעה:</Label>
-                                </td>
-                                <td>
-                                    <fieldset id="messageTypeRBL">
-                                        <input type="radio" value="private" name="msgType" checked = "checked"/>אישי
-                                        <input type="radio" value="kolektive" name="msgType"/>קולקטיבי
-                                    </fieldset>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td Width="20%">
-                                    <Label ID="classLBL">כיתה:</Label>
-                                </td>
-                                <td>
-                                    <select ID="classDDL" CssClass="form-control">
-                                        <option value="audi">בחר</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td Width="20%">
-                                    <Label ID="groupTypeLBL">נמענים:</Label>
-                                </td>
-                                <td>
-                                    <fieldset id="userTypeRBL">
-                                        <input type="radio" value="parents" name="users" checked ="checked">הורים
-                                        <input type="radio" value="pupils" name="users">תלמידים
-                                    </fieldset>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td Width="20%">
-                                    <Label ID="forLBL">נמען:</Label>
-                                </td>
-                                <td>
-                                    <select ID="userDDL" CssClass="form-control">
-                                        <option value="audi">בחר</option>
-                                    </select>
-                                </td>
-                            </tr>
+                    <div class="card-body">
+                        <div class="row">
+                            <Table ID="Table1" class="table">
+                                <tr>
+                                    <td>
+                                        <div style="float:right;margin-left:40px">
+                                            <div style="float:right">
+                                                <Label ID="sugLBL">סוג הודעה:</Label>
+                                            </div>
+                                            <div style="padding-right:80px">
 
-                            <tr>
-                                <td ColumnSpan="2">
-                                    <br />
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="נושא">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea id="compose-textarea" class="form-control" style="height: 300px"></textarea>
-                                    </div>
-                                    <h6><i class="fa fa-paperclip"></i> נספחים</h6>
-                                    <form action="#" class="dropzone">
-                                        <div class="fallback">
-                                            <input name="file" type="file" multiple />
+                                                <fieldset id="messageTypeRBL">
+                                                    <input type="radio" value="private" name="msgType" checked="checked" /> אישי
+                                                    <br />
+                                                    <input type="radio" value="kolektive" name="msgType" /> קולקטיבי
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td ColumnSpan="2">
-                                </td>
-                                <td>
-                                    <button ID="paperPlaneButton"><img src="Images/paperPlane.png" Height="100" /></button>
-                                </td>
-                            </tr>
-                        </Table>
-                </div>
-            </section>
+                                        <div >
+
+                                            <div style="float:right;margin-left:20px">
+                                                <Label ID="classLBL">כיתה: </Label>
+                                            </div>
+
+                                            <div style="padding-right:150px">
+                                                <select ID="classDDL" CssClass="form-control" data-toggle="dropdown">
+                                                    <option value="audi">בחר</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="float:right;margin-left:40px">
+
+                                            <div style="float:right">
+                                                <Label ID="groupTypeLBL">נמענים:</Label>
+
+                                            </div>
+                                            <div style="padding-right:80px">
+                                                <fieldset id="userTypeRBL">
+                                                    <input type="radio" value="parents" name="users" checked="checked"> הורים
+                                                    <br />
+                                                    <input type="radio" value="pupils" name="users"> תלמידים
+                                                </fieldset>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div style="float:right;margin-left:20px">
+                                                <Label ID="forLBL">נמען:</Label>
+                                            </div>
+                                            <div style="padding-right:150px">
+                                                <select ID="userDDL" CssClass="form-control">
+                                                    <option value="audi">בחר</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="נושא">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea id="compose-textarea" class="form-control" style="height: 250px"></textarea>
+                                        </div>
+                                        <div style="float:right;margin-left:20px">
+                                            <h6><i class="fa fa-paperclip"></i> נספחים</h6>
+                                        </div>
+                                        <div style="float:right">
+                                            <form action="#" class="dropzone">
+                                                <div class="fallback">
+                                                    <input name="file" type="file" multiple />
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div style="float:left">
+                                            <button ID="paperPlaneButton"><img src="Images/paperPlane.png" Height="50" /></button>
+
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </Table>
+                        </div>
+                    </div>
+                        </div>
+</section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
