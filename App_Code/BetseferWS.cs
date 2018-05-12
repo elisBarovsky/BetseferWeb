@@ -34,6 +34,47 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonString;
     }
 
+    
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetPupilsByClassTotalName(string classTotalName)
+    {
+        Classes c = new Classes();
+        string classCode = c.GetClassCodeAccordingToClassFullName(classTotalName);
+        Users u = new Users();
+        List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
+        s = u.getPupilsByClassCode(classCode);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(s);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetParentsByClassTotalName(string classTotalName)
+    {
+        Classes c = new Classes();
+        string classCode = c.GetClassCodeAccordingToClassFullName(classTotalName);
+        Users u = new Users();
+        List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
+        s = u.getParentsByClassCode(classCode);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(s);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetTeachers2()
+    {
+        Users u = new Users();
+        List<Dictionary<string, string>> t = new List<Dictionary<string, string>>();
+        t = u.GetTeachers2();
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(t);
+        return jsonString;
+    }
+
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetUserQuestionsByIdAndBday(string userID, string BDay)
@@ -206,31 +247,6 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GivenNoteByCode(string NoteCode)
-    {
-        Notes AllNotesByID = new Notes();
-        DataTable DT = AllNotesByID.GivenNoteByCode(NoteCode);
-
-        var list = new List<Dictionary<string, object>>();
-
-        foreach (DataRow row in DT.Rows)
-        {
-            var dict = new Dictionary<string, object>();
-
-            foreach (DataColumn col in DT.Columns)
-            {
-                dict[col.ColumnName] = row[col];
-            }
-            list.Add(dict);
-        }
-
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringGivenAllNotes = js.Serialize(list);
-        return jsonStringGivenAllNotes;
-    }
-
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GivenNotesBySubject(string PupilID, string ChooseSubjectCode)
     {
         Dictionary<string, string> LessonsList = new Dictionary<string, string>();
@@ -276,31 +292,6 @@ public class BetseferWS : System.Web.Services.WebService
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringFillAllHomeWork = js.Serialize(DT);
         return jsonStringFillAllHomeWork;
-    }
-
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GivenHWByCode(string HWCode)
-    {
-        Notes AllHWByID = new Notes();
-        DataTable DT = AllHWByID.GivenHTByCode(HWCode);
-
-        var list = new List<Dictionary<string, object>>();
-
-        foreach (DataRow row in DT.Rows)
-        {
-            var dict = new Dictionary<string, object>();
-
-            foreach (DataColumn col in DT.Columns)
-            {
-                dict[col.ColumnName] = row[col];
-            }
-            list.Add(dict);
-        }
-
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringGivenAllNotes = js.Serialize(list);
-        return jsonStringGivenAllNotes;
     }
 
     [WebMethod]
@@ -410,6 +401,20 @@ public class BetseferWS : System.Web.Services.WebService
         string jsonStringFillHW = js.Serialize(list);
         return jsonStringFillHW;
     }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetClassesFullName()
+    {
+        Classes classesOt = new Classes();
+        List<string> classes = classesOt.GetClassesFullName();
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillSubjects = js.Serialize(classes);
+        return jsonStringFillSubjects;
+    }
+
+
     public static string KeyByValue(Dictionary<string, string> dict, string val)
     {
         string key = null;

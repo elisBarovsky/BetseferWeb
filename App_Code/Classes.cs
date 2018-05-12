@@ -20,6 +20,11 @@ public class Classes
         return db.GetClassesOt();
     }
 
+    public List<string> GetClassesFullName()
+    {
+        return db.GetClassesFullName();
+    }
+
     public int InsertClass(string ClassOt, string ClassNum)
     {
         return db.InsertClass(ClassOt, ClassNum);

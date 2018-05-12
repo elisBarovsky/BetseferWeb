@@ -26,9 +26,13 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="dist/js/jquery.min.js"></script>
     <script src="Admin_Add_Messages_JS.js"></script>
     <script src="Admin_Add_Messages_AJAX.js"></script>
-
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
@@ -228,7 +232,7 @@
                         <a href="#"><i class="fa fa-envelope-o "></i><span>הודעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li><a href="apps-mailbox.html">הודעות נכנסות</a></li>
-                            <li><a href="Admin_Add_Messages.aspx">הודעה חדשה</a></li>
+                            <li><a href="Admin_Add_Messages.html">הודעה חדשה</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -258,9 +262,9 @@
                                             <div style="padding-right:80px">
 
                                                 <fieldset id="messageTypeRBL">
-                                                    <input type="radio" value="private" name="msgType" checked="checked" /> אישי
+                                                    <input type="radio" value="private" name="msgType" id="private" checked="checked" onclick="MessageType('private')"/> אישי
                                                     <br />
-                                                    <input type="radio" value="kolektive" name="msgType" /> קולקטיבי
+                                                    <input type="radio" value="kolektive" name="msgType" id="kolektive" onclick="MessageType('kolektive')"/> קולקטיבי
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -271,8 +275,8 @@
                                             </div>
 
                                             <div style="padding-right:150px">
-                                                <select ID="classDDL" CssClass="form-control" data-toggle="dropdown">
-                                                    <option value="audi">בחר</option>
+                                                <select ID="classDDL" CssClass="form-control" data-toggle="dropdown" onchange="FillUsers()">
+                                                    <option value="0">בחר</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -292,9 +296,11 @@
                                             </div>
                                             <div style="padding-right:80px">
                                                 <fieldset id="userTypeRBL">
-                                                    <input type="radio" value="parents" name="users" checked="checked"> הורים
+                                                    <input type="radio" value="pupils" name="users" id="pupils" onclick="ChooseDDL('pupils')"> תלמידים
                                                     <br />
-                                                    <input type="radio" value="pupils" name="users"> תלמידים
+                                                    <input type="radio" value="parents" name="users" id="parents" onclick="ChooseDDL('parents')"> הורים
+                                                    <br />
+                                                    <input type="radio" value="teachers" name="users" id="teachers" onclick="ChooseDDL('teachers')"> מורים
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -304,9 +310,9 @@
                                                 <Label ID="forLBL">נמען:</Label>
                                             </div>
                                             <div style="padding-right:150px">
-                                                <select ID="userDDL" CssClass="form-control">
-                                                    <option value="audi">בחר</option>
-                                                </select>
+                                                <select ID="childrenDDL" CssClass="form-control"></select>
+                                                <select ID="parentsDDL" CssClass="form-control"></select>
+                                                <select ID="teachersDDL" CssClass="form-control"></select>
                                             </div>
                                         </div>
                                     </td>
@@ -331,7 +337,7 @@
                                             </form>
                                         </div>
                                         <div style="float:left">
-                                            <button ID="paperPlaneButton"><img src="Images/paperPlane.png" Height="50" /></button>
+                                            <button ID="paperPlaneButton"><img src="Images/paperPlane.png" Height="50" onclick="SubmitMessage()"/></button>
 
                                         </div>
                                     </td>

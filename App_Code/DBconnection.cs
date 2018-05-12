@@ -499,6 +499,45 @@ public class DBconnection
         }
     }
 
+    public List<string> GetClassesFullName()
+    {
+        String selectSTR = "select distinct [TotalName], [OtClass], [NumClass] from [dbo].[Class] order by OtClass, NumClass";
+        string Ot;
+        List<string> l = new List<string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                Ot = dr["TotalName"].ToString();
+                l.Add(Ot);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public List<string> ClassesExites(string ClassOt, string ClassNum)
     {
         String selectSTR = "select [TotalName] from [dbo].[Class] where [TotalName] = '" + ClassOt + ClassNum + "'";
@@ -1118,12 +1157,52 @@ public class DBconnection
         {
             SqlCommand cmd = new SqlCommand(selectSTR, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            l.Add("0", "-");
             while (dr.Read())
             {
                 UserID = dr["UserID"].ToString();
                 TeacherFullName = dr["FullName"].ToString();
                 l.Add(UserID, TeacherFullName);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<Dictionary<string, string>> GetTeachers2()
+    {
+        String selectSTR = "SELECT UserID, UserFName + ' ' + UserLName AS FullName FROM Users WHERE (CodeUserType = 2)";
+        string UserID, TeacherFullName;
+        List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                Dictionary<string, string> d = new Dictionary<string, string>();
+                d.Add("UserId", dr["UserID"].ToString());
+                d.Add("FullName", dr["FullName"].ToString());
+                l.Add(d);
             }
             return l;
         }
@@ -1893,6 +1972,49 @@ public class DBconnection
             while (dr.Read())
             {
                 parents.Add(dr[0].ToString());
+            }
+            return parents;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<Dictionary<string, string>> getParentsByClassCode(string classCode)
+    {
+        List<Dictionary<string, string>> parents = new List<Dictionary<string, string>>();
+
+        String selectSTR = "SELECT UserID, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" +
+                               " FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID" +
+                               " where dbo.PupilsParent.codeClass = '" + classCode + "'";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                Dictionary<string, string> d = new Dictionary<string, string>();
+                d.Add("UserId", dr["UserID"].ToString());
+                d.Add("FullName", dr["FullName"].ToString());
+                parents.Add(d);
             }
             return parents;
         }

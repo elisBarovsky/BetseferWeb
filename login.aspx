@@ -30,7 +30,14 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+    <script language="javascript" type="text/javascript">
 
+        function SaveUserIdInLocalStorage() {
+            var id = document.getElementById("IDTB").value;
+            localStorage.setItem("UserID", id);
+        };
+
+    </script>
 </head>
 <body class="hold-transition login-page">
     <form id="form1" runat="server">
@@ -63,7 +70,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-xs-4 m-t-1">
-               <asp:Button ID="ButtonCheckUserExist" runat="server" class="btn btn-primary btn-block btn-flat" Text="התחבר" OnClick="Login1_Authenticate" />
+               <asp:Button ID="ButtonCheckUserExist" runat="server" class="btn btn-primary btn-block btn-flat" Text="התחבר" OnClientClick="javascript:SaveUserIdInLocalStorage();" OnClick="Login1_Authenticate"/>
 
                         </div>
                         <!-- /.col -->
