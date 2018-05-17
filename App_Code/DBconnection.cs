@@ -1139,6 +1139,47 @@ public class DBconnection
         }
     }
 
+    public List<string> getPupilsIdByClassCode(string classCode)
+    {
+
+        String selectSTR = "SELECT   dbo.Users.UserID FROM dbo.Pupil INNER JOIN " +
+            "dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID   where dbo.Pupil.CodeClass='" + classCode + "'";
+
+        List<string> l = new List<string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                l.Add(dr["UserID"].ToString());
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public Dictionary<string, string> GetTeachers()
     {
         String selectSTR = "SELECT UserID, UserFName + ' ' + UserLName AS FullName FROM Users WHERE (CodeUserType = 2)";
@@ -1203,6 +1244,43 @@ public class DBconnection
                 d.Add("UserId", dr["UserID"].ToString());
                 d.Add("FullName", dr["FullName"].ToString());
                 l.Add(d);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<string> GetTeachersIds()
+    {
+        String selectSTR = "SELECT UserID FROM Users WHERE (CodeUserType = 2)";
+        List<string> l = new List<string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                l.Add(dr["UserID"].ToString());
             }
             return l;
         }
@@ -2032,6 +2110,45 @@ public class DBconnection
         }
     }
 
+    public List<string> getParentsIdByClassCode(string classCode)
+    {
+        List<string> parents = new List<string>();
+
+        String selectSTR = "SELECT UserID FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID =" +
+            " dbo.Users.UserID where dbo.PupilsParent.codeClass = '" + classCode + "'";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                parents.Add(dr["UserID"].ToString());
+            }
+            return parents;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public string IsStudentUserNotThisParentYet(string childID, string parentID)
     {
         String STRuserType = "SELECT CodeUserType FROM dbo.Users where UserID = '" + childID + "'",
@@ -2107,6 +2224,41 @@ public class DBconnection
         String cStr = "INSERT INTO [dbo].[PupilsParent] VALUES ('" + parentID + "', '"+ childID + "', '"+ codeClass +"')";
         return ExecuteNonQuery(cStr);
     }
+
+    public int SendPrivateMessage(string SenderID, string RecieientID, string Subject, string content)
+    {
+        String cStr = "INSERT INTO [dbo].[Messages] VALUES ('" + DateTime.Now + "','" + SenderID + "', '" + RecieientID +
+            "', '" + content + "', '', '" + Subject + "', 0)";
+        return ExecuteNonQuery(cStr);
+    }
+
+    public int SendKolektiveMessage(string SenderID, string userClass, string userType, string Subject, string content)
+    {
+        List<string> usersIds = new List<string>();
+        String cStr = "";
+        switch (userType)
+        {
+            case "pupils":
+                usersIds = getPupilsIdByClassCode(userClass);
+        break;
+            case "parents":
+                usersIds = getParentsIdByClassCode(userClass);
+                break;
+            case "teachers":
+                usersIds = GetTeachersIds();
+                break;
+        }
+
+        for (int i = 0; i < usersIds.Count; i++)
+        {
+            cStr += "INSERT INTO [dbo].[Messages] VALUES ('" + DateTime.Now + "','" + SenderID + "', '" + usersIds[i] +
+            "', '" + content + "', '', '" + Subject + "', 0)";
+        }
+        
+        return ExecuteNonQuery(cStr);
+    }
+
+    
 
     //public List<Dictionary<string, string>> GetPupilsByParentId(string parentID)
     //{

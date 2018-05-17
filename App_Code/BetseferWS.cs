@@ -414,6 +414,30 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonStringFillSubjects;
     }
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SubmitMessage(Messages m)
+    {
+        Messages message = new Messages();
+        int answer; string stringAnswer = "bad";
+
+        if (m.MessageType == "private")
+        {
+            answer = message.SendPrivateMessage();
+        }
+        else
+        {
+            answer = message.SendKolektiveMessage();
+        }
+
+        if (answer > 0)
+        {
+            stringAnswer = "good";
+        }
+
+        return stringAnswer;
+    }
+
 
     public static string KeyByValue(Dictionary<string, string> dict, string val)
     {

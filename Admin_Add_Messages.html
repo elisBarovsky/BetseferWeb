@@ -269,18 +269,15 @@
                                             </div>
                                         </div>
                                         <div >
-
                                             <div style="float:right;margin-left:20px">
                                                 <Label ID="classLBL">כיתה: </Label>
                                             </div>
-
                                             <div style="padding-right:150px">
                                                 <select ID="classDDL" CssClass="form-control" data-toggle="dropdown" onchange="FillUsers()">
                                                     <option value="0">בחר</option>
                                                 </select>
                                             </div>
                                         </div>
-
                                     </td>
                                     <td>
 
@@ -289,10 +286,8 @@
                                 <tr>
                                     <td>
                                         <div style="float:right;margin-left:40px">
-
                                             <div style="float:right">
                                                 <Label ID="groupTypeLBL">נמענים:</Label>
-
                                             </div>
                                             <div style="padding-right:80px">
                                                 <fieldset id="userTypeRBL">
@@ -321,24 +316,23 @@
                                 <tr>
                                     <td colspan="2">
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="נושא">
+                                            <input class="form-control" placeholder="נושא" id="messageSubject">
                                         </div>
                                         <div class="form-group">
-                                            <textarea id="compose-textarea" class="form-control" style="height: 250px"></textarea>
+                                            <textarea id="messageContent" class="form-control" style="height: 250px"></textarea>
                                         </div>
                                         <div style="float:right;margin-left:20px">
                                             <h6><i class="fa fa-paperclip"></i> נספחים</h6>
                                         </div>
                                         <div style="float:right">
-                                            <form action="#" class="dropzone">
+                                            <div action="#" class="dropzone">
                                                 <div class="fallback">
                                                     <input name="file" type="file" multiple />
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                         <div style="float:left">
-                                            <button ID="paperPlaneButton"><img src="Images/paperPlane.png" Height="50" onclick="SubmitMessage()"/></button>
-
+                                            <button ID="paperPlaneButton" onclick="SubmitMessage()"><img src="Images/paperPlane.png" Height="50"/></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -354,7 +348,6 @@
     </div>
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
-    <script src="dist/js/jquery.min.js"></script>
 
     <!-- v4.0.0-alpha.6 -->
     <script src="dist/bootstrap/js/bootstrap.min.js"></script>
