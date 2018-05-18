@@ -68,16 +68,16 @@ function FillTeachers(FillTeachersInDDL) {
     });
 }
 
-function SubmitMessage(message, AfterMessageSent) {
+function SubmitMessageAjax(message, AfterMessageSent) {
     var dataString = JSON.stringify(message);
     $.ajax({
         url: 'BetseferWS.asmx/SubmitMessage',
-        data: JSON.stringify({ 'MessageType': message.messageType, 'usersUserTypeType': message.usersType, 'SenderID': message.senderId, 'RecipientID': message.recipientID, 'Subject': message.subject, 'Content': message.content}),
+        data: JSON.stringify({ 'm': message }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            AfterMessageSent(results);
+            AfterMessageSent(results.d);
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');

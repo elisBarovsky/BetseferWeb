@@ -2227,7 +2227,7 @@ public class DBconnection
 
     public int SendPrivateMessage(string SenderID, string RecieientID, string Subject, string content)
     {
-        String cStr = "INSERT INTO [dbo].[Messages] VALUES ('" + DateTime.Now + "','" + SenderID + "', '" + RecieientID +
+        String cStr = "INSERT INTO [dbo].[Messages] VALUES ('" + DateTime.Now + "', '" + SenderID + "', '" + RecieientID +
             "', '" + content + "', '', '" + Subject + "', 0)";
         return ExecuteNonQuery(cStr);
     }

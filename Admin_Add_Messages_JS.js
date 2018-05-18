@@ -8,6 +8,7 @@ $(document).ready(function () {
     $('#forLBL').hide();
 
     LoadClasses(FillClassesInDDL);
+    FillTeachers(FillTeachersInDDL);
 });
 
 
@@ -30,7 +31,6 @@ function FillUsers() {
     if (classTotalName !== "בחר") {
         FillPupils(classTotalName, FillPupilInDDL);
         FillParents(classTotalName, FillParentsInDDL);
-        FillTeachers(FillTeachersInDDL);
     }
 }
 
@@ -134,13 +134,7 @@ function MessageType(messageType) {
     ChooseDDL("fromMessageType");
 }
 
-$("#paperPlaneButton").click(function () {
-    alert("this is work!!");
-});
-
 function SubmitMessage() {
-    alert('im in!');
-    // first to check nothing is empty!!
     var userType = GetUserType(),
         subject = $('#messageSubject').val(),
         content = $('#messageContent').val();
@@ -148,38 +142,53 @@ function SubmitMessage() {
     if (userType !== "notSelected" && subject !== "" && content !== "") {
         var message = new Object();
 
-        message.messageType = GetMessageType();
-        message.usersType = GetUserType();
-        message.recipientID;
-        message.senderId = localStorage.getItem("UserID");
-        message.subject = subject;
-        message.content = content;
+        message.MessageType = GetMessageType();
+        message.UserType = userType;
+        message.SenderID = localStorage.getItem("UserID");
+        message.Subject = subject;
+        message.Content = content;
 
-        if (usersType !== "teachers") {
-            message.choosenClass = $('#classDDL').val();
+        if (message.UserType !== "teachers") {
+            message.UserClass = $('#classDDL').val();
         }
-        else message.choosenClass = "null";
+        else message.UserClass = "null";
 
-        if (messageType === "private") {
-            switch (usersType) {
+        if (message.MessageType === "private") {
+            switch (message.UserType) {
                 case "pupils":
-                    message.recipientID = $('#childrenDDL').val();
+                    message.RecipientID = $('#childrenDDL').val();
                     break;
                 case "parents":
-                    message.recipientID = $('#parentsDDL').val();
+                    message.RecipientID = $('#parentsDDL').val();
                     break;
                 case "teachers":
-                    message.recipientID = $('#teachersDDL').val();
+                    message.RecipientID = $('#teachersDDL').val();
                     break;
             }
         }
 
-        SubmitMessage(message, AfterMessageSent);
+        SubmitMessageAjax(message, AfterMessageSent);
     }
 }
 
 function AfterMessageSent(results) {
-    alert(results);
+    alert("נשלח");
+    $('#childrenDDL').val('0');
+    $('#childrenDDL').hide();
+    $('#parentsDDL').val('0');
+    $('#parentsDDL').hide();
+    $('#teachersDDL').val('0');
+    $('#teachersDDL').hide();
+    $('#classLBL').hide();
+    $('#classDDL').val('0');
+    $('#messageSubject').val('');
+    $('#messageContent').val('');
+    $('#forLBL').hide();
+    $('#private').select();
+    $('#pupils').val([]);
+    $('#parents').val([]);
+    $('#teachers').val([]);
+
 }
 
 function GetMessageType() {

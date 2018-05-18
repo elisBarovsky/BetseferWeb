@@ -25,13 +25,15 @@ public class Messages
 
     }
 
-    public Messages(string _SenderID, string _RecipientID, string _Subject, string _Content, string _MessageType) //private message.
+    public Messages(string _SenderID, string _RecipientID, string _Subject, string _Content, string _MessageType, string _UserClass, string _UserType) //private message.
     {
         SenderID = _SenderID;
         RecipientID = _RecipientID;
         Subject = _Subject;
         Content = _Content;
         MessageType = _MessageType;
+        UserClass = _UserClass;
+        UserType = _UserType;
     }
 
 
@@ -45,13 +47,13 @@ public class Messages
         MessageType = _MessageType;
     }
 
-    public int SendPrivateMessage()
+    public int SendPrivateMessage(Messages m)
     {
-        return db.SendPrivateMessage(this.SenderID, this.RecipientID, this.Subject, this.Content);
+        return db.SendPrivateMessage(m.SenderID, m.RecipientID, m.Subject, m.Content);
     }
 
-    public int SendKolektiveMessage()
+    public int SendKolektiveMessage(Messages m)
     {
-        return db.SendKolektiveMessage(this.SenderID, this.UserClass, this.UserType, this.Subject, this.Content);
+        return db.SendKolektiveMessage(m.SenderID, m.UserClass, m.UserType, m.Subject, m.Content);
     }
 }
