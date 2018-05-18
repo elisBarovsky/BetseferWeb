@@ -65,6 +65,17 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetClassesByTeacherId(string TeacherID)
+    {
+        Teacher t = new Teacher();
+        List<string> classes = t.FillClassOtAccordingTeacherId_List(TeacherID);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(classes);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetTeachers2()
     {
         Users u = new Users();

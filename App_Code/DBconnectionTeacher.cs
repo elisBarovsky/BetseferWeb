@@ -566,6 +566,51 @@ public class DBconnectionTeacher
         }
     }
 
+    public List<string> FillClassOtAccordingTeacherId_List(string teacherID)
+    {
+        string selectSTR = "SELECT  distinct  dbo.Class.TotalName FROM dbo.TimetableLesson " +
+                           "INNER JOIN dbo.Timetable ON dbo.TimetableLesson.TimeTableCode = " +
+                           "dbo.Timetable.TimeTableCode INNER JOIN dbo.Class ON dbo.Timetable.ClassCode = " +
+                           "dbo.Class.ClassCode AND dbo.Timetable.ClassCode = dbo.Class.ClassCode where " +
+                           "dbo.TimetableLesson.TeacherId = '" + teacherID + "'";
+
+        List<string> classesAccordingTeacherId = new List<string>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                classesAccordingTeacherId.Add(dr["TotalName"].ToString());
+            }
+            return classesAccordingTeacherId;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public DataTable FillBySubjectHomeWork(string PupilID, string ChooseSubjectCode) //webService
     {
         string selectSTR = " SELECT dbo.HomeWork.HWGivenDate,(dbo.Users.UserFName+' ' +dbo.Users.UserLName) as TeacherName, dbo.Lessons.LessonName ,dbo.HomeWork.HWInfo, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha" +

@@ -7,7 +7,7 @@ $(document).ready(function () {
     $("#teachersDDL").hide();
     $('#forLBL').hide();
 
-    LoadClasses(FillClassesInDDL);
+    LoadClasses(userID, FillClassesInDDL);
     FillTeachers(FillTeachersInDDL);
 });
 
@@ -65,6 +65,7 @@ function FillParentsInDDL(results) {
 
 function FillTeachersInDDL(results) {
     res3 = $.parseJSON(results.d);
+    var myID = localStorage.getItem("UserID");
 
     $('#teachersDDL').empty();
 
@@ -72,8 +73,10 @@ function FillTeachersInDDL(results) {
     $('#teachersDDL').append(dynamicLy);
 
     for (var i = 0; i < res3.length; i++) {
-        dynamicLy = " <option value='" + res3[i].UserId + "' style='text- align:right'>" + res3[i].FullName + "</option> ";
-        $('#teachersDDL').append(dynamicLy);
+        if (res3[i].UserId !== myID) {
+            dynamicLy = " <option value='" + res3[i].UserId + "' style='text- align:right'>" + res3[i].FullName + "</option> ";
+            $('#teachersDDL').append(dynamicLy);
+        }
     }
 }
 

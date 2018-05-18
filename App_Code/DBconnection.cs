@@ -2251,8 +2251,11 @@ public class DBconnection
 
         for (int i = 0; i < usersIds.Count; i++)
         {
-            cStr += "INSERT INTO [dbo].[Messages] VALUES ('" + DateTime.Now + "','" + SenderID + "', '" + usersIds[i] +
+            if (SenderID != usersIds[i])
+            {
+                cStr += "INSERT INTO [dbo].[Messages] VALUES ('" + DateTime.Now + "','" + SenderID + "', '" + usersIds[i] +
             "', '" + content + "', '', '" + Subject + "', 0)";
+            }
         }
         
         return ExecuteNonQuery(cStr);
