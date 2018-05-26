@@ -244,100 +244,34 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header sty-one">
-                <h1>יצירת הודעה</h1>
+                <h1>הודעות נכנסות</h1>
             </section>
 
             <!-- Main content -->
             <section class="content">
                 <div class="info-box">
-                    <div class="card-body">
-                        <div class="row">
-                            <Table ID="Table1" class="table">
-                                <tr>
-                                    <td>
-                                        <div style="float:right;margin-left:40px">
-                                            <div style="float:right">
-                                                <Label ID="sugLBL">סוג הודעה:</Label>
-                                            </div>
-                                            <div style="padding-right:80px">
-
-                                                <fieldset id="messageTypeRBL">
-                                                    <input type="radio" value="private" name="msgType" id="private" checked="checked" onclick="MessageType('private')" /> אישי
-                                                    <br />
-                                                    <input type="radio" value="kolektive" name="msgType" id="kolektive" onclick="MessageType('kolektive')" /> קולקטיבי
-                                                </fieldset>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div style="float:right;margin-left:20px">
-                                                <Label ID="classLBL">כיתה: </Label>
-                                            </div>
-                                            <div style="padding-right:150px">
-                                                <select ID="classDDL" CssClass="form-control" data-toggle="dropdown" onchange="FillUsers()">
-                                                    <option value="0">בחר</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="float:right;margin-left:40px">
-                                            <div style="float:right">
-                                                <Label ID="groupTypeLBL">נמענים:</Label>
-                                            </div>
-                                            <div style="padding-right:80px">
-                                                <fieldset id="userTypeRBL">
-                                                    <input type="radio" value="pupils" name="users" id="pupils" onclick="ChooseDDL('pupils')"> תלמידים
-                                                    <br />
-                                                    <input type="radio" value="parents" name="users" id="parents" onclick="ChooseDDL('parents')"> הורים
-                                                    <br />
-                                                    <input type="radio" value="teachers" name="users" id="teachers" onclick="ChooseDDL('teachers')"> מורים
-                                                </fieldset>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div style="float:right;margin-left:20px">
-                                                <Label ID="forLBL">נמען:</Label>
-                                            </div>
-                                            <div style="padding-right:150px">
-                                                <select ID="childrenDDL" CssClass="form-control"></select>
-                                                <select ID="parentsDDL" CssClass="form-control"></select>
-                                                <select ID="teachersDDL" CssClass="form-control"></select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-group">
-                                            <input class="form-control" placeholder="נושא" id="messageSubject">
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea id="messageContent" class="form-control" style="height: 250px"></textarea>
-                                        </div>
-                                        <div style="float:right;margin-left:20px">
-                                            <h6><i class="fa fa-paperclip"></i> נספחים</h6>
-                                        </div>
-                                        <div style="float:right">
-                                            <div action="#" class="dropzone">
-                                                <div class="fallback">
-                                                    <input name="file" type="file" multiple />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="float:left">
-                                            <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)"><img src="Images/paperPlane.png" Height="50" /></button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            </Table>
-                        </div>
-                    </div>
+                    <table style="width:100%;" id="messagesTable" class="table table-hover no-wrap table-striped">
+                        <tbody>
+                            <tr>
+                                <!--<td>
+                                    <div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position:relative">
+                                        <ins class="iCheck-helper" style="background: rgb(255, 255, 255); margin: 0px; padding: 0px; border: 0px; border-image: none; left: 0%; top: 0%; width: 100%; height: 100%; display: block; position: absolute; opacity: 0;"></ins>
+                                        <input style="position: absolute; opacity: 0;" type="checkbox" />
+                                    </div>
+                                </td>-->
+                                <!--<td class="mailbox-star">
+                                    <a href="#">
+                                        <i class="fa fa-star text-yellow"></i>
+                                    </a>
+                                </td>
+                                <td>תאריך</td>
+                                <td>הודעה</td>
+                                <td>נשלח ע''י</td>-->
+                            </tr>
+                        </tbody>
+                   
+                    
+                    </table>  
                 </div>
             </section>
             <!-- /.content -->

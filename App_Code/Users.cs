@@ -357,6 +357,15 @@ public class Users
         
     }
 
+    public string GetUserImgByUserID(string UserID)
+    {
+        return db.GetUserImgByUserID(UserID);
+    }
+
+    public string GetUserFullName(string Id)
+    {
+        return db.GetUserFullName(Id);
+    }
 
 }
 

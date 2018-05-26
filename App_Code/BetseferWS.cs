@@ -34,7 +34,18 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonString;
     }
 
-    
+        [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetUserFullName(string Id)
+    {
+        Users u = new Users();
+        string res = u.GetUserFullName(Id);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetPupilsByClassTotalName(string classTotalName)
@@ -46,6 +57,18 @@ public class BetseferWS : System.Web.Services.WebService
         s = u.getPupilsByClassCode(classCode);
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(s);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetUserImg(string UserID)
+    {
+        Users u = new Users();
+        string UserImg = u.GetUserImgByUserID(UserID);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(UserImg);
         return jsonString;
     }
 
@@ -71,6 +94,29 @@ public class BetseferWS : System.Web.Services.WebService
         List<string> classes = t.FillClassOtAccordingTeacherId_List(TeacherID);
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(classes);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetMessagesByUserId(string userId)
+    {
+        Messages u = new Messages();
+        List<Dictionary<string, string>> m = u.GetMessagesByUserId(userId);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(m);
+        return jsonString;
+    }
+
+    
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetAllConversation(string SenderID, string RecipientID)
+    {
+        Messages u = new Messages();
+        List<Messages> m = u.GetAllConversation(SenderID, RecipientID);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(m);
         return jsonString;
     }
 

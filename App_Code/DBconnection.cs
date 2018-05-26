@@ -85,9 +85,296 @@ public class DBconnection
         }
     }
 
+    public List<Dictionary<string,string>> GetMessagesByUserId(string userId)
+    {
+        string type = GetUserTypeById(userId), selectSTR = "SELECT MessageCode, MessageDate, SenderID, " +
+            " TheMessage, SubjectMessage FROM Messages where recipientID  = '" + userId +
+            "' order by MessageCode desc";
+        if (type == "3")
+        {
+            
+        }
+
+        List<Dictionary<string, string>> messages = new List<Dictionary<string, string>>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                Dictionary<string, string> d = new Dictionary<string, string>();
+
+                d.Add("MessageCode", dr["MessageCode"].ToString());
+                d.Add("MessageDate", dr["MessageDate"].ToString());
+                d.Add("SenderID", dr["SenderID"].ToString());
+                //d.Add("SenderName", dr["SenderName"].ToString());
+                d.Add("SubjectMessage", dr["SubjectMessage"].ToString());
+                d.Add("TheMessage", dr["TheMessage"].ToString());
+
+                messages.Add(d);
+            }
+            string SenderName;
+
+            for (int i = 0; i < messages.Count; i++)
+            {
+                SenderName = GetSenderNameBySenderID(messages[i]["SenderID"]);
+                messages[i].Add("SenderName", SenderName);
+            }
+
+            return messages;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+
+
+    public string GetUserFullName(string Id)
+    {
+        string selectSTR = "SELECT UserFName + ' ' + UserLName as UserName " +
+            " FROM Users where UserID  = '" + Id + "'",
+            UserName = "";
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                UserName = dr["UserName"].ToString();
+            }
+
+            return UserName;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public string GetSenderNameBySenderID(string SenderID)
+    {
+        string selectSTR = "select UserFName + ' ' + UserLName as SenderName from Users where UserID = '" + SenderID + "'";
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            string SenderName = "";
+            while (dr.Read())
+            {
+                SenderName = dr["SenderName"].ToString();
+            }
+            return SenderName;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+    
+    public string GetSenderImgBySenderID(string SenderID)
+    {
+        string selectSTR = "select UserImg from Users where UserID = '" + SenderID + "'";
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            string SenderIMG = "";
+            while (dr.Read())
+            {
+                SenderIMG = dr["UserImg"].ToString();
+            }
+            return SenderIMG;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<Messages> GetAllConversation(string SenderID, string RecipientID)
+    {
+        string selectSTR = "SELECT MessageCode, MessageDate, SenderID, " +
+         " recipientID, (select UserFName + ' ' + UserLName from Users where UserID = '"+ RecipientID +"') as RecipientName, " +
+         " TheMessage, SubjectMessage FROM Messages where SenderID  = '" + SenderID + "' and recipientID = '" + RecipientID +
+         "' or SenderID  = '" + RecipientID + "' and recipientID = '" + SenderID + "' order by MessageDate"; ;
+
+        List<Messages> messages = new List<Messages>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                Messages m = new Messages();
+
+                m.MessageDate = dr["MessageDate"].ToString();
+                m.SenderID = dr["SenderID"].ToString();
+                m.RecipientID = dr["recipientID"].ToString();
+                //m.SenderName = dr["SenderName"].ToString();
+                m.RecipientName = dr["RecipientName"].ToString();
+                m.Subject = dr["SubjectMessage"].ToString();
+                m.Content = dr["TheMessage"].ToString();
+
+                messages.Add(m);
+            }
+
+            string SenderName, SenderIMG;
+
+            for (int i = 0; i < messages.Count; i++)
+            {
+                SenderName = GetSenderNameBySenderID(messages[i].SenderID);
+                SenderIMG = GetSenderImgBySenderID(messages[i].SenderID);
+
+                messages[i].SenderName = SenderName;
+                messages[i].SenderIMG = SenderIMG;
+
+            }
+            return messages;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public string GetUserType(string UserID, string password)
     {
         String selectSTR = "SELECT CodeUserType  FROM Users where UserID  = '" + UserID + "' and LoginPassword  = '" + password + "'";
+        string type = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                type = dr["CodeUserType"].ToString();
+            }
+            return type;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public string GetUserTypeById(string UserID)
+    {
+        String selectSTR = "SELECT CodeUserType  FROM Users where UserID  = '" + UserID + "'";
         string type = "";
         try
         {
@@ -2227,8 +2514,8 @@ public class DBconnection
 
     public int SendPrivateMessage(string SenderID, string RecieientID, string Subject, string content)
     {
-        String cStr = "INSERT INTO [dbo].[Messages] VALUES ('" + DateTime.Now + "', '" + SenderID + "', '" + RecieientID +
-            "', '" + content + "', '', '" + Subject + "', 0)";
+        String cStr = "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage)" +
+            " VALUES ('" + DateTime.Now + "', '" + SenderID + "', '" + RecieientID + "', '" + content + "', '" + Subject + "')";
         return ExecuteNonQuery(cStr);
     }
 
@@ -2253,15 +2540,50 @@ public class DBconnection
         {
             if (SenderID != usersIds[i])
             {
-                cStr += "INSERT INTO [dbo].[Messages] VALUES ('" + DateTime.Now + "','" + SenderID + "', '" + usersIds[i] +
-            "', '" + content + "', '', '" + Subject + "', 0)";
+                cStr += "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage) VALUES ('" + DateTime.Now + "','" + SenderID + "', '" + usersIds[i] +
+            "', '" + content + "','" + Subject + "')";
             }
         }
         
         return ExecuteNonQuery(cStr);
     }
 
-    
+    public string GetUserImgByUserID(string UserID)
+    {
+        String selectSTR = "SELECT UserImg FROM dbo.Users where UserID = '" + UserID + "'";
+        string UserImg = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                UserImg = dr["UserImg"].ToString();
+            }
+            return UserImg;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 
     //public List<Dictionary<string, string>> GetPupilsByParentId(string parentID)
     //{
