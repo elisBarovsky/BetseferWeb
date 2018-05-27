@@ -85,3 +85,4 @@ function SubmitMessageAjax(message, AfterMessageSent) {
     });
 }
 
+

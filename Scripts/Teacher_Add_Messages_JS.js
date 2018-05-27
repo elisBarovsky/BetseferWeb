@@ -13,6 +13,10 @@ $(document).ready(function () {
 
 
 function FillClassesInDDL(results) {
+
+    UserImgimg.src = "";
+    UserName.text = "";
+
     res = $.parseJSON(results.d);
 
     $('#classDDL').empty();

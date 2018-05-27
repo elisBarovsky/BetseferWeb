@@ -1,9 +1,29 @@
 ﻿$(document).ready(function () {
-    var teacherId = localStorage.getItem("UserID");
-    LoadAllMessagesById(teacherId, DisplayMessages);
+   // var teacherId = localStorage.getItem("UserID");
+    UserFullInfo = new Object();
+    UserFullInfo.Id = localStorage.getItem("UserID");
+    GetUserInfo(UserFullInfo, DisplayUser);
+   // LoadAllMessagesById(teacherId, DisplayMessages);
 });
 
+function DisplayUser(results) {
+
+    res = $.parseJSON(results.d);
+
+    UserImgimg.src = "";
+    UserName.text = "";
+
+};
+
+
+
 function DisplayMessages(results) {
+
+   
+
+   
+
+
 
     res = $.parseJSON(results.d);
 
@@ -28,7 +48,7 @@ function DisplayMessages(results) {
 
 function OpenMessage(obj) {
     localStorage.setItem("messageDetails", JSON.stringify(obj));
-    //var a = window.open("OpenMessageWindow.html", "", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
-    window.location.href = "OpenMessageWindow.html";
+    var a = window.open("OpenMessageWindow.html", "", "toolbar=no,scrollbars=yes,resizable=yes,top=50%,left=25%,width=500,height=600");
+    //window.open.href = "OpenMessageWindow.html";
+  //  window.location.href = "OpenMessageWindow.html";
 };
-
