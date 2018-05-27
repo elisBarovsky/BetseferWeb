@@ -499,8 +499,6 @@ public class DBconnection
         }
     }
 
-
-
     public string GetPupilOtClass(string UserID)
     {
         String selectSTR = "SELECT  dbo.Class.ClassCode FROM dbo.Class INNER JOIN  dbo.Pupil ON dbo.Class.ClassCode = dbo.Pupil.CodeClass where  dbo.Pupil.UserID='" + UserID + "'";
@@ -786,45 +784,6 @@ public class DBconnection
         }
     }
 
-    public List<string> GetClassesFullName()
-    {
-        String selectSTR = "select distinct [TotalName], [OtClass], [NumClass] from [dbo].[Class] order by OtClass, NumClass";
-        string Ot;
-        List<string> l = new List<string>();
-        try
-        {
-            con = connect("Betsefer"); // create the connection
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-        try
-        {
-            SqlCommand cmd = new SqlCommand(selectSTR, con);
-            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            while (dr.Read())
-            {
-                Ot = dr["TotalName"].ToString();
-                l.Add(Ot);
-            }
-            return l;
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-        finally
-        {
-            if (con != null)
-            {
-                con.Close();
-            }
-        }
-    }
-
     public List<string> ClassesExites(string ClassOt, string ClassNum)
     {
         String selectSTR = "select [TotalName] from [dbo].[Class] where [TotalName] = '" + ClassOt + ClassNum + "'";
@@ -886,6 +845,45 @@ public class DBconnection
                 className = dr[0].ToString();
             }
             return className;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<string> GetClassesFullName()
+    {
+        String selectSTR = "select distinct [TotalName], [OtClass], [NumClass] from [dbo].[Class] order by OtClass, NumClass";
+        string Ot;
+        List<string> l = new List<string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                Ot = dr["TotalName"].ToString();
+                l.Add(Ot);
+            }
+            return l;
         }
         catch (Exception ex)
         {
@@ -997,6 +995,7 @@ public class DBconnection
         String cStr = "UPDATE [dbo].[Timetable]  SET [IsPublish] ='"+ publish+ "'WHERE [ClassCode]="+ classCode;
         return ExecuteNonQuery(cStr); // execute the command   
     }
+
     public int AddUser(Users NewUser)
     {
         string cStr = "INSERT INTO [dbo].[Users] ([UserID],[UserFName],[UserLName],[BirthDate],[UserImg],[LoginName],[LoginPassword],[PhoneNumber],[CodeUserType],[SecurityQ1Code],[SecurityQ1Answer],[alreadyLogin],[SecurityQ2Code],[SecurityQ2Answer])" +
@@ -1510,7 +1509,6 @@ public class DBconnection
     public List<Dictionary<string, string>> GetTeachers2()
     {
         String selectSTR = "SELECT UserID, UserFName + ' ' + UserLName AS FullName FROM Users WHERE (CodeUserType = 2)";
-        string UserID, TeacherFullName;
         List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
         try
         {
@@ -2319,8 +2317,6 @@ public class DBconnection
                             "dbo.PupilsParent ON dbo.Users.UserID = dbo.PupilsParent.ParentID " +
                             "where dbo.PupilsParent.PupilID = '" + pupilID + "'";
 
-
-
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -2585,47 +2581,4 @@ public class DBconnection
         }
     }
 
-    //public List<Dictionary<string, string>> GetPupilsByParentId(string parentID)
-    //{
-    //    List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
-
-    //    String selectSTR = "SELECT dbo.PupilsParent.PupilID, dbo.Users.UserFName + ' ' + dbo.Users.UserLName as FullName FROM dbo.UserType INNER JOIN " +
-    //                    "dbo.Users ON dbo.UserType.CodeUserType = dbo.Users.CodeUserType INNER JOIN " +
-    //                    "dbo.PupilsParent ON dbo.Users.UserID = dbo.PupilsParent.ParentID " +
-    //                    "where dbo.PupilsParent.ParentID ='" + parentID + "'";
-    //    try
-    //    {
-    //        con = connect("Betsefer"); // create the connection
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        // write to log
-    //        throw (ex);
-    //    }
-    //    try
-    //    {
-    //        SqlCommand cmd = new SqlCommand(selectSTR, con);
-    //        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-    //        while (dr.Read())
-    //        {
-    //            Dictionary<string, string> d = new Dictionary<string, string>();
-    //            d.Add(dr["PupilID"].ToString(), dr["FullName"].ToString());
-    //            l.Add(d);
-    //        }
-    //        return l;
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        // write to log
-    //        throw (ex);
-    //    }
-    //    finally
-    //    {
-    //        if (con != null)
-    //        {
-    //            con.Close();
-    //        }
-    //    }
-    //} 
 }
