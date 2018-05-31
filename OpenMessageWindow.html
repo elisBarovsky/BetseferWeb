@@ -69,9 +69,16 @@
                                 <span class="input-group-btn">
                                     <button class="btn btn-warning btn-flat" type="button" onclick="SubmitMessage()"><img src="Images/paperPlane.png" height="30" /></button>
                                 </span>
-                                <input name="message" id="newMessage" class="form-control" type="text" placeholder="...כתוב הודעה">
-                                <input name="subject" id="newSubject" class="form-control" type="text" placeholder="נושא">
+
+                                <input name="subject" id="newSubject" class="form-control" type="text" placeholder="נושא" style="width:25px;float:right;">
                             </div>
+
+                            <div class="input-group" style="padding-top:15px;">
+                                <!--<input name="message" id="newMessage" class="form-control" type="text" placeholder="...כתוב הודעה" style="height:200px;">-->
+                                <textarea name="message" id="newMessage" class="form-control" type="text" placeholder="...כתוב הודעה" style="height:200px;width:100%" cols="40" rows="5"></textarea>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>

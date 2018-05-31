@@ -101,7 +101,7 @@ public class DBconnection
         }
 
         List<Dictionary<string, string>> messages = new List<Dictionary<string, string>>();
-
+        List<string> SenderIDL = new List<string>();
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -128,14 +128,41 @@ public class DBconnection
                 d.Add("SubjectMessage", dr["SubjectMessage"].ToString());
                 d.Add("TheMessage", dr["TheMessage"].ToString());
 
-                messages.Add(d);
+                SenderIDL.Add(dr["SenderID"].ToString());
+               
+                if (messages.Count>0)
+                {
+                    for (int i = 0; i < SenderIDL.Count; i++)
+                    {
+
+                        if (SenderIDL[i]== dr["SenderID"].ToString())
+                        {
+
+                        }
+                        else
+                        {
+                            messages.Add(d);
+                            break;
+                        }
+
+                    }
+                }
+                else
+                {
+                    messages.Add(d);
+
+                }
+
             }
             string SenderName;
 
             for (int i = 0; i < messages.Count; i++)
             {
                 SenderName = GetSenderNameBySenderID(messages[i]["SenderID"]);
+
                 messages[i].Add("SenderName", SenderName);
+
+
             }
 
             return messages;
