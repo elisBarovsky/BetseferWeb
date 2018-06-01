@@ -12,6 +12,7 @@ using System.Web.Configuration;
 /// </summary>
 public class DBconnection
 {
+    LogWriter Log = new LogWriter();
     public SqlDataAdapter da;
     public DataTable dt;
 
@@ -57,8 +58,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
 
         try
@@ -73,8 +75,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -96,15 +101,16 @@ public class DBconnection
         }
 
         List<Dictionary<string, string>> messages = new List<Dictionary<string, string>>();
-
+        List<string> SenderIDL = new List<string>();
         try
         {
             con = connect("Betsefer"); // create the connection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            // throw (ex);
         }
 
         try
@@ -122,22 +128,52 @@ public class DBconnection
                 d.Add("SubjectMessage", dr["SubjectMessage"].ToString());
                 d.Add("TheMessage", dr["TheMessage"].ToString());
 
-                messages.Add(d);
+                SenderIDL.Add(dr["SenderID"].ToString());
+               
+                if (messages.Count>0)
+                {
+                    for (int i = 0; i < SenderIDL.Count; i++)
+                    {
+
+                        if (SenderIDL[i]== dr["SenderID"].ToString())
+                        {
+
+                        }
+                        else
+                        {
+                            messages.Add(d);
+                            break;
+                        }
+
+                    }
+                }
+                else
+                {
+                    messages.Add(d);
+
+                }
+
             }
             string SenderName;
 
             for (int i = 0; i < messages.Count; i++)
             {
                 SenderName = GetSenderNameBySenderID(messages[i]["SenderID"]);
+
                 messages[i].Add("SenderName", SenderName);
+
+
             }
 
             return messages;
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            // throw (ex);
+            return null;
+
         }
         finally
         {
@@ -162,8 +198,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            // throw (ex);
         }
 
         try
@@ -179,8 +216,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -201,8 +241,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
 
         try
@@ -218,8 +259,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -240,8 +284,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
 
         try
@@ -257,8 +302,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -284,8 +332,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
 
         try
@@ -322,8 +371,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -344,8 +396,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
 
         try
@@ -360,8 +413,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -382,8 +438,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
 
         try
@@ -398,8 +455,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -420,8 +480,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
 
         try
@@ -442,8 +503,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return false;
+
         }
         finally
         {
@@ -471,8 +535,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -487,8 +552,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -498,8 +566,6 @@ public class DBconnection
             }
         }
     }
-
-
 
     public string GetPupilOtClass(string UserID)
     {
@@ -511,8 +577,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -527,8 +594,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -549,8 +619,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -565,8 +636,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return false;
+
         }
         finally
         {
@@ -587,8 +661,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -603,8 +678,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -626,8 +704,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -655,8 +734,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -685,8 +767,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -729,8 +812,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -758,8 +844,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -774,47 +861,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
-        }
-        finally
-        {
-            if (con != null)
-            {
-                con.Close();
-            }
-        }
-    }
+            //  throw (ex);
+            return null;
 
-    public List<string> GetClassesFullName()
-    {
-        String selectSTR = "select distinct [TotalName], [OtClass], [NumClass] from [dbo].[Class] order by OtClass, NumClass";
-        string Ot;
-        List<string> l = new List<string>();
-        try
-        {
-            con = connect("Betsefer"); // create the connection
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-        try
-        {
-            SqlCommand cmd = new SqlCommand(selectSTR, con);
-            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            while (dr.Read())
-            {
-                Ot = dr["TotalName"].ToString();
-                l.Add(Ot);
-            }
-            return l;
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
         }
         finally
         {
@@ -836,8 +887,10 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+
         }
         try
         {
@@ -852,8 +905,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -874,8 +930,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -889,8 +946,54 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<string> GetClassesFullName()
+    {
+        String selectSTR = "select distinct [TotalName], [OtClass], [NumClass] from [dbo].[Class] order by OtClass, NumClass";
+        string Ot;
+        List<string> l = new List<string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            Log.LogWrite(ex.ToString());
+            // write to log
+            //  throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                Ot = dr["TotalName"].ToString();
+                l.Add(Ot);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            Log.LogWrite(ex.ToString());
+            // write to log
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -917,8 +1020,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -932,8 +1036,10 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
         }
         finally
         {
@@ -955,8 +1061,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -974,8 +1081,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -997,6 +1107,7 @@ public class DBconnection
         String cStr = "UPDATE [dbo].[Timetable]  SET [IsPublish] ='"+ publish+ "'WHERE [ClassCode]="+ classCode;
         return ExecuteNonQuery(cStr); // execute the command   
     }
+
     public int AddUser(Users NewUser)
     {
         string cStr = "INSERT INTO [dbo].[Users] ([UserID],[UserFName],[UserLName],[BirthDate],[UserImg],[LoginName],[LoginPassword],[PhoneNumber],[CodeUserType],[SecurityQ1Code],[SecurityQ1Answer],[alreadyLogin],[SecurityQ2Code],[SecurityQ2Answer])" +
@@ -1032,8 +1143,10 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+
         }
         finally
         {
@@ -1079,8 +1192,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1095,8 +1209,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return 0;
+
         }
         finally
         {
@@ -1137,8 +1254,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1153,8 +1271,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1176,8 +1297,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1193,8 +1315,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1216,8 +1341,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1233,8 +1359,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1310,8 +1439,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1327,8 +1457,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1351,8 +1484,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1370,8 +1504,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1394,8 +1531,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1414,8 +1552,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1439,8 +1580,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1455,8 +1597,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1478,8 +1623,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1495,8 +1641,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1510,7 +1659,6 @@ public class DBconnection
     public List<Dictionary<string, string>> GetTeachers2()
     {
         String selectSTR = "SELECT UserID, UserFName + ' ' + UserLName AS FullName FROM Users WHERE (CodeUserType = 2)";
-        string UserID, TeacherFullName;
         List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
         try
         {
@@ -1518,8 +1666,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1536,8 +1685,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1558,8 +1710,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1573,8 +1726,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1597,8 +1753,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1615,8 +1772,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
 
         }
         finally
@@ -1640,8 +1800,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1658,8 +1819,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1685,8 +1849,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1701,8 +1866,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1724,8 +1892,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1740,8 +1909,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1763,8 +1935,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1782,8 +1955,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1806,7 +1982,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            throw (ex);
+            Log.LogWrite(ex.ToString());
+            // write to log
+            //  throw (ex);
         }
 
         try
@@ -1817,8 +1995,10 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             return 0;
-            throw (ex);
+            // write to log
+            //  throw (ex);
         }
 
         finally
@@ -1841,8 +2021,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1865,8 +2046,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1889,8 +2073,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1919,8 +2104,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1941,8 +2129,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -1957,8 +2146,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -1980,8 +2172,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -2003,8 +2196,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -2026,8 +2222,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -2047,8 +2244,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return false;
+
         }
         finally
         {
@@ -2103,8 +2303,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         finally
         {
@@ -2126,8 +2327,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -2141,8 +2343,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -2163,8 +2368,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -2178,8 +2384,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -2203,8 +2412,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -2221,8 +2431,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -2243,8 +2456,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -2258,8 +2472,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -2283,8 +2500,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -2298,8 +2516,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -2319,16 +2540,15 @@ public class DBconnection
                             "dbo.PupilsParent ON dbo.Users.UserID = dbo.PupilsParent.ParentID " +
                             "where dbo.PupilsParent.PupilID = '" + pupilID + "'";
 
-
-
         try
         {
             con = connect("Betsefer"); // create the connection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -2342,8 +2562,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -2367,8 +2590,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -2385,8 +2609,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -2409,8 +2636,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -2424,8 +2652,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -2450,8 +2681,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         try
         {
@@ -2476,7 +2710,9 @@ public class DBconnection
                 catch (Exception ex)
                 {
 
-                    throw (ex);
+                    Log.LogWrite(ex.ToString());
+                    // write to log
+                    //  throw (ex);
                 }
             }
             else answer = "userTypeNotStudent";
@@ -2493,8 +2729,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -2558,8 +2797,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
         }
         try
         {
@@ -2573,8 +2813,11 @@ public class DBconnection
         }
         catch (Exception ex)
         {
+            Log.LogWrite(ex.ToString());
             // write to log
-            throw (ex);
+            //  throw (ex);
+            return null;
+
         }
         finally
         {
@@ -2585,47 +2828,4 @@ public class DBconnection
         }
     }
 
-    //public List<Dictionary<string, string>> GetPupilsByParentId(string parentID)
-    //{
-    //    List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
-
-    //    String selectSTR = "SELECT dbo.PupilsParent.PupilID, dbo.Users.UserFName + ' ' + dbo.Users.UserLName as FullName FROM dbo.UserType INNER JOIN " +
-    //                    "dbo.Users ON dbo.UserType.CodeUserType = dbo.Users.CodeUserType INNER JOIN " +
-    //                    "dbo.PupilsParent ON dbo.Users.UserID = dbo.PupilsParent.ParentID " +
-    //                    "where dbo.PupilsParent.ParentID ='" + parentID + "'";
-    //    try
-    //    {
-    //        con = connect("Betsefer"); // create the connection
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        // write to log
-    //        throw (ex);
-    //    }
-    //    try
-    //    {
-    //        SqlCommand cmd = new SqlCommand(selectSTR, con);
-    //        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-    //        while (dr.Read())
-    //        {
-    //            Dictionary<string, string> d = new Dictionary<string, string>();
-    //            d.Add(dr["PupilID"].ToString(), dr["FullName"].ToString());
-    //            l.Add(d);
-    //        }
-    //        return l;
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        // write to log
-    //        throw (ex);
-    //    }
-    //    finally
-    //    {
-    //        if (con != null)
-    //        {
-    //            con.Close();
-    //        }
-    //    }
-    //} 
 }

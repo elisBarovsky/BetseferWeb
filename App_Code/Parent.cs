@@ -68,7 +68,8 @@ public class Parent : Users
         return pupils;
     }
 
-    public int DeleteChild(string parentID, string childID) {
+    public int DeleteChild(string parentID, string childID)
+    {
         return db.DeleteChild(parentID, childID);
     }
 
