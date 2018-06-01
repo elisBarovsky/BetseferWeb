@@ -1,10 +1,9 @@
-﻿UserFullInfo = new Object();
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
    // var teacherId = localStorage.getItem("UserID");
+    UserFullInfo = new Object();
     UserFullInfo.Id = localStorage.getItem("UserID");
-   // GetUserInfo(UserFullInfo, DisplayUser);
-    LoadAllMessagesById(UserFullInfo, DisplayMessages);
+    GetUserInfo(UserFullInfo, DisplayUser);
+   // LoadAllMessagesById(teacherId, DisplayMessages);
 });
 
 function DisplayUser(results) {
@@ -20,7 +19,13 @@ function DisplayUser(results) {
 
 function DisplayMessages(results) {
 
-      res = $.parseJSON(results.d);
+   
+
+   
+
+
+
+    res = $.parseJSON(results.d);
 
     $('#messagesTable').empty();
 
