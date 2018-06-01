@@ -188,18 +188,6 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string ParentChooseChild(string ParentID)
-    {
-        Parent parent = new Parent(ParentID);
-        Student[] children = parent.children.ToArray();
-
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringCategory = js.Serialize(children);
-        return jsonStringCategory;
-    }
-
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetUserInfo(string Id)
     {
         Users userInfo = new Users();
@@ -508,6 +496,7 @@ public class BetseferWS : System.Web.Services.WebService
 
         return stringAnswer;
     }
+
 
     public static string KeyByValue(Dictionary<string, string> dict, string val)
     {

@@ -133,21 +133,6 @@ public class Users
         db = new DBconnection();
     }
 
-    public Users(string userID)
-    {
-        db = new DBconnection();
-        UserID = userID;
-        List<string> userDetails = GetUserInfo(userID);
-        UserFName = userDetails[1];
-        UserLName = userDetails[2];
-        BirthDate = userDetails[3];
-        UserImg = userDetails[4];
-        UserName = userDetails[5];
-        UserPassword = userDetails[6];
-        PhoneNumber = userDetails[7];
-        CodeUserType = userDetails[8];
-    }
-
     public Users(string userID, string userFName, string userLName, string birthDate, string userImg, string userName, string userPassword, string phoneNumber, string codeUserType)
     {
         db = new DBconnection();
@@ -162,6 +147,7 @@ public class Users
         PhoneNumber = phoneNumber;
         CodeUserType = codeUserType;
     }
+
 
     //public int AddPupil(string UserID, int classNumber)
     //{
@@ -367,6 +353,8 @@ public class Users
     public string IsStudentUserNotThisParentYet(string childID, string parentID)
     {
         return db.IsStudentUserNotThisParentYet(childID, parentID);
+
+        
     }
 
     public string GetUserImgByUserID(string UserID)
@@ -378,5 +366,6 @@ public class Users
     {
         return db.GetUserFullName(Id);
     }
+
 }
 
