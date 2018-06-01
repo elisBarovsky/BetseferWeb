@@ -61,13 +61,13 @@ public partial class login : System.Web.UI.Page
                 }
                 else
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('התחבר דרך האפליקציה בבקשה'); location.href='login.aspx';", true);
+                    Response.Write("<script LANGUAGE='JavaScript' >alert('התחבר דרך האפליקציה בבקשה')</script>");
                 }
             }
         }
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('אחד מהפרטים שהזנת שגוים'); location.href='login.aspx';", true);
+            Response.Write("<script LANGUAGE='JavaScript' >alert('אחד מהפרטים שהזנת שגוים')</script>");
         }
     }
 }
