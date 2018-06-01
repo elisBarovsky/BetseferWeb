@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.IO;
 using System.Reflection;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 /// <summary>
 /// Summary description for LogWriter
@@ -26,9 +28,12 @@ public class LogWriter
     public void LogWrite(string logMessage)
     {
         m_exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+        string folderPath = "~/App_Data/Logs";
+
         try
         {
-            using (StreamWriter w = File.AppendText(m_exePath + "\\" + "log.txt"))
+            using (StreamWriter w = File.AppendText(folderPath + "\\" + "log.txt"))
             {
                 Log(logMessage, w);
             }
