@@ -101,7 +101,7 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
                 //{
                 //    id = "WeekDay_" + (j + 1).ToString() + "-lesson_" + (i + 1).ToString() + "-ChoosenClass_" + ClaasCode;
                 //}
-                onclickImg.Attributes.Add("onclick", "event.preventDefault(); window.open('Admin_New_TT_form.aspx?cellID=" + id + "', 'mynewwin', 'width=400,height=470')");
+                onclickImg.Attributes.Add("onclick", "event.preventDefault(); window.open('Admin_New_TT_form.aspx?cellID=" + id + "', 'mynewwin', 'width=600,height=600')");
                 cell.Controls.Add(onclickImg);
 
                 Label info = new Label();

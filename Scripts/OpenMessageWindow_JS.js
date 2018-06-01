@@ -69,12 +69,10 @@ function SubmitMessage() {
 
         localStorage.setItem("putMessageUp", JSON.stringify(message));
 
-    SubmitMessageAjax(message, AfterMessageSent);
-
+        SubmitMessageAjax(message, AfterMessageSent);
 };
 
 function AfterMessageSent(results) {
-    window.location.reload();
 
     var myImg = localStorage.getItem("UserImg").toString();
     var message = JSON.parse(localStorage.getItem("putMessageUp"));
@@ -94,4 +92,5 @@ function AfterMessageSent(results) {
     //subject = $('#newSubject').empty();
     //content = $('#newMessage').empty();
     //document.getElementById('addToHereNewMessage').innerHTML += str;
+    location.reload();
 };

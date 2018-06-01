@@ -90,7 +90,7 @@ public partial class Admin_Saved_TimeTable : System.Web.UI.Page
                 onclickImg.ImageUrl = "Images/editIcon.png";
                 onclickImg.Style.Add("height", "20px");
                 string id = "WeekDay_" + (j + 1).ToString() + "-lesson_" + (i + 1).ToString() + "-ChoosenClass_" + ddl_clasesAdd.SelectedItem.Value + "-TableCode_" + TableCode;
-                onclickImg.Attributes.Add("onclick", "event.preventDefault(); window.open('Admin_Update_TT_form.aspx?cellID=" + id + "', 'mynewwin', 'width=400,height=470')");
+                onclickImg.Attributes.Add("onclick", "event.preventDefault(); window.open('Admin_Update_TT_form.aspx?cellID=" + id + "', 'mynewwin', 'width=600,height=600')");
                 cell.Controls.Add(onclickImg);
 
                 Label info = new Label();
