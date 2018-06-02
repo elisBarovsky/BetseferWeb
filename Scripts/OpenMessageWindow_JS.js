@@ -4,6 +4,7 @@
     var sender = messageDetails.SenderID;
     var me = localStorage.getItem("UserID");
 
+    localStorage.setItem("SenderID", sender);
     GetAllConversation(sender, me, ShowAllConversation);
 
     $('#senderTytle').text(messageDetails.SenderName);
@@ -12,7 +13,7 @@
 
 function ShowAllConversation(results) {
     res = $.parseJSON(results.d);
-    localStorage.setItem("SenderID", res[0].SenderID); // for know who the person you should send him answer.
+  //  localStorage.setItem("SenderID", res[0].SenderID); // for know who the person you should send him answer.
 
     var str = '<div class="direct- chat-messages" id = "addToHereNewMessage">';
     var me = localStorage.getItem("UserID").toString();
@@ -50,6 +51,9 @@ function ShowAllConversation(results) {
     str += '</div>';
 
     document.getElementById('conversationPlace').innerHTML = str;
+
+    scrollingElement = (document.scrollingElement || document.body)
+    scrollingElement.scrollTop = scrollingElement.scrollHeight;
 };
 
 function SubmitMessage() {
@@ -69,29 +73,32 @@ function SubmitMessage() {
 
         localStorage.setItem("putMessageUp", JSON.stringify(message));
 
-    SubmitMessageAjax(message, AfterMessageSent);
+        SubmitMessageAjax(message, AfterMessageSent);
 
 };
 
 function AfterMessageSent(results) {
-    window.location.reload();
 
-    var myImg = localStorage.getItem("UserImg").toString();
+    var date = new Date();
+    var FullDAte = ('0' + date.getDate()).slice(-2) + "/" + ('0' + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear() + " " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2) + ":" + ('0' + date.getSeconds()).slice(-2);
+
+    var myImg =localStorage.getItem("UserImg").toString();
     var message = JSON.parse(localStorage.getItem("putMessageUp"));
     var myFullName = localStorage.getItem("UserFullName").toString();
-
     var str = '<div class="direct-chat-msg">' +
         '<div class="direct-chat-info clearfix">' +
         '<span class="direct-chat-name pull-left">' + myFullName + '</span>' +
-        '<span class="direct-chat-timestamp pull-right">' + today.getDate() + '</span>' +
+        '<span class="direct-chat-timestamp pull-right">' + FullDAte  + '</span>' +
         '</div >' +
         '<img class="direct-chat-img" alt="user image" src="' + myImg + '">' +
         '<div class="direct-chat-text">' +
         '<div><u>' + message.Subject + '</u></div>' +
         message.Content + '</div > ' +
         '</div > ';
-
-    //subject = $('#newSubject').empty();
-    //content = $('#newMessage').empty();
-    //document.getElementById('addToHereNewMessage').innerHTML += str;
+   
+    document.getElementById('addToHereNewMessage').innerHTML += str;
+  
+    subject = document.getElementById('newSubject').value="";
+    content = document.getElementById('newMessage').value="";
 };
+

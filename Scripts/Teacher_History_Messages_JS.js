@@ -1,10 +1,10 @@
-﻿UserFullInfo = new Object();
+﻿//UserFullInfo = new Object();
 
 $(document).ready(function () {
-   // var teacherId = localStorage.getItem("UserID");
-    UserFullInfo.Id = localStorage.getItem("UserID");
+   var teacherId = localStorage.getItem("UserID");
+   // UserFullInfo.Id = localStorage.getItem("UserID");
    // GetUserInfo(UserFullInfo, DisplayUser);
-    LoadAllMessagesById(UserFullInfo, DisplayMessages);
+    LoadAllMessagesById(teacherId, DisplayMessages);
 });
 
 function DisplayUser(results) {
