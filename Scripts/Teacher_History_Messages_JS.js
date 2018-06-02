@@ -1,22 +1,20 @@
 ﻿//UserFullInfo = new Object();
 
 $(document).ready(function () {
-   var teacherId = localStorage.getItem("UserID");
-   // UserFullInfo.Id = localStorage.getItem("UserID");
-   // GetUserInfo(UserFullInfo, DisplayUser);
+    var teacherId = localStorage.getItem("UserID");
+    var z = getUserImg();
+    document.getElementById('imgUser').src = z;
     LoadAllMessagesById(teacherId, DisplayMessages);
 });
 
-function DisplayUser(results) {
-
-    res = $.parseJSON(results.d);
-
-    UserImgimg.src = "";
-    UserName.text = "";
-
+function getUserImg() {
+    var img = localStorage.getItem("UserImg");
+    return img;
 };
 
-
+//window.onload = function () {
+//    document.getElementById('imgUser').src = getUserImg();
+//};
 
 function DisplayMessages(results) {
 

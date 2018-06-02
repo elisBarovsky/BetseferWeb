@@ -29,6 +29,11 @@
     <script src="dist/js/jquery.min.js"></script>
     <script src="Scripts/Teacher_History_Messages_AJAX.js"></script>
     <script src="Scripts/Teacher_History_Messages_JS.js"></script>
+    <script>
+
+       
+
+    </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
@@ -161,15 +166,17 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu p-ph-res">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <asp:Image ID="UserImg1" runat="server" class="user-image" />
+                                <!--<asp:Image ID="UserImg1" runat="server" class="user-image" />-->
+                                <img id="imgUser" src="" alt="userImg" class="user-image" />
                                 <span class="hidden-xs"></span>
                             </a>
                             <ul class="dropdown-menu right">
                                 <li class="user-header right">
-                                    <div class="pull-left user-img" runat="server">
-                                        <asp:Image ID="UserImgimg" runat="server" class="img-responsive" />
+                                    <div class="pull-left user-img">
+                                        <img id="imgUser1" src="" alt="userImg" class="img-responsive"/>
+                                        <!--<asp:Image ID="UserImgimg" class="img-responsive" />-->
                                     </div>
-                                    <p class="text-left" id="UserName" runat="server"><small>some mail</small> </p>
+                                    <p class="text-left" id="UserName"><small>some mail</small> </p>
                                     <div class="view-link text-right"><a href="#">צפה בפרופיל</a> </div>
                                 </li>
                                 <li><a href="#" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
