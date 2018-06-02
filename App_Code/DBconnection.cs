@@ -101,7 +101,7 @@ public class DBconnection
         }
 
         List<Dictionary<string, string>> messages = new List<Dictionary<string, string>>();
-        List<string> SenderIDL = new List<string>();
+        //List<string> SenderIDL = new List<string>();
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -128,7 +128,7 @@ public class DBconnection
                 d.Add("SubjectMessage", dr["SubjectMessage"].ToString());
                 d.Add("TheMessage", dr["TheMessage"].ToString());
 
-                SenderIDL.Add(dr["SenderID"].ToString());
+                //d.Add("SenderID", dr["SenderID"].ToString());
                              
                     messages.Add(d);       
 
