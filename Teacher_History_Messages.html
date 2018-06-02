@@ -26,14 +26,11 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
     <script src="dist/js/jquery.min.js"></script>
-    <script src="Scripts/Teacher_History_Messages_AJAX.js"></script>
     <script src="Scripts/Teacher_History_Messages_JS.js"></script>
-    <script>
+    <script src="Scripts/Teacher_History_Messages_AJAX.js"></script>
 
-       
-
-    </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
@@ -166,17 +163,17 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu p-ph-res">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <!--<asp:Image ID="UserImg1" runat="server" class="user-image" />-->
+                                <!--<asp:Image ID="UserImg1" class="user-image" />-->
                                 <img id="imgUser" src="" alt="userImg" class="user-image" />
                                 <span class="hidden-xs"></span>
                             </a>
                             <ul class="dropdown-menu right">
                                 <li class="user-header right">
                                     <div class="pull-left user-img">
-                                        <img id="imgUser1" src="" alt="userImg" class="img-responsive"/>
+                                        <img id="imgUser1" src="" alt="userImg" class="img-responsive" />
                                         <!--<asp:Image ID="UserImgimg" class="img-responsive" />-->
                                     </div>
-                                    <p class="text-left" id="UserName"><small>some mail</small> </p>
+                                    <p class="text-left" id="UserName" ><small>some mail</small> </p>
                                     <div class="view-link text-right"><a href="#">צפה בפרופיל</a> </div>
                                 </li>
                                 <li><a href="#" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
@@ -251,7 +248,7 @@
                         <a href="#"><i class="fa fa-envelope-o "></i><span>הודעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li class="active"><a href="Teacher_History_Messages.html">הודעות נכנסות</a></li>
-                            <li > <a href="Teacher_Add_Messages.html">הודעה חדשה</a></li>
+                            <li> <a href="Teacher_Add_Messages.html">הודעה חדשה</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -288,22 +285,29 @@
                                 <td>נשלח ע''י</td>-->
                             </tr>
                         </tbody>
-                   
-                    
-                    </table>  
+
+
+                    </table>
                 </div>
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
     </div>
-    <!-- ./wrapper -->
     <!-- jQuery 3 -->
     <!-- v4.0.0-alpha.6 -->
-  <!--  <script src="dist/bootstrap/js/bootstrap.min.js"></script>-->
+    <script src="dist/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- template -->
     <script src="dist/js/niche.js"></script>
+
+    <!-- Chartjs JavaScript -->
+    <script src="dist/plugins/chartjs/chart.min.js"></script>
+    <script src="dist/plugins/chartjs/chart-int.js"></script>
+
+    <!-- Chart Peity JavaScript -->
+    <script src="dist/plugins/peity/jquery.peity.min.js"></script>
+    <script src="dist/plugins/functions/jquery.peity.init.js"></script>
 
 </body>
 </html>
