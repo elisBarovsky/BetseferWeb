@@ -108,9 +108,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
+            //Log.LogWrite(ex.ToString());
             // write to log
-            // throw (ex);
+            throw (ex);
         }
 
         try
@@ -129,29 +129,8 @@ public class DBconnection
                 d.Add("TheMessage", dr["TheMessage"].ToString());
 
                 SenderIDL.Add(dr["SenderID"].ToString());
-               
-                if (messages.Count>0)
-                {
-                    for (int i = 0; i < SenderIDL.Count; i++)
-                    {
-
-                        if (SenderIDL[i]== dr["SenderID"].ToString())
-                        {
-
-                        }
-                        else
-                        {
-                            messages.Add(d);
-                            break;
-                        }
-
-                    }
-                }
-                else
-                {
-                    messages.Add(d);
-
-                }
+                             
+                    messages.Add(d);       
 
             }
             string SenderName;
@@ -169,10 +148,10 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
+            //Log.LogWrite(ex.ToString());
             // write to log
-            // throw (ex);
-            return null;
+             throw (ex);
+           // return null;
 
         }
         finally
@@ -241,9 +220,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
+            //Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+             throw (ex);
         }
 
         try
@@ -259,10 +238,10 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
+            //Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+              throw (ex);
+           // return null;
 
         }
         finally
@@ -284,9 +263,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
+           // Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+             throw (ex);
         }
 
         try
@@ -302,10 +281,10 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
+          //  Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+              throw (ex);
+            //return null;
 
         }
         finally
@@ -332,9 +311,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
+            //Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+             throw (ex);
         }
 
         try
@@ -371,10 +350,10 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
+           // Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+              throw (ex);
+           // return null;
 
         }
         finally
@@ -1982,9 +1961,9 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
+           // Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+             throw (ex);
         }
 
         try
@@ -1995,10 +1974,10 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
-            return 0;
+           // Log.LogWrite(ex.ToString());
+           //// return 0;
             // write to log
-            //  throw (ex);
+              throw (ex);
         }
 
         finally
