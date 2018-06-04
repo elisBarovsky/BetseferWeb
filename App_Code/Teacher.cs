@@ -6,7 +6,7 @@ using System.Web;
 /// <summary>
 /// Summary description for Teacher
 /// </summary>
-public class Teacher: Users
+public class Teacher : Users
 {
     DBconnection db = new DBconnection();
 
@@ -46,7 +46,7 @@ public class Teacher: Users
         return dbt.FillLessonsAccordingTeacherId(teacherID);
     }
 
-    
+
     public Dictionary<string, string> FillClassOtAccordingTeacherId(string teacherID)
     {
         Dictionary<string, string> d = new Dictionary<string, string>();

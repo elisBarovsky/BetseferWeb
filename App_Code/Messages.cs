@@ -13,7 +13,7 @@ public class Messages
     public string RecipientID { get; set; }
     public string RecipientName { get; set; }
     public string MessageDate { get; set; }
-    public string UserClass { get; set;}
+    public string UserClass { get; set; }
     public string UserType { get; set; }
     public string Subject { get; set; }
     public string Content { get; set; }
@@ -24,7 +24,7 @@ public class Messages
 
     DBconnection db = new DBconnection();
 
-    public Messages() 
+    public Messages()
     {
 
     }
@@ -47,7 +47,7 @@ public class Messages
         SenderID = _SenderID;
         SenderName = _SenderName;
         UserClass = _UserClass;
-        UserType = _UserType; 
+        UserType = _UserType;
         Subject = _Subject;
         Content = _Content;
         MessageType = _MessageType;
