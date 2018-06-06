@@ -27,12 +27,11 @@
     <![endif]-->
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="dist/js/jquery.min.js"></script>
-    <script src="Scripts/Admin_Add_Messages_JS.js"></script>
-    <script src="Scripts/Admin_Add_Messages_AJAX.js"></script>
+
+    <script src="Scripts/Teacher_History_Messages_JS.js"></script>
+    <script src="Scripts/Teacher_History_Messages_AJAX.js"></script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
@@ -165,15 +164,18 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu p-ph-res">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <asp:Image ID="UserImg1" runat="server" class="user-image" />
+                                <!--<asp:Image ID="UserImg1" class="user-image" />-->
+                                <img id="imgUser" src="" alt="userImg" class="user-image" />
                                 <span class="hidden-xs"></span>
                             </a>
                             <ul class="dropdown-menu right">
                                 <li class="user-header right">
-                                    <div class="pull-left user-img" runat="server">
-                                        <asp:Image ID="UserImgimg" runat="server" class="img-responsive" />
+                                    <div class="pull-left user-img">
+                                        <img id="imgUser1" src="" alt="userImg" class="img-responsive" />
+                                        <img id="imgUser1" src="" alt="userImg" class="img-responsive" />
+                                        <!--<asp:Image ID="UserImgimg" class="img-responsive" />-->
                                     </div>
-                                    <p class="text-left" id="UserName" runat="server"><small>some mail</small> </p>
+                                    <p class="text-left" id="UserName"><small>some mail</small> </p>
                                     <div class="view-link text-right"><a href="#">צפה בפרופיל</a> </div>
                                 </li>
                                 <li><a href="#" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
@@ -216,10 +218,10 @@
                             <li><a href="Admin_Update_User.aspx"><i class="fa fa-edit"></i><span>עדכון משתמשים</span> </a>
                         </ul>
                     </li>
-                    <li class=" treeview">
+                    <li class="active treeview">
                         <a href="#"><i class="fa fa-briefcase"></i><span>ניהול כיתות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li><a href="Admin_Add_Class.aspx"><i class="fa fa-plus"></i><span>הוספת כיתה</span> </a>
+                            <li class="active"><a href="Admin_Add_Class.aspx"><i class="fa fa-plus"></i><span>הוספת כיתה</span> </a>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -228,11 +230,11 @@
                             <li><a href="Admin_Add_lessons.aspx"><i class="fa fa-plus"></i><span>הוספת מקצוע</span> </a>
                         </ul>
                     </li>
-                    <li class="active treeview">
+                    <li class="treeview">
                         <a href="#"><i class="fa fa-envelope-o "></i><span>הודעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li><a href="Admin_History_Messages.html">הודעות נכנסות</a></li>
-                            <li class="active"><a href="Admin_Add_Messages.html">הודעה חדשה</a></li>
+                            <li><a href="Admin_Add_Messages.html">הודעה חדשה</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -244,111 +246,41 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header sty-one">
-                <h1>יצירת הודעה</h1>
+                <h1>הודעות נכנסות</h1>
             </section>
 
             <!-- Main content -->
             <section class="content">
                 <div class="info-box">
-                    <div class="card-body">
-                        <div class="row">
-                            <Table ID="Table1" class="table">
-                                <tr>
-                                    <td>
-                                        <div style="float:right;margin-left:40px">
-                                            <div style="float:right">
-                                                <Label ID="sugLBL">סוג הודעה:</Label>
-                                            </div>
-                                            <div style="padding-right:80px">
+                    <table style="width:100%;" id="messagesTable" class="table table-hover no-wrap table-striped">
+                        <tbody>
+                            <tr>
+                                <!--<td>
+                                    <div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position:relative">
+                                        <ins class="iCheck-helper" style="background: rgb(255, 255, 255); margin: 0px; padding: 0px; border: 0px; border-image: none; left: 0%; top: 0%; width: 100%; height: 100%; display: block; position: absolute; opacity: 0;"></ins>
+                                        <input style="position: absolute; opacity: 0;" type="checkbox" />
+                                    </div>
+                                </td>-->
+                                <!--<td class="mailbox-star">
+                                    <a href="#">
+                                        <i class="fa fa-star text-yellow"></i>
+                                    </a>
+                                </td>
+                                <td>תאריך</td>
+                                <td>הודעה</td>
+                                <td>נשלח ע''י</td>-->
+                            </tr>
+                        </tbody>
 
-                                                <fieldset id="messageTypeRBL">
-                                                    <input type="radio" value="private" name="msgType" id="private" checked="checked" onclick="MessageType('private')"/> אישי
-                                                    <br />
-                                                    <input type="radio" value="kolektive" name="msgType" id="kolektive" onclick="MessageType('kolektive')"/> קולקטיבי
-                                                </fieldset>
-                                            </div>
-                                        </div>
-                                        <div >
-                                            <div style="float:right;margin-left:20px">
-                                                <Label ID="classLBL">כיתה: </Label>
-                                            </div>
-                                            <div style="padding-right:150px">
-                                                <select ID="classDDL" CssClass="form-control" data-toggle="dropdown" onchange="FillUsers()">
-                                                    <option value="0">בחר</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="float:right;margin-left:40px">
-                                            <div style="float:right">
-                                                <Label ID="groupTypeLBL">נמענים:</Label>
-                                            </div>
-                                            <div style="padding-right:80px">
-                                                <fieldset id="userTypeRBL">
-                                                    <input type="radio" value="pupils" name="users" id="pupils" onclick="ChooseDDL('pupils')"> תלמידים
-                                                    <br />
-                                                    <input type="radio" value="parents" name="users" id="parents" onclick="ChooseDDL('parents')"> הורים
-                                                    <br />
-                                                    <input type="radio" value="teachers" name="users" id="teachers" onclick="ChooseDDL('teachers')"> מורים
-                                                </fieldset>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div style="float:right;margin-left:20px">
-                                                <Label ID="forLBL">נמען:</Label>
-                                            </div>
-                                            <div style="padding-right:150px">
-                                                <select ID="childrenDDL" CssClass="form-control"></select>
-                                                <select ID="parentsDDL" CssClass="form-control"></select>
-                                                <select ID="teachersDDL" CssClass="form-control"></select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-group">
-                                            <input class="form-control" placeholder="נושא" id="messageSubject">
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea id="messageContent" class="form-control" style="height: 250px"></textarea>
-                                        </div>
-                                        <div style="float:right;margin-left:20px">
-                                            <h6><i class="fa fa-paperclip"></i> נספחים</h6>
-                                        </div>
-                                        <div style="float:right">
-                                            <div action="#" class="dropzone">
-                                                <div class="fallback">
-                                                    <input name="file" type="file" multiple />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="float:left">
-                                            <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)"><img src="Images/paperPlane.png" Height="50"/></button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            </Table>
-                        </div>
-                    </div>
-                        </div>
-</section>
+                    </table>
+                </div>
+            </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
     </div>
-    <!-- ./wrapper -->
     <!-- jQuery 3 -->
-
     <!-- v4.0.0-alpha.6 -->
     <script src="dist/bootstrap/js/bootstrap.min.js"></script>
 
@@ -362,5 +294,6 @@
     <!-- Chart Peity JavaScript -->
     <script src="dist/plugins/peity/jquery.peity.min.js"></script>
     <script src="dist/plugins/functions/jquery.peity.init.js"></script>
+
 </body>
 </html>

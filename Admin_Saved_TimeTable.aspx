@@ -214,7 +214,7 @@
                     </li>
                     <li class="treeview"><a href="#"><i class="fa fa-envelope-o "></i><span>הודעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li><a href="#">הודעות נכנסות</a></li>
+                            <li><a href="Admin_History_Messages.html">הודעות נכנסות</a></li>
                             <li><a href="apps-compose-mail.html">הודעה חדשה</a></li>
                         </ul>
                     </li>
