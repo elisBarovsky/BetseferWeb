@@ -2591,4 +2591,11 @@ public class DBconnection
             }
         }
     }
+
+    public string UpdateMessageAsRead(string MessageCode)
+    {
+        String cStr = "UPDATE Messages SET IsReadByRecipient = 1 WHERE MessageCode = '" + MessageCode + "'";
+        string answer = ExecuteNonQuery(cStr).ToString();
+        return answer;
+    }
 }

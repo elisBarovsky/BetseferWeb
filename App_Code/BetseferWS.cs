@@ -526,5 +526,16 @@ public class BetseferWS : System.Web.Services.WebService
         }
         return key;
     }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public static string UpdateMessageAsRead(string MessageCode)
+    {
+        Messages m = new Messages();
+
+
+
+        return m.UpdateMessageAsRead(MessageCode);
+    }
 }
 
