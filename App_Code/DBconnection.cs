@@ -117,7 +117,9 @@ public class DBconnection
 
             while (dr.Read())
             {
-                if (messagesSenders[dr["SenderID"].ToString()] != "exists") // the sender not exists yet
+                string value = "";
+                messagesSenders.TryGetValue(dr["SenderID"].ToString(), out value);
+                if (value != "exists") // the sender not exists yet
                 {
                     messagesSenders.Add(dr["SenderID"].ToString(), "exists");
 
