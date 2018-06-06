@@ -529,12 +529,12 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public static string UpdateMessageAsRead(string MessageCode)
+    public string SetMessageAsRead(string MessageCode)
     {
         Messages m = new Messages();
 
 
-
+        //   string bla = m.UpdateMessageAsRead(MessageCode);
         return m.UpdateMessageAsRead(MessageCode);
     }
 }

@@ -14,10 +14,10 @@
     });
 }
 
-function UpdateMessageAsRead(MessageCode, SuccsiedUpdateMessage) {
+function UpdateMessageAsRead(i, SuccsiedUpdateMessage) {
     $.ajax({
-        url: 'BetseferWS.asmx/UpdateMessageAsRead',
-        data: JSON.stringify({ 'MessageCode': MessageCode }),
+        url: 'BetseferWS.asmx/SetMessageAsRead',
+        data: JSON.stringify({ 'MessageCode': i }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
