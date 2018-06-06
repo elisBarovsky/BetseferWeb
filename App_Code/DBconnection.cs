@@ -112,18 +112,26 @@ public class DBconnection
         {
             SqlCommand cmd = new SqlCommand(selectSTR, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            Dictionary<string, string> messagesSenders = new Dictionary<string, string>(); // keep the ids of the senders
+
             while (dr.Read())
             {
-                Dictionary<string, string> d = new Dictionary<string, string>();
+                if (messagesSenders[dr["SenderID"].ToString()] != "exists") // the sender not exists yet
+                {
+                    messagesSenders.Add(dr["SenderID"].ToString(), "exists");
 
-                d.Add("MessageCode", dr["MessageCode"].ToString());
-                d.Add("MessageDate", dr["MessageDate"].ToString());
-                d.Add("SenderID", dr["SenderID"].ToString());
-                //d.Add("SenderName", dr["SenderName"].ToString());
-                d.Add("SubjectMessage", dr["SubjectMessage"].ToString());
-                d.Add("TheMessage", dr["TheMessage"].ToString());
+                    Dictionary<string, string> d = new Dictionary<string, string>();
 
-                messages.Add(d);
+                    d.Add("MessageCode", dr["MessageCode"].ToString());
+                    d.Add("MessageDate", dr["MessageDate"].ToString());
+                    d.Add("SenderID", dr["SenderID"].ToString());
+                    d.Add("SubjectMessage", dr["SubjectMessage"].ToString());
+                    d.Add("TheMessage", dr["TheMessage"].ToString());
+
+                    messages.Add(d);
+                }
+                
             }
             string SenderName;
 
