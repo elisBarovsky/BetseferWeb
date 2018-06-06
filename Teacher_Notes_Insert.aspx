@@ -180,7 +180,7 @@
             <section class="sidebar">
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="treeview"><a href="Teacher_Dashbord.aspx"><i class="fa fa-home"></i><span>דף הבית</span> </a>
+                    <li class="treeview"><a href="Teacher_Dashbord.html"><i class="fa fa-home"></i><span>דף הבית</span> </a>
                     </li>
                     <li class="treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">

@@ -53,11 +53,11 @@ public partial class login : System.Web.UI.Page
                 int UserType = int.Parse(User.GetUserType(UserID, password));
                 if (UserType == 1)
                 {
-                    Response.Redirect("AdminDashbord.aspx");
+                    Response.Redirect("AdminDashbord.html");
                 }
                 else if (UserType == 2)
                 {
-                    Response.Redirect("Teacher_Dashbord.aspx");
+                    Response.Redirect("Teacher_Dashbord.html");
                 }
                 else
                 {

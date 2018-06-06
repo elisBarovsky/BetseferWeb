@@ -14,7 +14,7 @@
     });
 }
 
-function UpdateMessageAsRead(i, SuccsiedUpdateMessage) {
+function UpdateMessageAsRead(i) {
     $.ajax({
         url: 'BetseferWS.asmx/SetMessageAsRead',
         data: JSON.stringify({ 'MessageCode': i }),
@@ -22,7 +22,7 @@ function UpdateMessageAsRead(i, SuccsiedUpdateMessage) {
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            SuccsiedUpdateMessage(results);
+           
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');
