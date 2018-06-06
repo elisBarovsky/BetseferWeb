@@ -6,13 +6,13 @@ using System.Web;
 /// <summary>
 /// Summary description for Administrator
 /// </summary>
-public class Administrator: Users
+public class Administrator : Users
 {
     DBconnection db = new DBconnection();
 
     public Administrator()
     {
-        
+
     }
     public int AddPupil(string UserID, int classNumber)
     {

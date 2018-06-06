@@ -17,7 +17,7 @@ public class TimeTable
         //
     }
 
-    public int InsertTimeTable(string date, int classCode,bool publish)
+    public int InsertTimeTable(string date, int classCode, bool publish)
     {
         return db.InsertTimeTable(date, classCode, publish);
     }
@@ -37,7 +37,7 @@ public class TimeTable
         return db.InsertUpdateTimeTable(TableCode, CodeWeekDay, ClassTimeCode, CodeLesson, TeacherId);
     }
 
-    public List<string> GetCellInfo(string date, int WeekDay,int LessonNum, string ClassNmum)
+    public List<string> GetCellInfo(string date, int WeekDay, int LessonNum, string ClassNmum)
     {
         return db.GetCellInfo(date, WeekDay, LessonNum, ClassNmum);
     }
@@ -82,7 +82,7 @@ public class TimeTable
         return db.DeleteTempTT(date, classcode);
     }
 
-    public int DeleteTT( string classcode)
+    public int DeleteTT(string classcode)
     {
         return db.DeleteTT(classcode);
     }
