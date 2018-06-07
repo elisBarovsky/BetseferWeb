@@ -423,7 +423,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
                 //}
             }
 
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('משתמש עודכן בהצלחה'); location.href='AUpdateUser.aspx';", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('משתמש עודכן בהצלחה'); location.href='Admin_Update_User.aspx';", true);
         }
         else
         {
