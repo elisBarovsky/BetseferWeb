@@ -159,7 +159,78 @@ public class DBconnection
         }
     }
 
+    public List<Dictionary<string, string>> GetMessagesByUserIdUnread(string userId)
+    {
+        string type = GetUserTypeById(userId), selectSTR = "SELECT MessageCode, MessageDate, SenderID, " +
+            " TheMessage, SubjectMessage FROM Messages where recipientID  = '" + userId +
+            "' and IsReadByRecipient is null order by MessageCode desc";
+        if (type == "3")
+        {
 
+        }
+
+        List<Dictionary<string, string>> messages = new List<Dictionary<string, string>>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            Dictionary<string, string> messagesSenders = new Dictionary<string, string>(); // keep the ids of the senders
+
+            while (dr.Read())
+            {
+                string value = "";
+                messagesSenders.TryGetValue(dr["SenderID"].ToString(), out value);
+                if (value != "exists") // the sender not exists yet
+                {
+                    messagesSenders.Add(dr["SenderID"].ToString(), "exists");
+
+                    Dictionary<string, string> d = new Dictionary<string, string>();
+
+                    d.Add("MessageCode", dr["MessageCode"].ToString());
+                    d.Add("MessageDate", dr["MessageDate"].ToString());
+                    d.Add("SenderID", dr["SenderID"].ToString());
+                    d.Add("SubjectMessage", dr["SubjectMessage"].ToString());
+                    d.Add("TheMessage", dr["TheMessage"].ToString());
+
+                    messages.Add(d);
+                }
+
+            }
+            string SenderName;
+
+            for (int i = 0; i < messages.Count; i++)
+            {
+                SenderName = GetSenderNameBySenderID(messages[i]["SenderID"]);
+                messages[i].Add("SenderName", SenderName);
+            }
+
+            return messages;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 
     public string GetUserFullName(string Id)
     {

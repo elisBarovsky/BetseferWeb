@@ -1,6 +1,6 @@
 ﻿function LoadAllMessagesById(Id, DisplayMessages) {
     $.ajax({
-        url: 'BetseferWS.asmx/GetMessagesByUserId',
+        url: 'BetseferWS.asmx/GetMessagesByUserIdUnread',
         data: JSON.stringify({ 'userId': Id }),
         type: 'POST',
         dataType: "json",

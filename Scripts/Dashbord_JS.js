@@ -9,6 +9,11 @@
 function DisplayMessages(results) {
 
     res = $.parseJSON(results.d);
+    if (res.length === 0) {
+        $('#noNewMessages').show();
+        return;
+    }
+    else $('#noNewMessages').hide();
 
     $('#messagesTable').empty();
 
@@ -23,7 +28,7 @@ function DisplayMessages(results) {
         objMessage.SubjectMessage = res[i].SubjectMessage;
         objMessage.TheMessage = res[i].TheMessage;
 
-        tableString += "<tr onclick = 'OpenMessage(" + JSON.stringify(objMessage) + ")'><td id = '" + res[i].MessageCode + "'></td><td class='mailbox-star'><a href='#'><i class='fa fa-star text-yellow'></i></a></td><td>" +
+        tableString += "<tr onclick = 'OpenMessage(" + JSON.stringify(objMessage) + ")'><td id = '" + res[i].MessageCode + "'></td><td class='mailbox-star'><a href='#'><i class='fa fa-envelope-o'></i></a></td><td>" +
             res[i].MessageDate + "</td><td>" + res[i].SubjectMessage + "</td><td>" + res[i].SenderName + "</td></tr>";
     }
     $('#messagesTable').append(tableString);
@@ -35,6 +40,5 @@ function OpenMessage(obj) {
     var i = obj.MessageCode;
     UpdateMessageAsRead(i);
     var a = window.open("OpenMessageWindow.html", "", "toolbar=no,scrollbars=yes,resizable=yes,top=50%,left=25%,width=500,height=600");
-    //window.open.href = "OpenMessageWindow.html";
-    //  window.location.href = "OpenMessageWindow.html";
+    
 };

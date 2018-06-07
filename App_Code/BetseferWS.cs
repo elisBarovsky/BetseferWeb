@@ -108,7 +108,17 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonString;
     }
 
-
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetMessagesByUserIdUnread(string userId)
+    {
+        Messages u = new Messages();
+        List<Dictionary<string, string>> m = u.GetMessagesByUserIdUnread(userId);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(m);
+        return jsonString;
+    }
+    
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetAllConversation(string SenderID, string RecipientID)
