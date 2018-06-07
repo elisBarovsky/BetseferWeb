@@ -4,6 +4,7 @@
     document.getElementById('imgUser').src = z;
     document.getElementById('UserImgimg').src = z;
     LoadAllMessagesById(Id, DisplayMessages);
+    LoadScheduleForToday(Id, DisplaySchedule); //not written yet
 });
 
 function DisplayMessages(results) {
@@ -27,9 +28,12 @@ function DisplayMessages(results) {
         objMessage.SenderName = res[i].SenderName;
         objMessage.SubjectMessage = res[i].SubjectMessage;
         objMessage.TheMessage = res[i].TheMessage;
+        objMessage.IconId = "icon" + i;
 
-        tableString += "<tr onclick = 'OpenMessage(" + JSON.stringify(objMessage) + ")'><td id = '" + res[i].MessageCode + "'></td><td class='mailbox-star'><a href='#'><i class='fa fa-envelope-o'></i></a></td><td>" +
-            res[i].MessageDate + "</td><td>" + res[i].SubjectMessage + "</td><td>" + res[i].SenderName + "</td></tr>";
+        tableString += "<tr style = 'color: black;' onclick = 'OpenMessage(" + JSON.stringify(objMessage) + ")'><td id = '" + res[i].MessageCode +
+            "'></td><td class='mailbox-star'><a href='#'><i id = '" + objMessage.IconId +
+            "' class='fa fa-envelope-o'></i></a></td><td>" + res[i].MessageDate + "</td><td>" +
+            res[i].SubjectMessage + "</td><td>" + res[i].SenderName + "</td></tr>";
     }
     $('#messagesTable').append(tableString);
 };
@@ -37,8 +41,13 @@ function DisplayMessages(results) {
 
 function OpenMessage(obj) {
     localStorage.setItem("messageDetails", JSON.stringify(obj));
-    var i = obj.MessageCode;
+    var i = obj.MessageCode, iconID = obj.IconId;
     UpdateMessageAsRead(i);
+    $(iconID).removeClass('fa fa-envelope-o').addClass('fa fa-envelope-open-o');
     var a = window.open("OpenMessageWindow.html", "", "toolbar=no,scrollbars=yes,resizable=yes,top=50%,left=25%,width=500,height=600");
     
+};
+
+function DisplaySchedule(results) {
+
 };

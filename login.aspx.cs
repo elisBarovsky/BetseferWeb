@@ -57,7 +57,7 @@ public partial class login : System.Web.UI.Page
                 }
                 else if (UserType == 2)
                 {
-                    Response.Redirect("Teacher_Dashbord.aspx");
+                    Response.Redirect("TeacherDashbord.html");
                 }
                 else
                 {

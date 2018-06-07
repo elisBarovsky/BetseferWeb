@@ -29,3 +29,19 @@ function UpdateMessageAsRead(i) {
         }
     });
 }
+
+function LoadScheduleForToday(Id, DisplaySchedule) { // do this
+    $.ajax({
+        url: 'BetseferWS.asmx/LoadScheduleForToday',
+        data: JSON.stringify({ 'userId': Id }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            DisplaySchedule(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
