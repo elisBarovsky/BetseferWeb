@@ -50,53 +50,11 @@
                 <div class="navbar-custom-menu" runat="server">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope-o"></i>
-                            <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                        </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 new messages</li>
-                                <li>
-                                    <ul class="menu">
-                                        <li><a href="#">
-                                            <div class="pull-left" runat="server">
-                                                <asp:Image ID="UserImg" runat="server" class="img-circle" />
-                                                <span class="profile-status online pull-right"></span>
-                                            </div>
-                                            <h4 id="UserNameplace">Alex C. Patton</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">9:30 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img3.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status offline pull-right"></span>
-                                            </div>
-                                            <h4>Nikolaj S. Henriksen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">10:15 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img2.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status away pull-right"></span>
-                                            </div>
-                                            <h4>Kasper S. Jessen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">8:45 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img4.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status busy pull-right"></span>
-                                            </div>
-                                            <h4>Florence S. Kasper</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">12:15 AM</span></p>
-                                        </a></li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View All Messages</a></li>
-                            </ul>
+                        <li class="dropdown messages-menu">
+                            <a href="AdminDashbord.html">
+                                <i class="fa fa-home"></i>
+                                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                            </a>
                         </li>
                         <!-- Notifications: style can be found in dropdown.less -->
                         <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o"></i>
@@ -136,10 +94,10 @@
                             </ul>
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu p-ph-res"><a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                        <li class="dropdown user user-menu p-ph-res"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <asp:Image ID="UserImg1" runat="server" class="user-image" />
                             <span class="hidden-xs"></span></a>
-                            <ul class="dropdown-menu right" style="float:right">
+                            <ul class="dropdown-menu right" style="float: right">
                                 <li class="user-header right">
                                     <div class="pull-left user-img" runat="server">
                                         <asp:Image ID="UserImgimg" runat="server" class="img-responsive" />
@@ -161,21 +119,19 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                 <div class="user-panel">
+                <%--                <div class="user-panel">
                     <div class="image text-center"></div>
                     <div class="info">
                         <a href="#">ברוך הבא ☺</a>
                     </div>
-                </div>
+                </div>--%>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="treeview"><a href="AdminDashbord.html"><i class="fa fa-home"></i><span>דף הבית</span> </a>
-                    </li>
                     <li class="treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li><a href="Admin_Add_TimeTable.aspx"><i class="fa fa-plus"></i><span>יצירת מערכת</span> </a>
                                 <li><a href="Admin_Update_TimeTable.aspx"><i class="fa fa-edit"></i><span>עדכון מערכת</span> </a>
-                               <li><a href="Admin_Saved_TimeTable.aspx"><i class="fa fa-edit"></i><span>מערכות בתהליך</span> </a>
+                                    <li><a href="Admin_Saved_TimeTable.aspx"><i class="fa fa-edit"></i><span>מערכות בתהליך</span> </a>
 
                         </ul>
                     </li>
@@ -228,15 +184,11 @@
                                             <asp:DropDownList ID="UserTypeDLL" runat="server" CssClass="form-control" data-toggle="dropdown" OnDataBound="FillFirstItem" OnSelectedIndexChanged="UserTypeDLL_CheckedChanged" DataSourceID="SqlDataSource2" DataTextField="CodeUserName" DataValueField="CodeUserType" AutoPostBack="true" RepeatDirection="Horizontal"></asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT * FROM [UserType]"></asp:SqlDataSource>
                                         </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
+                                        <td></td>
+                                        <td></td>
 
                                         <td>
-                            <asp:Button ID="AddUserBTN" runat="server" CssClass="btn btn-outline-primary" Text="הוסף משתמש" OnClick="AddUserBTN_Click" />
+                                            <asp:Button ID="AddUserBTN" runat="server" CssClass="btn btn-outline-primary" Text="הוסף משתמש" OnClick="AddUserBTN_Click" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -283,7 +235,7 @@
                                         <td>
                                             <asp:DropDownList ID="ClassOtDLL" Style="direction: ltr;" runat="server" CssClass="form-control" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" OnLoad="FillFirstItem"></asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>
-                                            </td>
+                                        </td>
 
                                     </tr>
                                     <tr>
@@ -310,7 +262,7 @@
                                             <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
                                             <asp:DropDownList ID="ClassesWithoutMainTeacher" Style="width: 70px" runat="server" CssClass="form-control" data-toggle="dropdown" OnLoad="FillFirstItem" DataSourceID="SqlDataSource1" DataTextField="TotalName" DataValueField="ClassCode" Visible="False"></asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class] WHERE ([MainTeacherID] IS NULL) ORDER BY [OtClass], [NumClass]"></asp:SqlDataSource>
-                                        
+
                                             <%--<asp:DropDownList ID="NumOfChildDDL" Style="direction: rtl;" runat="server" AutoPostBack="true" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnSelectedIndexChanged="NumOfChildDDL_SelectedIndexChanged"></asp:DropDownList>--%></td>
 
                                         <td>

@@ -68,53 +68,11 @@
                 <div class="navbar-custom-menu" runat="server">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope-o"></i>
-                            <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                        </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 new messages</li>
-                                <li>
-                                    <ul class="menu">
-                                        <li><a href="#">
-                                            <div class="pull-left" runat="server">
-                                                <asp:Image ID="UserImg" runat="server" class="img-circle" />
-                                                <span class="profile-status online pull-right"></span>
-                                            </div>
-                                            <h4 id="UserNameplace">Alex C. Patton</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">9:30 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img3.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status offline pull-right"></span>
-                                            </div>
-                                            <h4>Nikolaj S. Henriksen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">10:15 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img2.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status away pull-right"></span>
-                                            </div>
-                                            <h4>Kasper S. Jessen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">8:45 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img4.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status busy pull-right"></span>
-                                            </div>
-                                            <h4>Florence S. Kasper</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">12:15 AM</span></p>
-                                        </a></li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View All Messages</a></li>
-                            </ul>
+                        <li class="dropdown messages-menu">
+                            <a href="AdminDashbord.html">
+                                <i class="fa fa-home"></i>
+                                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                            </a>
                         </li>
                         <!-- Notifications: style can be found in dropdown.less -->
                         <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o"></i>
@@ -179,16 +137,14 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                <div class="user-panel">
+  <%--              <div class="user-panel">
                     <div class="image text-center"></div>
                     <div class="info">
                         <a href="#">ברוך הבא ☺</a>
                     </div>
-                </div>
+                </div>--%>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="treeview"><a href="AdminDashbord.html"><i class="fa fa-home"></i><span>דף הבית</span> </a>
-                    </li>
                     <li class="active treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li class="active"><a href="Admin_Add_TimeTable.aspx"><i class="fa fa-plus"></i><span>יצירת מערכת</span> </a>
@@ -236,60 +192,59 @@
                     <form runat="server" autopostback="true">
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" BackgroundCssClass="modalBackground" CancelControlID="Button4" runat="server" TargetControlID="lblstupid" PopupControlID="Panel1"></ajaxToolkit:ModalPopupExtender>
-                             <asp:Label ID="lblstupid" runat="server" Text=""></asp:Label>
-                                <asp:Panel ID="Panel1" runat="server" Width="400px" Height="180px" CssClass="pnlBackGround">
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <p style="font-size: x-large;">האם ברצונך לשמור שינויים ?</p>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-4 col-md-offset-1" style="float: right; position: relative">
-                                            <asp:Button ID="Button3" CssClass="btn btn-danger" runat="server" Text="לא" OnClick="No_Option" />
-                                        </div>
-                                        <div class="col-md-4 col-md-offset-1" style="float: left; position: relative">
-                                            <asp:Button ID="Button4" CssClass="btn btn-primary" runat="server" Text="כן" />
-                                        </div>
-                                    </div>
+                        <asp:Label ID="lblstupid" runat="server" Text=""></asp:Label>
+                        <asp:Panel ID="Panel1" runat="server" Width="400px" Height="180px" CssClass="pnlBackGround">
+                            <br />
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <p style="font-size: x-large;">האם ברצונך לשמור שינויים ?</p>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-1" style="float: right; position: relative">
+                                    <asp:Button ID="Button3" CssClass="btn btn-danger" runat="server" Text="לא" OnClick="No_Option" />
+                                </div>
+                                <div class="col-md-4 col-md-offset-1" style="float: left; position: relative">
+                                    <asp:Button ID="Button4" CssClass="btn btn-primary" runat="server" Text="כן" />
+                                </div>
+                            </div>
 
-                                </asp:Panel>
-<%--                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        </asp:Panel>
+                        <%--                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
                             <ContentTemplate>--%>
-                           
-                                <div class="table-responsive">
-                                    <div style="float: right; position: relative">
-                                        <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="true" OnSelectedIndexChanged="ddl_clasesAdd_SelectedIndexChanged"></asp:DropDownList>
-                                        <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT ClassCode, TotalName FROM Class WHERE (ClassCode NOT IN (SELECT Class_1.ClassCode FROM Class AS Class_1 INNER JOIN Timetable ON Class_1.ClassCode = Timetable.ClassCode))"></asp:SqlDataSource>
-                                    </div>
-                                    <div style="float: right; position: relative; padding-right: 20px">
-                                        <asp:Button ID="Button1" runat="server" CssClass="btn btn-outline-info" Text="אישור" OnClick="SelectedIndexChanged" />
-                                    </div>
 
-                                    <div style="float: left; position: relative; padding-bottom: 20px;">
-                                        <asp:Button ID="ButtonPublish" CssClass="btn btn-outline-success" runat="server" Text="שמור ופרסם" Visible="true" OnClick="ButtonPublish_Click" />
+                        <div class="table-responsive">
+                            <div style="float: right; position: relative">
+                                <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="true" OnSelectedIndexChanged="ddl_clasesAdd_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT ClassCode, TotalName FROM Class WHERE (ClassCode NOT IN (SELECT Class_1.ClassCode FROM Class AS Class_1 INNER JOIN Timetable ON Class_1.ClassCode = Timetable.ClassCode))"></asp:SqlDataSource>
+                            </div>
+                            <div style="float: right; position: relative; padding-right: 20px">
+                                <asp:Button ID="Button1" runat="server" CssClass="btn btn-outline-info" Text="אישור" OnClick="SelectedIndexChanged" />
+                            </div>
 
-                                    </div>
-                                    <div style="float: left; position: relative; padding-left: 20px">
-                                        <asp:Button ID="Button2" CssClass="btn btn-outline-primary" runat="server" Text="שמור" OnClick="Button2_Click" Visible="true" />
+                            <div style="float: left; position: relative; padding-bottom: 20px;">
+                                <asp:Button ID="ButtonPublish" CssClass="btn btn-outline-success" runat="server" Text="שמור ופרסם" Visible="true" OnClick="ButtonPublish_Click" />
 
-                                    </div>
+                            </div>
+                            <div style="float: left; position: relative; padding-left: 20px">
+                                <asp:Button ID="Button2" CssClass="btn btn-outline-primary" runat="server" Text="שמור" OnClick="Button2_Click" Visible="true" />
 
-                                    <div runat="server" id="AlertBox" class="alertBox" visible="false">
-                                        <div runat="server" id="AlertBoxMessage"></div>
-                                        <button onclick="closeAlert.call(this, event)">Ok</button>
-                                    </div>
-                                   
-                                </div>
-                                  <asp:Table ID="TimeTable" runat="server" align="center" class="table table-bordered table-striped" AutoPostBack="false" data-name="cool-table">
-                                    </asp:Table>
-<%--                            </ContentTemplate>
+                            </div>
+
+                            <div runat="server" id="AlertBox" class="alertBox" visible="false">
+                                <div runat="server" id="AlertBoxMessage"></div>
+                                <button onclick="closeAlert.call(this, event)">Ok</button>
+                            </div>
+
+                        </div>
+                        <asp:Table ID="TimeTable" runat="server" align="center" class="table table-bordered table-striped" AutoPostBack="false" data-name="cool-table">
+                        </asp:Table>
+                        <%--                            </ContentTemplate>
                             
                         </asp:UpdatePanel>--%>
-                       
                     </form>
                 </div>
             </section>

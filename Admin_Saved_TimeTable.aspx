@@ -28,7 +28,7 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-      <style>
+    <style>
         .modalBackground {
             /*background-color:Gray;*/
             filter: alpha(opacity=50);
@@ -68,53 +68,11 @@
                 <div class="navbar-custom-menu" runat="server">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope-o"></i>
-                            <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                        </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 new messages</li>
-                                <li>
-                                    <ul class="menu">
-                                        <li><a href="#">
-                                            <div class="pull-left" runat="server">
-                                                <asp:Image ID="UserImg" runat="server" class="img-circle" />
-                                                <span class="profile-status online pull-right"></span>
-                                            </div>
-                                            <h4 id="UserNameplace">Alex C. Patton</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">9:30 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img3.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status offline pull-right"></span>
-                                            </div>
-                                            <h4>Nikolaj S. Henriksen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">10:15 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img2.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status away pull-right"></span>
-                                            </div>
-                                            <h4>Kasper S. Jessen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">8:45 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img4.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status busy pull-right"></span>
-                                            </div>
-                                            <h4>Florence S. Kasper</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">12:15 AM</span></p>
-                                        </a></li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View All Messages</a></li>
-                            </ul>
+                        <li class="dropdown messages-menu">
+                            <a href="AdminDashbord.html">
+                                <i class="fa fa-home"></i>
+                                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                            </a>
                         </li>
                         <!-- Notifications: style can be found in dropdown.less -->
                         <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o"></i>
@@ -179,16 +137,14 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                <div class="user-panel">
+                <%--               <div class="user-panel">
                     <div class="image text-center"></div>
                     <div class="info">
                         <a href="#">ברוך הבא ☺</a>
                     </div>
-                </div>
+                </div>--%>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="treeview"><a href="AdminDashbord.html"><i class="fa fa-home"></i><span>דף הבית</span> </a>
-                    </li>
                     <li class="active treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li><a href="Admin_Add_TimeTable.aspx"><i class="fa fa-plus"></i><span>יצירת מערכת</span> </a>
@@ -233,8 +189,8 @@
             <!-- Main content -->
             <section class="content">
                 <div class="info-box">
-                    <form runat="server" autopostback="false">  
-                              <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                    <form runat="server" autopostback="false">
+                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" BackgroundCssClass="modalBackground" CancelControlID="Button4" runat="server" TargetControlID="lblstupid" PopupControlID="Panel1"></ajaxToolkit:ModalPopupExtender>
 
                         <asp:Label ID="lblstupid" runat="server" Text=""></asp:Label>
@@ -259,7 +215,7 @@
                         </asp:Panel>
                         <div class="table-responsive">
                             <div style="float: right; position: relative">
-                                <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" DataValueField="ClassCode"  AutoPostBack="true" OnSelectedIndexChanged="ddl_clasesAdd_SelectedIndexChanged" ></asp:DropDownList>
+                                <asp:DropDownList ID="ddl_clasesAdd" CssClass="form-control" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem" DataSourceID="DSclassesForAdd" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="true" OnSelectedIndexChanged="ddl_clasesAdd_SelectedIndexChanged"></asp:DropDownList>
                                 <asp:SqlDataSource ID="DSclassesForAdd" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT DISTINCT dbo.Class.ClassCode, dbo.Class.TotalName FROM dbo.Class INNER JOIN  dbo.Timetable ON dbo.Class.ClassCode = dbo.Timetable.ClassCode
                                                                                                 AND dbo.Class.ClassCode = dbo.Timetable.ClassCode where dbo.Timetable.IsPublish=0 ORDER BY dbo.Class.TotalName"></asp:SqlDataSource>
                             </div>
