@@ -55,53 +55,11 @@
                 <div class="navbar-custom-menu" runat="server">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope-o"></i>
-                            <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                        </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 new messages</li>
-                                <li>
-                                    <ul class="menu">
-                                        <li><a href="#">
-                                            <div class="pull-left" runat="server">
-                                                <asp:Image ID="UserImg" runat="server" class="img-circle" />
-                                                <span class="profile-status online pull-right"></span>
-                                            </div>
-                                            <h4 id="UserNameplace">Alex C. Patton</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">9:30 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img3.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status offline pull-right"></span>
-                                            </div>
-                                            <h4>Nikolaj S. Henriksen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">10:15 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img2.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status away pull-right"></span>
-                                            </div>
-                                            <h4>Kasper S. Jessen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">8:45 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/img4.jpg" class="img-circle" alt="User Image">
-                                                <span class="profile-status busy pull-right"></span>
-                                            </div>
-                                            <h4>Florence S. Kasper</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">12:15 AM</span></p>
-                                        </a></li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View All Messages</a></li>
-                            </ul>
+                        <li class="dropdown messages-menu">
+                            <a href="TeacherDashbord.html">
+                                <i class="fa fa-home"></i>
+                                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                            </a>
                         </li>
                         <!-- Notifications: style can be found in dropdown.less -->
                         <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o"></i>
@@ -164,18 +122,16 @@
 
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
-             <div class="user-panel">
+           <%--  <div class="user-panel">
                     <div class="image text-center"></div>
                     <div class="info">
                         <a href="#">ברוך הבא ☺</a>
                     </div>
-                </div>
+                </div>--%>
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="treeview"><a href="TeacherDashbord.htmlss"><i class="fa fa-home"></i><span>דף הבית</span> </a>
-                    </li>
                     <li class="active treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li class="active"><a href="Teacher_TimeTable.aspx"><i class="fa fa-plus"></i><span>צפייה</span> </a>

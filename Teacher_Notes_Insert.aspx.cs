@@ -33,13 +33,11 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         if (UserInfo[6] == "")
         {
             UserImgimg.ImageUrl = "/Images/NoImg.png";
-            UserImg.ImageUrl = "/Images/NoImg.png";
             UserImg1.ImageUrl = "/Images/NoImg.png";
         }
         else
         {
             UserImgimg.ImageUrl = UserInfo[6];
-            UserImg.ImageUrl = UserInfo[6];
             UserImg1.ImageUrl = UserInfo[6];
         }
     }
