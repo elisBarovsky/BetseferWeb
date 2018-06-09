@@ -1463,10 +1463,112 @@ public class DBconnection
         }
     }
 
-    public List<Dictionary<string, string>> getPupilsByClassCode(string classCode)
+    public List<Dictionary<string, string>> getPupilsByClassCode(string TeacherID)
     {
         String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS PupilName" +
-           "  FROM dbo.Pupil INNER JOIN   dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID   where dbo.Pupil.CodeClass='" + classCode + "'";
+           "  FROM dbo.Pupil INNER JOIN    dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID  where CodeClass in (SELECT distinct dbo.Timetable.ClassCode FROM  dbo.Timetable INNER JOIN " +
+           "  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where dbo.TimetableLesson.TeacherId='" + TeacherID + "')" +
+           " union " +
+           " SELECT UserID, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" +
+             "  FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID where CodeClass in (SELECT distinct dbo.Timetable.ClassCode FROM  dbo.Timetable INNER JOIN " +
+            "  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where dbo.TimetableLesson.TeacherId='" + TeacherID + "')";
+
+        List < Dictionary<string, string>> l = new List<Dictionary<string, string>>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                Dictionary<string, string> p = new Dictionary<string, string>();
+                p["UserId"] = dr["UserID"].ToString();
+                p["UserName"] = dr["PupilName"].ToString();
+
+                l.Add(p);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<Dictionary<string, string>> getPupilsAndTeachers(string PupilId)
+    {
+        String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName) AS PupilName FROM dbo.Pupil INNER JOIN  dbo.Users ON " +
+           "  dbo.Pupil.UserID = dbo.Users.UserID  where CodeClass =(select codeClass from dbo.Pupil where UserID = '"+ PupilId + "')" +
+           " union " +
+           " select UserID,(UserLName + ' ' +UserFName) AS PupilName from dbo.Users where UserID in(select dbo.TimetableLesson.TeacherId " +
+             "  FROM  dbo.Timetable INNER JOIN  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where " +
+            "  dbo.Timetable.ClassCode =(select codeClass from dbo.Pupil where UserID = '"+ PupilId + "'))";
+
+        List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                Dictionary<string, string> p = new Dictionary<string, string>();
+                p["UserId"] = dr["UserID"].ToString();
+                p["UserName"] = dr["PupilName"].ToString();
+
+                l.Add(p);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<Dictionary<string, string>> getParentsAndTeachers(string PupilId)
+    {
+        String selectSTR = "SELECT  distinct   dbo.Users.UserID, dbo.Users.UserLName + ' ' + dbo.Users.UserFName AS PupilName FROM  dbo.Users INNER JOIN dbo.PupilsParent ON " +
+           "   dbo.Users.UserID = dbo.PupilsParent.ParentID where  dbo.PupilsParent.codeClass= (select codeClass from dbo.Pupil where UserID = '"+ PupilId + "') " +
+           " union " +
+           " select UserID,(UserLName + ' ' +UserFName) AS PupilName from dbo.Users where UserID in(select dbo.TimetableLesson.TeacherId " +
+             "  FROM  dbo.Timetable INNER JOIN  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where " +
+            "  dbo.Timetable.ClassCode =(select codeClass from dbo.Pupil where UserID = '" + PupilId + "'))";
+
         List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
         try
         {

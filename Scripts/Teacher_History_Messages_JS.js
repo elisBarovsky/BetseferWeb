@@ -1,6 +1,4 @@
-﻿//UserFullInfo = new Object();
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var teacherId = localStorage.getItem("UserID");
     var z = getUserImg();
     document.getElementById('imgUser').src = z;
