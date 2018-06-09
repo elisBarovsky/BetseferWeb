@@ -2678,6 +2678,9 @@ public class DBconnection
         //keep just one time table for a class. no history.
         List<Dictionary<string, string>> TT = new List<Dictionary<string, string>>();
         SqlCommand cmd; string cStr = "";
+       // var weekDayCode = DateTime.Now.DayOfWeek;
+        int day = (int)DateTime.Now.DayOfWeek + 1; //check that it is work ok!! ****************************************************************************
+
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -2693,7 +2696,7 @@ public class DBconnection
             case 1: // admin
                 break;
             case 2: // teacher
-                cStr = "select TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '"+2+"') as WeekDay, ClassTimeCode, CodeLesson, TeacherId from TimetableLesson where CodeWeekDay = 2 and TeacherId = '" + Id + "'";
+                cStr = "select TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '"+ day + "') as WeekDay, ClassTimeCode, CodeLesson, TeacherId from TimetableLesson where CodeWeekDay = "+ day +" and TeacherId = '" + Id + "'";
                 break;
             case 3: // parent
                 cStr = "";
