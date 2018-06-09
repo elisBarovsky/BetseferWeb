@@ -2701,15 +2701,17 @@ public class DBconnection
             case 3: // parent
                 cStr = "";
                 break;
-            case 4:
-                cStr = "";
-                break; // pupil
+            case 4: // pupil
+                var classCode = GetClassCodeByPupilId(Id);
+                cStr = "select TimetableLesson.TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '" + day + "') as WeekDay, TimetableLesson.ClassTimeCode, TimetableLesson.CodeLesson, TimetableLesson.TeacherId " +
+                    "from TimetableLesson inner join Timetable on TimetableLesson.TimeTableCode = Timetable.TimeTableCode and TimetableLesson.CodeWeekDay = '"+ day +"'";
+                break;
         }
         try
         {
             cmd = CreateCommand(cStr, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            string lessonName, lessonHours, className;
+            string lessonName, lessonHours, className, teacherName;
 
             while (dr.Read())
             {
@@ -2726,6 +2728,9 @@ public class DBconnection
                 lessonName = GetLessonNameByLessonCode(dr["CodeLesson"].ToString());
                 lesson.Add("LessonName", lessonName);
                 lesson.Add("TeacherId", dr["TeacherId"].ToString());
+
+                teacherName = GetUserFullNameByID(dr["TeacherId"].ToString());
+                lesson.Add("TeacherName", teacherName);
 
                 TT.Add(lesson);
             }
@@ -2812,6 +2817,47 @@ public class DBconnection
                 className = GetClassNameByCodeClass(int.Parse(dr["ClassCode"].ToString()));
             }
             return className;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public string GetClassCodeByPupilId(string Id)
+    {
+        SqlCommand cmd; string cStr = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        cStr = "select CodeClass from Pupil where UserID = '" + Id + "'";
+
+        try
+        {
+            cmd = CreateCommand(cStr, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            string classCode = "";
+
+            while (dr.Read())
+            {
+                classCode = dr["CodeClass"].ToString();
+            }
+            return classCode;
         }
         catch (Exception ex)
         {
