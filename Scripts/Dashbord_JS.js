@@ -2,9 +2,17 @@
     var Id = localStorage.getItem("UserID");
     var z = localStorage.getItem("UserImg");
     document.getElementById('imgUser').src = z;
-    document.getElementById('UserImgimg').src = z;
+    //document.getElementById('UserImgimg').src = z;
+
+    obj = new Object()
+    obj.Id = Id;
+    obj.userType = "2";
+    //var Date = new Date();
+    //obj.weekDay = Date.getDay();
+
     LoadAllMessagesById(Id, DisplayMessages);
-    LoadScheduleForToday(Id, DisplaySchedule); //not written yet
+
+    LoadScheduleForToday(obj, DisplaySchedule);
 });
 
 function DisplayMessages(results) {
@@ -49,5 +57,31 @@ function OpenMessage(obj) {
 };
 
 function DisplaySchedule(results) {
+    res = $.parseJSON(results.d);
+    if (res.length === 0) {
+        $('#noSchedule').show();
+    }
+    else {
+        $('#noSchedule').hide();
 
+        var tableString = "<tr><td colspan='2'>יום " + res[0].WeekDay +"</td></tr>";
+        var day = res[0].WeekDay;
+        var counter = 0;
+
+        for (var i = 1; i < 10; i++) {
+
+            if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
+                tableString += "<tr><td> " + res[counter].lessonHours + "</td>";
+            }
+            else tableString += "<tr><td> - </td>";
+
+            if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
+
+                tableString += "<td>" + res[counter].LessonName + ", " + res[counter].ClassName + "</td>";
+                counter++;
+            }
+            tableString += "</tr>";
+        }
+        $('#looze').append(tableString);
+    }
 };

@@ -30,15 +30,16 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-    <script src="Login_AJAX.js"></script>
-    <script language="javascript" type="text/javascript">
+    <script src="Scripts/Login_AJAX.js"></script>
+    <script type="text/javascript">
 
         function SaveUserIdInLocalStorage() {
             var id = document.getElementById("IDTB").value;
             localStorage.setItem("UserID", id);
 
             GetUserImg(id, SaveUserImg);
-            GetUserFullName(id, SaveUserFullName)
+            GetUserFullName(id, SaveUserFullName);
+            //GetUserType(id, SaveUserType);
         };
 
         function SaveUserImg(results) {
@@ -49,7 +50,12 @@
         function SaveUserFullName(results) {
             res = $.parseJSON(results.d);
             localStorage.setItem("UserFullName", res);
-        }
+        };
+
+        //function SaveUserType(results) {
+        //    res = $.parseJSON(results.d);
+        //    localStorage.setItem("UserType", res);
+        //}
             
 
     </script>

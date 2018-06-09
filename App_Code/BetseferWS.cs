@@ -547,5 +547,29 @@ public class BetseferWS : System.Web.Services.WebService
         //   string bla = m.UpdateMessageAsRead(MessageCode);
         return m.UpdateMessageAsRead(MessageCode);
     }
+
+    //******************************************************************************************
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string LoadScheduleForToday(string Id, string userType)
+    {
+        TimeTable t = new TimeTable();
+
+        var schedule = t.LoadScheduleForToday(Id, userType);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringSchedule = js.Serialize(schedule);
+        return jsonStringSchedule;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetUserTypeById(string Id)
+    {
+        Users u = new Users();
+        string res = u.GetUserTypeById(Id);
+        return res;
+    }
 }
+
 

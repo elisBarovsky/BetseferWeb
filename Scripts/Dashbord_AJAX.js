@@ -30,10 +30,10 @@ function UpdateMessageAsRead(i) {
     });
 }
 
-function LoadScheduleForToday(Id, DisplaySchedule) { // do this
+function LoadScheduleForToday(obj, DisplaySchedule) {
     $.ajax({
         url: 'BetseferWS.asmx/LoadScheduleForToday',
-        data: JSON.stringify({ 'userId': Id }),
+        data: JSON.stringify({ 'Id': obj.Id, 'userType': obj.userType }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',

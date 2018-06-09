@@ -258,6 +258,11 @@ public class Users
         return db.GetUserType(UserID, password);
     }
 
+    public string GetUserTypeById(string UserID)
+    {
+        return db.GetUserTypeById(UserID);
+    }
+
     //public string GetPupilGroup(string UserID)
     //{
     //    return db.GetPupilGroup(UserID);
@@ -295,6 +300,7 @@ public class Users
     {
         return db.ChangePassword(userID, Password);
     }
+
 
     public string IsAlreadyLogin(string UserID, string password)
     {

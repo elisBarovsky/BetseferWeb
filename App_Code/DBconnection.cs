@@ -133,7 +133,7 @@ public class DBconnection
 
                     messages.Add(d);
                 }
-                
+
             }
             string SenderName;
 
@@ -2669,5 +2669,158 @@ public class DBconnection
         String cStr = "UPDATE Messages SET IsReadByRecipient = 1 WHERE MessageCode = '" + MessageCode + "'";
         string answer = ExecuteNonQuery(cStr).ToString();
         return answer;
+    }
+
+    //********************** add to application **********************************
+
+    public List<Dictionary<string, string>> LoadScheduleForToday(string Id, string userType)
+    {
+        //keep just one time table for a class. no history.
+        List<Dictionary<string, string>> TT = new List<Dictionary<string, string>>();
+        SqlCommand cmd; string cStr = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        switch (int.Parse(userType))
+        {
+            case 1: // admin
+                break;
+            case 2: // teacher
+                cStr = "select TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '"+2+"') as WeekDay, ClassTimeCode, CodeLesson, TeacherId from TimetableLesson where CodeWeekDay = 2 and TeacherId = '" + Id + "'";
+                break;
+            case 3: // parent
+                cStr = "";
+                break;
+            case 4:
+                cStr = "";
+                break; // pupil
+        }
+        try
+        {
+            cmd = CreateCommand(cStr, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            string lessonName, lessonHours, className;
+
+            while (dr.Read())
+            {
+                Dictionary<string, string> lesson = new Dictionary<string, string>();
+                lesson.Add("TimeTableCode", dr["TimeTableCode"].ToString());
+                className = GetClassNameByTimeTableCode(dr["TimeTableCode"].ToString());
+                lesson.Add("ClassName", className);
+
+                lesson.Add("WeekDay", dr["WeekDay"].ToString());
+                lesson.Add("ClassTimeCode", dr["ClassTimeCode"].ToString());
+
+                lessonHours = GetLessonHoursByCode(dr["ClassTimeCode"].ToString());
+                lesson.Add("lessonHours", lessonHours);
+                lessonName = GetLessonNameByLessonCode(dr["CodeLesson"].ToString());
+                lesson.Add("LessonName", lessonName);
+                lesson.Add("TeacherId", dr["TeacherId"].ToString());
+
+                TT.Add(lesson);
+            }
+            return TT;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public string GetLessonHoursByCode(string code)
+    {
+        SqlCommand cmd; string cStr = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        cStr = "select CONVERT(varchar, StartClassTime, 108) + ' - ' + CONVERT(varchar, EndClassTime, 108) as LessonHours from ClassTime where ClassTimeCode = '" + code +"'";
+
+        try
+        {
+            cmd = CreateCommand(cStr, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            string hours = "";
+
+            while (dr.Read())
+            {
+                hours = dr["LessonHours"].ToString();
+            }
+            return hours;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public string GetClassNameByTimeTableCode(string TTC)
+    {
+        SqlCommand cmd; string cStr = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        cStr = "select ClassCode from TimeTable where TimeTableCode = '"+ TTC +"'";
+
+        try
+        {
+            cmd = CreateCommand(cStr, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            string className = "";
+
+            while (dr.Read())
+            {
+                className = GetClassNameByCodeClass(int.Parse(dr["ClassCode"].ToString()));
+            }
+            return className;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
     }
 }

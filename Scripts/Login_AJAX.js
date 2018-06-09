@@ -30,3 +30,19 @@ function GetUserFullName(id, SaveUserFullName) {
         }
     });
 }
+
+function GetUserType(id, SaveUserType) {
+    $.ajax({
+        url: 'BetseferWS.asmx/GetUserTypeById',
+        data: JSON.stringify({ "Id": id }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            SaveUserType(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
