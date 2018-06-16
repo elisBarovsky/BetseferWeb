@@ -26,6 +26,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
     <script src="dist/js/jquery.min.js"></script>
 
     <script src="Scripts/Dashbord_JS.js"></script>
@@ -110,14 +112,12 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu p-ph-res">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <!--<asp:Image ID="UserImg1" class="user-image" />-->
                                 <img id="imgUser" src="" alt="userImg" class="user-image" />
                                 <span class="hidden-xs"></span>
                             </a>
                             <ul class="dropdown-menu right">
                                 <li class="user-header right">
                                     <div class="pull-left user-img">
-                                        <img id="imgUser1" src="" alt="userImg" class="img-responsive" />
                                         <img id="imgUser1" src="" alt="userImg" class="img-responsive" />
                                         <!--<asp:Image ID="UserImgimg" class="img-responsive" />-->
                                     </div>
@@ -187,23 +187,29 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header sty-one">
-                <h1></h1>
-            </section>
-
             <!-- Main content -->
-            <section class="content">
-                <div class="info-box">
-                    <div style="width: 50%">
-                        <h4>הודעות שלא נקראו</h4>
-                        <div>
-                            <h6 id="noNewMessages" style="color:gold; visibility:hidden">אין הודעות חדשות</h6>
-                            <table style="width:100%;" id="messagesTable" class="table table-hover no-wrap table-striped"></table>
+            <div class="content">
+                <div class="info-box" style="height:90%">
+
+                    <br /> <br />
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <!--  <h4>הודעות שלא נקראו</h4>-->
+                                    <div class="info-box">
+                                        <img src="Images/messageShake.gif" height="3" class="TDeshbordImg" />
+                                        <div>
+                                            <h6 id="noNewMessages" style="color:gold">אין הודעות חדשות</h6>
+                                            <table style="width:100%" id="messagesTable" class="table table-hover no-wrap table-striped"></table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -214,6 +220,10 @@
 
     <!-- template -->
     <script src="dist/js/niche.js"></script>
+
+
+
+
 
 </body>
 </html>

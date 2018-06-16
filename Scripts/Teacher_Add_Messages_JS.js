@@ -2,6 +2,12 @@
 
 $(document).ready(function () {
     var userID = localStorage.getItem("UserID");
+    var z = getUserImg();
+    var userName = localStorage.getItem("UserFullName");
+    document.getElementById('imgUser').src = z;
+    document.getElementById('imgUser1').src = z;
+    document.getElementById('UserName').innerHTML = userName;
+
     $("#childrenDDL").hide();
     $("#parentsDDL").hide();
     $("#teachersDDL").hide();
@@ -11,6 +17,10 @@ $(document).ready(function () {
     FillTeachers(FillTeachersInDDL);
 });
 
+function getUserImg() {
+    var img = localStorage.getItem("UserImg");
+    return img;
+};
 
 function FillClassesInDDL(results) {
 
