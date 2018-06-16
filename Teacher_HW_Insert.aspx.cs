@@ -63,7 +63,8 @@ public partial class Teacher_HW_Insert : System.Web.UI.Page
         Dictionary<string, string> Classes = new Dictionary<string, string>();
         ClassCode = ChooseClassDLL.SelectedValue;
         Subject s = new Subject();
-        string LessonsCode = s.GetSubjectCodeBySubjectName(ChooseLessonsDLL.SelectedValue);
+        //string LessonsCode = s.GetSubjectCodeBySubjectName(ChooseLessonsDLL.SelectedValue);
+        string LessonsCode = ChooseLessonsDLL.SelectedValue;
 
         string newBDATe = date1.Value;
 
@@ -98,9 +99,9 @@ public partial class Teacher_HW_Insert : System.Web.UI.Page
         string classCode = ChooseClassDLL.SelectedItem.Value;
         Subject s = new Subject();
         Dictionary<string, string> l = s.GetSubjectsByClassCode(classCode);
-        ChooseLessonsDLL.DataSource = l.Values;
-        ChooseLessonsDLL.DataBind();
-        ChooseLessonsDLL.Enabled = true;
+        //ChooseLessonsDLL.DataSource = l.Values;
+        //ChooseLessonsDLL.DataBind();
+        //ChooseLessonsDLL.Enabled = true;
     }
 
     protected void FillFirstItem(object sender, EventArgs e)
