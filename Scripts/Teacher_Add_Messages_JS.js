@@ -129,6 +129,8 @@ function ChooseDDL(userType) {
         if (userType === 'teachers') {
             $('#classDDL').val('0');
             $('#classDDL').hide();
+            $('#classLBL').hide();
+
         }
         else {
             $('#classDDL').val('0');
