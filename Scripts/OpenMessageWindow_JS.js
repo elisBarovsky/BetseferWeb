@@ -63,6 +63,15 @@ function SubmitMessage() {
     if (subject === "נושא" || subject === null) {
         subject = "";
     }
+
+    if (content === null) {
+        content === "";
+    }
+    
+    if ((subject === "" || subject === "נושא") && content === "") {
+        return;
+    }
+
         var message = new Object();
 
         message.MessageType = "private";
@@ -85,6 +94,9 @@ function AfterMessageSent(results) {
     var myImg =localStorage.getItem("UserImg").toString();
     var message = JSON.parse(localStorage.getItem("putMessageUp"));
     var myFullName = localStorage.getItem("UserFullName").toString();
+
+    var messageContent = message.Content.replace(/\n/g, "<br>");
+
     var str = '<div class="direct-chat-msg">' +
         '<div class="direct-chat-info clearfix">' +
         '<span class="direct-chat-name pull-left">' + myFullName + '</span>' +
@@ -93,7 +105,7 @@ function AfterMessageSent(results) {
         '<img class="direct-chat-img" alt="user image" src="' + myImg + '">' +
         '<div class="direct-chat-text">' +
         '<div><u>' + message.Subject + '</u></div>' +
-        message.Content + '</div > ' +
+        messageContent + '</div > ' +
         '</div > ';
    
     document.getElementById('addToHereNewMessage').innerHTML += str;
