@@ -2845,12 +2845,12 @@ span.label {
 	color: #5867dd;
 }
 .progress-description, .info-box-text {
-	display: block;
-	font-size: 13px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	color: #999;
+    display: block;
+    font-size: 13px;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #999;
 }
 .text-muted {
 	font-size: 14px;
@@ -5563,9 +5563,9 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e73f7c', endCo
 .table-responsive {
 	overflow: auto
 }
-.table-responsive>.table tr th, .table-responsive>.table tr td {
-	white-space: normal !important
-}
+    .table-responsive > .table tr th, .table-responsive > .table tr td {
+        white-space: pre-wrap !important
+    }
 }
 /*----- Morris Chart -----*/
 .morris-hover {
