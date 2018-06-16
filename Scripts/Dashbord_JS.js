@@ -45,16 +45,26 @@ function DisplayMessages(results) {
     }
     $('#messagesTable').append(tableString);
 };
-
+var a = null;
 
 function OpenMessage(obj) {
     localStorage.setItem("messageDetails", JSON.stringify(obj));
     var i = obj.MessageCode, iconID = obj.IconId;
     UpdateMessageAsRead(i);
     $(iconID).removeClass('fa fa-envelope-o').addClass('fa fa-envelope-open-o');
-    var a = window.open("OpenMessageWindow.html", "", "toolbar=no,scrollbars=yes,resizable=yes,top=50%,left=25%,width=500,height=600");
-    
+
+    a = window.open("OpenMessageWindow.html", "window", "toolbar=no,scrollbars=yes,resizable=yes,top=50%,left=25%,width=500,height=600,modal=yes");
+
+    a.focus();
+    document.onmousedown = a;
+    document.onkeyup = a;
+    document.onmousemove = a;
 };
+
+function parent_disable() {
+    if (a && !a.closed)
+        a.focus();
+}
 
 function DisplaySchedule(results) {
     res = $.parseJSON(results.d);
