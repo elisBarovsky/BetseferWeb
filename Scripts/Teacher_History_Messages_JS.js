@@ -36,16 +36,26 @@ function DisplayMessages(results) {
     }
     $('#messagesTable').append(tableString);
 };
-
+var a = null;
 function OpenMessage(obj) {
     localStorage.setItem("messageDetails", JSON.stringify(obj));
     var i = obj.MessageCode;
     UpdateMessageAsRead(i);
-    var a = window.open("OpenMessageWindow.html", "", "toolbar=no,scrollbars=yes,resizable=yes,top=50%,left=25%,width=500,height=600");
+    a = window.open("OpenMessageWindow.html", "window", "toolbar=no,scrollbars=yes,resizable=yes,top=50%,left=25%,width=500,height=600,modal=yes");
+
+    a.focus();
+    document.onmousedown = a;
+    document.onkeyup = a;
+    document.onmousemove = a;
     //window.open.href = "OpenMessageWindow.html";
   //  window.location.href = "OpenMessageWindow.html";
 };
 
+function parent_disable() {
+    if (a && !a.closed)
+        a.focus();
+
+}
 //function SuccsiedUpdateMessage(results) {
 //    var res = results.d;
 //};
