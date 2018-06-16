@@ -41,19 +41,19 @@ footer {
     padding-bottom: 1500px;
 }
 
-img {
+.TDeshbordImg {
     height: 150px;
     width: 200px;
 }
 
-#logo {
+/*#logo {
     height: 25px;
-}
+}*/
 
-.Plogo {
+/*.Plogo {
     margin: auto;
     height: 150px;
-}
+}*/
 
 #TXT_Info {
     height: 131px;
@@ -231,10 +231,10 @@ input {
     z-index: 9999;
 }
 
-#Picon {
+/*#Picon {
     height: 50px;
     margin: auto;
-}
+}*/
 
 #TimeTable {
     width: 100%;
