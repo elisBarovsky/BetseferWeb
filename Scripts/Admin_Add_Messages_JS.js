@@ -43,7 +43,7 @@ function FillPupilInDDL(results) {
     $('#childrenDDL').append(dynamicLy);
 
     for (var i = 0; i < res1.length; i++) {
-        dynamicLy = " <option value='" + res1[i].UserId + "' style='text- align:right'>" + res1[i].UserName + "</option> ";
+        dynamicLy = " <option value='" + res1[i].UserId + "' style='text- align:right'>" + res1[i].PupilName + "</option> ";
         $('#childrenDDL').append(dynamicLy);
     }
 

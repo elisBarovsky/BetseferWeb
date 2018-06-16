@@ -54,7 +54,7 @@ public class BetseferWS : System.Web.Services.WebService
         string classCode = c.GetClassCodeAccordingToClassFullName(classTotalName);
         Users u = new Users();
         List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
-        s = u.getPupilsByClassCode(classCode);
+        s = u.getPupilsByClassCodeDictionary(classCode);
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(s);
         return jsonString;

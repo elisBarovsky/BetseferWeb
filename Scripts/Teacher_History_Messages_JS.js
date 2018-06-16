@@ -16,7 +16,7 @@ function getUserImg() {
 
 function DisplayMessages(results) {
 
-      res = $.parseJSON(results.d);
+    res = $.parseJSON(results.d);
 
     $('#messagesTable').empty();
 
