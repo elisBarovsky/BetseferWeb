@@ -62,13 +62,13 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GetPupilsByAndTeachers(string TeacherID)
+    public string GetPupilsByAndTeachers(string classCode)
     {
         // Classes c = new Classes();
         //string classCode = c.GetClassCodeAccordingToClassFullName(TeacherID);
         Users u = new Users();
         List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
-        s = u.getPupilsAndTeachers(TeacherID);
+        s = u.getPupilsByClassCodeDictionary(classCode);
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(s);
         return jsonString;

@@ -252,6 +252,17 @@ public class DBconnectionTeacher
         }
     }
 
+    public int HWDone(string PupilID, bool IsDone, string HWCode)
+    {
+        int Done = 0;
+        if (IsDone)
+        {
+            Done = 1;
+        }
+        string cStr = "UPDATE [dbo].[HWPupil] SET [IsDone] =" + Done + " where HWCode= " + HWCode + " and PupilID ='" + PupilID + "'";
+        return ExecuteNonQuery(cStr);
+    }
+
     public DataTable FillAllHomeWork(string Id)//WebService
     {
         string selectSTR = "SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha " +
