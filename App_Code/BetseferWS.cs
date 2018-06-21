@@ -48,13 +48,41 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GetPupilsByClassTotalName(string classTotalName)
+    public string GetPupilsByClassTotalName(string TeacherID)
     {
-        Classes c = new Classes();
-        string classCode = c.GetClassCodeAccordingToClassFullName(classTotalName);
+       // Classes c = new Classes();
+        //string classCode = c.GetClassCodeAccordingToClassFullName(TeacherID);
         Users u = new Users();
         List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
-        s = u.getPupilsByClassCodeDictionary(classCode);
+        s = u.getPupilsByClassCode(TeacherID);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(s);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetPupilsByAndTeachers(string TeacherID)
+    {
+        // Classes c = new Classes();
+        //string classCode = c.GetClassCodeAccordingToClassFullName(TeacherID);
+        Users u = new Users();
+        List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
+        s = u.getPupilsAndTeachers(TeacherID);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(s);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetParentsByAndTeachers(string TeacherID)
+    {
+        // Classes c = new Classes();
+        //string classCode = c.GetClassCodeAccordingToClassFullName(TeacherID);
+        Users u = new Users();
+        List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
+        s = u.getParentsAndTeachers(TeacherID);
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(s);
         return jsonString;
@@ -437,6 +465,33 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string CheckedHW(string PupilID, bool IsDone, string HWCode)
+    {
+        HomeWork HW = new HomeWork();
+        int HWs = HW.HWDone( PupilID,  IsDone,  HWCode);
+        string result = "";
+        if (IsDone==true & HWs>0)
+        {
+            result = "well done!";
+        }
+        else if (IsDone == true & HWs < 0 || IsDone == false & HWs < 0)
+        {
+            result = "something went wrong";
+        }
+        else if (IsDone == false & HWs > 0)
+        {
+            result = "updated";
+        }
+
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(result);
+        return jsonStringFillHW;
+
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string FillGrades(string UserID)
     {
         Grades UserGrades = new Grades();
@@ -504,8 +559,19 @@ public class BetseferWS : System.Web.Services.WebService
         Messages message = new Messages();
         int answer; string stringAnswer = "bad";
         Classes c = new Classes();
-        string classCode = c.GetClassCodeAccordingToClassFullName(m.UserClass);
-        m.UserClass = classCode;
+        if (m.UserClass=="null" & m.UserType== "pupils")
+        {
+            m.UserClass = c.GetClassCodeByUserID(m.SenderID);
+            //m.UserClass = classCode;
+        }
+        else if (m.UserClass == "null" & m.UserType == "parents")
+        {
+            Dictionary<string, string> ClassAndParent =c.GetClassCodeAndParentIDByPupilID(m.SenderID);
+
+            m.SenderID = ClassAndParent["ParentID"]; 
+            m.UserClass = ClassAndParent["codeClass"];
+        }
+
         if (m.MessageType == "private")
         {
             answer = message.SendPrivateMessage(m);

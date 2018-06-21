@@ -40,8 +40,18 @@ public class Classes
         return db.ClassesExites(ClassOt, ClassNum);
     }
 
-    public string GetClassCodeAccordingToClassFullName(string classTotalName)
+    public string GetClassCodeAccordingToClassFullName(string TeacherID)
     {
-        return db.GetClassCodeAccordingToClassFullName(classTotalName);
+        return db.GetClassCodeAccordingToClassFullName(TeacherID);
+    }
+
+    public string GetClassCodeByUserID(string UserID)
+    {
+        return db.GetClassCodeByUserID(UserID);
+    }
+
+    public Dictionary<string, string> GetClassCodeAndParentIDByPupilID(string UserID)
+    {
+        return db.GetClassCodeAndParentIDByPupilID(UserID);
     }
 }
