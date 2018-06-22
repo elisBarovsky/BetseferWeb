@@ -11,24 +11,10 @@ function onDeviceReady() {
             collapsible: true
         });
     });
-
    
     GetUserGrades(Grade, renderGrades);
-
-    //function LetsClick(getID) {
-    //    alert(getID);
-    //}
-   
+       
 }
-
-
-$(document).ready('#button').click(function () {
-    //localStorage.setItem("ChoosenExamID", this.id); //saving in localS
-  //  var id = $(this).attr('id');
- //   alert($(this).prop("value"));
-
- //   alert('נלחץ על הגרף');
-});
 
 function renderGrades(results) {
     res = $.parseJSON(results.d);

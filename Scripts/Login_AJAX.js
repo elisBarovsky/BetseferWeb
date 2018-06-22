@@ -6,10 +6,10 @@ if (isCordovaApp) {
 else
     path = "";
 
-function GetUserImg(id, SaveUserImg) {
+function GetUserImgWeb(id, SaveUserImg) {
 
     $.ajax({
-        url: path+'BetseferWS.asmx/GetUserImg',
+        url: path+'BetseferWS.asmx/GetUserImgWeb',
         data: JSON.stringify({"UserID": id}),
         type: 'POST',
         dataType: "json",
@@ -23,6 +23,23 @@ function GetUserImg(id, SaveUserImg) {
     });
 }
 
+function GetUserImg(id, SaveUserImg) {
+
+    $.ajax({
+        url: path + 'BetseferWS.asmx/GetUserImg',
+        data: JSON.stringify({ "UserID": id }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            SaveUserImg(results);
+        },
+        error: function (request, error) {
+
+        }
+    });
+
+}
 function GetUserFullName(id, SaveUserFullName) {
     $.ajax({
         url: path+'BetseferWS.asmx/GetUserFullName',
@@ -41,7 +58,7 @@ function GetUserFullName(id, SaveUserFullName) {
 
 function GetUserType(id, SaveUserType) {
     $.ajax({
-        url: 'BetseferWS.asmx/GetUserTypeById',
+        url: path+'BetseferWS.asmx/GetUserTypeById',
         data: JSON.stringify({ "Id": id }),
         type: 'POST',
         dataType: "json",

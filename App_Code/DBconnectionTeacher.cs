@@ -932,6 +932,17 @@ public class DBconnectionTeacher
         return ExecuteNonQuery(cStr);
     }
 
+    public int HWDone(string PupilID, bool IsDone, string HWCode)
+    {
+        int Done = 0;
+        if (IsDone)
+        {
+            Done = 1;
+        }
+        string cStr = "UPDATE [dbo].[HWPupil] SET [IsDone] =" + Done + " where HWCode= " + HWCode + " and PupilID ='" + PupilID + "'";
+        return ExecuteNonQuery(cStr);
+    }
+
     public int InserHomeWork(string LessonsCode, string HWInfo, string TeacherID, string CodeClass, string HWDate, bool IsLehagasha)
     {
         int num = 0;
@@ -1093,17 +1104,6 @@ public class DBconnectionTeacher
         }
     }
 
-    public int HWDone(string PupilID, bool IsDone, string HWCode)
-    {
-        int Done = 0;
-        if (IsDone)
-        {
-            Done = 1;
-        }
-        string cStr = "UPDATE [dbo].[HWPupil] SET [IsDone] =" + Done + " where HWCode= " + HWCode + " and PupilID ='" + PupilID + "'";
-        return ExecuteNonQuery(cStr);
-
-    }
     public string GetSubjectCodeBySubjectName(string subjectName)
     {
         String selectSTR = "SELECT CodeLesson FROM Lessons where LessonName  = '" + subjectName + "'";
