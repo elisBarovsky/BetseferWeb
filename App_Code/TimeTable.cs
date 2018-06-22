@@ -52,10 +52,10 @@ public class TimeTable
         return db.GetTimeTableAcordingToClassCode(classCode);
     }
 
-    //public List<Dictionary<string, string>> GetTimeTableAcordingToClassCodeForMobile(int classCode)
-    //{
-    //    return db.GetTimeTableAcordingToClassCodeForMobile(classCode);
-    //}
+    public List<Dictionary<string, string>> GetTimeTableAcordingToClassCodeForMobile(int classCode)
+    {
+        return db.GetTimeTableAcordingToClassCodeForMobile(classCode);
+    }
 
     public bool IsClassHasTimeTable(string classCodee)
     {
@@ -94,8 +94,9 @@ public class TimeTable
 
     //********************** add to application **********************************
 
-    public List<Dictionary<string, string>> LoadScheduleForToday(string Id, string  userType)
+    public List<Dictionary<string, string>> LoadScheduleForToday(string Id, string  userType, int? day = null)
     {
-        return db.LoadScheduleForToday(Id, userType);
+        return db.LoadScheduleForToday(Id, userType, day);
     }
+
 }

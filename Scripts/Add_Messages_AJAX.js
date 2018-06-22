@@ -6,11 +6,12 @@ if (isCordovaApp) {
 else
     path = "";
 
-function LoadClasses(FillClassesInDDL) {
+
+function LoadClasses(TeacherID, FillClassesInDDL) {
 
     $.ajax({
-        url: path+'BetseferWS.asmx/GetClassesFullName',
-        data: JSON.stringify(),
+        url: path+'BetseferWS.asmx/GetClassesByTeacherId',
+        data: JSON.stringify({ 'TeacherID': TeacherID}),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
@@ -23,17 +24,16 @@ function LoadClasses(FillClassesInDDL) {
     });
 }
 
-function FillPupils(classTotalName, FillUsersInDDL) {
+function FillPupils(TeacherID, FillTeachersInDDL) {
 
-    var dataString = JSON.stringify(classTotalName);
     $.ajax({
-        url: path+'BetseferWS.asmx/GetPupilsByClassTotalName',
-        data: JSON.stringify({ 'classTotalName': classTotalName }),
+        url: path + 'BetseferWS.asmx/GetPupilsByClassTotalName',
+        data:  JSON.stringify({ 'TeacherID': TeacherID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            FillPupilInDDL(results);
+            FillTeachersInDDL(results);
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');
@@ -41,17 +41,16 @@ function FillPupils(classTotalName, FillUsersInDDL) {
     });
 }
 
-function FillParents(classTotalName, FillUsersInDDL) {
+function FillPupilsAndTeacher(TeacherID, FillTeachersInDDL) {
 
-    var dataString = JSON.stringify(classTotalName);
     $.ajax({
-        url: path+'BetseferWS.asmx/GetParentsByClassTotalName',
-        data: JSON.stringify({ 'classTotalName': classTotalName }),
+        url: path +'BetseferWS.asmx/GetPupilsByAndTeachers',
+        data: JSON.stringify({ 'TeacherID': TeacherID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            FillParentsInDDL(results);
+            FillTeachersInDDL(results);
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');
@@ -59,11 +58,11 @@ function FillParents(classTotalName, FillUsersInDDL) {
     });
 }
 
-function FillTeachers(FillTeachersInDDL) {
+function FillParentsAndTeacher(TeacherID, FillTeachersInDDL) {
 
     $.ajax({
-        url: path+'BetseferWS.asmx/GetTeachers2',
-        data: JSON.stringify(),
+        url: path + 'BetseferWS.asmx/GetParentsByAndTeachers',
+        data: JSON.stringify({ 'TeacherID': TeacherID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
@@ -79,7 +78,7 @@ function FillTeachers(FillTeachersInDDL) {
 function SubmitMessageAjax(message, AfterMessageSent) {
     var dataString = JSON.stringify(message);
     $.ajax({
-        url: path+'BetseferWS.asmx/SubmitMessage',
+        url: path +'BetseferWS.asmx/SubmitMessage',
         data: JSON.stringify({ 'm': message }),
         type: 'POST',
         dataType: "json",

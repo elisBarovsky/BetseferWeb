@@ -37,7 +37,7 @@
             var id = document.getElementById("IDTB").value;
             localStorage.setItem("UserID", id);
 
-            GetUserImg(id, SaveUserImg);
+            GetUserImgWeb(id, SaveUserImg);
             GetUserFullName(id, SaveUserFullName);
             //GetUserType(id, SaveUserType);
         };

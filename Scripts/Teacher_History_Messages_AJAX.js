@@ -1,6 +1,15 @@
-﻿function LoadAllMessagesById(teacherId, DisplayMessages) {
+﻿var path = "";
+var isCordovaApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+if (isCordovaApp) {
+    path = "https://proj.ruppin.ac.il/bgroup52/Test2/tar4/";
+}
+else
+    path = "";
+
+
+function LoadAllMessagesById(teacherId, DisplayMessages) {
     $.ajax({
-        url: 'BetseferWS.asmx/GetMessagesByUserId',
+        url: path+'BetseferWS.asmx/GetMessagesByUserId',
         data: JSON.stringify({ 'userId': teacherId }),
         type: 'POST',
         dataType: "json",
@@ -16,7 +25,7 @@
 
 function UpdateMessageAsRead(i) {
     $.ajax({
-        url: 'BetseferWS.asmx/SetMessageAsRead',
+        url: path+ 'BetseferWS.asmx/SetMessageAsRead',
         data: JSON.stringify({ 'MessageCode': i }),
         type: 'POST',
         dataType: "json",

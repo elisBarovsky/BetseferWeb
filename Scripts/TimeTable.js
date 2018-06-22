@@ -6,6 +6,7 @@ function onDeviceReady() {
     localStorage.setItem("LastVisit", "TimeTable.html"); //saving in localS
   //  Grade.ID = localStorage.getItem("PupilID");
 
+        day = 0;
  
     if (localStorage.getItem("UserType") !== "Teacher") {
         Pupil = JSON.parse(localStorage.getItem("child"));
