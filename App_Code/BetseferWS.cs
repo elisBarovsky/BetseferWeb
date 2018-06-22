@@ -636,6 +636,33 @@ public class BetseferWS : System.Web.Services.WebService
         string res = u.GetUserTypeById(Id);
         return res;
     }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetClassesFullName_JustClassesWithPupils()
+    {
+        Classes c = new Classes();
+        var res = c.GetClassesFullName_JustClassesWithPupils();
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringSchedule = js.Serialize(res);
+        return jsonStringSchedule;
+    }
+
+
+    //***********************************************************************************
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetPupilsByClassTotalName_TheGoodOne(string ClassTotalName)
+    {
+        Classes c = new Classes(); Users u = new Users();
+        string classCode = c.GetClassCodeAccordingToClassFullName(ClassTotalName);
+
+        List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
+        s = u.getPupilsByClassCode(classCode);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(s);
+        return jsonString;
+    }
 }
 
 

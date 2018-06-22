@@ -198,9 +198,9 @@ public class Users
         return db.getPupils(classCode);
     }
 
-    public List<Dictionary<string, string>> getPupilsByClassCode(string TeacherID)
+    public List<Dictionary<string, string>> getPupilsByClassCode(string ClassCode)
     {
-        return db.getPupilsByClassCode(TeacherID);
+        return db.getPupilsByClassCodeDictionary(ClassCode);
     }
 
     public List<Dictionary<string, string>> getPupilsByClassCodeGrades(string ClassCode)

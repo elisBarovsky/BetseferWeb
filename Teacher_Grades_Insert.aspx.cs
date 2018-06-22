@@ -15,10 +15,10 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
         //    Response.Redirect("login.aspx");
         //}
 
-        //if (!IsPostBack)
-        //{
+        if (!IsPostBack)
+        {
             LoadUser();
-        //}
+        }
     }
 
     public void LoadUser()

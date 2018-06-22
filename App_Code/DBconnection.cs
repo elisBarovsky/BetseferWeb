@@ -3183,4 +3183,43 @@ public class DBconnection
             }
         }
     }
+
+    public List<string> GetClassesFullName_JustClassesWithPupils()
+    {
+        String selectSTR = "select distinct Class.[TotalName], Class.[OtClass], Class.[NumClass] from [dbo].[Class] INNER JOIN [dbo].[Pupil] ON Class.ClassCode = Pupil.CodeClass order by OtClass, NumClass";
+        string Ot;
+        List<string> l = new List<string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                Ot = dr["TotalName"].ToString();
+                l.Add(Ot);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 }

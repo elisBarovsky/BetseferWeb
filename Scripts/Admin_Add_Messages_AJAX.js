@@ -1,7 +1,7 @@
 ﻿function LoadClasses(FillClassesInDDL) {
 
     $.ajax({
-        url: 'BetseferWS.asmx/GetClassesFullName',
+        url: 'BetseferWS.asmx/GetClassesFullName_JustClassesWithPupils',
         data: JSON.stringify(),
         type: 'POST',
         dataType: "json",
@@ -19,8 +19,8 @@ function FillPupils(classTotalName, FillUsersInDDL) {
 
     var dataString = JSON.stringify(classTotalName);
     $.ajax({
-        url: 'BetseferWS.asmx/GetPupilsByClassTotalName',
-        data: JSON.stringify({ 'classTotalName': classTotalName }),
+        url: 'BetseferWS.asmx/GetPupilsByClassTotalName_TheGoodOne',
+        data: JSON.stringify({ 'ClassTotalName': classTotalName }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
