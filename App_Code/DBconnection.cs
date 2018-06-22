@@ -2100,7 +2100,7 @@ public class DBconnection
 
     public Dictionary<string, string> FillClassOt()
     {
-        String selectSTR = "SELECT ClassCode,TotalName FROM Class ";
+        String selectSTR = "SELECT ClassCode,TotalName FROM Class order by TotalName";
         string ClassCode, TotalName;
         Dictionary<string, string> l = new Dictionary<string, string>();
         try

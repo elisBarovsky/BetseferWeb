@@ -199,7 +199,7 @@
                                             <asp:SqlDataSource ID="DDLclassesAccordingToTeacherID" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT  distinct  dbo.Class.ClassCode, dbo.Class.TotalName
 FROM   dbo.TimetableLesson INNER JOIN  dbo.Timetable ON dbo.TimetableLesson.TimeTableCode = dbo.Timetable.TimeTableCode INNER JOIN
 dbo.Class ON dbo.Timetable.ClassCode = dbo.Class.ClassCode AND dbo.Timetable.ClassCode = dbo.Class.ClassCode
-where dbo.TimetableLesson.TeacherId=@TID">
+where dbo.TimetableLesson.TeacherId=@TID order by dbo.Class.TotalName">
                                                 <SelectParameters>
                                                     <asp:CookieParameter CookieName="UserID" Name="TID" />
                                                 </SelectParameters>
