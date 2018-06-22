@@ -394,7 +394,6 @@ public class BetseferWS : System.Web.Services.WebService
         string PupilClassCode = PupilClass.GetPupilOtClass(PupilID);
         TimeTable TimeTableByClassCode = new TimeTable();
 
-        List<Dictionary<string, string>> ls = TimeTableByClassCode.GetTimeTableAcordingToClassCode(int.Parse(PupilClassCode));
         List<Dictionary<string, string>> ls = TimeTableByClassCode.GetTimeTableAcordingToClassCodeForMobile(int.Parse(PupilClassCode));
 
         JavaScriptSerializer js = new JavaScriptSerializer();
@@ -649,7 +648,6 @@ public class BetseferWS : System.Web.Services.WebService
         string res = u.GetUserTypeById(Id);
         return res;
     }
-<<<<<<< HEAD
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -677,9 +675,6 @@ public class BetseferWS : System.Web.Services.WebService
         string jsonString = js.Serialize(s);
         return jsonString;
     }
-}
-=======
->>>>>>> 514faef40959a3d7c573cbed3a88fc3f5c9c4560
 
     
             [WebMethod]

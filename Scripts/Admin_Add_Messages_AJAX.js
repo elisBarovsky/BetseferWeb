@@ -9,11 +9,8 @@ else
 function LoadClasses(FillClassesInDDL) {
 
     $.ajax({
-<<<<<<< HEAD
         url: 'BetseferWS.asmx/GetClassesFullName_JustClassesWithPupils',
-=======
-        url: path+'BetseferWS.asmx/GetClassesFullName',
->>>>>>> 514faef40959a3d7c573cbed3a88fc3f5c9c4560
+        url: path +'BetseferWS.asmx/GetClassesFullName_JustClassesWithPupils',
         data: JSON.stringify(),
         type: 'POST',
         dataType: "json",
@@ -31,13 +28,10 @@ function FillPupils(classTotalName, FillUsersInDDL) {
 
     var dataString = JSON.stringify(classTotalName);
     $.ajax({
-<<<<<<< HEAD
         url: 'BetseferWS.asmx/GetPupilsByClassTotalName_TheGoodOne',
         data: JSON.stringify({ 'ClassTotalName': classTotalName }),
-=======
-        url: path+'BetseferWS.asmx/GetPupilsByClassTotalName',
-        data: JSON.stringify({ 'classTotalName': classTotalName }),
->>>>>>> 514faef40959a3d7c573cbed3a88fc3f5c9c4560
+        url: path +'BetseferWS.asmx/GetPupilsByClassTotalName_TheGoodOne',
+        data: JSON.stringify({ 'ClassTotalName': classTotalName }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
