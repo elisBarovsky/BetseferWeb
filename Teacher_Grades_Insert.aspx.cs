@@ -56,7 +56,7 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
 
         List<Dictionary<string, string>> pupils = new List<Dictionary<string, string>>();
         Users u = new Users();
-        pupils = u.getPupilsByClassCode(ClassCode);
+        pupils = u.getPupilsByClassCodeGrades(ClassCode);
         string[] titles = new string[] {  "ת.ז.", "שם", "ציון" };
         TableRow tr = new TableRow();
         int counter = 0;

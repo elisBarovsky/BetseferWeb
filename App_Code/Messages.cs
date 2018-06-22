@@ -82,4 +82,7 @@ public class Messages
     {
         return db.UpdateMessageAsRead(MessageCode);
     }
+
+   
+
 }

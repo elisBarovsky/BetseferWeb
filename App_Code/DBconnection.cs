@@ -1582,6 +1582,51 @@ public class DBconnection
         }
     }
 
+    public List<Dictionary<string, string>> getPupilsByClassCodeGrades(string ClassCode)
+    {
+        String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS PupilName" +
+        "  FROM dbo.Pupil INNER JOIN   dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID   where dbo.Pupil.CodeClass='" + ClassCode + "'";
+
+
+        List< Dictionary<string, string>> l = new List<Dictionary<string, string>>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                Dictionary<string, string> p = new Dictionary<string, string>();
+                p["UserId"] = dr["UserID"].ToString();
+                p["UserName"] = dr["PupilName"].ToString();
+
+                l.Add(p);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+
+    }
     public List<Dictionary<string, string>> getPupilsByClassCode(string TeacherID)
     {
         String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS PupilName" +
@@ -2184,7 +2229,8 @@ public class DBconnection
         //keep just one time table for a class. no history.
         List<Dictionary<string, string>> TT = new List<Dictionary<string, string>>();
         SqlCommand cmd; string cStr;
-        cStr = "select [dbo].[TimetableLesson].TimeTableCode, [dbo].[TimetableLesson].CodeWeekDay, [dbo].[TimetableLesson].ClassTimeCode, [dbo].[TimetableLesson].CodeLesson, [dbo].[TimetableLesson].TeacherId from [dbo].[TimetableLesson] inner join[dbo].[Timetable] on[dbo].[TimetableLesson].TimeTableCode = [dbo].[Timetable].TimeTableCode where[dbo].[Timetable].ClassCode = " + classCode;
+        cStr = "select [dbo].[TimetableLesson].TimeTableCode, [dbo].[TimetableLesson].CodeWeekDay, [dbo].[TimetableLesson].ClassTimeCode, [dbo].[TimetableLesson].CodeLesson, [dbo].[TimetableLesson].TeacherId from [dbo].[TimetableLesson] inner join[dbo].[Timetable] on[dbo].[TimetableLesson].TimeTableCode = [dbo].[Timetable].TimeTableCode where[dbo].[Timetable].ClassCode = " + classCode +
+            " order by [dbo].[TimetableLesson].ClassTimeCode";
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -2885,6 +2931,49 @@ public class DBconnection
             }
         }
     }
+ public List<string> GetUserImgAndFullNameByUserID(string UserID)
+    {
+
+         List<string> UserInfo = new List<string>();
+        String selectSTR = "SELECT UserFName + ' ' + UserLName as UserName, UserImg FROM dbo.Users where UserID = '" + UserID + "'";
+      // string UserImg = "";
+       // string UserName = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                UserInfo.Add(dr["UserName"].ToString());
+                UserInfo.Add(dr["UserImg"].ToString());
+            }
+            return UserInfo;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+
+
 
     public string UpdateMessageAsRead(string MessageCode)
     {

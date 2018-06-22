@@ -15,7 +15,7 @@ public class DBconnectionTeacher
     public SqlDataAdapter da;
     public DataTable dt;
     SqlConnection con = new SqlConnection();
-    LogWriter Log = new LogWriter();
+
     public DBconnectionTeacher()
     {
     }
@@ -46,16 +46,15 @@ public class DBconnectionTeacher
         string selectSTR = " SELECT dbo.Pupil.UserID, (dbo.Users.UserFName +' '+ dbo.Users.UserLName) as PupilName, dbo.Grades.Grade" +
                         " FROM dbo.Pupil INNER JOIN dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID Full outer JOIN dbo.Grades ON dbo.Users.UserID = dbo.Grades.PupilID where dbo.Pupil.CodeClass = '" + ClassOtID + "'";
         DataTable dtt = new DataTable();
-        DataSet ds;
+        DataSet ds ;
         try
         {
             con = connect("Betsefer"); // create the connection
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
 
         try
@@ -63,15 +62,12 @@ public class DBconnectionTeacher
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con);
             ds = new DataSet("PupilsDS");
             daa.Fill(ds);
-            return dtt = ds.Tables[0];
+            return  dtt = ds.Tables[0];
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -96,9 +92,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
 
         try
@@ -110,11 +105,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -122,7 +114,7 @@ public class DBconnectionTeacher
             {
                 con.Close();
             }
-
+            
         }
     }
 
@@ -140,9 +132,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
 
         try
@@ -154,11 +145,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -174,7 +162,7 @@ public class DBconnectionTeacher
         string selectSTR = " SELECT  dbo.Pupil.UserID as 'תעודת זהות תלמיד' ,(dbo.Users.UserFName +' '+ dbo.Users.UserLName) as 'שם תלמיד' , dbo.NoteType.NoteName AS 'הערת משמעת', dbo.Lessons.LessonName AS 'שיעור', dbo.GivenNotes.NoteDate AS 'תאריך' ,dbo.GivenNotes.Comment AS 'הערת מורה'" +
                           " FROM  dbo.Users inner JOIN dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID inner JOIN dbo.GivenNotes " +
                           "ON dbo.Users.UserID = dbo.GivenNotes.PupilID  inner JOIN dbo.NoteType ON dbo.GivenNotes.CodeNoteType = dbo.NoteType.CodeNoteType  INNER JOIN  dbo.Lessons ON dbo.GivenNotes.LessonsCode = dbo.Lessons.CodeLesson " +
-                          " where " + FilterType + "='" + ValueFilter + "' and dbo.GivenNotes.TeacherID = '" + teacherID  + "'";
+                          " where " + FilterType + "='" + ValueFilter + "' and dbo.GivenNotes.TeacherID = '" + teacherID + "'";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
@@ -183,9 +171,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
 
         try
@@ -197,11 +184,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -224,9 +208,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
         try
         {
@@ -237,64 +220,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
-        }
-        finally
-        {
-            if (con != null)
-            {
-                con.Close();
-            }
-        }
-    }
-
-    public int HWDone(string PupilID, bool IsDone, string HWCode)
-    {
-        int Done = 0;
-        if (IsDone)
-        {
-            Done = 1;
-        }
-        string cStr = "UPDATE [dbo].[HWPupil] SET [IsDone] =" + Done + " where HWCode= " + HWCode + " and PupilID ='" + PupilID + "'";
-        return ExecuteNonQuery(cStr);
-    }
-
-    public DataTable FillAllHomeWork(string Id)//WebService
-    {
-        string selectSTR = "SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha " +
-            "FROM   dbo.HomeWork INNER JOIN  dbo.Class ON dbo.HomeWork.CodeClass = dbo.Class.ClassCode INNER JOIN " +
-            "  dbo.Pupil ON dbo.Class.ClassCode = dbo.Pupil.CodeClass INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson " +
-            "  where UserID = '" + Id + "'";
-        DataTable dtt = new DataTable();
-        DataSet ds;
-        try
-        {
-            con = connect("Betsefer"); // create the connection
-        }
-        catch (Exception ex)
-        {
-            Log.LogWrite(ex.ToString());
-            // write to log
-            //  throw (ex);
-        }
-        try
-        {
-            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
-            ds = new DataSet("HWDS");
-            daa.Fill(ds);
-            return dtt = ds.Tables[0];
-        }
-        catch (Exception ex)
-        {
-            Log.LogWrite(ex.ToString());
-            // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -307,10 +234,10 @@ public class DBconnectionTeacher
 
     public DataTable GivenAllNotes(string PupilID) //webService
     {
-        string selectSTR = " SELECT dbo.GivenNotes.CodeGivenNote, dbo.GivenNotes.Comment , dbo.GivenNotes.NoteDate , dbo.Lessons.LessonName , dbo.NoteType.NoteName " +
+        string selectSTR = " SELECT dbo.GivenNotes.CodeGivenNote, dbo.GivenNotes.Comment , dbo.GivenNotes.NoteDate , dbo.Lessons.LessonName , dbo.NoteType.NoteName ,(select ( UserFName+ ' '+ UserLName)  from dbo.Users where [UserID]= dbo.GivenNotes.TeacherID) as Teacher_FullName" +
                           " FROM  dbo.Users inner JOIN dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID inner JOIN dbo.GivenNotes " +
                           "ON dbo.Users.UserID = dbo.GivenNotes.PupilID  inner JOIN dbo.NoteType ON dbo.GivenNotes.CodeNoteType = dbo.NoteType.CodeNoteType  INNER JOIN  dbo.Lessons ON dbo.GivenNotes.LessonsCode = dbo.Lessons.CodeLesson " +
-                          " where dbo.Pupil.UserID='" + PupilID + "'";
+                          " where dbo.Pupil.UserID='" + PupilID + "'order by dbo.GivenNotes.NoteDate desc";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
@@ -319,9 +246,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
         try
         {
@@ -332,11 +258,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -361,9 +284,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
         try
         {
@@ -374,11 +296,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -402,9 +321,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
         try
         {
@@ -415,11 +333,45 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 
+    public DataTable FillAllHomeWork(string Id)//WebService
+    {
+        string selectSTR = "SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha ,(select ( UserFName+ ' '+ UserLName)  from dbo.Users where [UserID]= dbo.HomeWork.TeacherID) as Teacher_FullName , dbo.HWPupil.IsDone" +
+            " FROM  dbo.HomeWork INNER JOIN  dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson " +
+            "  where dbo.HWPupil.PupilID = '" + Id + "' order by dbo.HomeWork.HWGivenDate desc";
+        DataTable dtt = new DataTable();
+        DataSet ds;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
+            ds = new DataSet("HWDS");
+            daa.Fill(ds);
+            return dtt = ds.Tables[0];
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
         }
         finally
         {
@@ -446,10 +398,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-
+            throw (ex);
         }
 
         try
@@ -465,11 +415,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -495,9 +442,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
 
         try
@@ -515,11 +461,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -544,9 +487,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
 
         try
@@ -564,11 +506,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -595,9 +534,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
 
         try
@@ -615,11 +553,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -646,9 +581,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
 
         try
@@ -664,11 +598,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -693,9 +624,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
         try
         {
@@ -706,11 +636,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -735,9 +662,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
         try
         {
@@ -748,11 +674,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
-
+            throw (ex);
         }
         finally
         {
@@ -774,7 +697,7 @@ public class DBconnectionTeacher
         }
         else //parent -> 3
         {
-             selectSTR = "SELECT dbo.Users.PhoneNumber,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'שם הורה'"+
+             selectSTR = "SELECT dbo.Users.PhoneNumber  as 'מספר סלולרי',( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'שם הורה'" +
                                 " FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID"+
                                 " where dbo.PupilsParent.codeClass = '"+ ClassFilter + "'";
         }
@@ -787,9 +710,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
+            throw (ex);
         }
         try
         {
@@ -800,10 +722,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         finally
         {
@@ -838,10 +758,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         try
         {
@@ -852,10 +770,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         finally
         {
@@ -876,28 +792,24 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         try
         {
-            SqlCommand cmd = new SqlCommand(selectSTR, con);
-            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+             SqlCommand cmd = new SqlCommand(selectSTR, con);
+             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
-            while (dr.Read())
-            {
-                type = dr["CodeUserType"].ToString();
-            }
+             while (dr.Read())
+             {
+                  type = dr["CodeUserType"].ToString();
+             }
             return type;
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         finally
         {
@@ -919,10 +831,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         try
         {
@@ -949,10 +859,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         finally
         {
@@ -973,7 +881,7 @@ public class DBconnectionTeacher
     {
         //SqlConnection conGrades = new SqlConnection();
         //conGrades = connect("Betsefer");
-        string cStr = "INSERT INTO [dbo].[Grades]  ([PupilID] ,[TeacherID],[CodeLesson],[ExamDate],[Grade])   VALUES ('" + PupilID + "','" + TeacherID + "','" + CodeLesson + "' ,'" + ExamDate + "' ," + Grade + ")";
+        string cStr = "INSERT INTO [dbo].[Grades]  ([PupilID] ,[TeacherID],[CodeLesson],[ExamDate],[Grade])   VALUES ('"+ PupilID + "','"+ TeacherID + "','"+ CodeLesson + "' ,'"+ ExamDate + "' ,"+ Grade + ")";
         return ExecuteNonQuery(cStr);
     }
 
@@ -988,30 +896,26 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         try
         {
             SqlCommand cmd = new SqlCommand(selectSTR, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             l.Add("0", "בחר");
-            while (dr.Read())
-            {
-                CodeNoteType = dr["CodeNoteType"].ToString();
-                NoteName = dr["NoteName"].ToString();
-                l.Add(CodeNoteType, NoteName);
-            }
+                while (dr.Read())
+                {
+                    CodeNoteType = dr["CodeNoteType"].ToString();
+                    NoteName = dr["NoteName"].ToString();
+                    l.Add(CodeNoteType, NoteName);
+                }
             return l;
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         finally
         {
@@ -1085,30 +989,26 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         try
         {
-            SqlCommand cmd = new SqlCommand(selectSTR, con);
-            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            l.Add("0", "בחר מקצוע");
-            while (dr.Read())
-            {
-                CodeLesson = dr["CodeLesson"].ToString();
-                LessonName = dr["LessonName"].ToString();
-                l.Add(CodeLesson, LessonName);
-            }
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+                SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                l.Add("0", "בחר מקצוע");
+                while (dr.Read())
+                {
+                    CodeLesson = dr["CodeLesson"].ToString();
+                    LessonName = dr["LessonName"].ToString();
+                    l.Add(CodeLesson, LessonName);
+                }
             return l;
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         finally
         {
@@ -1129,10 +1029,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return 0;
+            throw (ex);
         }
         try
         {
@@ -1146,10 +1044,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return 0;
+            throw (ex);
         }
         finally
         {
@@ -1172,10 +1068,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            return 0;
-            //  throw (ex);
+            throw (ex);
         }
 
         try
@@ -1186,11 +1080,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
-             return 0;
-            // write to log
-            //  throw (ex); 
-          
+            return 0;
+            throw (ex);
         }
 
         finally
@@ -1202,6 +1093,17 @@ public class DBconnectionTeacher
         }
     }
 
+    public int HWDone(string PupilID, bool IsDone, string HWCode)
+    {
+        int Done = 0;
+        if (IsDone)
+        {
+            Done = 1;
+        }
+        string cStr = "UPDATE [dbo].[HWPupil] SET [IsDone] =" + Done + " where HWCode= " + HWCode + " and PupilID ='" + PupilID + "'";
+        return ExecuteNonQuery(cStr);
+
+    }
     public string GetSubjectCodeBySubjectName(string subjectName)
     {
         String selectSTR = "SELECT CodeLesson FROM Lessons where LessonName  = '" + subjectName + "'";
@@ -1212,9 +1114,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            return null;
+            throw (ex);
         }
         try
         {
@@ -1228,10 +1129,8 @@ public class DBconnectionTeacher
         }
         catch (Exception ex)
         {
-            Log.LogWrite(ex.ToString());
             // write to log
-            //  throw (ex);
-            return null;
+            throw (ex);
         }
         finally
         {

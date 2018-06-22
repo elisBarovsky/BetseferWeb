@@ -203,6 +203,11 @@ public class Users
         return db.getPupilsByClassCode(TeacherID);
     }
 
+    public List<Dictionary<string, string>> getPupilsByClassCodeGrades(string ClassCode)
+    {
+        return db.getPupilsByClassCodeGrades(ClassCode);
+    }
+
     public List<Dictionary<string, string>> getPupilsByClassCodeDictionary(string classCode)
     {
         return db.getPupilsByClassCodeDictionary(classCode);
@@ -211,6 +216,16 @@ public class Users
     public List<Dictionary<string, string>> getParentsByClassCode(string classCode)
     {
         return db.getParentsByClassCode(classCode);
+    }
+
+ public List<Dictionary<string, string>> getPupilsAndTeachers(string TeacherID)
+    {
+        return db.getPupilsAndTeachers(TeacherID);
+    }
+
+    public List<Dictionary<string, string>> getParentsAndTeachers(string TeacherID)
+    {
+        return db.getParentsAndTeachers(TeacherID);
     }
 
     public Dictionary<string, string> FillUsers(string CodeUserType)
@@ -385,15 +400,16 @@ public class Users
         return db.GetUserImgByUserID(UserID);
     }
 
+  public List<string> GetUserImgAndFullNameByUserID(string UserID)
+    {
+        return db.GetUserImgAndFullNameByUserID(UserID);
+    }
+	
     public string GetUserFullName(string Id)
     {
         return db.GetUserFullName(Id);
     }
 
-    public List<Dictionary<string, string>> getParentsAndTeachers(string TeacherID)
-    {
-        return db.getParentsAndTeachers(TeacherID);
-    }
 
 }
 
