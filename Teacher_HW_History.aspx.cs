@@ -86,7 +86,7 @@ public partial class Teacher_HW_History : System.Web.UI.Page
 
     protected void FilterHWBTN_Click(object sender, EventArgs e)
     {
-        if (ChooseClassDLL.SelectedValue == "בחר" || ChooseLessonsDLL.SelectedValue == "בחר מקצוע")
+        if (ChooseClassDLL.SelectedValue == "בחר" || ChooseLessonsDLL.SelectedValue == "בחר")
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('לא בחרת כיתה ו/או מקצוע'); ", true);
         }
