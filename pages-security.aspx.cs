@@ -30,7 +30,7 @@ public partial class pages_security : System.Web.UI.Page
 
         if (a1 =="" || a2== "")
         {
-            Response.Write("<script LANGUAGE='JavaScript' >alert('אחת או יותר מהתשובות ריקות, הקלד תשובותך')</script>");
+            Response.Write("<script LANGUAGE='JavaScript' >Erroralert('אחת או יותר מהתשובות ריקות, הקלד תשובותך')</script>");
         }
         else
         {
@@ -58,7 +58,7 @@ public partial class pages_security : System.Web.UI.Page
     {
         if (int.Parse(DropDownList_Qlist2.SelectedItem.Value) == int.Parse(DropDownList_Qlist1.SelectedItem.Value))
         {
-            Response.Write("<script LANGUAGE='JavaScript' >alert('אסור 2 שאלות זהות, בחר שאלה אחרת')</script>");
+            Response.Write("<script LANGUAGE='JavaScript' >Erroralert('אסור 2 שאלות זהות, בחר שאלה אחרת')</script>");
         }
     }
 

@@ -28,13 +28,13 @@ public partial class pages_recover_changePass : System.Web.UI.Page
             int num = User.ChangePassword(userID, Pass1.Text);
             if (num > 0)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('סיסמתך שונתה בהצלחה'); location.href='login.aspx';", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('סיסמתך שונתה בהצלחה'); ", true);
             }
-            else Response.Write("<script LANGUAGE='JavaScript' >alert('סעקב בעיות טכניות לא ניתן לשמור את סיסמתך כרגע, אנא נסה במועד מאוחר יותר או פנה לשירות הלקוחות ' )</script>");
+            else Response.Write("<script LANGUAGE='JavaScript' >Erroralert('סעקב בעיות טכניות לא ניתן לשמור את סיסמתך כרגע, אנא נסה במועד מאוחר יותר או פנה לשירות הלקוחות ' )</script>");
         }
         else
         {
-            Response.Write("<script LANGUAGE='JavaScript' >alert('הסיסמאות לא תואמות, נסה שנית')</script>");
+            Response.Write("<script LANGUAGE='JavaScript' >Erroralert('הסיסמאות לא תואמות, נסה שנית')</script>");
         }
     }
 }

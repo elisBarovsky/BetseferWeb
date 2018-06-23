@@ -93,19 +93,19 @@ public partial class pages_recover_password : System.Web.UI.Page
 
         if (day == "יום" || month == "חודש" || year == "שנה")
         {
-            Response.Write("<script LANGUAGE='JavaScript' >alert('תאריך הלידה לא יכול להיות ריק')</script>");
+            Response.Write("<script LANGUAGE='JavaScript' >Erroralert('תאריך הלידה לא יכול להיות ריק')</script>");
             return;
         }
         else if (!u.IsLegalBday(day, month))
         {
-            Response.Write("<script LANGUAGE='JavaScript' >alert('תאריך הלידה לא חוקי')</script>");
+            Response.Write("<script LANGUAGE='JavaScript' >Erroralert('תאריך הלידה לא חוקי')</script>");
             return;
         }
         l = User.GetUserSecurityDetailsByuserIDandBday(userID, Bday);
 
         if (l.Count() == 0)
         {
-            Response.Write("<script LANGUAGE='JavaScript' >alert('תאריך הלידה ו/או תעודת הזהות שגויים')</script>");
+            Response.Write("<script LANGUAGE='JavaScript' >Erroralert('תאריך הלידה ו/או תעודת הזהות שגויים')</script>");
         }
         else
         {

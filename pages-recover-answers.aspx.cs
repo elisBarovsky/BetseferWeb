@@ -45,7 +45,7 @@ public partial class pages_recover_answers : System.Web.UI.Page
         }
         else
         {
-            Response.Write("<script LANGUAGE='JavaScript' >alert('תשובה אחת או יותר שגויות, נסה שנית')</script>");
+            Response.Write("<script LANGUAGE='JavaScript' >Erroralert('תשובה אחת או יותר שגויות, נסה שנית')</script>");
         }
     }
 }
