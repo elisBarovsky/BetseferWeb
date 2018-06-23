@@ -129,7 +129,7 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
         
         if (NewDate == "" || ChooseLessonsDLL.SelectedValue == "0" || ChooseClassDLL.SelectedValue == "0")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('לא ניתן להשאיר שדות רקים');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('לא ניתן להשאיר שדות רקים');", true);
             return;
         }
 
@@ -138,7 +138,7 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
 
         if (DateTime.Today < d)
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('אופס! תאריך הבחינה עוד לא הגיע');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('אופס! תאריך הבחינה עוד לא הגיע');", true);
             return;
         }
 
@@ -162,11 +162,11 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
         if (num == (tableGrades.Rows.Count - 1))
         {
             ChooseClassDLL.SelectedValue = "0";
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('ציונים נשמרו בהצלחה'); location.href='Teacher_Grades_Insert.aspx';", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('ציונים נשמרו בהצלחה');", true);
         }
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('נתקלנו בבעיה בשמירת הנתונים. אנא צור קשר עם שירות הלקוחות.');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('נתקלנו בבעיה בשמירת הנתונים. אנא צור קשר עם שירות הלקוחות.');", true);
         }
     }
 

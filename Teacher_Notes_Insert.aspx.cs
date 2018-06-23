@@ -106,15 +106,15 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
             int res1 = InsertPupilNote.InsertNotes(PupilID, NoteID, date, TeacherId, LessonID, TNoteTB.Text);
             if (res1 == 1)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הערה נוספה בהצלחה'); location.href='Teacher_Notes_Insert.aspx';", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('הערה נוספה בהצלחה');", true);
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הייתה בעיה בהוספת הערת משמעת, בדוק נתונים');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('הייתה בעיה בהוספת הערת משמעת, בדוק נתונים');", true);
             }
         }
 
-        else ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('נתונים חסרים, אנא מלא את כל השדות');", true);
+        else ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('נתונים חסרים, אנא מלא את כל השדות');", true);
     }
 
     protected void ChooseClasssDLL_SelectedIndexChanged(object sender, EventArgs e)

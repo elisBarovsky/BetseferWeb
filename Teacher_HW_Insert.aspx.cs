@@ -76,7 +76,7 @@ public partial class Teacher_HW_Insert : System.Web.UI.Page
        
         if (newBDATe== "")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תאריך לא יכול להיות ריק');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('תאריך לא יכול להיות ריק');", true);
             return;
         }
 
@@ -86,11 +86,11 @@ public partial class Teacher_HW_Insert : System.Web.UI.Page
 
         if (res1 == 1)
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('שיעורי בית נוספו בהצלחה'); location.href='Teacher_HW_Insert.aspx';", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('שיעורי בית נוספו בהצלחה'); ", true);
         }
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הייתה בעיה בהוספת שיעורי בית, בדוק נתונים');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('הייתה בעיה בהוספת שיעורי בית, בדוק נתונים');", true);
         }
     }
 

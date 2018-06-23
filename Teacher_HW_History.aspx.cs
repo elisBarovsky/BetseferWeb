@@ -84,7 +84,7 @@ public partial class Teacher_HW_History : System.Web.UI.Page
     {
         if (ChooseClassDLL.SelectedValue == "בחר" || ChooseLessonsDLL.SelectedValue == "בחר מקצוע")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('לא בחרת כיתה ו/או מקצוע'); ", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('לא בחרת כיתה ו/או מקצוע'); ", true);
         }
         else
         {
@@ -102,7 +102,7 @@ public partial class Teacher_HW_History : System.Web.UI.Page
 
             if (dtt.Rows.Count == 0)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('אין היסטוריית שיעורים שהוזנה על ידך עבור הכיתה והמקצוע שנבחר'); ", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('אין היסטוריית שיעורים שהוזנה על ידך עבור הכיתה והמקצוע שנבחר'); ", true);
                 GridView1.DataSource = null;
             }
             else

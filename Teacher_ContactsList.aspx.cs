@@ -76,12 +76,12 @@ public partial class Teacher_ContactsList : System.Web.UI.Page
     {
         if (ChooseClassDLL.SelectedValue == "0")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('עליך לבחור כיתה');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('עליך לבחור כיתה');", true);
             return;
         }
         if (FilterNotes.SelectedValue == "0")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('עליך לבחור קבוצה');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('עליך לבחור קבוצה');", true);
             return;
         }
         string UserTypeFilter = FilterNotes.SelectedValue;

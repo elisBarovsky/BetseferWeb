@@ -28,6 +28,38 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script type="text/javascript">
+
+           function Succesesalert(msg) {
+            swal({
+                title: 'בוצע!',
+                text: msg,
+                type: 'success',
+                icon: "success",
+                showConfirmButton: true
+                });
+                 setTimeout(function () {
+                     window.location.href = "Teacher_HW_Insert.aspx";
+                 }, 700);
+            };
+     
+            function Erroralert(msg) {
+            swal({
+                title: 'שגיאה!',
+                text: msg,
+                type: 'error',
+                icon: "error",
+                showConfirmButton: true
+                });
+                 //setTimeout(function () {
+                 //    window.location.href = "login.aspx";
+                 //}, 1000);
+            };
+
+    </script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
