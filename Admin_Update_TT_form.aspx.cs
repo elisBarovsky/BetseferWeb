@@ -46,7 +46,7 @@ public partial class Admin_Update_TT_form : System.Web.UI.Page
         }
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הייתה בעיה, נסה שנית.');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('הייתה בעיה, נסה שנית.');", true);
         }
     }
 }

@@ -22,12 +22,43 @@
     <link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
     <link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+    <script type="text/javascript">
+
+           function Succesesalert(msg) {
+            swal({
+                title: 'בוצע!',
+                text: msg,
+                type: 'success',
+                icon: "success",
+                showConfirmButton: true
+                });
+                 setTimeout(function () {
+                     window.location.href = "Admin_Add_Class.aspx";
+                 }, 700);
+            };
+     
+            function Erroralert(msg) {
+            swal({
+                title: 'שגיאה!',
+                text: msg,
+                type: 'error',
+                icon: "error",
+                showConfirmButton: true
+                });
+                 //setTimeout(function () {
+                 //    window.location.href = "login.aspx";
+                 //}, 2000);
+            };
+
+    </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">

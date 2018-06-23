@@ -180,6 +180,6 @@ public partial class Admin_Update_TimeTable : System.Web.UI.Page
 
     protected void ButtonUpdate_Click(object sender, EventArgs e)
     {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת עודכנה בהצלחה'); location.href='Admin_Update_TimeTable.aspx';", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('מערכת עודכנה בהצלחה'); ", true);
     }
 }

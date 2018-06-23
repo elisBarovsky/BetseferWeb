@@ -143,13 +143,13 @@ public partial class Admin_Add_User : System.Web.UI.Page
         string newBDATe = date1.Value;
         if (newBDATe == "")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תאריך לא יכול להיות ריק');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('תאריך לא יכול להיות ריק');", true);
             return;
         }
         
         else if (ClassOtDLL.SelectedValue == "בחר")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('לא נבחרה כיתה.');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('לא נבחרה כיתה.');", true);
             return;
         }
         string Bday = newBDATe.Substring(8, 2) + "/" + newBDATe.Substring(5, 2) + "/" + newBDATe.Substring(0, 4);
@@ -194,11 +194,11 @@ public partial class Admin_Add_User : System.Web.UI.Page
                     }
                 }
             }
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('משתמש נוסף בהצלחה'); location.href='Admin_Add_User.aspx';", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('משתמש נוסף בהצלחה');", true);
         }
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הייתה בעיה בעדכון המשתמש, בדוק נתונים');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('הייתה בעיה בעדכון המשתמש, בדוק נתונים');", true);
         }
     }
 

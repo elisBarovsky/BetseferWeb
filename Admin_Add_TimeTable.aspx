@@ -47,6 +47,38 @@
             border-radius: 20px;
         }
     </style>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script type="text/javascript">
+
+           function Succesesalert(msg) {
+            swal({
+                title: 'בוצע!',
+                text: msg,
+                type: 'success',
+                icon: "success",
+                showConfirmButton: true
+                });
+                 setTimeout(function () {
+                     window.location.href = "Admin_Add_TimeTable.aspx";
+                 }, 700);
+            };
+     
+            function Erroralert(msg) {
+            swal({
+                title: 'שגיאה!',
+                text: msg,
+                type: 'error',
+                icon: "error",
+                showConfirmButton: true
+                });
+                 setTimeout(function () {
+                     window.location.href = "Admin_Add_TimeTable.aspx";
+                 }, 1000);
+            };
+
+    </script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">

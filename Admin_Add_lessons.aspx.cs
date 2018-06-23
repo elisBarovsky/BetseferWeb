@@ -48,12 +48,12 @@ public partial class Admin_Add_lessons : System.Web.UI.Page
         string newSubject = LessonsNameTB.Text;
         if (newS.IsExists(newSubject))
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('המקצוע כבר קיים ברשימת המקצועות.');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('המקצוע כבר קיים ברשימת המקצועות.');", true);
             return;
         }
         else if (newSubject == "")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('לא הוזן מקצוע.');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('לא הוזן מקצוע.');", true);
             return;
         }
         else
@@ -61,12 +61,12 @@ public partial class Admin_Add_lessons : System.Web.UI.Page
             int answer = newS.AddNewSubject(newSubject);
             if (answer > 0)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('המקצוע נוסף בהצלחה') ; location.href='Admin_Add_lessons.aspx';", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('המקצוע נוסף בהצלחה');", true);
 
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('עקב תקלה לא ניתן להוסיף מקצוע זה.<br/> אנא נסה מאוחר יותר. במידה והתקלה נמשכת אנא פנה לשירות הלקוחות.');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('עקב תקלה לא ניתן להוסיף מקצוע זה.<br/> אנא נסה מאוחר יותר. במידה והתקלה נמשכת אנא פנה לשירות הלקוחות.');", true);
             }
         }
     }

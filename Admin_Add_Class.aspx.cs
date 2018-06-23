@@ -74,7 +74,7 @@ public partial class Admin_Add_Class : System.Web.UI.Page
         ClassesTotalName = IsExitss.ClassesExites(OtClassDDL.SelectedValue, NumClassDDL.SelectedValue);
         if (ClassesTotalName.Count() > 0)
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הכיתה קיימת, נסה מספר אחר.');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('הכיתה קיימת, נסה מספר אחר.');", true);
         }
         else
         {
@@ -82,11 +82,11 @@ public partial class Admin_Add_Class : System.Web.UI.Page
             int res = InsertClass.InsertClass(OtClassDDL.SelectedValue, NumClassDDL.SelectedValue);
             if (res == 1)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הכיתה נוספה בהצלחה'); location.href='Admin_Add_Class.aspx';", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('הכיתה נוספה בהצלחה');", true);
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('עקב תקלה לא ניתן להוסיף מקצוע זה.<br/> אנא נסה מאוחר יותר. במידה והתקלה נמשכת אנא פנה לשירות הלקוחות.');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('עקב תקלה לא ניתן להוסיף מקצוע זה.<br/> אנא נסה מאוחר יותר. במידה והתקלה נמשכת אנא פנה לשירות הלקוחות.');", true);
             }
         }
     }

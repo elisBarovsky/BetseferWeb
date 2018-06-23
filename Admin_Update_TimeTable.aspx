@@ -34,6 +34,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="css/style.css" rel="stylesheet" type="text/css" />
 --%>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script type="text/javascript">
+
+           function Succesesalert(msg) {
+            swal({
+                title: 'בוצע!',
+                text: msg,
+                type: 'success',
+                icon: "success",
+                showConfirmButton: true
+                });
+                 //setTimeout(function () {
+                 //    window.location.href = "Admin_Update_TimeTable.aspx";
+                 //}, 2000);
+            };
+     
+            function Erroralert(msg) {
+            swal({
+                title: 'שגיאה!',
+                text: msg,
+                type: 'error',
+                icon: "error",
+                showConfirmButton: true
+                });
+                 //setTimeout(function () {
+                 //    window.location.href = "login.aspx";
+                 //}, 2000);
+            };
+
+    </script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">

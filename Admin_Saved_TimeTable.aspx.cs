@@ -135,7 +135,7 @@ public partial class Admin_Saved_TimeTable : System.Web.UI.Page
         string classCode = Request.Cookies["SelectedCodeClass"].Value;
         TT.DeleteTT(classCode);
 
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת לא נשמרה.'); location.href='Admin_Saved_TimeTable.aspx';", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('מערכת לא נשמרה.'); location.href='Admin_Saved_TimeTable.aspx';", true);
 
     }
 
@@ -147,11 +147,11 @@ public partial class Admin_Saved_TimeTable : System.Web.UI.Page
 
             if (rowsAffected > 0)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת נשמרה בהצלחה'); location.href='Admin_Saved_TimeTable.aspx';", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('מערכת נשמרה בהצלחה'); ", true);
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('קרתה תקלה בעת שמירת המערכת. נא צור קשר עם שירות הלקוחות בטלפון: 1-800-400-400');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('קרתה תקלה בעת שמירת המערכת. נא צור קשר עם שירות הלקוחות בטלפון: 1-800-400-400');", true);
             }
     }
 
@@ -224,6 +224,6 @@ public partial class Admin_Saved_TimeTable : System.Web.UI.Page
     {
         Response.Cookies["IsSaveClicked"].Value = "true";
 
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת נשמרה בהצלחה'); location.href='Admin_Saved_TimeTable.aspx';", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('מערכת נשמרה בהצלחה'); ", true);
     }
 }

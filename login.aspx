@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
     <link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
 
-
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -56,7 +56,18 @@
         //    res = $.parseJSON(results.d);
         //    localStorage.setItem("UserType", res);
         //}
-            
+            function Erroralert(msg) {
+            swal({
+                title: 'שגיאה!',
+                text: msg,
+                type: 'error',
+                icon: "error",
+                showConfirmButton: true
+                });
+                 setTimeout(function () {
+                     window.location.href = "login.aspx";
+                 }, 2000);
+            };
 
     </script>
 </head>

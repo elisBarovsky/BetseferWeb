@@ -343,7 +343,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
 
         if (BDAYtb.Text == "")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תאריך לא יכול להיות ריק');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('תאריך לא יכול להיות ריק');", true);
             return;
         }
 
@@ -423,11 +423,11 @@ public partial class Admin_Update_User : System.Web.UI.Page
                 //}
             }
 
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('משתמש עודכן בהצלחה'); location.href='Admin_Update_User.aspx';", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('משתמש עודכן בהצלחה');", true);
         }
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('הייתה בעיה בעדכון המשתמש, בדוק נתונים');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('הייתה בעיה בעדכון המשתמש, בדוק נתונים');", true);
         }
     }
 
@@ -455,7 +455,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
         string childID = ChildDDL.SelectedValue;
         if (childID == "0")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('לא נבחר ילד למחיקה');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('לא נבחר ילד למחיקה');", true);
             return;
         }
         else
@@ -556,21 +556,21 @@ public partial class Admin_Update_User : System.Web.UI.Page
         switch (answer)
         {
             case "userTypeNotStudent":
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תלמיד לא קיים במערכת');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('תלמיד לא קיים במערכת');", true);
                 return;
             case "everythingGood":
                 int num = p.SaveChildAndParent(parentID, childID);
                 if (num > 0)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תלמיד נוסף בהצלחה');", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('תלמיד נוסף בהצלחה');", true);
                 }
-                else ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('עקב תקלה לא ניתן להוסיף תלמיד להורה');", true);
+                else ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('עקב תקלה לא ניתן להוסיף תלמיד להורה');", true);
                 ChildDDL.DataBind();
                 TBaddNewChild.Text = "";
                 TBaddNewChild.Visible = false;
                 break;
             case "connectionExists":
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תלמיד כבר משוייך להורה');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('תלמיד כבר משוייך להורה');", true);
                 return;
         }
     }

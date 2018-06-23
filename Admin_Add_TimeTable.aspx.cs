@@ -148,7 +148,7 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
         string classCode = Request.Cookies["SelectedCodeClass"].Value;
         TT.DeleteTempTT(DateTime.Today.ToShortDateString(), classCode);
 
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת לא נשמרה.'); location.href='Admin_Add_TimeTable.aspx';", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('מערכת לא נשמרה.'); ", true);
     }
 
     protected void ButtonPublish_Click(object sender, EventArgs e)
@@ -158,11 +158,11 @@ public partial class Admin_Add_TimeTable : System.Web.UI.Page
             int rowsAffected = TT.InsertTimeTable(DateTime.Today.ToShortDateString(), int.Parse(ddl_clasesAdd.SelectedItem.Value), true);
             if (rowsAffected > 0)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('מערכת נשמרה ופורסמה בהצלחה'); location.href='Admin_Add_TimeTable.aspx';", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('מערכת נשמרה ופורסמה בהצלחה'); ", true);
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('קרתה תקלה בעת שמירת המערכת. נא צור קשר עם שירות הלקוחות בטלפון: 1-800-400-400');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('קרתה תקלה בעת שמירת המערכת. נא צור קשר עם שירות הלקוחות בטלפון: 1-800-400-400');", true);
             }
     }
 
