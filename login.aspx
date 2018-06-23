@@ -96,15 +96,17 @@
                             <div class="checkbox icheck">
                                 <label>
                                     <input type="checkbox"> זכור אותי</label>
-                                <a href="pages-recover-password.aspx" runat="server" class="pull-left"><i class="fa fa-lock"></i>? שכחת סיסמה
+                                <a href="pages-recover-password.aspx" runat="server" class="pull-left"><i class="fa fa-lock"></i>
+                                    <img src="Images/forget.png" height="40"/>
                                 </a>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-xs-4 m-t-1">
-               <asp:Button ID="ButtonCheckUserExist" runat="server" class="btn btn-primary btn-block btn-flat" Text="התחבר" OnClientClick="javascript:SaveUserIdInLocalStorage();" OnClick="Login1_Authenticate"/>
-
-                        </div>
+                    <center>
+                   <asp:ImageButton ID="ButtonCheckUserExist" runat="server" class="btn btn-flat" Text="התחבר" ImageUrl="Images/door.png" OnClientClick="javascript:SaveUserIdInLocalStorage();" OnClick="Login1_Authenticate" Height="100"/>
+                        </center>
+                   </div>
                         <!-- /.col -->
                     </div>
                 </form>
