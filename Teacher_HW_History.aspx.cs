@@ -49,20 +49,24 @@ public partial class Teacher_HW_History : System.Web.UI.Page
     protected void FillClasses()
     {
         Dictionary<string, string> Classes = new Dictionary<string, string>();
-        Grades ClassGrade = new Grades();
-        Classes = ClassGrade.FillClassOt();
+        Teacher t = new Teacher();
+        string teacherID = Request.Cookies["UserID"].Value;
+        Classes =t.FillClassOtAccordingTeacherId(teacherID);
         ChooseClassDLL.DataSource = Classes.Values;
         ChooseClassDLL.DataBind();
+        ChooseClassDLL.Items.Insert(0, new ListItem("בחר", "בחר"));
         Session["ClassesList"] = Classes;
     }
 
     protected void FillSubjects()
     {
         Dictionary<string, string> Lessons = new Dictionary<string, string>();
-        Grades ClassGrade = new Grades();
-        Lessons = ClassGrade.FillLessons();
+        Teacher t = new Teacher();
+        string teacherID = Request.Cookies["UserID"].Value;
+        Lessons = t.FillLessonsAccordingTeacherId(teacherID);
         ChooseLessonsDLL.DataSource = Lessons.Values;
         ChooseLessonsDLL.DataBind();
+        ChooseLessonsDLL.Items.Insert(0, new ListItem("בחר", "בחר"));
         Session["LessonsList"] = Lessons;
     }
 
