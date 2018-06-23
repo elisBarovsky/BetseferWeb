@@ -2140,6 +2140,47 @@ public class DBconnection
         }
     }
 
+    public Dictionary<string, string> FillTeacherNotBusy(int WeekDay, int LessonNum )
+    {
+        String selectSTR = "select [UserID],[UserFName]+' '+ [UserLName] as FullName from [dbo].[Users] where [CodeUserType]=2 and [UserID] not in (select [TeacherId] from [dbo].[TimetableLesson] "+
+                           " where [CodeWeekDay] = "+WeekDay+" and [ClassTimeCode] = "+ LessonNum+" union select [TeacherId] from [dbo].[TempTimetableLesson] where [CodeWeekDay] = "+ WeekDay+" and [ClassTimeCode] = "+ LessonNum+" )";
+        string UserID, TotalName;
+        Dictionary<string, string> l = new Dictionary<string, string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                UserID = dr["UserID"].ToString();
+                TotalName = dr["FullName"].ToString();
+                l.Add(UserID, TotalName);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
     //--------------------------------------------------------------------------------------------------
     // This method returns number of rows affected
     //--------------------------------------------------------------------------------------------------

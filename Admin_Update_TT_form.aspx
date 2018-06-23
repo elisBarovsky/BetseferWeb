@@ -103,9 +103,8 @@
                                 <td style="text-align: right">
                                     <br />
                                     <br />
-                                    <asp:DropDownList ID="TeachersDDL" CssClass="form-control" data-toggle="dropdown" runat="server" DataSourceID="SqlDataSource1" DataTextField="TeacherName" DataValueField="UserID"></asp:DropDownList>
-                                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="select [UserID],([UserFName]+' '+[UserLName]) as TeacherName from [dbo].[Users]
-where [CodeUserType]=2"></asp:SqlDataSource>
+                                    <asp:DropDownList ID="TeachersDDL" CssClass="form-control" data-toggle="dropdown" runat="server"  DataTextField="TeacherName" DataValueField="UserID"></asp:DropDownList>
+                                  
                                 </td>
                             </tr>
                             <tr>
