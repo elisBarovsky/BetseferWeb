@@ -102,15 +102,7 @@
                                 <td style="text-align: right">
                                     <br />
                                     <br />
-                                    <asp:DropDownList ID="TeachersDDL" CssClass="form-control" data-toggle="dropdown" runat="server" DataSourceID="SqlDataSource1" DataTextField="TeacherName" DataValueField="TeacherID" AutoPostBack="true" OnDataBound="FillFirstItem"></asp:DropDownList>
-                                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT           ( dbo.Users.UserFName+ ' ' +dbo.Users.UserLName) as TeacherName, dbo.TeachersTeachesSubjects.CodeLessons, dbo.TeachersTeachesSubjects.TeacherID
-FROM            dbo.Users INNER JOIN
-                         dbo.TeachersTeachesSubjects ON dbo.Users.UserID = dbo.TeachersTeachesSubjects.TeacherID
-where dbo.TeachersTeachesSubjects.CodeLessons=@LesCode">
-                                        <SelectParameters>
-                                            <asp:ControlParameter ControlID="DDLlessons" Name="LesCode" PropertyName="SelectedValue" />
-                                        </SelectParameters>
-                                    </asp:SqlDataSource>
+                                    <asp:DropDownList ID="TeachersDDL" CssClass="form-control" data-toggle="dropdown" runat="server"   AutoPostBack="true" OnDataBound="FillFirstItem"></asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
