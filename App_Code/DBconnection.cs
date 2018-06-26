@@ -3273,4 +3273,102 @@ public class DBconnection
             }
         }
     }
+
+    public int SaveUser(Users newUser)
+    {
+        SqlConnection con;
+        SqlCommand cmd;
+
+        try
+        {
+            con = connect("PushDBConnectionString"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        String userStr = BuildInsertUser(newUser);      // helper method to build the insert string
+
+        cmd = CreateCommand(userStr, con);             // create the command
+
+        try
+        {
+            int numEffected = cmd.ExecuteNonQuery(); // execute the command
+            return numEffected;
+        }
+        catch (Exception ex)
+        {
+            return 0;
+            // write to log
+            throw (ex);
+        }
+
+        finally
+        {
+            if (con != null)
+            {
+                // close the db connection
+                con.Close();
+            }
+        }
+
+    }
+
+    //לתקן בהתאמה לטבלה אצלנו !!! 
+    private String BuildInsertUser(Users newUser)
+    {
+        String command;
+
+        StringBuilder sb = new StringBuilder();
+        // use a string builder to create the dynamic string
+        sb.AppendFormat("Values({0}, '{1}')", newUser.UserID1, newUser.RegId);
+        String prefix = "UPDATE [users] SET [regId] ='" + newUser.RegId + "' WHERE [userId] ='" + newUser.UserID1 + "' IF @@ROWCOUNT=0 INSERT INTO users " + "(userId, regId) ";
+        command = prefix + sb.ToString();
+        return command;
+    }
+
+
+    public List<Users> getUserList(string conString, string tableName)
+    {
+
+        List<Users> userList = new List<Users>();
+        SqlConnection con = null;
+        try
+        {
+            con = connect(conString); // create a connection to the database using the connection String defined in the web config file
+
+            String selectSTR = "SELECT * FROM " + tableName;
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+
+            // get a reader
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+
+
+            while (dr.Read())
+            {   // Read till the end of the data into a row               
+                Users u = new Users();
+                u.UserID1 = dr["userId"].ToString();
+                u.RegId = (string)dr["regId"];
+
+                userList.Add(u);
+
+            }
+            return userList;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
 }

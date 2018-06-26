@@ -687,5 +687,30 @@ public class BetseferWS : System.Web.Services.WebService
         string jsonStringTimeTable = js.Serialize(timeTable);
         return jsonStringTimeTable;
     }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string insertNewGuard(string UserId, string RegId)
+    {
+        int cID = Convert.ToInt32(UserId);
+
+        Users newUser = new Users();
+        newUser.UserID1 = cID.ToString();
+        newUser.RegId = RegId;
+
+        int numEffected = newUser.insertUser(newUser);
+        if (numEffected == 1)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            // serialize to string
+            string jsonString = js.Serialize(newUser);
+            return jsonString;
+        }
+        else
+        {
+            throw (new Exception("error in create user"));
+        }
+    }
 }
 
