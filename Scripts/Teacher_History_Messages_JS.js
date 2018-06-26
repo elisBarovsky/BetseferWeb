@@ -40,6 +40,7 @@ function DisplayMessages(results) {
     }
     $('#messagesTable').append(tableString);
 };
+
 var a = null;
 function OpenMessage(obj) {
     localStorage.setItem("messageDetails", JSON.stringify(obj));
