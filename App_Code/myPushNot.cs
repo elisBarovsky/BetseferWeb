@@ -65,13 +65,13 @@ public class myPushNot
         set { Sound = "default"; }
     }
 
-    private Payload payload1;
+    //private Payload payload1;
 
-    public Payload data
-    {
-        get { return payload1; }
-        set { payload1 = value; }
-    }
+    //public Payload data
+    //{
+    //    get { return payload1; }
+    //    set { payload1 = value; }
+    //}
 
     public myPushNot(string _message, string _title, string _msgcnt, int _badge, string _sound)
     {

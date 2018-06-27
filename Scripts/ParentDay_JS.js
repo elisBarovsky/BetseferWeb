@@ -4,6 +4,9 @@
 
     IfMehanech_LoadParentDay(userID, ShowParentsDay);
 
+    $("#submitPD").click(function () {
+        alert("zayiiinnneeeeeee");
+    });
     
 });
 
@@ -45,7 +48,15 @@ function ShowParentsDay(results) {
         var td3 = document.createElement('td');
         var td4 = document.createElement('td');
         var text2 = document.createTextNode('שעת התחלה:');
-        var input2 = document.createElement('input');
+        var input2 = document.createElement("select");
+
+        var list = "< option >בחר</option>";
+        for (var i = 1; i < 25; i++) {
+            var hour = i / 10 >= 1 ? i : "0" + i;
+            hour = hour + " : 00";
+            list += "<option>" + hour + "</option>";
+        }
+        input2.innerHTML = list;
 
         td3.appendChild(text2);
         td4.appendChild(input2);
@@ -58,7 +69,9 @@ function ShowParentsDay(results) {
         var td5 = document.createElement('td');
         var td6 = document.createElement('td');
         var text3 = document.createTextNode('שעת סיום:');
-        var input3 = document.createElement('input');
+        var input3 = document.createElement('select');
+
+        input3.innerHTML = list;
 
         td5.appendChild(text3);
         td6.appendChild(input3);
@@ -72,7 +85,8 @@ function ShowParentsDay(results) {
         var td8 = document.createElement('td');
         var text4 = document.createTextNode('משך פגישה:');
         var input4 = document.createElement('input');
-        
+        input4.id = "meetingLong";
+        input4.checkValidity(); // ma ze ose??
 
         td7.appendChild(text4);
         td8.appendChild(input4);
@@ -80,7 +94,13 @@ function ShowParentsDay(results) {
         tr4.appendChild(td8);
 
         $("#createNewDay").append(tr4);
-        
+
+        var submitButton = document.createElement('button');
+        submitButton.textContent = "צור";
+        submitButton.style = "float: left";
+        submitButton.id = "submitPD";
+        $("#createNewDay").append(submitButton);
+
     return;
     }
 
@@ -88,4 +108,6 @@ function ShowParentsDay(results) {
     $("#parentsDayTable").show();
     $("#noMehanech").hide();
 };
+
+
 
