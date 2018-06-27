@@ -44,11 +44,11 @@ function ShowParentsDay(results) {
         var tr2 = document.createElement('tr');
         var td3 = document.createElement('td');
         var td4 = document.createElement('td');
-        var text = document.createTextNode('שעת התחלה:');
-        var input = document.createElement('input');
+        var text2 = document.createTextNode('שעת התחלה:');
+        var input2 = document.createElement('input');
 
-        td3.appendChild(text);
-        td4.appendChild(input);
+        td3.appendChild(text2);
+        td4.appendChild(input2);
         tr2.appendChild(td3);
         tr2.appendChild(td4);
 
@@ -57,11 +57,11 @@ function ShowParentsDay(results) {
         var tr3 = document.createElement('tr');
         var td5 = document.createElement('td');
         var td6 = document.createElement('td');
-        var text = document.createTextNode('שעת סיום:');
-        var input = document.createElement('input');
+        var text3 = document.createTextNode('שעת סיום:');
+        var input3 = document.createElement('input');
 
-        td5.appendChild(text);
-        td6.appendChild(input);
+        td5.appendChild(text3);
+        td6.appendChild(input3);
         tr3.appendChild(td5);
         tr3.appendChild(td6);
 
@@ -70,12 +70,12 @@ function ShowParentsDay(results) {
         var tr4 = document.createElement('tr');
         var td7 = document.createElement('td');
         var td8 = document.createElement('td');
-        var text = document.createTextNode('משך פגישה:');
-        var input = document.createElement('input');
+        var text4 = document.createTextNode('משך פגישה:');
+        var input4 = document.createElement('input');
         
 
-        td7.appendChild(text);
-        td8.appendChild(input);
+        td7.appendChild(text4);
+        td8.appendChild(input4);
         tr4.appendChild(td7);
         tr4.appendChild(td8);
 

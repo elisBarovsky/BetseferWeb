@@ -699,6 +699,8 @@ public class BetseferWS : System.Web.Services.WebService
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringParentsDay = js.Serialize(p);
         return jsonStringParentsDay;
+    }
+
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string insertNewGuard(string UserId, string RegId)
