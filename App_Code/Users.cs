@@ -173,8 +173,7 @@ public class Users
     public int insertUser(Users u)
     {
         db = new DBconnection();
-        int numAffected = db.SaveUser(u);
-        return numAffected;
+		return numAffected = db.SaveUser(u);
     }
 
     public List<Users> getUserList()
