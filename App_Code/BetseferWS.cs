@@ -718,11 +718,10 @@ public class BetseferWS : System.Web.Services.WebService
         newUser.UserID1 = cID.ToString();
         newUser.RegId = RegId;
 
-        int numEffected = newUser.insertUser(newUser);
+        int numEffected = newUser.PushUpdateRegId(newUser.UserID1, newUser.RegId);
         if (numEffected == 1)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
-            // serialize to string
             string jsonString = js.Serialize(newUser);
             return jsonString;
         }
