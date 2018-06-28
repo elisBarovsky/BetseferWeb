@@ -736,7 +736,7 @@ public class BetseferWS : System.Web.Services.WebService
     public string PushUpdateRegId(string Id, string RegID)
     {
         Users u = new Users();
-        int res = u.PushUpdateRegId(Id, RegID); //PushUpdateRegId
+        int res = u.PushUpdateRegId(Id, RegID); 
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(res);
