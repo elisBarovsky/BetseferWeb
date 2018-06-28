@@ -492,10 +492,11 @@ public class DBconnection
         }
     }
 
-    public string GetUserType(string UserID, string password)
+    public List<string> GetUserType(string UserID, string password)
     {
-        String selectSTR = "SELECT CodeUserType  FROM Users where UserID  = '" + UserID + "' and LoginPassword  = '" + password + "'";
-        string type = "";
+        String selectSTR = "SELECT CodeUserType,PushRegID  FROM Users where UserID  = '" + UserID + "' and LoginPassword  = '" + password + "'";
+        List<string> UserInfo = new List<string>();
+        string type, RegID;
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -513,8 +514,12 @@ public class DBconnection
             while (dr.Read())
             {
                 type = dr["CodeUserType"].ToString();
+                UserInfo.Add(type);
+                RegID = dr["PushRegID"].ToString();
+                UserInfo.Add(RegID);
+
             }
-            return type;
+            return UserInfo;
         }
         catch (Exception ex)
         {
@@ -894,12 +899,18 @@ public class DBconnection
             {
                 con.Close();
             }
-        }
+        }// 
     }
 
     public int ChangePassword(string userID, string Password)
     {
         string cStr = "update[dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
+        return ExecuteNonQuery(cStr);
+    }
+
+    public int PushUpdateRegId(string userID, string RegID)
+    {
+        string cStr = "update[dbo].[Users] set[LoginPassword] = ('" + RegID + "') WHERE UserID = '" + userID + "'";
         return ExecuteNonQuery(cStr);
     }
 

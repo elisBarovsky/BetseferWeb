@@ -21,7 +21,8 @@ function renderlogin(results) {
     if (res[0] === "openSeqQestion") { // go to fill identity questions page
         localStorage.setItem("UserType", res[1]);
         window.location.href = "pages-security.html";
-    }
+        localStorage.setItem("registrationId", res[2]);
+     }
     else if (res[0] === "wrongDetails") { //wrong details
         //$.alert({
         //    title: 'שגיאה',
@@ -33,6 +34,7 @@ function renderlogin(results) {
     }
     else { // already login -> go to main page according the type user. 
         localStorage.setItem("UserType", res[1]);
+        localStorage.setItem("registrationId", res[2]);
 
         if (res[1] === 'Parent') {
             document.location.href = "Parent-ChooseChild.html";
