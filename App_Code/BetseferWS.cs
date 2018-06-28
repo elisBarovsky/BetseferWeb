@@ -627,13 +627,9 @@ public class BetseferWS : System.Web.Services.WebService
     public string SetMessageAsRead(string MessageCode)
     {
         Messages m = new Messages();
-
-
-        //   string bla = m.UpdateMessageAsRead(MessageCode);
         return m.UpdateMessageAsRead(MessageCode);
     }
 
-    //******************************************************************************************
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string LoadScheduleForToday(string Id, string userType)
@@ -667,8 +663,6 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonStringSchedule;
     }
 
-
-    //***********************************************************************************
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetPupilsByClassTotalName_TheGoodOne(string ClassTotalName)
@@ -684,7 +678,7 @@ public class BetseferWS : System.Web.Services.WebService
     }
 
     
-            [WebMethod]
+    [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string LoadTimeTableByIdAndDay(string UserId, string UserType, int Day)
     {
@@ -695,6 +689,24 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonStringTimeTable;
     }
 
+
+    //***********************************************************************************
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string IfMehanech_LoadParentDay(string UserId)
+    {
+        ParentsDay p = new ParentsDay();
+        p = p.IfMehanech_LoadParentDay(UserId);
+
+        if (p == null)
+        {
+            return "no";
+        }
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringParentsDay = js.Serialize(p);
+        return jsonStringParentsDay;
+    }
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
