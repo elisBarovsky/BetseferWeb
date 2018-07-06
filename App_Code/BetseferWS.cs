@@ -199,6 +199,12 @@ public class BetseferWS : System.Web.Services.WebService
     public string Login(string UserID, string password)
     {
         Users UserLogin = new Users();
+        List<string> UserInfo = UserLogin.GetUserType(UserID, password);
+        string UserType = UserInfo[0].ToString();
+
+        string UserRegID = UserInfo[1].ToString();
+
+
         string isvalid = "";
 
         if (UserType == "" || UserType == "1")
@@ -231,6 +237,7 @@ public class BetseferWS : System.Web.Services.WebService
 
 
         }
+        string[] arr = new string[] { isvalid, UserType, UserRegID };
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringCategory = js.Serialize(arr);
         return jsonStringCategory;
@@ -622,6 +629,7 @@ public class BetseferWS : System.Web.Services.WebService
         Messages m = new Messages();
 
 
+        //   string bla = m.UpdateMessageAsRead(MessageCode);
         return m.UpdateMessageAsRead(MessageCode);
     }
 
@@ -705,6 +713,7 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string PushInsertNewGuard(string UserId, string RegId) 
     {
         int cID = Convert.ToInt32(UserId);
 
@@ -712,6 +721,7 @@ public class BetseferWS : System.Web.Services.WebService
         newUser.UserID1 = cID.ToString();
         newUser.RegId = RegId;
 
+        int numEffected = newUser.PushUpdateRegId(newUser.UserID1, newUser.RegId);
         if (numEffected == 1)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
@@ -724,9 +734,7 @@ public class BetseferWS : System.Web.Services.WebService
         }
     }
 
-<<<<<<< HEAD
-    
-        [WebMethod]
+    [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string SaveParentDay(string date, string from, string to, string longMeeting, string teacher)
     {
@@ -736,7 +744,7 @@ public class BetseferWS : System.Web.Services.WebService
         p.to = to;
         p.longMeeting = int.Parse(longMeeting);
         p.TeacherID = teacher;
-        
+
         int numEffected = p.SaveParentsDay(p);
         if (numEffected == 1)
         {
@@ -749,7 +757,18 @@ public class BetseferWS : System.Web.Services.WebService
         {
             throw (new Exception("error in create user"));
         }
->>>>>>> 499a8cbb51c7810d7a3c3da7d3cff1dbdf63ebef
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string PushUpdateRegId(string Id, string RegID)
+    {
+        Users u = new Users();
+        int res = u.PushUpdateRegId(Id, RegID); 
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
     }
 }
 

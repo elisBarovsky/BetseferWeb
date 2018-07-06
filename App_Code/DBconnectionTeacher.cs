@@ -1314,6 +1314,47 @@ public class DBconnectionTeacher
         return p;
     }
 
+    public int GetParentsDayCodeByDateAndTeacherID(string ParentsDayDate, string TeacherID)
+    {
+        int parentsDayCode = -1;
+
+        String selectSTR = "SELECT ParentsDayCode FROM ParentsDay where ParentsDayDate  = '" +
+            ParentsDayDate + "' and TeacherID = '"+ TeacherID + "'";
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            DBconnection db = new DBconnection();
+            while (dr.Read())
+            {
+                int.TryParse(dr["ParentsDayCode"].ToString(), out parentsDayCode);
+            }
+            return parentsDayCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public int SaveParentsDay(ParentsDay p)
     {
         DBconnection db = new DBconnection();
@@ -1341,10 +1382,12 @@ public class DBconnectionTeacher
             DateTime from = DateTime.Parse( p.from);
             while (from < DateTime.Parse(p.to))
             {
-                //myDateTime.AddMinutes(1);       
+                //myDateTime.AddMinutes(1); create the meetings       
             }
 
             insertSTR = "";
+            int answerParentsDayMeetingsTable = ExecuteNonQuery(insertSTR);
+            return answerParentsDayTable + answerParentsDayMeetingsTable; // should be bigger than two. maybe i should know the number of meetings and check if it is OK
         }
         catch (Exception ex)
         {
@@ -1358,8 +1401,5 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-
-        p.ParentsDayMeetings = GetMeetingsByParentsDayCode(p.ParentsDayCode);
-        return p;
     }
 }
