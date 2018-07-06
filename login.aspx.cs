@@ -50,7 +50,9 @@ public partial class login : System.Web.UI.Page
 
             else
             {
-                int UserType = int.Parse(User.GetUserType(UserID, password));
+                List<string> UserInfo = User.GetUserType(UserID, password);
+                int UserType = int.Parse(UserInfo[0]);
+
                 if (UserType == 1)
                 {
                     Response.Redirect("AdminDashbord.html");

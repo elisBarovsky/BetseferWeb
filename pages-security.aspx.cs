@@ -41,7 +41,11 @@ public partial class pages_security : System.Web.UI.Page
                 Users User2 = new Users();
                 int result = User2.ChangeFirstLogin(id);
                 Users User4 = new Users();
-                switch (int.Parse(User4.GetUserType(id, Request.Cookies["UserPassword"].Value)))
+
+                List<string> UserInfo = User4.GetUserType(id, Request.Cookies["UserPassword"].Value);
+                string UserType = UserInfo[0].ToString();
+
+                switch (int.Parse(UserType))
                 {
                     case 1:
                         Response.Redirect("AdminDashbord.html");

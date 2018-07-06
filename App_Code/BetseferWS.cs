@@ -199,7 +199,6 @@ public class BetseferWS : System.Web.Services.WebService
     public string Login(string UserID, string password)
     {
         Users UserLogin = new Users();
-        string UserType = UserLogin.GetUserType(UserID, password);
         string isvalid = "";
 
         if (UserType == "" || UserType == "1")
@@ -229,8 +228,9 @@ public class BetseferWS : System.Web.Services.WebService
                         UserType = "Child";
                         break;
                 }
+
+
         }
-        string[] arr = new string[] { isvalid, UserType };
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringCategory = js.Serialize(arr);
         return jsonStringCategory;
@@ -620,6 +620,8 @@ public class BetseferWS : System.Web.Services.WebService
     public string SetMessageAsRead(string MessageCode)
     {
         Messages m = new Messages();
+
+
         return m.UpdateMessageAsRead(MessageCode);
     }
 
@@ -703,7 +705,6 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string insertNewGuard(string UserId, string RegId)
     {
         int cID = Convert.ToInt32(UserId);
 
@@ -711,11 +712,9 @@ public class BetseferWS : System.Web.Services.WebService
         newUser.UserID1 = cID.ToString();
         newUser.RegId = RegId;
 
-        int numEffected = newUser.insertUser(newUser);
         if (numEffected == 1)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
-            // serialize to string
             string jsonString = js.Serialize(newUser);
             return jsonString;
         }
@@ -725,6 +724,7 @@ public class BetseferWS : System.Web.Services.WebService
         }
     }
 
+<<<<<<< HEAD
     
         [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -749,6 +749,7 @@ public class BetseferWS : System.Web.Services.WebService
         {
             throw (new Exception("error in create user"));
         }
+>>>>>>> 499a8cbb51c7810d7a3c3da7d3cff1dbdf63ebef
     }
 }
 
