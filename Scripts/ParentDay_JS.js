@@ -4,12 +4,8 @@
 
     IfMehanech_LoadParentDay(userID, ShowParentsDay);
 
-    $("#submitPD").click(function () {
-        alert("zayiiinnneeeeeee");
-    });
     
 });
-
 
 
 
@@ -49,11 +45,11 @@ function ShowParentsDay(results) {
         var td4 = document.createElement('td');
         var text2 = document.createTextNode('שעת התחלה:');
         var input2 = document.createElement("select");
+        input2.id = "from";
 
-        var list = "< option >בחר</option>";
+        var list = "<option>בחר</option>";
         for (var i = 1; i < 25; i++) {
-            var hour = i / 10 >= 1 ? i : "0" + i;
-            hour = hour + " : 00";
+            var hour = (i / 10 >= 1 ? i : "0" + i) + ":00";
             list += "<option>" + hour + "</option>";
         }
         input2.innerHTML = list;
@@ -70,7 +66,7 @@ function ShowParentsDay(results) {
         var td6 = document.createElement('td');
         var text3 = document.createTextNode('שעת סיום:');
         var input3 = document.createElement('select');
-
+        input3.id = "to";
         input3.innerHTML = list;
 
         td5.appendChild(text3);
@@ -83,10 +79,16 @@ function ShowParentsDay(results) {
         var tr4 = document.createElement('tr');
         var td7 = document.createElement('td');
         var td8 = document.createElement('td');
-        var text4 = document.createTextNode('משך פגישה:');
-        var input4 = document.createElement('input');
-        input4.id = "meetingLong";
-        input4.checkValidity(); // ma ze ose??
+        var text4 = document.createTextNode('משך פגישה (דקות):');
+        var input4 = document.createElement('select');
+        input4.id = "long";
+
+        var times = "<option>בחר</option>" +
+            "<option>5</option>" +
+            "<option>10</option>" +
+            "<option>15</option>" +
+            "<option>20</option>";
+        input4.innerHTML = times;
 
         td7.appendChild(text4);
         td8.appendChild(input4);
@@ -99,6 +101,7 @@ function ShowParentsDay(results) {
         submitButton.textContent = "צור";
         submitButton.style = "float: left";
         submitButton.id = "submitPD";
+        submitButton.onclick = SaveParentsDay;
         $("#createNewDay").append(submitButton);
 
     return;
@@ -109,5 +112,45 @@ function ShowParentsDay(results) {
     $("#noMehanech").hide();
 };
 
+function SaveParentsDay() {
+    var date = $('#parentsDayDate').val();
+    var from = $('#from option:selected').text();
+    var to = $('#to option:selected').text();
+    var long = $('#long option:selected').text();
 
+    if (date === "" || from === "בחר" || to === "בחר" || long === "בחר") {
+        alert("עליך למלא את כל השדות");
+        return;
+    }
+    chosenDate = date.split("-");
+    date = chosenDate[2] + "/" + chosenDate[1] + "/" + chosenDate[0];
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    today = dd + '/' + mm + '/' + yyyy;
 
+    if (today > date) {
+        alert("תאריך זה כבר עבר");
+        return;
+    }
+
+    if (from > to) {
+        alert("שעות אינן תקינות");
+        return;
+    }
+
+    parentsDay = new obj()
+    parentsDay.date = date;
+    parentsDay.from = from;
+    parentsDay.to = to;
+    parentsDay.long = long;
+    parentsDay.teacher = localStorage.getItem("UserID");
+
+    SaveParentDay(parentsDay, AfterSave)
+
+}
+
+function AfterSave(results) {
+    alert("נוצר בהצלחה");
+}

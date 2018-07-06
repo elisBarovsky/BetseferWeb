@@ -16,6 +16,10 @@ public class ParentsDay
     public string TeacherName { get; set; }
     public int ClassCode { get; set; }
     public string ClassName { get; set; }
+    public string from { get; set; }
+    public string to { get; set; }
+    public int longMeeting { get; set; }
+    
     public List<Meeting> ParentsDayMeetings { get; set; }
 
     DBconnectionTeacher dbt = new DBconnectionTeacher();
@@ -28,5 +32,10 @@ public class ParentsDay
     public ParentsDay IfMehanech_LoadParentDay(string UserId)
     {
         return dbt.LoadParentDay(UserId);
+    }
+
+    public int SaveParentsDay(ParentsDay p)
+    {
+        return dbt.SaveParentsDay(p);
     }
 }

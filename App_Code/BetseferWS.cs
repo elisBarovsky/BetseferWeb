@@ -724,5 +724,31 @@ public class BetseferWS : System.Web.Services.WebService
             throw (new Exception("error in create user"));
         }
     }
+
+    
+        [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SaveParentDay(string date, string from, string to, string longMeeting, string teacher)
+    {
+        ParentsDay p = new ParentsDay();
+        p.ParentsDayDate = date;
+        p.from = from;
+        p.to = to;
+        p.longMeeting = int.Parse(longMeeting);
+        p.TeacherID = teacher;
+        
+        int numEffected = p.SaveParentsDay(p);
+        if (numEffected == 1)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            // serialize to string
+            string jsonString = js.Serialize(numEffected);
+            return jsonString;
+        }
+        else
+        {
+            throw (new Exception("error in create user"));
+        }
+    }
 }
 

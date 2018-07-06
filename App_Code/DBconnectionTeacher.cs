@@ -1313,4 +1313,53 @@ public class DBconnectionTeacher
         p.ParentsDayMeetings = GetMeetingsByParentsDayCode(p.ParentsDayCode);
         return p;
     }
+
+    public int SaveParentsDay(ParentsDay p)
+    {
+        DBconnection db = new DBconnection();
+        p.CodeWeekDay = db.GetCodeWeekDayByDate(p.ParentsDayDate);
+        p.ClassCode = GetClassCodeByMainTeacherID(p.TeacherID);
+
+        String insertSTR = "insert into ParentsDay(CodeWeekDay, ParentsDayDate, TeacherID, ClassCode) "+
+            "values("+ p.CodeWeekDay +",'"+ p.ParentsDayDate +"','"+ p.TeacherID +"',"+ p.ClassCode +")";
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            int answerParentsDayTable = ExecuteNonQuery(insertSTR);
+
+            int parentsDayCode = GetParentsDayCodeByDateAndTeacherID(p.ParentsDayDate, p.TeacherID);
+
+            DateTime from = DateTime.Parse( p.from);
+            while (from < DateTime.Parse(p.to))
+            {
+                //myDateTime.AddMinutes(1);       
+            }
+
+            insertSTR = "";
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+
+        p.ParentsDayMeetings = GetMeetingsByParentsDayCode(p.ParentsDayCode);
+        return p;
+    }
 }

@@ -3371,4 +3371,12 @@ public class DBconnection
         }
     }
 
+    public int GetCodeWeekDayByDate(string date)
+    {
+        int year = int.Parse(date.Substring(6)), mont = int.Parse(date.Substring(3, 5)), day = int.Parse(date.Substring(0,1));
+        DateTime dateValue = new DateTime(year, mont, day);
+        return (int)dateValue.DayOfWeek;
+    }
+        
+
 }
