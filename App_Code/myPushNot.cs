@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Configuration;
-
-using PushSharp;
-using PushSharp.Android;
-//using PushSharp.Apple;
 using PushSharp.Core;
-
+using PushSharp.Google;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using Newtonsoft.Json.Linq;
 
 /// <summary>
 /// Summary description for myPushNot
@@ -84,79 +79,124 @@ public class myPushNot
     }
     public void RunPushNotification(List<Users> userList, myPushNot pushNot)
     {
-        //Create our push services broker
-        var push = new PushBroker();
+        List<string> registrationIDs = new List<string>();
 
-        //Wire up the events for all the services that the broker registers
-        push.OnNotificationSent += NotificationSent;
-        //push.OnChannelException += ChannelException;
-        //push.OnServiceException += ServiceException;
-        //push.OnNotificationFailed += NotificationFailed;
-        //push.OnDeviceSubscriptionExpired += DeviceSubscriptionExpired;
-        //push.OnDeviceSubscriptionChanged += DeviceSubscriptionChanged;
-        //push.OnChannelCreated += ChannelCreated;
-        //push.OnChannelDestroyed += ChannelDestroyed;
-
-
-        //------------------------------------------------
-        //IMPORTANT NOTE about Push Service Registrations
-        //------------------------------------------------
-        //Some of the methods in this sample such as 'RegisterAppleServices' depend on you referencing the correct
-        //assemblies, and having the correct 'using PushSharp;' in your file since they are extension methods!!!
-
-        // If you don't want to use the extension method helpers you can register a service like this:
-        //push.RegisterService<WindowsPhoneToastNotification>(new WindowsPhonePushService());
-
-        //If you register your services like this, you must register the service for each type of notification
-        //you want it to handle.  In the case of WindowsPhone, there are several notification types!
-
-
-
-        //---------------------------
-        // ANDROID GCM NOTIFICATIONS 
-        //---------------------------
-        //Configure and start Android GCM
-        //IMPORTANT: The API KEY comes from your Google APIs Console App, under the API Access section, 
-        //  by choosing 'Create new Server key...'
-        //  You must ensure the 'Google Cloud Messaging for Android' service is enabled in your APIs Console
-        //push.RegisterGcmService(new GcmPushChannelSettings("YOUR Google API's Console API Access  API KEY for Server Apps HERE"));
-
-        //string from web.config
-        string serverKey = ConfigurationManager.AppSettings["AIzaSyCXwH-HNkRlKLCCD47q2ybPM3AWaUq7uL0"];
-        push.RegisterGcmService(new GcmPushChannelSettings(serverKey));
-        //Fluent construction of an Android GCM Notification
-        //IMPORTANT: For Android you MUST use your own RegistrationId here that gets generated within your Android app itself!
-
-        //string message = "test";
-        //push.QueueNotification(new GcmNotification().ForDeviceRegistrationId("efFGfsxygyU:APA91bFOuNDsdSlTeJX191QLL64HMoKuqQYiVx_AqBL4bbrj_8K8l7CVyBe7KS0BpvNYIn2s883xF3T9uRZdFnTdt8ybWOn9lIs3Y7WTfObMSdVzhc5v7O-EHX0PFUpieGP9Rq9sNKxF")
-        //                      .WithJson("{\"message\": \" " + message + " \", \"title\": \" my title\", \"msgcnt\": \"1\", \"alert\":\"Hello World!\",\"badge\":7,\"sound\":\"default\"}"));
-        //{\"message\": \" my message\", \"title\": \" my title\", \"msgcnt\": \"1\" - FOR the BACKGROUND!!!
-        // \"alert\":\"Hello World!\",\"badge\":7,\"sound\":\"sound.caf\"}" - FOR the FOREGROUND!!!
-
-        //create the json to push message
-        JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-
-        string jsonString = serializer.Serialize(pushNot);
-
-        //get the user regId
-        foreach (Users u in userList)
+        foreach (var item in userList)
         {
-            string readRegFromDb = u.RegId;
+            //ignore nulls
+            if (item.RegId != "")
+            {
+                registrationIDs.Add(item.RegId);
+            }
 
-            //string readRegFromDb = "dVDPWsEDyQ8:APA91bG-PkJ-yv2vN_ayfb3ipxPowl2ittiIe5gW_Yw-M_mxSdLLViTpaCvDSMFRVQYQSsgwNoLjAiV_EtwZlMvyQ15GpN1jWMS5qvYMdqY19fBYAGhHrBf30QHKnDhbFiY7ojqtuTiQ";
-            push.QueueNotification(new GcmNotification().ForDeviceRegistrationId(readRegFromDb)
-                                  .WithJson(jsonString));
         }
 
-        //Console.WriteLine("Waiting for Queue to Finish...");
+        // Configuration
+        var config = new GcmConfiguration("AIzaSyCXwH-HNkRlKLCCD47q2ybPM3AWaUq7uL0");
+        config.GcmUrl = "https://fcm.googleapis.com/fcm/send";
 
-        //Stop and wait for the queues to drains
-        push.StopAllServices();
+        // Create a new broker
+        var gcmBroker = new GcmServiceBroker(config);
 
-        //Console.WriteLine("Queue Finished, press return to exit...");
-        //Console.ReadLine();	
+        // Wire up events
+        gcmBroker.OnNotificationFailed += (notification, aggregateEx) =>
+        {
+            Console.WriteLine("GCM Notification Failed!");
+        };
+
+        gcmBroker.OnNotificationSucceeded += (notification) =>
+        {
+            Console.WriteLine("GCM Notification Sent!");
+        };
+
+        // Start the broker
+        gcmBroker.Start();
+
+        foreach (var regId in registrationIDs)
+        {
+
+            // Queue a notification to send
+            gcmBroker.QueueNotification(new GcmNotification
+            {
+
+                RegistrationIds = new List<string> {
+            regId
+        },
+                Data = JObject.Parse(
+                        "{" +
+                               "\"title\" : \"" + pushNot.Title + "\"," +
+                               "\"message\" : \"" + pushNot.Message + "\"," +
+                                "\"info\" : \" Optional \"," +
+                            "\"content-available\" : \"" + "1" + "\"" +
+                        "}")
+            });
+        }
+
+
+        // Stop the broker, wait for it to finish   
+        // This isn't done after every message, but after you're
+        // done with the broker
+        gcmBroker.Stop();
+
     }
+    public void RunPushNotificationOne(Users user, JObject data)
+    {
+
+        // Configuration
+        var config = new GcmConfiguration("AIzaSyCXwH-HNkRlKLCCD47q2ybPM3AWaUq7uL0");
+        config.GcmUrl = "https://fcm.googleapis.com/fcm/send";
+
+        // Create a new broker
+        var gcmBroker = new GcmServiceBroker(config);
+
+        // Wire up events
+        gcmBroker.OnNotificationFailed += (notification, aggregateEx) =>
+        {
+            //Console.WriteLine("GCM Notification Failed!");
+        };
+
+        gcmBroker.OnNotificationSucceeded += (notification) =>
+        {
+            //Console.WriteLine("GCM Notification Sent!");
+        };
+
+        // Start the broker
+        gcmBroker.Start();
+
+        // Queue a notification to send
+        gcmBroker.QueueNotification(new GcmNotification
+        {
+
+            RegistrationIds = new List<string> {
+            user.RegId
+        },
+            Data = data
+        });
+
+
+
+        // Stop the broker, wait for it to finish   
+        // This isn't done after every message, but after you're
+        // done with the broker
+        gcmBroker.Stop();
+    }
+
+    public void cancelRide(int rideID, Users user)
+    {
+        var x = new JObject();
+
+        x.Add("title", "נסיעה בוטלה");
+
+        //modify by import ride from db by rideID
+        x.Add("message", "ביום 26.8 מהדסה לירושלים");
+
+        x.Add("rideID", rideID);
+        x.Add("info", "Canceled");
+        x.Add("content-available", 1);
+
+        RunPushNotificationOne(user, x);
+    }
+
     void NotificationSent(object sender, INotification notification)
     {
         //ScriptManager.RegisterClientScriptBlock(this., this.GetType(), "success", "Erroralert(Sent'" + sender + " -> " + notification + ".');", true);
