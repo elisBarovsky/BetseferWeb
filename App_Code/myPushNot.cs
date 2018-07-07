@@ -11,7 +11,8 @@ using PushSharp.Core;
 
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
-
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 /// <summary>
 /// Summary description for myPushNot
@@ -65,13 +66,13 @@ public class myPushNot
         set { Sound = "default"; }
     }
 
-    //private Payload payload1;
+    private Payload payload1;
 
-    //public Payload data
-    //{
-    //    get { return payload1; }
-    //    set { payload1 = value; }
-    //}
+    public Payload data
+    {
+        get { return payload1; }
+        set { payload1 = value; }
+    }
 
     public myPushNot(string _message, string _title, string _msgcnt, int _badge, string _sound)
     {
@@ -158,7 +159,8 @@ public class myPushNot
     }
     void NotificationSent(object sender, INotification notification)
     {
-        //Console.WriteLine("Sent: " + sender + " -> " + notification);
+        //ScriptManager.RegisterClientScriptBlock(this., this.GetType(), "success", "Erroralert(Sent'" + sender + " -> " + notification + ".');", true);
+        Console.WriteLine("Sent: " + sender + " -> " + notification);
     }
 
 }

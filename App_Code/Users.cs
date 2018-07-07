@@ -180,10 +180,10 @@ public class Users
     {
         db = new DBconnection();
         List<Users> listUser = new List<Users>();
-        listUser = db.getUserList("Betsefer", "users");
+        return listUser = db.getUserList();
 
-        return listUser;
     }
+
     public string GetNumChild(string UserID)
     {
         return db.GetNumChild(UserID);

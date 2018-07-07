@@ -3285,30 +3285,31 @@ public class DBconnection
         }
     }
 
-    public List<Users> getUserList(string conString, string tableName)
+    public List<Users> getUserList()
     {
+        String selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where [PushRegID] != 'null'";
 
         List<Users> userList = new List<Users>();
-        SqlConnection con = null;
         try
         {
-            con = connect(conString); // create a connection to the database using the connection String defined in the web config file
-
-            String selectSTR = "SELECT * FROM " + tableName;
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
             SqlCommand cmd = new SqlCommand(selectSTR, con);
-
-            // get a reader
-            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
-
-
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             while (dr.Read())
-            {   // Read till the end of the data into a row               
+            {
                 Users u = new Users();
-                u.UserID1 = dr["userId"].ToString();
-                u.RegId = (string)dr["regId"];
+                u.UserID1 = dr["UserID"].ToString();
+                u.RegId = dr["PushRegID"].ToString();
 
                 userList.Add(u);
-
             }
             return userList;
         }
