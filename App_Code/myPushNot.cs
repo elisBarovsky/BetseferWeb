@@ -77,6 +77,7 @@ public class myPushNot
         badge = _badge;
         sound = _sound;
     }
+
     public void RunPushNotification(List<Users> userList, myPushNot pushNot)
     {
         List<string> registrationIDs = new List<string>();
