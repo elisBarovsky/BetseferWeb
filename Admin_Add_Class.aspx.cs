@@ -98,8 +98,8 @@ public partial class Admin_Add_Class : System.Web.UI.Page
         //string message = messageTB.Text;
         //string title = titleTB.Text;
 
-        string message = "תוכן פוש";
-        string title = "כותרת פוש";
+        string message = "יהיה בסדר, מתה עלייך ♥";
+        string title = "דקלה נשמה";
 
         myPushNot pushNot = new myPushNot(message, title, "1", 7, "default");
         pushNot.RunPushNotification(userList, pushNot);
