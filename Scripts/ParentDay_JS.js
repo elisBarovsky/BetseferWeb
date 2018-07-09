@@ -7,14 +7,16 @@
     
 });
 
-
-
 function ShowParentsDay(results) {
+    $("#parentsDayTable").empty();
+    $("#pdDetails").empty();
 
     if (results === "no") { // this teacher don't has a main class
 
         $("#noMehanech").show();
+        $("#createNewDay").hide();
         $("#parentsDayTable").hide();
+        $("#pdDetails").hide();
         return;
     }
 
@@ -109,7 +111,32 @@ function ShowParentsDay(results) {
 
     // show the existing parents day
     $("#parentsDayTable").show();
+    $("#createNewDay").hide();
+    var title = "כיתה " + res.ClassName + " תאריך: " + res.ParentsDayDate;
+    $("#pdDetails").append(title);
+    $("#pdDetails").show();
     $("#noMehanech").hide();
+
+    var strParentsDay = "<thead class='bg-warning'>< tr ><th>שעה</th><th>תלמיד</th></tr ></thead >";
+
+    for (var i = 0; i < res["ParentsDayMeetings"].length; i++) {
+        // remmember also to check if this is me let me delete myself from the list
+        if (res["ParentsDayMeetings"][i].PupilID === "") {//there is nothing in the pupil ID
+            pupilOrBreake = "<button onclick='GiveMeBreak1(" + res["ParentsDayMeetings"][i].MeetingCode + ")'>סגירה עבור הפסקה</button>"
+        }
+        else if (res["ParentsDayMeetings"][i].PupilID === "0") {
+            pupilOrBreake = "<button onclick='DeleteBreak1(" + res["ParentsDayMeetings"][i].MeetingCode + ")'>ביטול הפסקה</button>";
+        }
+        else {
+            pupilOrBreake = res["ParentsDayMeetings"][i].PupilName;
+        }
+            strParentsDay += "<tr><td>" + res["ParentsDayMeetings"][i].StartTime +
+                "-" + res["ParentsDayMeetings"][i].EndTime +
+                "</td><td>" + pupilOrBreake +
+                "</td></tr>";
+    }
+
+    $("#parentsDayTable").append(strParentsDay);
 };
 
 function SaveParentsDay() {
@@ -126,31 +153,62 @@ function SaveParentsDay() {
     date = chosenDate[2] + "/" + chosenDate[1] + "/" + chosenDate[0];
     var today = new Date();
     var dd = today.getDate();
+    if (dd < 10) {
+        dd = "0" + dd;
+    }
     var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-    today = dd + '/' + mm + '/' + yyyy;
+    if (mm < 10) {
+        mm = "0" + mm;
 
-    if (today > date) {
-        alert("תאריך זה כבר עבר");
-        return;
+        var yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' + yyyy;
+        if (today > date) {
+            alert("תאריך זה כבר עבר");
+            return;
+        }
+
+        if (from > to) {
+            alert("שעות אינן תקינות");
+            return;
+        }
+
+        parentsDay = new Object();
+        parentsDay.date = date;
+        parentsDay.from = from;
+        parentsDay.to = to;
+        parentsDay.long = long;
+        parentsDay.teacher = localStorage.getItem("UserID");
+
+        SaveParentDay(parentsDay, AfterSave)
+
     }
-
-    if (from > to) {
-        alert("שעות אינן תקינות");
-        return;
-    }
-
-    parentsDay = new obj()
-    parentsDay.date = date;
-    parentsDay.from = from;
-    parentsDay.to = to;
-    parentsDay.long = long;
-    parentsDay.teacher = localStorage.getItem("UserID");
-
-    SaveParentDay(parentsDay, AfterSave)
-
-}
+};
 
 function AfterSave(results) {
     alert("נוצר בהצלחה");
-}
+
+    //var date = $('#parentsDayDate').val() = "";
+    //var from = $('#from option:selected').select(0);
+    //var to = $('#to option:selected').select(0);
+    //var long = $('#long option:selected').select(0);
+
+    IfMehanech_LoadParentDay(localStorage.getItem("UserID"), ShowParentsDay);
+};
+
+function GiveMeBreak1(ParentsDayMeeting) {
+    // save the breake time
+    GiveMeBreak(ParentsDayMeeting, ChangeButton);
+
+    //change the button text
+};
+
+function DeleteBreak1(ParentsDayMeeting) {
+    //delete the break time
+    DeleteBreak(ParentsDayMeeting, ChangeButton);
+
+    //change the button text
+};
+
+function ChangeButton(results) {
+    IfMehanech_LoadParentDay(localStorage.getItem("UserID"), ShowParentsDay);
+};
