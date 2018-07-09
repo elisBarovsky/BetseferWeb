@@ -1238,6 +1238,7 @@ public class DBconnectionTeacher
             while (dr.Read())
             {
                 Meeting m = new Meeting();
+                m.MeetingCode = dr["MeetingCode"].ToString();
                 m.PupilID = dr["PupilID"].ToString();
                 m.PupilName = db.GetUserFullNameByID(m.PupilID);
                 m.StartTime = dr["StartTime"].ToString();
@@ -1274,7 +1275,7 @@ public class DBconnectionTeacher
         p.TeacherID = UserId;
         p.ClassCode = GetClassCodeByMainTeacherID(UserId);
 
-        String selectSTR = "SELECT * FROM ParentsDay where ClassCode  = '" + p.ClassCode + "' and ParentsDayDate >= (SELECT GETDATE())";
+        String selectSTR = "SELECT * FROM ParentsDay where ClassCode  = '" + p.ClassCode + "' and ParentsDayDate >= (convert(nvarchar(10), SYSDATETIME(), 103))";
 
         try
         {
@@ -1289,13 +1290,17 @@ public class DBconnectionTeacher
         {
             SqlCommand cmd = new SqlCommand(selectSTR, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            DBconnection db = new DBconnection();
             while (dr.Read())
             {
                 p.ParentsDayCode = int.Parse(dr["ParentsDayCode"].ToString());
+                p.ClassCode = int.Parse(dr["ClassCode"].ToString());
+                p.ClassName = db.GetClassNameByCodeClass(p.ClassCode);
                 p.CodeWeekDay = int.Parse(dr["CodeWeekDay"].ToString());
                 p.ParentsDayDate = dr["ParentsDayDate"].ToString();
                 
             }
+            p.ParentsDayMeetings = GetMeetingsByParentsDayCode(p.ParentsDayCode);
         }
         catch (Exception ex)
         {
@@ -1309,8 +1314,7 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-
-        p.ParentsDayMeetings = GetMeetingsByParentsDayCode(p.ParentsDayCode);
+       
         return p;
     }
 
@@ -1379,13 +1383,16 @@ public class DBconnectionTeacher
 
             int parentsDayCode = GetParentsDayCodeByDateAndTeacherID(p.ParentsDayDate, p.TeacherID);
 
-            DateTime from = DateTime.Parse( p.from);
-            while (from < DateTime.Parse(p.to))
+            DateTime from = DateTime.Parse(p.from), to;
+            insertSTR = "";
+            while (from < DateTime.Parse(p.to)) //add less long meeting to stay in range.
             {
-                //myDateTime.AddMinutes(1); create the meetings       
+                to = from.AddMinutes((double)p.longMeeting);
+                insertSTR += " insert into ParentsDayMeeting (TeacherID, ParentsDayCode, StartTime, EndTime) " +
+                    "values ('" + p.TeacherID + "', " + parentsDayCode + ", '" + from + "', '" + to +"')";
+                from = from.AddMinutes((double)p.longMeeting);
             }
 
-            insertSTR = "";
             int answerParentsDayMeetingsTable = ExecuteNonQuery(insertSTR);
             return answerParentsDayTable + answerParentsDayMeetingsTable; // should be bigger than two. maybe i should know the number of meetings and check if it is OK
         }
@@ -1401,5 +1408,17 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
+    }
+
+    public int GiveMeBreak(string ParentsDayMeeting)
+    {
+        string cStr = "UPDATE ParentsDayMeeting SET PupilID = '0' WHERE MeetingCode = '"+ ParentsDayMeeting + "'";
+        return ExecuteNonQuery(cStr);
+    }
+
+    public int DeleteBreak(string ParentsDayMeeting)
+    {
+        string cStr = "UPDATE ParentsDayMeeting SET PupilID = null WHERE MeetingCode = '"+ ParentsDayMeeting + "'";
+        return ExecuteNonQuery(cStr);
     }
 }

@@ -38,4 +38,15 @@ public class ParentsDay
     {
         return dbt.SaveParentsDay(p);
     }
+
+    public int GiveMeBreak(string ParentsDayMeeting)
+    {
+        return dbt.GiveMeBreak(ParentsDayMeeting);
+        
+    }
+
+    public int DeleteBreak(string ParentsDayMeeting)
+    {
+        return dbt.DeleteBreak(ParentsDayMeeting);
+    }
 }

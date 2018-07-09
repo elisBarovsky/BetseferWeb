@@ -1008,7 +1008,7 @@ public class DBconnection
         }
         try
         {
-            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlCommand cmd = new SqlCommand(selectSTR, conNameClass);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             while (dr.Read())
             {
@@ -3329,7 +3329,7 @@ public class DBconnection
 
     public int GetCodeWeekDayByDate(string date)
     {
-        int year = int.Parse(date.Substring(6)), mont = int.Parse(date.Substring(3, 5)), day = int.Parse(date.Substring(0,1));
+        int year = int.Parse(date.Substring(6)), mont = int.Parse(date.Substring(3, 2)), day = int.Parse(date.Substring(0,2));
         DateTime dateValue = new DateTime(year, mont, day);
         return (int)dateValue.DayOfWeek;
     }

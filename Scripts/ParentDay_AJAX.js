@@ -27,7 +27,39 @@ function SaveParentDay(parentsDay, AfterSave) {
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            ShowParentsDay(results);
+            AfterSave(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
+function GiveMeBreak(ParentsDayMeeting, ChangeButton) {
+    $.ajax({
+        url: 'BetseferWS.asmx/GiveMeBreak',
+        data: JSON.stringify({ 'ParentsDayMeeting': ParentsDayMeeting }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            ChangeButton(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
+function DeleteBreak(ParentsDayMeeting, ChangeButton) {//need meetting code not what i saved
+    $.ajax({
+        url: 'BetseferWS.asmx/DeleteBreak',
+        data: JSON.stringify({ 'ParentsDayMeeting': ParentsDayMeeting }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            ChangeButton(results);
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');

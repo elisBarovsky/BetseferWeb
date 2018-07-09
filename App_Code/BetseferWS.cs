@@ -746,7 +746,7 @@ public class BetseferWS : System.Web.Services.WebService
         p.TeacherID = teacher;
 
         int numEffected = p.SaveParentsDay(p);
-        if (numEffected == 1)
+        if (numEffected > 1)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             // serialize to string
@@ -765,6 +765,30 @@ public class BetseferWS : System.Web.Services.WebService
     {
         Users u = new Users();
         int res = u.PushUpdateRegId(Id, RegID); 
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GiveMeBreak(string ParentsDayMeeting)
+    {
+        ParentsDay p = new ParentsDay();
+        int res = p.GiveMeBreak(ParentsDayMeeting);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string DeleteBreak(string ParentsDayMeeting)
+    {
+        ParentsDay p = new ParentsDay();
+        int res = p.DeleteBreak(ParentsDayMeeting);
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(res);
