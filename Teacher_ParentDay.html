@@ -183,20 +183,17 @@
                             <li><a href="Teacher_ContactsList.aspx"><i class="fa fa-plus"></i><span>צפייה</span> </a>
                         </ul>
                     </li>
-                    <!--<li class="treeview">
-                        <a href="#"><i class="fa fa-briefcase"></i><span>לוח שנה</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                    </li>-->
-                    <li class="treeview">
+
+                    <li class="active treeview">
                         <a href="#"><i class="fa fa-briefcase"></i><span>יום הורים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li><a href="Teacher_ParentDay.html"><i class="fa fa-plus"></i><span>יצירה</span> </a>
-                            <li><a href="Teacher_ParentDay.html"><i class="fa fa-plus"></i><span>צפייה ועדכון</span> </a>
+                            <li class="active"><a href="Teacher_ParentDay.html"><i class="fa fa-plus"></i><span>יצירה וצפייה</span> </a>
                         </ul>
                     </li>
-                    <li class="active treeview">
+                    <li class="treeview">
                         <a href="#"><i class="fa fa-envelope-o "></i><span>הודעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li class="active"><a href="Teacher_History_Messages.html">הודעות נכנסות</a></li>
+                            <li ><a href="Teacher_History_Messages.html">הודעות נכנסות</a></li>
                             <li> <a href="Teacher_Add_Messages.html">הודעה חדשה</a></li>
                         </ul>
                     </li>
@@ -206,14 +203,29 @@
         </aside>
 
         <div class="content-wrapper">
-            <h3>יום הורים</h3>
-            <br />
-            <h5 id="noMehanech">אין עבורך כיתת חינוך</h5>
-            <table id="createNewDay" class="table"></table>
-            <h6 id="pdDetails"></h6>
-            <table id="parentsDayTable" class="table table-striped">
+            <section class="content-header sty-one">
+                <h1>יום הורים</h1>
                 
-            </table>
+            </section>
+
+        
+            <section class="content">
+                <div class="info-box">
+                    <div class="card-body">
+                        <div style="text-align: center; font-size: 20px">
+                            <h6 id="pdDetails" style="font-weight:bold"></h6>
+
+                        </div>
+                        <div class="row">
+                            <h5 id="noMehanech"></h5>
+                            <table id="createNewDay" class="table" style="width:50%;margin:auto;text-align:center"></table>
+
+
+                            <table id="parentsDayTable" class="table table-striped" style="width:50%;margin:auto;text-align:center"></table>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 
