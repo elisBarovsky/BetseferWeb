@@ -10,7 +10,6 @@
             FillClassesInDDL(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }
@@ -19,8 +18,8 @@ function FillPupils(classTotalName, FillUsersInDDL) {
 
     var dataString = JSON.stringify(classTotalName);
     $.ajax({
-        url: 'BetseferWS.asmx/GetPupilsByClassTotalName',
-        data: JSON.stringify({ 'classTotalName': classTotalName }),
+        url: 'BetseferWS.asmx/GetPupilsByClassTotalName_TheGoodOne',
+        data: JSON.stringify({ 'ClassTotalName': classTotalName }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
@@ -28,7 +27,6 @@ function FillPupils(classTotalName, FillUsersInDDL) {
             FillPupilInDDL(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }
@@ -46,7 +44,6 @@ function FillParents(classTotalName, FillUsersInDDL) {
             FillParentsInDDL(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }
@@ -63,7 +60,6 @@ function FillTeachers(FillTeachersInDDL) {
             FillTeachersInDDL(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }
@@ -80,7 +76,6 @@ function SubmitMessageAjax(message, AfterMessageSent) {
             AfterMessageSent(results.d);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }

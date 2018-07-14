@@ -89,46 +89,10 @@
                                 <i class="fa fa-home"></i>
                                 <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
                             </a>
-                        </li>
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o"></i>
-                            <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                        </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">התראות</li>
-                                <li>
-                                    <ul class="menu">
-                                        <li><a href="#">
-                                            <div class="pull-left icon-circle red"><i class="icon-lightbulb"></i></div>
-                                            <h4>Alex C. Patton</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">9:30 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left icon-circle blue"><i class="fa fa-coffee"></i></div>
-                                            <h4>Nikolaj S. Henriksen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">1:30 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left icon-circle green"><i class="fa fa-paperclip"></i></div>
-                                            <h4>Kasper S. Jessen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">9:30 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left icon-circle yellow"><i class="fa  fa-plane"></i></div>
-                                            <h4>Florence S. Kasper</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">11:10 AM</span></p>
-                                        </a></li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">ראיתי את כל ההתראות</a></li>
-                            </ul>
-                        </li>
+                        </li>                      
                         <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu p-ph-res"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                  <li class="dropdown user user-menu p-ph-res">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <asp:Image ID="UserImg1" runat="server" class="user-image" />
                             <span class="hidden-xs"></span></a>
                             <ul class="dropdown-menu right">
@@ -136,13 +100,11 @@
                                     <div class="pull-left user-img" runat="server">
                                         <asp:Image ID="UserImgimg" runat="server" class="img-responsive" />
                                     </div>
-                                    <p class="text-left" id="UserName" runat="server"><small>some mail</small> </p>
-                                    <div class="view-link text-right"><a href="#">צפה בפרופיל</a> </div>
                                 </li>
+                                 <li><a href="#" class="view-link text-right"> <h2 class="view-link text-right" id="UserName" runat="server"><small></small> </h2></a></li>
                                 <li><a href="#" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
-                                <li role="separator" class="divider"></li>
                                 <li><a href="login.aspx" class="view-link text-right">התנתק  <i class="fa fa-power-off"></i></a></li>
-                            </ul>
+                              </ul>
                         </li>
                     </ul>
                 </div>
@@ -153,12 +115,6 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-        <%--         <div class="user-panel">
-                    <div class="image text-center"></div>
-                    <div class="info">
-                        <a href="#">ברוך הבא ☺</a>
-                    </div>
-                </div>--%>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -181,7 +137,6 @@
                     <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ציונים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li><a href="Teacher_Grades_Insert.aspx"><i class="fa fa-plus"></i><span>הוספת ציונים</span> </a>
-                                <li><a href="#.aspx"><i class="fa fa-plus"></i><span>עדכון</span> </a>
                         </ul>
                     </li>
                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>דף קשר</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -189,8 +144,6 @@
                             <li ><a href="Teacher_ContactsList.aspx"><i class="fa fa-plus"></i><span>צפייה</span> </a>
                         </ul>
                     </li>
-                   <%-- <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>לוח שנה</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                    </li>--%>
                     <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>יום הורים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li><a href="Teacher_ParentDay.html"><i class="fa fa-plus"></i><span>יצירה וצפייה</span> </a>
@@ -286,9 +239,6 @@ where  dbo.TeachersTeachesSubjects.TeacherID=@TID">
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <%-- <footer class="main-footer">
-    <div class="pull-left hidden-xs">Copyright © 2018 Ellis & Dikla. All rights reserved</div>
-    </footer>--%>
     </div>
     <!-- ./wrapper -->
 
@@ -308,31 +258,6 @@ where  dbo.TeachersTeachesSubjects.TeacherID=@TID">
     <!-- Chart Peity JavaScript -->
     <script src="dist/plugins/peity/jquery.peity.min.js"></script>
     <script src="dist/plugins/functions/jquery.peity.init.js"></script>
-
-    <%--  <div class="w3-sidebar w3-bar-block w3-card w3-dark-grey w3-xlarge" style="width: 10%; right: 0;">
-            <h3 class="w3-bar-item"></h3>
-            <a href="Admin.aspx" class="w3-bar-item w3-button"><i class="fa fa-home" style="padding-left: 50%"></i></a>
-            <a href="ATimeTable.aspx" class="w3-bar-item w3-button w3-hover-green" style="text-align: right">מערכת שעות</a>
-            <a href="AdminMasseges.aspx" class="w3-bar-item w3-button w3-hover-blue" style="text-align: right">הודעות</a>
-            <a href="AAddNewUser.aspx" class="w3-bar-item w3-button w3-hover-red" style="text-align: right">ניהול משתמשים</a>
-            <a href="AAddClasses.aspx" class="w3-bar-item w3-button w3-hover-blue" style="text-align: right">ניהול כיתות</a>
-            <a href="AAddLessons.aspx" class="w3-bar-item w3-button w3-hover-red" style="text-align: right">ניהול מקצועות</a>
-            <a href="Login.aspx" class="w3-bar-item w3-button"><i class="fa fa-sign-out" style="padding-left: 50%"></i></a>
-
-        </div>
-
-
-        <div style="margin-right: 10%">
-
-            <div class="w3-container w3-dark-grey" style="height: 50px">
-                <img src="Images/Betsefer.png" style="padding-top: 5px; height: 50px">
-            </div>
-
-            <br />
-            <br />
-            <br />--%>
-
-    <%--</div>--%>
-
+   
 </body>
 </html>

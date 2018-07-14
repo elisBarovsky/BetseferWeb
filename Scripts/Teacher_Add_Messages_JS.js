@@ -24,9 +24,6 @@ function getUserImg() {
 
 function FillClassesInDDL(results) {
 
-    UserImgimg.src = "";
-    UserName.text = "";
-
     res = $.parseJSON(results.d);
 
     $('#classDDL').empty();
@@ -43,6 +40,7 @@ function FillClassesInDDL(results) {
 function FillUsers() {
     var classTotalName = $('#classDDL').val();
     if (classTotalName !== "בחר") {
+
         FillPupils(classTotalName, FillPupilInDDL);
         FillParents(classTotalName, FillParentsInDDL);
     }
