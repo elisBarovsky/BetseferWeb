@@ -33,36 +33,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="css/style.css" rel="stylesheet" type="text/css" />
---%>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    --%>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-  <script type="text/javascript">
+    <script type="text/javascript">
 
-           function Succesesalert(msg) {
+        function Succesesalert(msg) {
             swal({
                 title: 'בוצע!',
                 text: msg,
                 type: 'success',
                 icon: "success",
                 showConfirmButton: true
-                });
-                 //setTimeout(function () {
-                 //    window.location.href = "Admin_Update_TimeTable.aspx";
-                 //}, 2000);
-            };
-     
-            function Erroralert(msg) {
+            });
+            //setTimeout(function () {
+            //    window.location.href = "Admin_Update_TimeTable.aspx";
+            //}, 2000);
+        };
+
+        function Erroralert(msg) {
             swal({
                 title: 'שגיאה!',
                 text: msg,
                 type: 'error',
                 icon: "error",
                 showConfirmButton: true
-                });
-                 //setTimeout(function () {
-                 //    window.location.href = "login.aspx";
-                 //}, 2000);
-            };
+            });
+            //setTimeout(function () {
+            //    window.location.href = "login.aspx";
+            //}, 2000);
+        };
 
     </script>
 
@@ -93,57 +93,22 @@
                                 <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
                             </a>
                         </li>
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o"></i>
-                            <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                        </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">התראות</li>
-                                <li>
-                                    <ul class="menu">
-                                        <li><a href="#">
-                                            <div class="pull-left icon-circle red"><i class="icon-lightbulb"></i></div>
-                                            <h4>Alex C. Patton</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">9:30 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left icon-circle blue"><i class="fa fa-coffee"></i></div>
-                                            <h4>Nikolaj S. Henriksen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">1:30 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left icon-circle green"><i class="fa fa-paperclip"></i></div>
-                                            <h4>Kasper S. Jessen</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">9:30 AM</span></p>
-                                        </a></li>
-                                        <li><a href="#">
-                                            <div class="pull-left icon-circle yellow"><i class="fa  fa-plane"></i></div>
-                                            <h4>Florence S. Kasper</h4>
-                                            <p>I've finished it! See you so...</p>
-                                            <p><span class="time">11:10 AM</span></p>
-                                        </a></li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">ראיתי את כל ההתראות</a></li>
-                            </ul>
-                        </li>
+
                         <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu p-ph-res"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <asp:Image ID="UserImg1" runat="server" class="user-image" />
-                            <span class="hidden-xs"></span></a>
+                        <li class="dropdown user user-menu p-ph-res">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <asp:Image ID="UserImg1" runat="server" class="user-image" />
+                                <span class="hidden-xs"></span></a>
                             <ul class="dropdown-menu right">
                                 <li class="user-header right">
                                     <div class="pull-left user-img" runat="server">
                                         <asp:Image ID="UserImgimg" runat="server" class="img-responsive" />
                                     </div>
-                                    <p class="text-left" id="UserName" runat="server"><small>some mail</small> </p>
-                                    <div class="view-link text-right"><a href="#">צפה בפרופיל</a> </div>
                                 </li>
+                                <li><a href="#" class="view-link text-right">
+                                    <h2 class="view-link text-right" id="UserName" runat="server"><small></small></h2>
+                                </a></li>
                                 <li><a href="#" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
-                                <li role="separator" class="divider"></li>
                                 <li><a href="login.aspx" class="view-link text-right">התנתק  <i class="fa fa-power-off"></i></a></li>
                             </ul>
                         </li>
@@ -154,7 +119,7 @@
 
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
-          <%--  <div class="user-panel">
+            <%--  <div class="user-panel">
                 <div class="image text-center"></div>
                 <div class="info">
                     <a href="#">ברוך הבא ☺</a>

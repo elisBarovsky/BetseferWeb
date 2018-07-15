@@ -1,5 +1,10 @@
 ﻿$(document).ready(function () {
-
+    var Id = localStorage.getItem("UserID");
+    var z = localStorage.getItem("UserImg");
+    var userName = localStorage.getItem("UserFullName");
+    document.getElementById('imgUser').src = z;
+    document.getElementById('imgUser1').src = z;
+    document.getElementById('UserName').innerHTML = userName;
     var userID = localStorage.getItem("UserID");
 
     IfMehanech_LoadParentDay(userID, ShowParentsDay);
