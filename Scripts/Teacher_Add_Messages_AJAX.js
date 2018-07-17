@@ -1,7 +1,16 @@
-﻿function LoadClasses(TeacherID ,FillClassesInDDL) {
+﻿var path = "";
+var isCordovaApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+if (isCordovaApp) {
+    path = "https://proj.ruppin.ac.il/bgroup52/prod/";
+}
+else
+    path = "";
+
+
+function LoadClasses(TeacherID, FillClassesInDDL) {
 
     $.ajax({
-        url: 'BetseferWS.asmx/GetClassesByTeacherId',
+        url: path+'BetseferWS.asmx/GetClassesByTeacherId',
         data: JSON.stringify({ 'TeacherID': TeacherID}),
         type: 'POST',
         dataType: "json",
@@ -18,7 +27,7 @@ function FillPupils(classTotalName, FillUsersInDDL) {
 
     var dataString = JSON.stringify(classTotalName);
     $.ajax({
-        url: 'BetseferWS.asmx/GetPupilsByClassTotalName_TheGoodOne',
+        url: path+'BetseferWS.asmx/GetPupilsByClassTotalName_TheGoodOne',
         data: JSON.stringify({ 'ClassTotalName': classTotalName }),
         type: 'POST',
         dataType: "json",
@@ -35,7 +44,7 @@ function FillParents(classTotalName, FillUsersInDDL) {
 
     var dataString = JSON.stringify(classTotalName);
     $.ajax({
-        url: 'BetseferWS.asmx/GetParentsByClassTotalName',
+        url: path+ 'BetseferWS.asmx/GetParentsByClassTotalName',
         data: JSON.stringify({ 'classTotalName': classTotalName }),
         type: 'POST',
         dataType: "json",
@@ -51,7 +60,7 @@ function FillParents(classTotalName, FillUsersInDDL) {
 function FillTeachers(FillTeachersInDDL) {
 
     $.ajax({
-        url: 'BetseferWS.asmx/GetTeachers2',
+        url: path+ 'BetseferWS.asmx/GetTeachers2',
         data: JSON.stringify(),
         type: 'POST',
         dataType: "json",
@@ -67,7 +76,7 @@ function FillTeachers(FillTeachersInDDL) {
 function SubmitMessageAjax(message, AfterMessageSent) {
     var dataString = JSON.stringify(message);
     $.ajax({
-        url: 'BetseferWS.asmx/SubmitMessage',
+        url: path+ 'BetseferWS.asmx/SubmitMessage',
         data: JSON.stringify({ 'm': message }),
         type: 'POST',
         dataType: "json",
