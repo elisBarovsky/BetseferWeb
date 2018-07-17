@@ -150,6 +150,58 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetsubjectsByClassandTeacherID(string TeacherID,string ClassCode)
+    {
+        Subject s = new Subject();
+
+        DataTable subjs =s.GetsubjectsByClassandTeacherID(TeacherID, ClassCode);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in subjs.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in subjs.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(list);
+        return jsonStringFillHW;
+    }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetPupilsListByClassTotalName(string ClassCode)
+    {
+        Users u = new Users();
+        DataTable pupils = u.getPupillistsByClassCode(ClassCode);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in pupils.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in pupils.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(list);
+        return jsonStringFillHW; ;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetMessagesByUserIdUnread(string userId)
     {
         Messages u = new Messages();
@@ -303,13 +355,23 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string TelephoneList(string type, string PupilID)
+    public string TelephoneList(string type, string PupilID,string Teacher)
     {
-        Users PupilClass = new Users();
-        string PupilClassCode = PupilClass.GetPupilOtClass(PupilID);
+        string ClassCode = "";
+        if (Teacher == "True")
+        {
+            ClassCode = PupilID;
+        }
+        else
+        {
+            Users PupilClass = new Users();
+            ClassCode = PupilClass.GetPupilOtClass(PupilID);
+
+        }
 
         TelphoneList TL = new TelphoneList();
-        DataTable DT =  TL.FilterTelphoneListForMobile(type, PupilClassCode);
+
+        DataTable DT = TL.FilterTelphoneListForMobile(type, ClassCode);
 
         var list = new List<Dictionary<string, object>>();
 
@@ -459,6 +521,59 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string getHwInfoForProgBar(string PupilID)
+    {
+        HomeWork HW = new HomeWork();
+        DataTable HWs = HW.getHwInfoForProgBar(PupilID);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in HWs.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in HWs.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(list);
+        return jsonStringFillHW;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string getClassStudentsAvgGrades(string PupilID)
+    {
+        Classes GetClass = new Classes();
+        string ClassCode= GetClass.GetClassCodeByUserID(PupilID);
+
+        Grades ClassAvg = new Grades();
+        DataTable HWs = ClassAvg.PupilAvgGrades(ClassCode);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in HWs.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in HWs.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(list);
+        return jsonStringFillHW;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string FillHW(string UserID)
     {
         HomeWork HW = new HomeWork();
@@ -568,6 +683,68 @@ public class BetseferWS : System.Web.Services.WebService
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringFillSubjects = js.Serialize(classes);
+        return jsonStringFillSubjects;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SubmitHWInfo( string HWContent, string DueDate ,string ChoosenClass, string ChoosenSubject, string IsLehagasha, string TeacherID)
+    {
+        int answer = 0;
+        string stringAnswer = "bad";
+        HomeWork InsertHomeW = new HomeWork();
+        bool IsLehag = false;
+
+        Classes ClassC = new Classes();
+        string ClassCode= ClassC.GetClassCodeAccordingToClassFullName(ChoosenClass);
+
+        Subject Subj = new Subject();
+        string Lesson = Subj.GetSubjectCodeBySubjectName(ChoosenSubject);
+        if (IsLehagasha=="True")
+        {
+            IsLehag = true;
+        }
+
+        answer= InsertHomeW.InserHomeWork(Lesson, HWContent, TeacherID, ClassCode, DueDate, IsLehag);
+
+        if (answer > 0)
+        {
+            stringAnswer = "good";
+        }
+
+      //  return stringAnswer;
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillSubjects = js.Serialize(stringAnswer);
+        return jsonStringFillSubjects;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SubmitNoteInfo(string Pupil, string CodeNoteType, string TeacherID, string LessonsCode, string Comment)
+    {
+        int answer = 0;
+        string stringAnswer = "bad";
+
+        Notes InsertNote = new Notes();
+        string NoteCode = InsertNote.GiveNoteCodeByNoteName(CodeNoteType);
+
+        Subject Subj = new Subject();
+        string Lesson = Subj.GetSubjectCodeBySubjectName(LessonsCode);
+
+        Student student = new Student();
+        string StudID = student.GetUserIDByFullName(Pupil);
+
+        string todayDate = DateTime.Today.ToShortDateString();
+        answer = InsertNote.InsertNotes(StudID, NoteCode, todayDate, TeacherID, Lesson, Comment);
+
+        if (answer > 0)
+        {
+            stringAnswer = "good";
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillSubjects = js.Serialize(stringAnswer);
         return jsonStringFillSubjects;
     }
 
@@ -761,6 +938,18 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SaveMeMeeting(string ParentsDayMeeting, string PupilID)
+    {
+        ParentsDay p = new ParentsDay();
+        int res = p.SaveMeMeeting(ParentsDayMeeting, PupilID);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string PushUpdateRegId(string Id, string RegID)
     {
         Users u = new Users();
@@ -793,6 +982,56 @@ public class BetseferWS : System.Web.Services.WebService
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(res);
         return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string Parent_LoadParentDay(string PupilID)
+    {
+        ParentsDay p = new ParentsDay();
+        PupilID = PupilID.Replace(@"\", string.Empty);
+        p = p.Parent_LoadParentDay(PupilID);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(p);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string DeleteMyMeeting(string ParentsDayMeeting)
+    {
+        ParentsDay p = new ParentsDay();
+        int res = p.DeleteMyMeeting(ParentsDayMeeting);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetNoteTypes()
+    {
+        Notes AllNotes = new Notes();
+        DataTable DT = AllNotes.GetNotestype();
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in DT.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in DT.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringGivenAllNotes = js.Serialize(list);
+        return jsonStringGivenAllNotes;
     }
 }
 

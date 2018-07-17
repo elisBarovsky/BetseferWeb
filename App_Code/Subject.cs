@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +12,7 @@ public class Subject
     public int subjectCode { get; set; }
     public string name { get; set; }
     DBconnection db = new DBconnection();
+    DBconnectionTeacher dbt = new DBconnectionTeacher();
 
     public Subject()
     {
@@ -44,12 +46,16 @@ public class Subject
 
     public string GetSubjectCodeBySubjectName(string subjectName)
     {
-        DBconnectionTeacher dbt = new DBconnectionTeacher();
         return dbt.GetSubjectCodeBySubjectName(subjectName);
     }
 
     public Dictionary<string, string> GetSubjectsByClassCode(string classCode)
     {
         return db.GetSubjectsByClassCode(classCode);
+    }
+
+    public DataTable GetsubjectsByClassandTeacherID(string TeacherID, string ClassCode)
+    {
+        return db.GetsubjectsByClassandTeacherID( TeacherID,  ClassCode);
     }
 }
