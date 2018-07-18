@@ -136,7 +136,7 @@ function ChooseDDL(userType) {
             $('#classDDL').hide();
         }
         else {
-            $('#classDDL').val('0');
+           // $('#classDDL').val('0');
             $('#classDDL').show();
         }
     }

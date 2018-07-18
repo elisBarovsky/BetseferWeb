@@ -3043,19 +3043,27 @@ public class DBconnection
     {
         List<string> usersIds = new List<string>();
         String cStr = "";
+        string classCode = "";
+
+        if (userClass!= "" )
+        {
+            Classes Cl = new Classes();
+
+            classCode = Cl.GetClassCodeAccordingToClassFullName(userClass);
+        }
         switch (userType)
         {
             case "pupils":
-                usersIds = getPupilsIdByClassCode(userClass);
+                usersIds = getPupilsIdByClassCode(classCode);
                 break;
             case "parents":
-                usersIds = getParentsIdByClassCode(userClass);
+                usersIds = getParentsIdByClassCode(classCode);
                 break;
             case "teachers":
                 usersIds = GetTeachersIds();
                 break;
             case "parentsAndPupils":
-                usersIds = getParentsAndPupilsIdByClassCode(userClass);
+                usersIds = getParentsAndPupilsIdByClassCode(classCode);
                 break;
         }
 
