@@ -179,7 +179,7 @@
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="ClassOt1DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" AutoPostBack="true" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]"></asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class] order by TotalName"></asp:SqlDataSource>
                                         </td>
 
                                         <td>
