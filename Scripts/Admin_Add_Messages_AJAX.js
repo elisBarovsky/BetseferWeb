@@ -19,7 +19,6 @@ function LoadClasses(FillClassesInDDL) {
             FillClassesInDDL(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }
@@ -39,7 +38,6 @@ function FillPupils(classTotalName, FillUsersInDDL) {
             FillPupilInDDL(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }
@@ -57,7 +55,6 @@ function FillParents(classTotalName, FillUsersInDDL) {
             FillParentsInDDL(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }
@@ -74,7 +71,6 @@ function FillTeachers(FillTeachersInDDL) {
             FillTeachersInDDL(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }
@@ -91,7 +87,6 @@ function SubmitMessageAjax(message, AfterMessageSent) {
             AfterMessageSent(results.d);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }
