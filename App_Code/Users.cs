@@ -330,7 +330,6 @@ public class Users
 
     public string GetUserFullNameByID(string teacherId)
     {
-        DBconnection db = new DBconnection();
         return db.GetUserFullNameByID(teacherId);
     }
 
