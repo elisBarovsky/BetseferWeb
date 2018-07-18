@@ -3486,7 +3486,6 @@ public class DBconnection
                 }
                 break;
         }
-      //  String selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where [PushRegID] != 'null'";
 
         List<Users> userList = new List<Users>();
         try

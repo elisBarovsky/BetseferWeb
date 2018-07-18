@@ -816,7 +816,7 @@ public class BetseferWS : System.Web.Services.WebService
                         break;
                 }
 
-                string Pushmessage = " התקבלה הודעה חדשה מההנהלה בנושא "+ m.Subject;
+                string Pushmessage = " התקבלה הודעה חדשה בנושא "+ m.Subject;
                 string title = "הודעה";
 
                 myPushNot pushNot = new myPushNot(Pushmessage, title, "1", 7, "default");
