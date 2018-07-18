@@ -3499,4 +3499,8 @@ public class DBconnection
     }
 
     public int DeleteMyMeeting(string ParentsDayMeeting)
+    {
+        String cStr = "UPDATE ParentsDayMeeting SET PupilID = null WHERE MeetingCode = " + ParentsDayMeeting;
+        return ExecuteNonQuery(cStr);
+    }
 }

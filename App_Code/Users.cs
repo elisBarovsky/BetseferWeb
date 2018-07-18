@@ -389,5 +389,11 @@ public class Users
     {
         return db.getPupillistsByClassCode(ClassCode);
     }
+
+    public string GetUserIDByFullName(string FullName)
+    {
+        return db.GetUserIDByFullName(FullName);
+
+    }
 }
 
