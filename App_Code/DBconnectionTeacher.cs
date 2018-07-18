@@ -1607,7 +1607,7 @@ public class DBconnectionTeacher
             {
                 to = from.AddMinutes((double)p.longMeeting);
                 insertSTR += " insert into ParentsDayMeeting (TeacherID, ParentsDayCode, StartTime, EndTime) " +
-                    "values ('" + p.TeacherID + "', " + parentsDayCode + ", '" + from + "', '" + to +"')";
+                    "values ('" + p.TeacherID + "', " + parentsDayCode + ", '" + from.ToShortTimeString() + "', '" + to.ToShortTimeString() + "')";
                 from = from.AddMinutes((double)p.longMeeting);
             }
 

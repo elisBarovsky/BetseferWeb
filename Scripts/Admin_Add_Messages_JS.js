@@ -189,6 +189,15 @@ function SubmitMessage() {
         }
 
         SubmitMessageAjax(message, AfterMessageSent);
+    } else {
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה - לא מילאת את כל השדות ',
+            showConfirmButton: true,
+
+        });
     }
 }
 

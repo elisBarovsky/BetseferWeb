@@ -3451,9 +3451,42 @@ public class DBconnection
         }
     }
 
-    public List<Users> getUserList()
+    public List<Users> getUserList(string PrivOrColec,string type, string ClassCode)
     {
-        String selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where [PushRegID] != 'null'";
+        String selectSTR = "";
+   
+        switch (PrivOrColec)
+        {
+            case "Privet":
+                 selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where [PushRegID] != 'null' and [UserID] ='"+ ClassCode+"'";
+                break;
+            case "Colective":
+
+                switch (type)
+                {
+                    case "1": //admin
+                        selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where [CodeUserType]=1 and [PushRegID] != 'null'";
+                        break;
+                    case "2": //teacher
+                        selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where [CodeUserType]=2 and [PushRegID] != 'null'";
+                        break;
+                    case "3": //parent
+                        selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where [CodeUserType]=3 and [UserID] in (select ParentID from PupilsParent where codeClass="+ ClassCode+" ) and [PushRegID] != 'null'";
+                        break;
+                    case "4": // pupil
+                        selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where [CodeUserType]=4 and [UserID] in (select UserID from Pupil where codeClass="+ ClassCode+" ) and [PushRegID] != 'null'";
+                        break;
+                    case "5": //pupils+parent of spesific class
+                        selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where ([CodeUserType]=4 or  [CodeUserType]=3) and ( [UserID] in (select ParentID from PupilsParent where codeClass=" + ClassCode + ") " +
+                                    " or [UserID] in (select UserID from Pupil where codeClass = " + ClassCode + " )) and [PushRegID] != 'null'";
+                        break;
+                    case "6": // //pupil+parent of spesific pupil
+                        selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where UserID ='" + ClassCode + "' or UserID  = (select ParentID from PupilsParent where PupilID= '" + ClassCode + "' ) and [PushRegID] != 'null'";
+                        break;
+                }
+                break;
+        }
+      //  String selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where [PushRegID] != 'null'";
 
         List<Users> userList = new List<Users>();
         try
@@ -3493,6 +3526,7 @@ public class DBconnection
         }
     }
 
+    
     public int GetCodeWeekDayByDate(string date)
     {
         int year = int.Parse(date.Substring(6)), mont = int.Parse(date.Substring(3, 2)), day = int.Parse(date.Substring(0,2));

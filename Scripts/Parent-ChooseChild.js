@@ -32,7 +32,16 @@ function onDeviceReady() {
 function getChildrenArray(results) {//return string[].
     res = $.parseJSON(results.d);
     if (res.length === 0) {
-        alert("לא רשומים ילדים המשוייכים אליך במערכת. במידה ומדובר בשגיאה צור קשר עם שירות הלקוחות במספר: 052-77777777");
+
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה  ',
+            text: "לא רשומים ילדים המשוייכים אליך במערכת. במידה ומדובר בשגיאה צור קשר עם שירות הלקוחות במספר: 052-77777777",
+            showConfirmButton: true,
+
+        });
         document.location.href = "index.html";
     }
     else if (res.length === 1) {

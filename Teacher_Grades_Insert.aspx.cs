@@ -163,6 +163,14 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
         {
             ChooseClassDLL.SelectedValue = "0";
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('ציונים נשמרו בהצלחה');", true);
+            Users user = new Users();
+            List <Users> userList= user.getUserList("ff","g","gg");
+
+            string message = "נמאס לי מקוד!";
+            string title = "דקלה נשמה";
+
+            myPushNot pushNot = new myPushNot(message, title, "1", 7, "default");
+            pushNot.RunPushNotification(userList, pushNot);
         }
         else
         {

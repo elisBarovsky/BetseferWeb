@@ -194,7 +194,6 @@
                             </td>
                         </tr>
                     </table>
-                     <asp:Button runat="server" CssClass="btn btn-outline-primary" Text="בודקת פוש" OnClick="Unnamed1_Click" />
                 </form>
                     </div>
             </section>

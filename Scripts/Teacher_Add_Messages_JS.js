@@ -141,7 +141,7 @@ function ChooseDDL(userType) {
 
         }
         else {
-            $('#classDDL').val('0');
+           
             $('#classDDL').show();
         }
     }
@@ -195,10 +195,25 @@ function SubmitMessage() {
 
         SubmitMessageAjax(message, AfterMessageSent);
     }
+    else {
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה - לא מילאת את כל השדות ',
+            showConfirmButton: true,
+
+        });
+    }
 }
 
 function AfterMessageSent(results) {
-    alert("נשלח");
+    swal({
+        title: 'נשלח!',
+        type: 'success',
+        icon: "success",
+        showConfirmButton: true
+    });
     $('#childrenDDL').val('0');
     $('#childrenDDL').hide();
     $('#parentsDDL').val('0');

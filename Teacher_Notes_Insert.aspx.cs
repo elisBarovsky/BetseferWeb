@@ -107,6 +107,17 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
             if (res1 == 1)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('הערה נוספה בהצלחה');", true);
+
+                string ClassCode = ChooseClassDLL.SelectedValue;
+                //string PrivOrColec, string type, string ClassCode
+                Users user = new Users();
+                List<Users> userList = user.getUserList("Colective", "6", PupilID);
+
+                string message = "התווספה הערת משמעת ב" + ChooseLessonsDLL.SelectedItem;
+                string title = "הערת משמעת";
+
+                myPushNot pushNot = new myPushNot(message, title, "1", 7, "default");
+                pushNot.RunPushNotification(userList, pushNot);
             }
             else
             {
