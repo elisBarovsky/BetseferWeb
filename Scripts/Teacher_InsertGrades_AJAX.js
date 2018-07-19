@@ -69,5 +69,4 @@ function SaveGradesAjax(pupilGrades, AfterSaveGrades) {
         }
     });
 };
-
-// 
+ 
