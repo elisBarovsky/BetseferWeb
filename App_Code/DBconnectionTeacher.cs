@@ -970,11 +970,9 @@ public class DBconnectionTeacher
         return ExecuteNonQuery(cStr);
     }
 
-    public int InsertGrade(string PupilID, string TeacherID, string CodeLesson, string ExamDate, int Grade)
+    public int InsertGrade(string PupilID, string TeacherID, string CodeLesson, string ExamDate, int Grade, int ClassId)
     {
-        //SqlConnection conGrades = new SqlConnection();
-        //conGrades = connect("Betsefer");
-        string cStr = "INSERT INTO [dbo].[Grades]  ([PupilID] ,[TeacherID],[CodeLesson],[ExamDate],[Grade])   VALUES ('"+ PupilID + "','"+ TeacherID + "','"+ CodeLesson + "' ,'"+ ExamDate + "' ,"+ Grade + ")";
+        string cStr = "INSERT INTO [dbo].[Grades] ([PupilID] ,[TeacherID],[CodeLesson],[ExamDate],[Grade],[ClassId])   VALUES ('"+ PupilID + "','"+ TeacherID + "','"+ CodeLesson + "' ,'"+ ExamDate + "' ,"+ Grade + ", "+ ClassId + ")";
         return ExecuteNonQuery(cStr);
     }
 

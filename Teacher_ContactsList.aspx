@@ -135,7 +135,7 @@
                     </li>
                     <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ציונים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li><a href="Teacher_Grades_Insert.aspx"><i class="fa fa-plus"></i><span>הוספת ציונים</span> </a>
+                            <li><a href="Teacher_Grades_Insert.html"><i class="fa fa-plus"></i><span>הוספת ציונים</span> </a>
                         </ul>
                     </li>
                     <li class="active treeview"><a href="#"><i class="fa fa-briefcase"></i><span>דף קשר</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>

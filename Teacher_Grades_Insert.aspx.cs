@@ -156,7 +156,7 @@ public partial class Teacher_Grades_Insert : System.Web.UI.Page
             grade = int.Parse((tableGrades.Rows[i].Cells[2].FindControl(gradeID) as TextBox).Text);
             string pupilId = tableGrades.Rows[i].Cells[0].Text;
             Grades g = new Grades();
-            num += g.InsertGrade(pupilId, teacherId, codeLesson, ExamDate, grade);
+            //num += g.InsertGrade(pupilId, teacherId, codeLesson, ExamDate, grade);
         }
 
         if (num == (tableGrades.Rows.Count - 1))

@@ -1,6 +1,7 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en" dir="rtl">
-<head runat="server">
+<head>
     <title></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,8 +21,8 @@
     <link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    <!-- WARNING: Respond.js doesn't work if you view the page v
+
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -29,9 +30,10 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
 
     <script src="dist/js/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <script src="Scripts/Dashbord_JS.js"></script>
-    <script src="Scripts/Dashbord_AJAX.js"></script>
+    <script src="Scripts/Teacher_InsertGrades_JS.js"></script>
+    <script src="Scripts/Teacher_InsertGrades_AJAX.js"></script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -146,46 +148,44 @@
         </aside>
 
         <div class="content-wrapper">
-                          <div class="content">
-                              <div class="info-box" style="height:90%">
-                                  <!-- Small boxes (Stat box) -->
-                                  <br /> <br />
-                                  <div class="row">
-                                      <div class="col-lg-7">
-                                          <div class="small-box bg-aqua">
-                                              <div class="inner">
-                                                  <!--  <h4>הודעות שלא נקראו</h4>-->
-                                                  <div class="info-box">
-                                                      <img src="Images/messageShake.gif" height="3" class="TDeshbordImg" style="margin-right:39%" />
-                                                      <div>
-                                                          <h6 id="noNewMessages" style="color:gold;text-align:center">אין הודעות חדשות</h6>
-                                                          <table style="width:100%" id="messagesTable" class="table table-hover no-wrap table-striped"></table>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-
-                                      <div class="col-lg-5">
-                                          <div class="small-box bg-orange">
-                                              <div class="inner">
-                                                  <div class="d-flex flex-wrap">
-                                                      <div class="info-box">
-                                                          <h4>מה הלו"ז</h4>
-                                                          <img src="Images/luzeMove.gif" height="3" class="TDeshbordImg" style="margin-right:35%"/>
-                                                          <div>
-                                                              <h6 id="noSchedule" style="color:gold;text-align:center">אין שיעורים היום</h6>
-                                                              <table class="table table-hover no-wrap table-striped" style="width:100%; color: black" id="looze"></table>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              </div>
-                          </div>
+            <div class="content">
+                <div class="info-box" style="height:90%">
+                    <!-- Small boxes (Stat box) -->
+                    <br /> <br />
+                    <div class="row">
+                        <div class="inner">
+                            <h4>הזנת ציונים</h4>
+                            <div class="info-box">
+                                <table class="table" align="center">
+                                    <tr>
+                                        <td>
+                                            <label class="control-label">תאריך בחינה</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" id="date1" type="date">
+                                        </td>
+                                        <td>
+                                            <label class="control-label">בחר מקצוע</label>
+                                        </td>
+                                        <td>
+                                            <select ID="DDLsubjectsAccordingToTeacherID" class="btn btn-default dropdown-toggle" data-toggle="dropdown" onchange="SubjectSelected()"></select>
+                                        </td>
+                                        <td>
+                                            <label ID="ChooseClassLBL" class="control-label">בחר כיתה</label>
+                                        </td>
+                                        <td>
+                                            <select ID="ChooseClassDLL" class="btn btn-default dropdown-toggle" onchange="ClassSelected()"></select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <table class="table table-hover no-wrap table-striped" style="width:100%; color: black" id="pupilList"></table>
+                    </div>
+                    <button id="save" onclick="SaveGrades()" class="btn btn-rounded btn-outline-primary">שמור</button>
+                </div>
+             </div>
+        </div>
         <!-- /.content-wrapper -->
     </div>
     <!-- jQuery 3 -->
