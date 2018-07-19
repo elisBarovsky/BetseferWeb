@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿localStorage.setItem("ThereIsParentDay", 0);
+
+$(document).ready(function () {
     var Id = localStorage.getItem("UserID");
     var z = localStorage.getItem("UserImg");
     var userName = localStorage.getItem("UserFullName");
@@ -7,7 +9,23 @@
     document.getElementById('UserName').innerHTML = userName;
     var userID = localStorage.getItem("UserID");
 
-    IfMehanech_LoadParentDay(userID, ShowParentsDay);
+
+    $(function () {
+        setTimeout(function () {
+            IfMehanech_LoadParentDay(userID, ShowParentsDay); // to show div after 0 sec of page load
+            // To reshow on every 1.5 second
+
+            setInterval(function () {
+                var ParentDayExisted = localStorage.getItem("ThereIsParentDay");
+                if (ParentDayExisted === "1") {
+                    //  alert(ParentDayExisted);
+                    IfMehanech_LoadParentDay(userID, ShowParentsDay);
+                }
+            }, 1500);
+
+        }, 0);
+    });
+
 
     
 });
@@ -23,6 +41,8 @@ function ShowParentsDay(results) {
         $("#createNewDay").hide();
         $("#parentsDayTable").hide();
         $("#pdDetails").hide();
+        localStorage.setItem("ThereIsParentDay", 0);
+
         return;
     }
 
@@ -134,6 +154,7 @@ function ShowParentsDay(results) {
 
              return;
     }
+    localStorage.setItem("ThereIsParentDay", 1);
 
     // show the existing parents day
     $("#parentsDayTable").show();
