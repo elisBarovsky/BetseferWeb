@@ -70,7 +70,7 @@ function DisplayPupils(results) {
         pupil.FullName = res[i].FullName;
 
         tableString += "<tr><td>" + pupil.UserID + "</td><td>" + res[i].FullName + "</td><td>" +
-            "<input type='number' pattern='[0–9]' maxlength='3' min='0' max='100' required class = 'grades' id = '" + pupil.UserID + "'></input></td></tr>";
+            "<input type='number' pattern='[0–9]' maxlength='3' min='0' max='100' required class = 'grades form-control' id = '" + pupil.UserID + "'></input></td></tr>";
     }
     $('#pupilList').append(tableString);
     $('#save').show();
@@ -139,6 +139,10 @@ function AfterSaveGrades(results) {
     res = $.parseJSON(results.d);
     if (res == 1) {
         //swal("", "ציונים הוזנו בהצלחה", "success");
+        swal({
+            title: "ציונים הוזנו בהצלחה",
+            icon: "success",
+        });
         document.getElementById('date1').value = "";
         $('#pupilList').empty();
         $('#ChooseClassDLL').empty();
@@ -148,6 +152,11 @@ function AfterSaveGrades(results) {
         LoadSubjectsByTeacherID(localStorage.getItem("UserID"), DisplaySubjects);
     }
     else {
-        alert("נתקלנו בבעיה בשמירת הציונים, נא נסה שנית");
+       // alert("נתקלנו בבעיה בשמירת הציונים, נא נסה שנית");
+        swal({
+            title: "אופס",
+            text: "נתקלנו בבעיה בשמירת הציונים, נא נסה שנית",
+            icon: "error",
+        });
     }
 };

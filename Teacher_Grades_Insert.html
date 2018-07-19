@@ -114,10 +114,10 @@
                             <li><a href="Teacher_HW_History.aspx"><i class="fa fa-plus"></i><span>צפייה בשיעורים</span> </a>
                         </ul>
                     </li>
-                    <li class="treeview">
+                    <li class="active treeview">
                         <a href="#"><i class="fa fa-briefcase"></i><span>ציונים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li><a href="Teacher_Grades_Insert.html"><i class="fa fa-plus"></i><span>הוספת ציונים</span> </a>
+                            <li class="active"><a href="Teacher_Grades_Insert.html"><i class="fa fa-plus"></i><span>הוספת ציונים</span> </a>
                             <li><a href="Teacher_Grades_History.html"><i class="fa fa-plus"></i><span>צפייה בהיסטוריה</span> </a>
                         </ul>
                     </li>
@@ -127,9 +127,6 @@
                             <li><a href="Teacher_ContactsList.aspx"><i class="fa fa-plus"></i><span>צפייה</span> </a>
                         </ul>
                     </li>
-                    <!--<li class="treeview">
-                        <a href="#"><i class="fa fa-briefcase"></i><span>לוח שנה</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                    </li>-->
                     <li class="treeview">
                         <a href="#"><i class="fa fa-briefcase"></i><span>יום הורים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
@@ -149,43 +146,53 @@
         </aside>
 
         <div class="content-wrapper">
-            <div class="content">
-                <div class="info-box" style="height:90%">
-                    <!-- Small boxes (Stat box) -->
-                    <br /> <br />
-                    <div class="row">
-                        <div class="inner">
-                            <h4>הזנת ציונים</h4>
-                            <div class="info-box">
-                                <table class="table" align="center">
-                                    <tr>
-                                        <td>
-                                            <label class="control-label">תאריך בחינה</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control" id="date1" type="date">
-                                        </td>
-                                        <td>
-                                            <label class="control-label">בחר מקצוע</label>
-                                        </td>
-                                        <td>
-                                            <select ID="DDLsubjectsAccordingToTeacherID" class="btn btn-default dropdown-toggle" data-toggle="dropdown" onchange="SubjectSelected()"></select>
-                                        </td>
-                                        <td>
-                                            <label ID="ChooseClassLBL" class="control-label">בחר כיתה</label>
-                                        </td>
-                                        <td>
-                                            <select ID="ChooseClassDLL" class="btn btn-default dropdown-toggle" onchange="ClassSelected()"></select>
-                                        </td>
-                                    </tr>
-                                </table>
+            <section class="content-header sty-one">
+                <h1>הזנת ציונים</h1>
+            </section>
+
+            <section class="content">
+                
+                    <div class="info-box" style="height:90%">
+                        <!-- Small boxes (Stat box) -->
+                        <br /> <br />
+                        <div class="row">
+                            <div >
+
+                                <div >
+                                    <table class="table" align="center" style="width:100%;margin-right:55%;text-align:center">
+                                        <tr>
+                                            <td>
+                                                <label class="control-label">תאריך בחינה</label>
+                                            </td>
+                                            <td>
+                                                <input class="form-control" id="date1" type="date">
+                                            </td>
+                                            <td>
+                                                <label class="control-label">בחר מקצוע</label>
+                                            </td>
+                                            <td>
+                                                <select ID="DDLsubjectsAccordingToTeacherID" class="btn btn-default dropdown-toggle" data-toggle="dropdown" onchange="SubjectSelected()"></select>
+                                            </td>
+                                            <td>
+                                                <label ID="ChooseClassLBL" class="control-label">בחר כיתה</label>
+                                            </td>
+                                            <td>
+                                                <select ID="ChooseClassDLL" class="btn btn-default dropdown-toggle" onchange="ClassSelected()"></select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
+                            <table class="table table-hover no-wrap table-striped" style="width:70%; color: black;margin:auto;text-align:center" id="pupilList"></table>
                         </div>
-                        <table class="table table-hover no-wrap table-striped" style="width:100%; color: black" id="pupilList"></table>
+                        <div style="margin-right:50%">
+                            <br />
+                            <button id="save" onclick="SaveGrades()" class="btn btn-rounded btn-outline-primary" style="height:50px;width:80px">שמור</button>
+
+                        </div>
                     </div>
-                    <button id="save" onclick="SaveGrades()" class="btn btn-rounded btn-outline-primary">שמור</button>
-                </div>
-             </div>
+             
+                </section>
         </div>
         <!-- /.content-wrapper -->
     </div>

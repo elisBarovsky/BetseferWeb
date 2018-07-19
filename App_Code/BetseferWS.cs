@@ -1140,7 +1140,20 @@ public class BetseferWS : System.Web.Services.WebService
     {
         Grades g = new Grades();
         int res = g.InsertGradesAfterAdjustTheDetails(pupilGrades);
+        if (res >=1)
+        {
+            Dictionary<System.String, System.Object> y = (Dictionary<System.String, System.Object>)pupilGrades[0];
 
+            Subject sub = new Subject();
+            Users user = new Users();            
+            List<Users> userList = user.getUserList("Colective", "5", user.GetPupilOtClass(y["pupilID"].ToString()));
+
+            string Pushmessage = "הוזנו ציונים ב"+ y["subject"].ToString();
+            string title = "ציונים";
+
+            myPushNot pushNot = new myPushNot(Pushmessage, title, "1", 7, "default");
+            pushNot.RunPushNotification(userList, pushNot);
+        }
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(res);
         return jsonString;
