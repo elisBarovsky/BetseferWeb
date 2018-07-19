@@ -12,6 +12,7 @@ public class Grades
     DBconnectionTeacher dbT;
     DBconnection db;
     public string subject { get; set; }
+    public string subjectCode { get; set; }
     public string date { get; set; }
     public string teacherID { get; set; }
     public string pupilID { get; set; }
@@ -25,7 +26,7 @@ public class Grades
         db = new DBconnection();
     }
 
-    public Grades(string _subject, string _date, string _teacherID, string _pupilID, int _grade, int _classID, string _className)
+    public Grades(string _subject, string _date, string _teacherID, string _pupilID, int _grade, int _classID, string _className, string _subjectCode)
     {
         subject = _subject;
         date = _date;
@@ -33,6 +34,7 @@ public class Grades
         pupilID = _pupilID;
         grade = _grade;
         classID = _classID;
+        subjectCode = _subjectCode;
     }
 
     public Dictionary<string, string> FillClassOt()
@@ -107,7 +109,7 @@ public class Grades
         List<Grades> tests = dbT.LoadTestsByTeacherID(teacherId);
         for (int i = 0; i < tests.Count; i++)
         {
-            tests[i].subject = db.GetLessonNameByLessonCode(tests[i].subject);
+            tests[i].subjectCode = db.GetLessonNameByLessonCode(tests[i].subject);
             tests[i].className = db.GetClassNameByCodeClass(tests[i].classID);
         }
         return tests;
