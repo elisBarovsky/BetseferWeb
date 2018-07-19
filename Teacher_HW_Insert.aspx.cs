@@ -87,6 +87,16 @@ public partial class Teacher_HW_Insert : System.Web.UI.Page
         if (res1 == 1)
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('שיעורי בית נוספו בהצלחה'); ", true);
+
+            //string PrivOrColec, string type, string ClassCode
+            Users user = new Users();
+            List<Users> userList = user.getUserList("Colective","4", ClassCode);
+
+            string message = "נוספו שיעורי בית ב" + ChooseLessonsDLL.SelectedItem;
+            string title = "שיעורי בית";
+
+            myPushNot pushNot = new myPushNot(message, title, "1", 7, "default");
+            pushNot.RunPushNotification(userList, pushNot);
         }
         else
         {

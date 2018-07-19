@@ -91,23 +91,4 @@ public partial class Admin_Add_Class : System.Web.UI.Page
         }
     }
 
-    protected void Unnamed1_Click(object sender, EventArgs e)
-    {
-        Users u = new Users();
-        List<Users> userList = u.getUserList();
-        //string message = messageTB.Text;
-        //string title = titleTB.Text;
-
-        string message = "יהיה בסדר, מתה עלייך ♥";
-        string title = "דקלה נשמה";
-
-        myPushNot pushNot = new myPushNot(message, title, "1", 7, "default");
-        pushNot.RunPushNotification(userList, pushNot);
-
-        //pushNot.msgcnt = "1"; //message id - 
-        //pushNot.badge = 7; //count of messages - field name in the client is count
-        //pushNot.data = new Payload();
-        //pushNot.data.code = "benny";
-        //pushNot.data.year = 52;
-    }
 }

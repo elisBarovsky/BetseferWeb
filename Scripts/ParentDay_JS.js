@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿localStorage.setItem("ThereIsParentDay", 0);
+
+$(document).ready(function () {
     var Id = localStorage.getItem("UserID");
     var z = localStorage.getItem("UserImg");
     var userName = localStorage.getItem("UserFullName");
@@ -8,7 +10,6 @@
     var userID = localStorage.getItem("UserID");
 
     IfMehanech_LoadParentDay(userID, ShowParentsDay);
-
     
 });
 
@@ -23,6 +24,8 @@ function ShowParentsDay(results) {
         $("#createNewDay").hide();
         $("#parentsDayTable").hide();
         $("#pdDetails").hide();
+        localStorage.setItem("ThereIsParentDay", 0);
+
         return;
     }
 
@@ -126,12 +129,15 @@ function ShowParentsDay(results) {
         submitButton.textContent = "צור";
         submitButton.style = "float: left";
         submitButton.id = "submitPD";
+        submitButton.setAttribute("class", "btn btn-rounded btn-outline-primary");
+
         submitButton.onclick = SaveParentsDay;
-        submitButton.className('btn btn-rounded btn-outline-primary');
+
         $("#createNewDay").append(submitButton);
 
              return;
     }
+    localStorage.setItem("ThereIsParentDay", 1);
 
     // show the existing parents day
     $("#parentsDayTable").show();
@@ -146,7 +152,6 @@ function ShowParentsDay(results) {
     var strParentsDay = "<thead class='bg-warning' >< tr ><th style='text-align:center'>שעה</th><th style='text-align:center'>תלמיד</th></tr ></thead >";
 
     for (var i = 0; i < res["ParentsDayMeetings"].length; i++) {
-        // remmember also to check if this is me let me delete myself from the list
         if (res["ParentsDayMeetings"][i].PupilID === "") {//there is nothing in the pupil ID
             pupilOrBreake = "<button onclick='GiveMeBreak1(" + res["ParentsDayMeetings"][i].MeetingCode + ")' class='btn btn-rounded btn-outline-danger'>סגירה עבור הפסקה</button>"
         }
@@ -163,6 +168,8 @@ function ShowParentsDay(results) {
     }
 
     $("#parentsDayTable").append(strParentsDay);
+
+
 };
 
 function SaveParentsDay() {
@@ -261,5 +268,38 @@ function DeleteBreak1(ParentsDayMeeting) {
 };
 
 function ChangeButton(results) {
+    res = $.parseJSON(results.d);
+    if (res == "teacher") {
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה',
+            text: 'המחנך חסם שעה זאת, נסה שעה אחרת',
+            showConfirmButton: true,
+
+        });
+    }
+    else if (res == "pupil") {
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה',
+            text: 'השעה נתפסה על ידי הורה, אתה יכול לסגור שעה אחרת',
+            showConfirmButton: true,
+
+        });
+    }
+    else { //done
+        swal({
+            position: 'top-end',
+            type: 'success',
+            icon: "success",
+            title: 'עודכן בהצלחה',
+            showConfirmButton: true,
+
+        });
+    }
     IfMehanech_LoadParentDay(localStorage.getItem("UserID"), ShowParentsDay);
 };

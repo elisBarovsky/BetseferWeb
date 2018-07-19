@@ -12,7 +12,9 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/style.css">
     <link rel="stylesheet" href="dist/css/font-awesome/css/font-awesome.min.css">
@@ -29,6 +31,7 @@
     <script src="dist/js/jquery.min.js"></script>
     <script src="Scripts/Admin_Add_Messages_JS.js"></script>
     <script src="Scripts/Admin_Add_Messages_AJAX.js"></script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
@@ -166,7 +169,7 @@
                                                 <Label ID="classLBL">כיתה: </Label>
                                             </div>
                                             <div style="padding-right:150px">
-                                                <select ID="classDDL" CssClass="form-control" data-toggle="dropdown" onchange="FillUsers()">
+                                                <select ID="classDDL"  Class="btn btn-default dropdown-toggle"  data-toggle="dropdown" onchange="FillUsers()">
                                                     <option value="0">בחר</option>
                                                 </select>
                                             </div>
@@ -198,9 +201,9 @@
                                                 <Label ID="forLBL">נמען:</Label>
                                             </div>
                                             <div style="padding-right:150px">
-                                                <select ID="childrenDDL" CssClass="form-control"></select>
-                                                <select ID="parentsDDL" CssClass="form-control"></select>
-                                                <select ID="teachersDDL" CssClass="form-control"></select>
+                                                <select ID="childrenDDL"  Class="btn btn-default dropdown-toggle" ></select>
+                                                <select ID="parentsDDL"  Class="btn btn-default dropdown-toggle" ></select>
+                                                <select ID="teachersDDL"  Class="btn btn-default dropdown-toggle" ></select>
                                             </div>
                                         </div>
                                     </td>

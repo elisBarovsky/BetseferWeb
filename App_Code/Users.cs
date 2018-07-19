@@ -171,11 +171,11 @@ public class Users
         CodeUserType = codeUserType;
     }
 
-    public List<Users> getUserList()
+    public List<Users> getUserList(string PrivOrColec, string type, string ClassCode)
     {
         db = new DBconnection();
         List<Users> listUser = new List<Users>();
-        return listUser = db.getUserList();
+        return listUser = db.getUserList( PrivOrColec,  type,  ClassCode);
 
     }
 
@@ -330,7 +330,6 @@ public class Users
 
     public string GetUserFullNameByID(string teacherId)
     {
-        DBconnection db = new DBconnection();
         return db.GetUserFullNameByID(teacherId);
     }
 

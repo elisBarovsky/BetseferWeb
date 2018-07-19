@@ -252,25 +252,28 @@ public class BetseferWS : System.Web.Services.WebService
     {
         Users UserLogin = new Users();
         List<string> UserInfo = UserLogin.GetUserType(UserID, password);
-        string UserType = UserInfo[0].ToString();
-
-        string UserRegID = UserInfo[1].ToString();
-
-
+        string UserType = "";
         string isvalid = "";
-
-        if (UserType == "" || UserType == "1")
+        string UserRegID = "";
+        if (UserInfo.Count > 0)
         {
-            isvalid = "wrongDetails";
-        }
-        else
-        {
-            bool isAlreadyLogin = bool.Parse(UserLogin.IsAlreadyLogin(UserID, password));
+            UserType = UserInfo[0].ToString();
 
-            if (!isAlreadyLogin)
+            UserRegID = UserInfo[1].ToString();
+
+
+            if (UserType == "" || UserType == "1")
             {
-                isvalid = "openSeqQestion";/*FillSecurityQ();*/
+                isvalid = "Forbidden";
             }
+            else
+            {
+                bool isAlreadyLogin = bool.Parse(UserLogin.IsAlreadyLogin(UserID, password));
+
+                if (!isAlreadyLogin)
+                {
+                    isvalid = "openSeqQestion";/*FillSecurityQ();*/
+                }
                 switch (int.Parse(UserType))
                 {
                     case 1:
@@ -288,6 +291,11 @@ public class BetseferWS : System.Web.Services.WebService
                 }
 
 
+            }
+        }
+        else
+        {
+            isvalid = "wrongDetails";
         }
         string[] arr = new string[] { isvalid, UserType, UserRegID };
         JavaScriptSerializer js = new JavaScriptSerializer();
@@ -780,6 +788,49 @@ public class BetseferWS : System.Web.Services.WebService
         if (answer > 0)
         {
             stringAnswer = "good";
+
+            if (m.MessageType == "private")
+            {
+                Users user = new Users();
+
+                List<Users> userList = user.getUserList("Privet", "3", m.RecipientID);
+
+                string Pushmessage = " התקבלה הודעה חדשה בנושא " + m.Subject;
+                string title = "הודעה";
+
+                myPushNot pushNot = new myPushNot(Pushmessage, title, "1", 7, "default");
+                pushNot.RunPushNotification(userList, pushNot);
+            }
+            else
+            {
+                Users user = new Users();
+
+                List<Users> userList = new List<Users>();
+                Classes clas = new Classes();
+               string classCode= clas.GetClassCodeAccordingToClassFullName(m.UserClass);
+                switch (m.UserType)
+                {
+                    case "pupils":
+                        userList = user.getUserList("Colective", "4", classCode);
+                        break;
+                    case "parents":
+                        userList = user.getUserList("Colective", "3", classCode);
+                        break;
+                    case "teachers":
+                        userList = user.getUserList("Colective", "2", classCode);
+                        break;
+                    case "parentsAndPupils":
+                        userList = user.getUserList("Colective", "5", classCode);
+                        break;
+                }
+
+                string Pushmessage = " התקבלה הודעה חדשה בנושא "+ m.Subject;
+                string title = "הודעה";
+
+                myPushNot pushNot = new myPushNot(Pushmessage, title, "1", 7, "default");
+                pushNot.RunPushNotification(userList, pushNot);
+            }
+    
         }
 
         return stringAnswer;
@@ -923,8 +974,19 @@ public class BetseferWS : System.Web.Services.WebService
         p.TeacherID = teacher;
 
         int numEffected = p.SaveParentsDay(p);
-        if (numEffected > 1)
+        if (numEffected >= 1)
         {
+            Users user = new Users();
+            string CodeClass = user.GetTeacherMainClass(teacher);
+
+            List<Users> userList = user.getUserList("Colective", "3", CodeClass);
+
+            string message = "נפתח יום הורים, מהרו להשתבץ";
+            string title = "יום הורים";
+
+            myPushNot pushNot = new myPushNot(message, title, "1", 7, "default");
+            pushNot.RunPushNotification(userList, pushNot);
+
             JavaScriptSerializer js = new JavaScriptSerializer();
             // serialize to string
             string jsonString = js.Serialize(numEffected);
@@ -932,7 +994,7 @@ public class BetseferWS : System.Web.Services.WebService
         }
         else
         {
-            throw (new Exception("error in create user"));
+            throw (new Exception("error in create ParentDay"));
         }
     }
 
@@ -965,7 +1027,7 @@ public class BetseferWS : System.Web.Services.WebService
     public string GiveMeBreak(string ParentsDayMeeting)
     {
         ParentsDay p = new ParentsDay();
-        int res = p.GiveMeBreak(ParentsDayMeeting);
+        string res = p.GiveMeBreak(ParentsDayMeeting);
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(res);

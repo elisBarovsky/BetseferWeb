@@ -20,7 +20,7 @@ function IfMehanech_LoadParentDay(userID, ShowParentsDay) {
             ShowParentsDay(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
+          
         }
     });
 }
@@ -38,7 +38,6 @@ function SaveParentDay(parentsDay, AfterSave) {
             AfterSave(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }
@@ -54,7 +53,6 @@ function GiveMeBreak(ParentsDayMeeting, ChangeButton) {
             ChangeButton(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }
@@ -70,7 +68,6 @@ function DeleteBreak(ParentsDayMeeting, ChangeButton) {//need meetting code not 
             ChangeButton(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
         }
     });
 }

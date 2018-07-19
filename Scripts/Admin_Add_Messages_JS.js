@@ -189,17 +189,38 @@ function SubmitMessage() {
         }
 
         SubmitMessageAjax(message, AfterMessageSent);
+    } else {
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה - לא מילאת את כל השדות ',
+            showConfirmButton: true,
+
+        });
     }
 }
 
 function AfterMessageSent(results) {
 
+    if (results == "good") {
         swal({
             title: 'נשלח!',
             type: 'success',
             icon: "success",
             showConfirmButton: true
         });
+    }
+    else {
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה - הייתה בעיה בשליחת ההודעה ',
+            showConfirmButton: true,
+
+        });
+    }
 
     $('#childrenDDL').val('0');
     $('#childrenDDL').hide();
