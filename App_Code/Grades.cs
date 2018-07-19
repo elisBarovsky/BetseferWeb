@@ -11,12 +11,13 @@ public class Grades
 {
     DBconnectionTeacher dbT;
     DBconnection db;
-    string subject;
-    string date;
-    string teacherID;
-    string pupilID;
-    int grade;
-    int classID;
+    public string subject { get; set; }
+    public string date { get; set; }
+    public string teacherID { get; set; }
+    public string pupilID { get; set; }
+    public int grade { get; set; }
+    public int classID { get; set; }
+    public string className { get; set; }
 
     public Grades()
     {
@@ -24,7 +25,7 @@ public class Grades
         db = new DBconnection();
     }
 
-    public Grades(string _subject, string _date, string _teacherID, string _pupilID, int _grade, int _classID)
+    public Grades(string _subject, string _date, string _teacherID, string _pupilID, int _grade, int _classID, string _className)
     {
         subject = _subject;
         date = _date;
@@ -99,5 +100,16 @@ public class Grades
             return 1;
         }
         return 0;
+    }
+
+    public List<Grades> LoadTestsByTeacherID(string teacherId)
+    {
+        List<Grades> tests = dbT.LoadTestsByTeacherID(teacherId);
+        for (int i = 0; i < tests.Count; i++)
+        {
+            tests[i].subject = db.GetLessonNameByLessonCode(tests[i].subject);
+            tests[i].className = db.GetClassNameByCodeClass(tests[i].classID);
+        }
+        return tests;
     }
 }

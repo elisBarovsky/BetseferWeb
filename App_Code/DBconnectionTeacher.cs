@@ -1713,4 +1713,50 @@ public class DBconnectionTeacher
         }
     }
 
-}
+    public List<Grades> LoadTestsByTeacherID(string teacherId)
+    {
+        string selectSTR = "select distinct CodeLesson, ExamDate, ClassId from Grades where " +
+            "TeacherID = '" + teacherId + "' order by ExamDate desc";
+
+        List<Grades> tests = new List<Grades>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            DBconnection db = new DBconnection();
+            while (dr.Read())
+            {
+                Grades g = new Grades();
+                g.date = dr["ExamDate"].ToString();
+                g.classID = int.Parse(dr["ClassId"].ToString());
+                g.subject = dr["CodeLesson"].ToString();
+
+                tests.Add(g);
+            }
+            return tests;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    }
