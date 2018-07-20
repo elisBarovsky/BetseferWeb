@@ -1006,10 +1006,9 @@ public class DBconnectionTeacher
         string cStr = "update[dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
         return ExecuteNonQuery(cStr);
     }
-
-    public int InsertGrade(string PupilID, string TeacherID, string CodeLesson, string ExamDate, int Grade, int ClassId)
+    public int InsertGrade(string PupilID, int ExamCode, int Grade)
     {
-        string cStr = "INSERT INTO [dbo].[Grades] ([PupilID] ,[TeacherID],[CodeLesson],[ExamDate],[Grade],[ClassId])   VALUES ('"+ PupilID + "','"+ TeacherID + "','"+ CodeLesson + "' ,'"+ ExamDate + "' ,"+ Grade + ", "+ ClassId + ")";
+        string cStr = "INSERT INTO [dbo].[Grades] (ExamCode, PupilID, [Grade]) VALUES ('"+ ExamCode + "','"+ PupilID + "',"+ Grade + ")";
         return ExecuteNonQuery(cStr);
     }
 
@@ -1752,7 +1751,7 @@ public class DBconnectionTeacher
 
     public List<Grades> LoadTestsByTeacherID(string teacherId)
     {
-        string selectSTR = "select distinct CodeLesson, ExamDate, ClassId from Grades where " +
+        string selectSTR = "select ExamCode, ExamDate, ClassCode, SubjectCode from Exams where " +
             "TeacherID = '" + teacherId + "' order by ExamDate desc";
 
         List<Grades> tests = new List<Grades>();
@@ -1774,13 +1773,61 @@ public class DBconnectionTeacher
             while (dr.Read())
             {
                 Grades g = new Grades();
+                g.examCode = int.Parse(dr["ExamCode"].ToString());
                 g.date = dr["ExamDate"].ToString();
-                g.classID = int.Parse(dr["ClassId"].ToString());
-                g.subject = dr["CodeLesson"].ToString();
+                g.classID = int.Parse(dr["ClassCode"].ToString());
+                g.subject = dr["SubjectCode"].ToString();
 
                 tests.Add(g);
             }
             return tests;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public int InserExam(string examDate, string teacherID, int classCode, string lessonCode)
+    {
+        string cStr = "INSERT INTO [dbo].[Exams] ([ExamDate] ,[TeacherID],[ClassCode],[SubjectCode]) "+
+            " VALUES ('" + examDate + "','" + teacherID + "','" + classCode + "' ,'" + lessonCode + "')";
+        return ExecuteNonQuery(cStr);
+    }
+
+    public int GetLastExamCode()
+    {
+        string selectSTR = "select max(ExamCode) from Exams";
+
+        int examCode = 0;
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            DBconnection db = new DBconnection();
+            while (dr.Read())
+            {
+                examCode = int.Parse(dr[0].ToString());
+            }
+            return examCode;
         }
         catch (Exception ex)
         {

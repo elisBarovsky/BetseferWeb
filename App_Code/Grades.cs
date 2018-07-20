@@ -19,6 +19,8 @@ public class Grades
     public int grade { get; set; }
     public int classID { get; set; }
     public string className { get; set; }
+    public int examCode { get; set; }
+    
 
     public Grades()
     {
@@ -52,9 +54,9 @@ public class Grades
         return dbT.PupilList(ClassOtID);
     }
 
-    public int InsertGrade(string PupilID, string TeacherID, string CodeLesson, string ExamDate, int Grade, int ClassId)
+    public int InsertGrade(string PupilID,int ExamCode, int Grade)
     {
-        return dbT.InsertGrade(PupilID, TeacherID, CodeLesson, ExamDate, Grade, ClassId);
+        return dbT.InsertGrade(PupilID, ExamCode, Grade);
     }
 
     public DataTable PupilGrades(string PupilID) // NEW !!!!
@@ -93,15 +95,33 @@ public class Grades
 
         string lessonCode = db.GetLessonCodeByLessonName(grades[0].subject);
         int counter = 0;
-        for (int i = 0; i < pupilGrade.Count; i++)
+
+        counter += InserExam(grades[0].date, grades[0].teacherID, grades[0].classID, lessonCode);
+
+        if (counter == 1)
         {
-            counter += InsertGrade(grades[i].pupilID, grades[i].teacherID, lessonCode, grades[i].date, grades[i].grade, grades[i].classID);
-        }
-        if (counter == grades.Count)
-        {
-            return 1;
+            int examCode = GetLastExamCode();
+            counter = 0;
+            for (int i = 0; i < pupilGrade.Count; i++)
+            {
+                counter += InsertGrade(grades[i].pupilID, examCode, grades[i].grade);
+            }
+            if (counter == grades.Count)
+            {
+                return 1;
+            }
         }
         return 0;
+    }
+
+    public int InserExam(string examDate, string teacherID, int classCode, string lessonCode)
+    {
+        return dbT.InserExam(examDate, teacherID, classCode, lessonCode);
+    }
+
+    public int GetLastExamCode()
+    {
+        return dbT.GetLastExamCode();
     }
 
     public List<Grades> LoadTestsByTeacherID(string teacherId)

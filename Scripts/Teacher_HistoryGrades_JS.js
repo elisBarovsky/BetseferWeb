@@ -21,20 +21,15 @@ function DisplayTests(results) {
 
         var objTest = new Object();
 
-        objTest.TeacherID = localStorage.getItem("UserID");
-        objTest.CodeLesson = res[i].subjectCode;
-        objTest.ExamDate = res[i].date;
-        objTest.ClassId = res[i].classID;
-
-        str += "<tr onclick = 'OpenGrades(" + JSON.stringify(objTest) +
+        str += "<tr onclick = 'OpenGrades(" + res[i].examCode +
             ")'><td><i class='fa fa-star text-yellow'></i></td><td>" + res[i].date +
             "</td><td>" + res[i].subject + "</td><td>" + res[i].className + "</td></tr>";
     }
     $('#gradesTable').append(str);
 };
 
-function OpenGrades(obj) {
-    localStorage.setItem("testDetails", JSON.stringify(obj));
+function OpenGrades(examCode) {
+    localStorage.setItem("examCode", examCode);
 
     window.location.href = "OpenTestGradesWindow.html";
 };
