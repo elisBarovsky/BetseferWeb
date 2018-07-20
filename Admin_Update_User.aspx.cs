@@ -322,13 +322,13 @@ public partial class Admin_Update_User : System.Web.UI.Page
         ChildI4DTB.Visible = false;
         ChildI5DTB.Visible = false;
         ChildI6DTB.Visible = false;
-        //UpdateChild.Visible = false;
-        //NumChildLBL.Visible = false;
-     //   NumChildDDL.Visible = false;
-        //ChoosenNumChildLBL.Visible = false;
-        //ChoosenNumChildDDL.Visible = false;
-      //  ChoosenNumChildDDL.SelectedIndex = 0;
-        //UpdateChild.Checked = false;
+
+        DeleteChild.Visible = false;
+        AddChild.Visible = false;
+        ChildDDL.Visible = false;
+        TBaddNewChild.Visible = false;
+        TBaddNewChild.Text = "";
+
         ChildIDLBL.Visible = false;
     }
 
