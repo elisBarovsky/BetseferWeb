@@ -62,7 +62,6 @@ public class ParentsDay
 
     public int DeleteMyMeeting(string ParentsDayMeeting)
     {
-        DBconnection db = new DBconnection();
         return db.DeleteMyMeeting(ParentsDayMeeting);
     }
 }
