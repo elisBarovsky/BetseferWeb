@@ -15,6 +15,7 @@ public class DBconnectionTeacher
     public SqlDataAdapter da;
     public DataTable dt;
     SqlConnection con = new SqlConnection();
+    DBconnection db = new DBconnection();
 
     public DBconnectionTeacher()
     {
@@ -1776,7 +1777,7 @@ public class DBconnectionTeacher
                 g.examCode = int.Parse(dr["ExamCode"].ToString());
                 g.date = dr["ExamDate"].ToString();
                 g.classID = int.Parse(dr["ClassCode"].ToString());
-                g.subject = dr["SubjectCode"].ToString();
+                g.subjectCode = dr["SubjectCode"].ToString();
 
                 tests.Add(g);
             }
@@ -1843,4 +1844,49 @@ public class DBconnectionTeacher
         }
     }
 
+    
+    public List<Grades> GetAllGradesByExamCode(string examCode)
+    {
+        string selectSTR = "select [PupilID], [Grade] from [dbo].[Grades] where [ExamCode] = '" + examCode + "'";
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            List<Grades> grades = new List<Grades>();
+
+            while (dr.Read())
+            {
+                Grades g = new Grades();
+                g.pupilID = dr["PupilID"].ToString();
+                g.grade = int.Parse(dr["Grade"].ToString());
+                g.pupilName = db.GetUserFullNameByID(g.pupilID);
+
+                grades.Add(g);
+            }
+            return grades;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
     }
+
+}

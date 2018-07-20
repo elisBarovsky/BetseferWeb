@@ -16,6 +16,7 @@ public class Grades
     public string date { get; set; }
     public string teacherID { get; set; }
     public string pupilID { get; set; }
+    public string pupilName { get; set; }
     public int grade { get; set; }
     public int classID { get; set; }
     public string className { get; set; }
@@ -129,9 +130,14 @@ public class Grades
         List<Grades> tests = dbT.LoadTestsByTeacherID(teacherId);
         for (int i = 0; i < tests.Count; i++)
         {
-            tests[i].subjectCode = db.GetLessonNameByLessonCode(tests[i].subject);
+            tests[i].subject = db.GetLessonNameByLessonCode(tests[i].subjectCode);
             tests[i].className = db.GetClassNameByCodeClass(tests[i].classID);
         }
         return tests;
+    }
+
+    public List<Grades> GetAllGradesByExamCode(string examCode)
+    {
+        return dbT.GetAllGradesByExamCode(examCode);
     }
 }

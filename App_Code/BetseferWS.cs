@@ -1195,5 +1195,19 @@ public class BetseferWS : System.Web.Services.WebService
         string jsonString = js.Serialize(tests);
         return jsonString;
     }
+
+    
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetAllGradesByExamCode(string examCode)
+    {
+        List<Grades> grades = new List<Grades>();
+        Grades g = new Grades();
+        grades = g.GetAllGradesByExamCode(examCode);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(grades);
+        return jsonString;
+    }
 }
 

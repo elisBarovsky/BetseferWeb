@@ -21,15 +21,21 @@ function DisplayTests(results) {
 
         var objTest = new Object();
 
-        str += "<tr onclick = 'OpenGrades(" + res[i].examCode +
+        var objExam = new Object();
+        objExam.examCode = res[i].examCode;
+        objExam.subject = res[i].subject;
+        objExam.date = res[i].date;
+        objExam.className = res[i].className;
+
+        str += "<tr onclick = 'OpenGrades(" + JSON.stringify(objExam) +
             ")'><td><i class='fa fa-star text-yellow'></i></td><td>" + res[i].date +
             "</td><td>" + res[i].subject + "</td><td>" + res[i].className + "</td></tr>";
     }
     $('#gradesTable').append(str);
 };
 
-function OpenGrades(examCode) {
-    localStorage.setItem("examCode", examCode);
+function OpenGrades(objExam) {
+    localStorage.setItem("examDetails", JSON.stringify(objExam));
 
     window.location.href = "OpenTestGradesWindow.html";
 };
