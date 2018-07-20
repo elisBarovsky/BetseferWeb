@@ -23,6 +23,7 @@ public class ParentsDay
     public List<Meeting> ParentsDayMeetings { get; set; }
 
     DBconnectionTeacher dbt = new DBconnectionTeacher();
+    DBconnection db = new DBconnection();
 
     public ParentsDay()
     {
@@ -54,9 +55,8 @@ public class ParentsDay
         return dbt.Parent_LoadParentDay(PupilID);
     }
 
-    public int SaveMeMeeting(string ParentsDayMeeting, string PupilID)
+    public string SaveMeMeeting(string ParentsDayMeeting, string PupilID)
     {
-        DBconnection db = new DBconnection();
         return db.SaveMeMeeting(ParentsDayMeeting, PupilID);
     }
 

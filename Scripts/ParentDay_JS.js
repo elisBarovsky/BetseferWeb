@@ -64,6 +64,7 @@ function ShowParentsDay(results) {
 
         var text2 = document.createTextNode('שעת התחלה:');
         var input2 = document.createElement("select");
+        input2.setAttribute("Class", "btn btn-default dropdown-toggle");
         input2.id = "from";
 
         var list = "<option>בחר</option>";
@@ -89,6 +90,8 @@ function ShowParentsDay(results) {
 
         var text3 = document.createTextNode('שעת סיום:');
         var input3 = document.createElement('select');
+        input3.setAttribute("Class", "btn btn-default dropdown-toggle");
+
         input3.id = "to";
         input3.innerHTML = list;
 
@@ -109,6 +112,7 @@ function ShowParentsDay(results) {
 
         var text4 = document.createTextNode('משך פגישה (דקות):');
         var input4 = document.createElement('select');
+        input4.setAttribute("Class", "btn btn-default dropdown-toggle");
         input4.id = "long";
 
         var times = "<option>בחר</option>" +
