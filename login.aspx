@@ -32,11 +32,27 @@
 <![endif]-->
     <script src="Scripts/Login_AJAX.js"></script>
     <script type="text/javascript">
+        function onDeviceReady() {
 
+            var Remember = localStorage.getItem("rememberME");
+            if (Remember != null) {
+                document.getElementById("IDTB").value = localStorage.getItem("rememberME");
+                document.getElementById("rememberME").checked = true;
+            }
+        }
+      
         function SaveUserIdInLocalStorage() {
             var id = document.getElementById("IDTB").value;
             localStorage.setItem("UserID", id);
 
+                var checkBox = document.getElementById("rememberME");
+
+            if (checkBox.checked == true) {
+                localStorage.setItem("rememberME", document.getElementById("IDTB").value); //saving in localS
+            }
+            else {
+                window.localStorage.removeItem("rememberME");
+            }
             GetUserImgWeb(id, SaveUserImg);
             GetUserFullName(id, SaveUserFullName);
             //GetUserType(id, SaveUserType);
@@ -52,10 +68,6 @@
             localStorage.setItem("UserFullName", res);
         };
 
-        //function SaveUserType(results) {
-        //    res = $.parseJSON(results.d);
-        //    localStorage.setItem("UserType", res);
-        //}
             function Erroralert(msg) {
             swal({
                 title: 'שגיאה!',
@@ -71,7 +83,7 @@
 
     </script>
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" onload="javascript:onDeviceReady();">
     <form id="form1" runat="server">
         <div class="login-box" style="float: inherit">
                <div>
@@ -95,7 +107,7 @@
                         <div class="col-xs-8">
                             <div class="checkbox icheck">
                                 <label>
-                                    <input type="checkbox"> זכור אותי</label>
+                                    <input type="checkbox" id="rememberME"> זכור אותי</label>
                                 <a href="pages-recover-password.aspx" runat="server" class="pull-left"><i class="fa fa-lock"></i>? שכחת סיסמה
                                 </a>
                             </div>
@@ -108,13 +120,6 @@
                         <!-- /.col -->
                     </div>
                 </form>
-                <%--  <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-      Facebook</a> <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-      Google+</a> </div>--%>
-                <!-- /.social-auth-links -->
-
             </div>
             <!-- /.login-box-body -->
         </div>
