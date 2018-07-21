@@ -95,6 +95,10 @@ public partial class Admin_Add_User : System.Web.UI.Page
             FileUpload1.SaveAs(folderPath + FileUpload1.FileName);
             ImgPath = "/Images/" + FileUpload1.FileName;
         }
+        else
+        {
+            ImgPath = "/Images/NoImg.png";
+        }
         string newBDATe = date1.Value;
         if (newBDATe == "")
         {
