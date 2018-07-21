@@ -392,7 +392,16 @@ public class Users
     public string GetUserIDByFullName(string FullName)
     {
         return db.GetUserIDByFullName(FullName);
+    }
 
+    public Dictionary<string,string> GetChildrenByParentID(string parentSelected)
+    {
+        return db.GetChildrenByParentID(parentSelected);
+    }
+    
+    public Dictionary<string, string> getAllPupils()
+    {
+        return db.getAllPupils();
     }
 }
 

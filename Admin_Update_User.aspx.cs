@@ -10,11 +10,6 @@ public partial class Admin_Update_User : System.Web.UI.Page
     string tempList = "";
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (Request.Cookies["UserID"] == null || Request.Cookies["UserPassword"] == null)
-        //{
-        //    Response.Redirect("login.aspx");
-        //}
-
         if (!IsPostBack)
         {
             LoadUser();
@@ -22,37 +17,10 @@ public partial class Admin_Update_User : System.Web.UI.Page
             VisibleOtherUsers(false);
             ClearAll();
             UpdateUserBTN.Visible = false;
-            //    FillNumChilds();
             ChildDDL.Visible = false;
-            //  NumChildDDL.Visible = false;
             VisibleParent(false);
-            //ChoosenNumChildLBL.Visible = false;
-            HideChildTBID(false);
         }
     }
-
-    protected void HideChildTBID(bool ans)
-    {
-        ChildI2DTB.Visible = ans;
-        ChildI3DTB.Visible = ans;
-        ChildI4DTB.Visible = ans;
-        ChildI5DTB.Visible = ans;
-        ChildI6DTB.Visible = ans;
-    }
-
-    //private void FillNumChilds()
-    //{
-    //    List<int> NumChild = new List<int>();
-    //    for (int i = 0; i < 7; i++)
-    //    {
-    //        NumChild.Add(i);
-    //    }
-
-    //    NumChildDDL.DataSource = NumChild;
-    //    NumChildDDL.DataBind();
-    //    ChoosenNumChildDDL.DataSource = NumChild;
-    //    ChoosenNumChildDDL.DataBind();
-    //}
 
     protected void FillFirstItem(object sender, EventArgs e)
     {
@@ -76,13 +44,11 @@ public partial class Admin_Update_User : System.Web.UI.Page
         if (UserInfo[6] == "")
         {
             UserImgimg.ImageUrl = "/Images/NoImg.png";
-            //UserImg.ImageUrl = "/Images/NoImg.png";
             UserImg1.ImageUrl = "/Images/NoImg.png";
         }
         else
         {
             UserImgimg.ImageUrl = UserInfo[6];
-            //UserImg.ImageUrl = UserInfo[6];
             UserImg1.ImageUrl = UserInfo[6];
         }
     }
@@ -100,6 +66,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
         ChildDDL.DataValueField = "key";
         ChildDDL.DataTextField = "value";
         ChildDDL.DataBind();
+
     }
 
     protected void UserTypeDLL_CheckedChanged(object sender, EventArgs e)
@@ -110,7 +77,6 @@ public partial class Admin_Update_User : System.Web.UI.Page
             VisiblePupil(true);
             VisibleOtherUsers(false);
             VisibleTeacherUsers(false);
-            HideChildTBID(false);
             FillClasses();
         }
         else if (UserTypeDLL.SelectedValue == "2")
@@ -118,7 +84,6 @@ public partial class Admin_Update_User : System.Web.UI.Page
             VisibleTeacherUsers(true);
             VisiblePupil(false);
             VisibleOtherUsers(true);
-            HideChildTBID(false);
             FillUsers();
             tempList = "2";
         }
@@ -127,7 +92,6 @@ public partial class Admin_Update_User : System.Web.UI.Page
             if (UserTypeDLL.SelectedValue == "3") { VisibleParent(true); }
             VisibleTeacherUsers(false);
             VisiblePupil(false);
-            HideChildTBID(false);
             VisibleOtherUsers(true);
             FillUsers();
         }
@@ -206,10 +170,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
             else if (UserTypeDLL.SelectedValue == "3")
             {
                 Users QuntityChiled = new Users();
-                //  NumChildDDL.Visible = true;
-                //NumChildLBL.Visible = true;
-                // NumChildDDL.SelectedValue = QuntityChiled.GetNumChild(UserID);
-                //FillChildren();
+                FillChildrenOfParent(UserID);
             }
         }
 
@@ -237,6 +198,16 @@ public partial class Admin_Update_User : System.Web.UI.Page
         }
     }
 
+    public void FillChildrenOfParent(string parentID)
+    {
+        Users u = new Users();
+        Dictionary<string,string> children = u.GetChildrenByParentID(parentID);
+        PupilDLL.DataSource = children;
+        PupilDLL.DataTextField = "Value";
+        PupilDLL.DataValueField = "Key";
+        PupilDLL.DataBind();
+    }
+
     public string KeyByValue(Dictionary<string, string> dict, string val)
     {
         string key = null;
@@ -259,11 +230,6 @@ public partial class Admin_Update_User : System.Web.UI.Page
         return key;
     }
 
-    //protected void FillTBofBdate(object sender, EventArgs e)
-    //{
-    //    BirthDateTB.Text = Calendar1.SelectedDate.ToShortDateString();
-    //}
-
     protected void VisiblePupil(bool ans)
     {
         ChoosePupilLBL.Visible = ans;
@@ -283,8 +249,6 @@ public partial class Admin_Update_User : System.Web.UI.Page
     protected void VisibleParent(bool ans)
     {
         ChildDDL.Visible = ans;
-        //UpdateChild.Visible = ans;
-        //ChoosenNumChildDDL.Visible = false;
         DeleteChild.Visible = ans;
         AddChild.Visible = ans;
         SaveChild.Visible = false;
@@ -310,18 +274,6 @@ public partial class Admin_Update_User : System.Web.UI.Page
         MainTeacher.Visible = false;
         MainTeacherCB.Visible = false;
         MainTeacherCB.Checked = false;
-        ChildI1DTB.Text = "";
-        ChildI2DTB.Text = "";
-        ChildI3DTB.Text = "";
-        ChildI4DTB.Text = "";
-        ChildI5DTB.Text = "";
-        ChildI6DTB.Text = "";
-        ChildI1DTB.Visible = false;
-        ChildI2DTB.Visible = false;
-        ChildI3DTB.Visible = false;
-        ChildI4DTB.Visible = false;
-        ChildI5DTB.Visible = false;
-        ChildI6DTB.Visible = false;
 
         DeleteChild.Visible = false;
         AddChild.Visible = false;
@@ -338,24 +290,11 @@ public partial class Admin_Update_User : System.Web.UI.Page
         int res1 = 0;
         Administrator NewUser = new Administrator();
 
-
-        // string newBDATe = date1.Value;
-
         if (BDAYtb.Text == "")
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('תאריך לא יכול להיות ריק');", true);
             return;
         }
-
-        //  string Bday = newBDATe.Substring(8, 2) + "/" + newBDATe.Substring(5, 2) + "/" + newBDATe.Substring(0, 4);
-
-        //string day = DDLday.SelectedValue, month = DDLmonth.SelectedValue, year = DDLyear.SelectedValue;
-        //string Bday = day + "/" + month + "/" + year;
-        //if (day == "יום" || month == "חודש" || year == "שנה")
-        //{
-        //    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "alert('תאריך הלידה לא יכול להיות ריק');", true);
-        //    return;
-        //}
 
         if (FileUpload1.FileName == "")
         {
@@ -399,28 +338,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
             }
             else if (UserTypeDLL.SelectedValue == "3")
             {
-                //if (UpdateChild.Checked)
-                //{
-                //    string[] ChildID = new string[6];
 
-                //    ChildID[0] = ChildI1DTB.Text;
-                //    ChildID[1] = ChildI2DTB.Text;
-                //    ChildID[2] = ChildI3DTB.Text;
-                //    ChildID[3] = ChildI4DTB.Text;
-                //    ChildID[4] = ChildI5DTB.Text;
-                //    ChildID[5] = ChildI6DTB.Text;
-
-                //    for (int i = 0; i < ChildID.Length; i++)
-                //    {
-                //        if (ChildID[i] != "")
-                //        {
-                //            Users GetPupilClass = new Users();
-                //            string ChildCodeClass = GetPupilClass.GetPupilOtClass(ChildID[i]);
-                //            Administrator AddMoreThanOneChild = new Administrator();
-                //            AddMoreThanOneChild.UpdateParent(UserIDTB.Text, ChildID[i], ChildCodeClass);
-                //        }
-                //    }
-                //}
             }
 
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('משתמש עודכן בהצלחה');", true);
@@ -447,7 +365,14 @@ public partial class Admin_Update_User : System.Web.UI.Page
 
     protected void AddNewChild(object sender, EventArgs e)
     {
+        Dictionary<string, string> allPupils = new Dictionary<string, string>();
+        Users u = new Users();
+        TBaddNewChild.DataSource = u.getAllPupils();
+        TBaddNewChild.DataTextField = "Value";
+        TBaddNewChild.DataValueField = "Key";
+        TBaddNewChild.DataBind();
         TBaddNewChild.Visible = true;
+        SaveChild.Visible = true;
     }
 
     protected void DeleteChildFunction(object sender, EventArgs e)
@@ -465,88 +390,15 @@ public partial class Admin_Update_User : System.Web.UI.Page
             int answer = p.DeleteChild(UserIDTB.Text, childID);
             if (answer > 0)
             {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('ילד נמחק בהצלחה!');", true);
                 ChildDDL.DataBind();
             }
         }
     }
 
-
-
-    protected void UpdateChild_CheckedChanged(object sender, EventArgs e)
-    {
-        //if (UpdateChild.Checked)
-        //{
-        //  //  NumChildDDL.Visible = true;
-        //    //ChoosenNumChildDDL.Visible = true;
-        //    //ChoosenNumChildLBL.Visible = true;
-        //}
-        //else
-        {
-            //NumChildDDL.Visible = false;
-            //ChoosenNumChildDDL.Visible = false;
-            //ChoosenNumChildLBL.Visible = false;
-        }
-    }
-
-    //protected void NumChildDDL_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    ChildIDLBL.Visible = true;
-    //    switch (ChoosenNumChildDDL.SelectedValue)
-    //    {
-    //        case "1":
-    //            ChildI1DTB.Visible = true;
-    //            ChildI2DTB.Visible = false;
-    //            ChildI3DTB.Visible = false;
-    //            ChildI4DTB.Visible = false;
-    //            ChildI5DTB.Visible = false;
-    //            ChildI6DTB.Visible = false;
-    //            break;
-    //        case "2":
-    //            ChildI1DTB.Visible = true;
-    //            ChildI2DTB.Visible = true;
-    //            ChildI3DTB.Visible = false;
-    //            ChildI4DTB.Visible = false;
-    //            ChildI5DTB.Visible = false;
-    //            ChildI6DTB.Visible = false;
-    //            break;
-    //        case "3":
-    //            ChildI1DTB.Visible = true;
-    //            ChildI2DTB.Visible = true;
-    //            ChildI3DTB.Visible = true;
-    //            ChildI4DTB.Visible = false;
-    //            ChildI5DTB.Visible = false;
-    //            ChildI6DTB.Visible = false;
-    //            break;
-    //        case "4":
-    //            ChildI1DTB.Visible = true;
-    //            ChildI2DTB.Visible = true;
-    //            ChildI3DTB.Visible = true;
-    //            ChildI4DTB.Visible = true;
-    //            ChildI5DTB.Visible = false;
-    //            ChildI6DTB.Visible = false;
-    //            break;
-    //        case "5":
-    //            ChildI1DTB.Visible = true;
-    //            ChildI2DTB.Visible = true;
-    //            ChildI3DTB.Visible = true;
-    //            ChildI4DTB.Visible = true;
-    //            ChildI5DTB.Visible = true;
-    //            ChildI6DTB.Visible = false;
-    //            break;
-    //        case "6":
-    //            ChildI1DTB.Visible = true;
-    //            ChildI2DTB.Visible = true;
-    //            ChildI3DTB.Visible = true;
-    //            ChildI4DTB.Visible = true;
-    //            ChildI5DTB.Visible = true;
-    //            ChildI6DTB.Visible = true;
-    //            break;
-    //    }
-    //}
-
     protected void SaveNewChildToParent(object sender, EventArgs e)
     {
-        string childID = TBaddNewChild.Text,
+        string childID = TBaddNewChild.SelectedValue, //pupilID
             parentID = UserIDTB.Text;
 
         Users child = new Users();
@@ -563,11 +415,12 @@ public partial class Admin_Update_User : System.Web.UI.Page
                 if (num > 0)
                 {
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('תלמיד נוסף בהצלחה');", true);
+                    ChildDDL.DataBind();
+                    TBaddNewChild.Visible = false;
+                    SaveChild.Visible = false;
                 }
                 else ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('עקב תקלה לא ניתן להוסיף תלמיד להורה');", true);
-                ChildDDL.DataBind();
-                TBaddNewChild.Text = "";
-                TBaddNewChild.Visible = false;
+
                 break;
             case "connectionExists":
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('תלמיד כבר משוייך להורה');", true);

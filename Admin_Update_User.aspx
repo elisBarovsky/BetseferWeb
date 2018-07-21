@@ -252,26 +252,17 @@
                                             <asp:TextBox ID="PasswordTB" runat="server" required="required" class="form-control"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <%--<asp:Label ID="NumChildLBL" runat="server" Text="מספר ילדים"></asp:Label>--%>
                                             <asp:Label ID="MainTeacher" runat="server" Text=" האם מחנך"></asp:Label>
                                             <asp:DropDownList ID="ChildDDL" runat="server" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnDataBound="FillFirstItemChildrenList"></asp:DropDownList>
-                                            <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup52_test2ConnectionString %>" SelectCommand="SELECT [PupilID] FROM [PupilsParent] WHERE ([ParentID] = @ParentID)">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="UserIDTB" Name="ParentID" PropertyName="Text" Type="String"/>
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>--%>
                                             &nbsp;&nbsp;&nbsp;
                                             <asp:LinkButton ID="DeleteChild" OnClick="DeleteChildFunction" Visible="false" runat="server"><i class="fa fa-trash-o"></i></asp:LinkButton>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             <asp:LinkButton ID="AddChild" OnClick="AddNewChild" Visible="false" runat="server"><i class="fa fa-bathtub"></i></asp:LinkButton>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="TBaddNewChild" runat="server" Visible="false" CssClass="form-control"></asp:TextBox>
-                                            <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="TBaddNewChild" Type="Integer" ErrorMessage="CompareValidator" ForeColor="Red" Operator="DataTypeCheck">הזנת מספרים בלבד</asp:CompareValidator>
-                                            <%--<asp:DropDownList ID="NumChildDDL" runat="server"></asp:DropDownList>--%>
-                                            <%--<asp:Label ID="ChildLBL" runat="server" Text="תלמידים:"></asp:Label>--%>
+                                            <asp:DropDownList ID="TBaddNewChild" runat="server" Visible="false" OnDataBound="FillFirstItem" CssClass="btn btn-default dropdown-toggle"></asp:DropDownList>
                                             <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
-                                            <asp:Button ID="SaveChild" runat="server" Text="הוסף" Visible="false" OnClick="SaveNewChildToParent" />
+                                            <asp:Button ID="SaveChild" runat="server" Text="הוסף" Visible="false" OnClick="SaveNewChildToParent" class="btn btn-outline-primary"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -282,17 +273,8 @@
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="ClassOt2DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="false" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
-
-                                            <asp:TextBox ID="ChildI1DTB" runat="server" required="required"></asp:TextBox><br />
-                                            <asp:TextBox ID="ChildI2DTB" runat="server" required="required"></asp:TextBox><br />
-                                            <asp:TextBox ID="ChildI3DTB" runat="server" required="required"></asp:TextBox><br />
-                                            <asp:TextBox ID="ChildI4DTB" runat="server" required="required"></asp:TextBox><br />
-                                            <asp:TextBox ID="ChildI5DTB" runat="server" required="required"></asp:TextBox><br />
-                                            <asp:TextBox ID="ChildI6DTB" runat="server" required="required"></asp:TextBox>
-                                            <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [CodePgroup], [GroupName] FROM [PupilsGroup]"></asp:SqlDataSource>
                                         </td>
                                         <td>
-                                            <%--<asp:CheckBox ID="UpdateChild" runat="server" AutoPostBack="true" Text="לעדכן ילדים?" OnCheckedChanged="UpdateChild_CheckedChanged" />--%>
                                         </td>
                                     </tr>
                                 </table>

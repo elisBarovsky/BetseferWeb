@@ -1168,8 +1168,8 @@ public class DBconnection
 
     public int AddUser(Users NewUser)
     {
-        string cStr = "INSERT INTO [dbo].[Users] ([UserID],[UserFName],[UserLName],[BirthDate],[UserImg],[LoginName],[LoginPassword],[PhoneNumber],[CodeUserType],[SecurityQ1Code],[SecurityQ1Answer],[alreadyLogin],[SecurityQ2Code],[SecurityQ2Answer])" +
-                     " VALUES('" + NewUser.UserID1 + "','" + NewUser.UserFName1 + "','" + NewUser.UserLName1 + "','" + NewUser.BirthDate1 + "','" + NewUser.UserImg1 + "','" + NewUser.UserName1 + "','" + NewUser.UserPassword1 + "','" + NewUser.PhoneNumber1 + "','" + NewUser.CodeUserType1 + "' , null, null, 0, null, null)";
+        string cStr = "INSERT INTO [dbo].[Users] ([UserID],[UserFName],[UserLName],[BirthDate],[UserImg],[LoginPassword],[PhoneNumber],[CodeUserType],[SecurityQ1Code],[SecurityQ1Answer],[alreadyLogin],[SecurityQ2Code],[SecurityQ2Answer])" +
+                     " VALUES('" + NewUser.UserID1 + "','" + NewUser.UserFName1 + "','" + NewUser.UserLName1 + "','" + NewUser.BirthDate1 + "','" + NewUser.UserImg1 + "','" + NewUser.UserPassword1 + "','" + NewUser.PhoneNumber1 + "','" + NewUser.CodeUserType1 + "' , null, null, 0, null, null)";
         return ExecuteNonQuery(cStr);
     }
 
@@ -2955,10 +2955,9 @@ public class DBconnection
 
     public string IsStudentUserNotThisParentYet(string childID, string parentID)
     {
-        String STRuserType = "SELECT CodeUserType FROM dbo.Users where UserID = '" + childID + "'",
-            STRcheckIfConnectionExists = "SELECT count(ParentID) from PupilsParent where ParentID = '" + parentID +
+        String STRcheckIfConnectionExists = "SELECT count(ParentID) from PupilsParent where ParentID = '" + parentID +
             "' and PupilID = '" + childID + "'",
-            codeUserType = "", answer = "";
+            answer = "";
         int numConnections = -1;
 
         try
@@ -2970,33 +2969,15 @@ public class DBconnection
             // write to log
             throw (ex);
         }
+        
         try
         {
-            SqlCommand cmd = new SqlCommand(STRuserType, con);
+            SqlCommand cmd = new SqlCommand(STRcheckIfConnectionExists, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             while (dr.Read())
             {
-                codeUserType = dr[0].ToString();
+                numConnections = int.Parse(dr[0].ToString());
             }
-
-            if (codeUserType == "4")
-            {
-                try
-                {
-                    cmd = new SqlCommand(STRcheckIfConnectionExists, con);
-                    dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                    while (dr.Read())
-                    {
-                        numConnections = int.Parse(dr[0].ToString());
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                    throw (ex);
-                }
-            }
-            else answer = "userTypeNotStudent";
 
             if (numConnections == 0)
             {
@@ -3010,7 +2991,6 @@ public class DBconnection
         }
         catch (Exception ex)
         {
-            // write to log
             throw (ex);
         }
         finally
@@ -3601,6 +3581,86 @@ public class DBconnection
                 lessonCode = dr[0].ToString();
             }
             return lessonCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public Dictionary<string, string> GetChildrenByParentID(string parentSelected)
+    {
+        String selectSTR = "SELECT dbo.Users.UserID, dbo.Users.UserFName +' '+dbo.Users.UserLName as FullPupilName, dbo.PupilsParent.ParentID "+ 
+                            "FROM dbo.Users INNER JOIN dbo.PupilsParent ON  dbo.Users.UserID = dbo.PupilsParent.PupilID " +
+                            "where dbo.PupilsParent.ParentID = '"+ parentSelected + "'";
+        Dictionary<string, string> children = new Dictionary<string, string>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                children.Add(dr["UserID"].ToString(), dr["FullPupilName"].ToString());
+            }
+            return children;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public Dictionary<string, string> getAllPupils()
+    {
+        String selectSTR = "SELECT UserID, UserFName +' '+UserLName as FullPupilName " +
+                            "FROM dbo.Users where CodeUserType = 4";
+
+        Dictionary<string, string> pupils = new Dictionary<string, string>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                pupils.Add(dr["UserID"].ToString(), dr["FullPupilName"].ToString());
+            }
+            return pupils;
         }
         catch (Exception ex)
         {
