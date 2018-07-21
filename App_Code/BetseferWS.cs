@@ -1209,5 +1209,17 @@ public class BetseferWS : System.Web.Services.WebService
         string jsonString = js.Serialize(grades);
         return jsonString;
     }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string UploadImg(string UserID, string Img)
+    {
+        Users user = new Users();
+        int res = user.UploadImg(UserID, Img);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
 }
 
