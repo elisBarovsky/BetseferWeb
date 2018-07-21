@@ -20,6 +20,26 @@ public partial class pages_recover_changePass : System.Web.UI.Page
         }
     }
 
+    protected void UploadImgBTN(object sender, EventArgs e)
+    {
+        string folderPath = Server.MapPath("~/Images/");
+
+        string userID = Request.Cookies["UserID"].Value;
+        FileUpload1.SaveAs(folderPath + FileUpload1.FileName);
+
+        Users user = new Users();
+
+        int res = user.UploadImg(userID, "Images/"+ FileUpload1.FileName);
+        if (res >0)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('התמונה הועלתה בהצלחה. תתעדכן בהתחברות הבאה שלך'); ", true);
+        }
+        else
+        {
+            Response.Write("<script LANGUAGE='JavaScript' >Erroralert('בעיה בהעלאת תמונה, נסה שנית מאוחר יותר או פנה לתמיכה')</script>");
+        }
+    }
+
     protected void ChangePasswordBTN(object sender, EventArgs e)
     {
         string userID = Request.Cookies["UserID"].Value;

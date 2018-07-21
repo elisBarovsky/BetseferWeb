@@ -92,7 +92,7 @@
         <body class="hold-transition login-page">
             <div class="login-box">
                 <div class="login-box-body">
-                    <h3 class="login-box-msg m-b-1">שינוי סיסמה</h3>
+                    <h3 class="login-box-msg m-b-1">הגדרות</h3>
                     <p>בחר סיסמה חדשה והזן אותה פעמיים </p>
                     <form action="index.html" method="post">
 
@@ -112,6 +112,17 @@
 
                             </div>
                             <!-- /.col -->
+                              <br /><br />
+                              <div class="col-xs-4 m-t-1">
+                                  <fieldset class="form-group" runat="server">
+                                                <label class="custom-file center-block block">
+                                                    <asp:FileUpload ID="FileUpload1" runat="server" class="custom-file-input" />
+                                                    <span class="custom-file-control"></span>
+                                                </label>
+                                            </fieldset>
+                  <asp:Button ID="Button2" runat="server" class="btn btn-primary btn-block btn-flat" Text="העלאת תמונה" OnClick="UploadImgBTN" />
+
+                            </div>
                         </div>
                     </form>
                 </div>
