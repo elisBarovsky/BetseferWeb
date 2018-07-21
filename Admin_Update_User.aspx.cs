@@ -140,11 +140,11 @@ public partial class Admin_Update_User : System.Web.UI.Page
         if (UserTypeDLL.SelectedValue == "4")
         {
             UserID = PupilDLL.SelectedValue;
-            Users PupilGroupID = new Users();
+            Users Pupil = new Users();
             Dictionary<string, string> pupils = new Dictionary<string, string>();
             pupils = (Dictionary<string, string>)(Session["PupilsList"]);
             UserID = KeyByValue(pupils, UserID);
-            ClassOt2DLL.SelectedValue = PupilGroupID.GetPupilOtClass(UserID);
+            ClassOt2DLL.SelectedValue = Pupil.GetPupilOtClass(UserID);
         }
         else
         {

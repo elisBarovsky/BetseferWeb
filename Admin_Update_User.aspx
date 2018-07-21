@@ -272,7 +272,8 @@
 
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ClassOt2DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataSourceID="SqlDataSource3" DataTextField="TotalName" DataValueField="ClassCode" AutoPostBack="false" OnSelectedIndexChanged="FillPupils"></asp:DropDownList>
+                                            <asp:DropDownList ID="ClassOt2DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataValueField="ClassCode" OnSelectedIndexChanged="FillPupils" DataSourceID="classesWithoutMainTeacher" DataTextField="ClassCode"></asp:DropDownList>
+                                            <asp:SqlDataSource ID="classesWithoutMainTeacher" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class] WHERE ([MainTeacherID] IS NULL)"></asp:SqlDataSource>
                                         </td>
                                         <td>
                                         </td>
