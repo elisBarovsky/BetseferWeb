@@ -255,61 +255,12 @@
                                             <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
                                             <asp:DropDownList ID="ClassesWithoutMainTeacher" Style="width: 70px" runat="server" CssClass="form-control" data-toggle="dropdown" OnLoad="FillFirstItem" DataSourceID="SqlDataSource1" DataTextField="TotalName" DataValueField="ClassCode" Visible="False"></asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class] WHERE ([MainTeacherID] IS NULL) ORDER BY [OtClass], [NumClass]"></asp:SqlDataSource>
-
-                                            <%--<asp:DropDownList ID="NumOfChildDDL" Style="direction: rtl;" runat="server" AutoPostBack="true" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" OnSelectedIndexChanged="NumOfChildDDL_SelectedIndexChanged"></asp:DropDownList>--%></td>
-
                                         <td>
-                                            <%--<asp:Label ID="ChildIDLBL" runat="server" Text=" :הזן תעודת זהות ילד"></asp:Label>--%>
                                         </td>
                                         <td>
-                                            <%--         
-
-                                    <asp:TextBox ID="ChildI1DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI1DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                    <asp:TextBox ID="ChildI2DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI2DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                    <asp:TextBox ID="ChildI3DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI3DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                    <asp:TextBox ID="ChildI4DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI4DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                    <asp:TextBox ID="ChildI5DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI5DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                    <asp:TextBox ID="ChildI6DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox>
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI6DTB"
-                                        ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />--%>
                                         </td>
                                     </tr>
                                 </table>
-                                <asp:Label ID="NumChildLBL" runat="server" Text="מספר ילדים רשומים"></asp:Label>
-
-                                <asp:DropDownList ID="NumOfChildDDL" Style="direction: rtl;" runat="server" AutoPostBack="true" CssClass="form-control" data-toggle="dropdown" OnSelectedIndexChanged="NumOfChildDDL_SelectedIndexChanged"></asp:DropDownList></td>
-
-                               
-                                    <asp:Label ID="ChildIDLBL" runat="server" Text=" הזן ת.ז. ילד:"></asp:Label>
-
-                                <asp:TextBox ID="ChildI1DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI1DTB"
-                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                <asp:TextBox ID="ChildI2DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI2DTB"
-                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                <asp:TextBox ID="ChildI3DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI3DTB"
-                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                <asp:TextBox ID="ChildI4DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI4DTB"
-                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                <asp:TextBox ID="ChildI5DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox><br />
-                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI5DTB"
-                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
-                                <asp:TextBox ID="ChildI6DTB" runat="server" required="required" MaxLength="10" class="form-control"></asp:TextBox>
-                                <asp:RegularExpressionValidator runat="server" ControlToValidate="ChildI6DTB"
-                                    ErrorMessage="ת.ז. חייבת להכיל מספרים בלבד." ForeColor="Red" ValidationExpression="^[0-9]*$" />
                             </div>
                         </div>
                         <div class="tab-pane p-20" id="Pupil" role="tabpanel" runat="server">
