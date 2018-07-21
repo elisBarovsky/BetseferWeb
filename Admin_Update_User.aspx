@@ -257,7 +257,7 @@
                                             &nbsp;&nbsp;&nbsp;
                                             <asp:LinkButton ID="DeleteChild" OnClick="DeleteChildFunction" Visible="false" runat="server"><i class="fa fa-trash-o"></i></asp:LinkButton>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <asp:LinkButton ID="AddChild" OnClick="AddNewChild" Visible="false" runat="server"><i class="fa fa-bathtub"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="AddChild" OnClick="AddNewChild" Visible="false" runat="server"><i class="fa fa-plus"></i></asp:LinkButton>
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="TBaddNewChild" runat="server" Visible="false" OnDataBound="FillFirstItem" CssClass="btn btn-default dropdown-toggle"></asp:DropDownList>

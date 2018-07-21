@@ -12,13 +12,13 @@ public partial class Admin_Update_User : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            LoadUser();
-            VisiblePupil(false);
-            VisibleOtherUsers(false);
-            ClearAll();
-            UpdateUserBTN.Visible = false;
-            ChildDDL.Visible = false;
-            VisibleParent(false);
+                LoadUser();
+                VisiblePupil(false);
+                VisibleOtherUsers(false);
+                ClearAll();
+                UpdateUserBTN.Visible = false;
+                ChildDDL.Visible = false;
+                VisibleParent(false);
         }
     }
 
@@ -338,7 +338,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
             }
             else if (UserTypeDLL.SelectedValue == "3")
             {
-
+                //children allready saved.
             }
 
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('משתמש עודכן בהצלחה');", true);
@@ -390,8 +390,9 @@ public partial class Admin_Update_User : System.Web.UI.Page
             int answer = p.DeleteChild(UserIDTB.Text, childID);
             if (answer > 0)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('ילד נמחק בהצלחה!');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "sweetAlert('ילד נמחק בהצלחה!');", true);
                 ChildDDL.DataBind();
+                return;
             }
         }
     }
@@ -414,14 +415,14 @@ public partial class Admin_Update_User : System.Web.UI.Page
                 int num = p.SaveChildAndParent(parentID, childID);
                 if (num > 0)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('תלמיד נוסף בהצלחה');", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "sweetAlert('ילד נמחק בהצלחה!');", true);
                     ChildDDL.DataBind();
                     TBaddNewChild.Visible = false;
                     SaveChild.Visible = false;
                 }
                 else ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('עקב תקלה לא ניתן להוסיף תלמיד להורה');", true);
 
-                break;
+                return;
             case "connectionExists":
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('תלמיד כבר משוייך להורה');", true);
                 return;
