@@ -459,7 +459,7 @@ public class DBconnectionTeacher
     {
         string selectSTR = "SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha ,(select ( UserFName+ ' '+ UserLName)  from dbo.Users where [UserID]= dbo.HomeWork.TeacherID) as Teacher_FullName , dbo.HWPupil.IsDone" +
             " FROM  dbo.HomeWork INNER JOIN  dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson " +
-            "  where dbo.HWPupil.PupilID = '" + Id + "'  and dbo.HomeWork.HWDueDate < CONVERT(nvarchar(10), getdate(), 103)  order by dbo.HomeWork.HWDueDate asc";
+            "  where dbo.HWPupil.PupilID = '" + Id + "'  and dbo.HomeWork.HWDueDate < CONVERT(nvarchar(10), getdate(), 103) or dbo.HWPupil.IsDone=1 order by dbo.HomeWork.HWDueDate asc";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
@@ -1057,7 +1057,10 @@ public class DBconnectionTeacher
 
     public int InsertNotes(string PupilID, string CodeNoteType, string NoteDate, string TeacherID, string LessonsCode, string Comment)
     {
-        string cStr = "INSERT INTO [dbo].[GivenNotes]  ([PupilID] ,[CodeNoteType],[NoteDate],[TeacherID],[LessonsCode],[Comment])   VALUES ('" + PupilID + "','" + CodeNoteType + "','" + NoteDate + "' ,'" + TeacherID + "' ,'" + LessonsCode + "','" + Comment + "')";
+        string contentToHtml = Comment.Replace("\n", "<br />");
+        string tipulBeGeresh = contentToHtml.Replace("'", "''");
+
+        string cStr = "INSERT INTO [dbo].[GivenNotes]  ([PupilID] ,[CodeNoteType],[NoteDate],[TeacherID],[LessonsCode],[Comment])   VALUES ('" + PupilID + "','" + CodeNoteType + "','" + NoteDate + "' ,'" + TeacherID + "' ,'" + LessonsCode + "','" + tipulBeGeresh + "')";
         return ExecuteNonQuery(cStr);
     }
 
@@ -1075,20 +1078,22 @@ public class DBconnectionTeacher
     public int InserHomeWork(string LessonsCode, string HWInfo, string TeacherID, string CodeClass, string HWDate, bool IsLehagasha)
     {
         int num = 0;
+        string contentToHtml = HWInfo.Replace("\n", "<br />");
+        string tipulBeGeresh = contentToHtml.Replace("'", "''");
         try
         {
             using (var con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Betsefer"].ConnectionString))
-        {
-            using (var cmd = new SqlCommand("InsertHomeWork", con))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@LessonsCode", LessonsCode);
-                cmd.Parameters.AddWithValue("@HWInfo", HWInfo);
-                cmd.Parameters.AddWithValue("@GivenDate", DateTime.Today.ToShortDateString());
-                cmd.Parameters.AddWithValue("@TeacherID", TeacherID);
-                cmd.Parameters.AddWithValue("@CodeClass", CodeClass);
-                cmd.Parameters.AddWithValue("@WDate", HWDate);
-                cmd.Parameters.AddWithValue("@IsLehagasha", IsLehagasha);
+                using (var cmd = new SqlCommand("InsertHomeWork", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@LessonsCode", LessonsCode);
+                    cmd.Parameters.AddWithValue("@HWInfo", tipulBeGeresh);
+                    cmd.Parameters.AddWithValue("@GivenDate", DateTime.Today.ToShortDateString());
+                    cmd.Parameters.AddWithValue("@TeacherID", TeacherID);
+                    cmd.Parameters.AddWithValue("@CodeClass", CodeClass);
+                    cmd.Parameters.AddWithValue("@WDate", HWDate);
+                    cmd.Parameters.AddWithValue("@IsLehagasha", IsLehagasha);
 
                 con.Open();
 

@@ -361,3 +361,20 @@ function LoadScheduleForToday(obj, DisplaySchedule) {
 }
 
 
+function UploadImg(UserInfo, renderUpload) {
+    var dataString = JSON.stringify(UserInfo);
+    $.ajax({
+        url: path + 'BetseferWS.asmx/UploadImg',
+        data: JSON.stringify({ 'UserID': UserInfo.ID, 'Img': UserInfo.image }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            renderUpload(results);
+        },
+        error: function (request, error) {
+            console.log("error");
+
+        }
+    });
+}

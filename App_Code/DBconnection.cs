@@ -3675,4 +3675,11 @@ public class DBconnection
             }
         }
     }
+
+    public int UploadImg(string UserID, string Img)
+    {
+        String cStr = "update Users set UserImg = '" + Img + "' where UserID = '" + UserID + "'";
+        return ExecuteNonQuery(cStr); // execute the command   
+    }
+
 }

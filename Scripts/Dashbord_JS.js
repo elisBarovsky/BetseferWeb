@@ -85,7 +85,6 @@ function DisplaySchedule(results) {
             if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
                 tableString += "<tr><td> " + res[counter].lessonHours + "</td>";
             }
-            else tableString += "<tr><td> - </td>";
 
             if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
 
@@ -95,5 +94,23 @@ function DisplaySchedule(results) {
             tableString += "</tr>";
         }
         $('#looze').append(tableString);
+    }
+
+    var AlreadyLogged = sessionStorage.getItem('Loged');
+    if (AlreadyLogged != "1") {
+
+        if (localStorage.getItem("PasswordTB") == '1234') {
+            swal({
+                position: 'top-end',
+                type: 'error',
+                icon: "error",
+                title: 'בעיית אבטחה',
+                text: 'אתה עדיין משתמש בסיסמה הראשונית, תחליף אותה בהגדרות כאמצעי זהירות',
+                showConfirmButton: true,
+
+            });
+        }
+        sessionStorage.setItem("Loged", 1);
+
     }
 };

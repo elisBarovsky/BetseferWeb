@@ -403,5 +403,10 @@ public class Users
     {
         return db.getAllPupils();
     }
+
+    public int UploadImg(string UserID, string Img)
+    {
+        return db.UploadImg(UserID, Img);
+    }
 }
 
