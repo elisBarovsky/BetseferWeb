@@ -10,6 +10,10 @@ public partial class Admin_Update_User : System.Web.UI.Page
     string tempList = "";
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Request.Cookies["UserID"] == null || Request.Cookies["UserPassword"] == null)
+        {
+            Response.Redirect("login.aspx");
+        }
         if (!IsPostBack)
         {
                 LoadUser();

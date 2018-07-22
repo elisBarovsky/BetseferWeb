@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class pages_recover_changePass : System.Web.UI.Page
+public partial class SettingPage_Admin : System.Web.UI.Page
 {
     Users User = new Users();
     List<string> l = new List<string>();
@@ -13,10 +13,33 @@ public partial class pages_recover_changePass : System.Web.UI.Page
     Users u = new Users();
 
     protected void Page_Load(object sender, EventArgs e)
-    {
+    {   
+        //if (Request.Cookies["UserID"] == null || Request.Cookies["UserPassword"] == null)
+        //{
+        //    Response.Redirect("login.aspx");
+        //}
         if (!IsPostBack)
         {
+            LoadUser();
+        }
+    }
 
+    public void LoadUser()
+    {
+        string AdminId = Request.Cookies["UserID"].Value;
+        Users UserInfo_ = new Users();
+
+        List<string> UserInfo = new List<string>();
+        UserInfo = UserInfo_.GetUserInfo(AdminId);
+
+        UserNameSpan.InnerText = UserInfo[1] + " " + UserInfo[2];
+        if (UserInfo[6] == "")
+        {
+            UserImg1.ImageUrl = "/Images/NoImg.png";
+        }
+        else
+        {
+            UserImg1.ImageUrl = UserInfo[6];
         }
     }
 

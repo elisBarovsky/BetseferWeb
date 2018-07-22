@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Teacher_ContactsList.aspx.cs" Inherits="Teacher_ContactsList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SettingPage_Teacher.aspx.cs" Inherits="SettingPage_Teacher" %>
 
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
@@ -21,16 +21,14 @@
     <link rel="stylesheet" href="dist/css/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
     <link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-  <script type="text/javascript">
+      <script type="text/javascript">
 
            function Succesesalert(msg) {
             swal({
@@ -41,7 +39,7 @@
                 showConfirmButton: true
                 });
                  setTimeout(function () {
-                     window.location.href = "Admin_Add_Class.aspx";
+                     window.location.href = "Admin_Add_lessons.aspx";
                  }, 700);
             };
      
@@ -55,11 +53,27 @@
                 });
                  //setTimeout(function () {
                  //    window.location.href = "login.aspx";
-                 //}, 1000);
+                 //}, 2000);
             };
 
     </script>
+    <style type="text/css">
+        .auto-style1 {
+            height: 184px;
+        }
 
+        .scrollingControlContainer
+        {
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .scrollingCheckBoxList
+        {
+            margin: 10px 0px 10px 10px;
+            height: 110px;
+        }
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
@@ -78,19 +92,17 @@
                 <ul class="nav navbar-nav pull-left">
                     <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a></li>
                 </ul>
-                <!-- search form -->
-                <!--</div>-->
                 <div class="navbar-custom-menu" runat="server">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                  <li class="dropdown messages-menu">
-                            <a href="TeacherDashbord.html">
+                        <li class="dropdown messages-menu">
+                            <a href="AdminDashbord.html">
                                 <i class="fa fa-home"></i>
                                 <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
                             </a>
-                        </li>                       
+                        </li>                      
                         <!-- User Account: style can be found in dropdown.less -->
-                   <li class="dropdown user user-menu p-ph-res">
+                <li class="dropdown user user-menu p-ph-res">
                             <a  class="dropdown-toggle" data-toggle="dropdown">
                             <asp:Image ID="UserImg1" runat="server" class="user-image" />
                             <span class="hidden-xs"  runat="server" id="UserNameSpan" ></span></a>
@@ -108,7 +120,7 @@
         </header>
 
         <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
+     <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -156,63 +168,60 @@
             </section>
             <!-- /.sidebar -->
         </aside>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header sty-one">
-                <h1>דף קשר</h1>
-
+                <h1>הגדרות</h1>
             </section>
 
             <!-- Main content -->
             <section class="content">
-                <div class="info-box">
-                    <form runat="server">
-                        <div class="card-body">
-                            <div class="row">
-                                <table class="table" align="center">
-                                    <tr>
-                                        <td>
-                                            <label class="control-label">בחר כיתה</label>
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList ID="ChooseClassDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem"></asp:DropDownList>
+            <div class="login-box">
+                <div class="login-box-body">
+                   
+                    <p>בחר סיסמה חדשה והזן אותה פעמיים </p>
+                    <form action="index.html" method="post" runat="server">
 
-                                        </td>
-                                        <td>
-                                            <label class="control-label">בחר קבוצה</label>
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList ID="FilterNotes" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" runat="server" RepeatDirection="Horizontal" Width="349px">
-                                                <asp:ListItem Text="בחר" Value="0" />
-                                                <asp:ListItem Text="הורים" Value="3" />
-                                                <asp:ListItem Text="תלמידים" Value="4" />
-                                            </asp:DropDownList>
-                                        </td>
-                                        <td>
-                                            <asp:Button ID="TLBTN" runat="server" Text="צפה" CssClass="btn btn-outline-primary" OnClick="TLBTN_Click"  />
-                                        </td>
-                                    </tr>
-                                </table>
-                                <div class="table-responsive">
-                                    <asp:GridView ID="GridView1" class="table table-bordered table-striped" HeaderStyle-CssClass="headerGW" runat="server" AllowPaging="False" BorderStyle="Dashed" style="width:50%;margin:auto;text-align:center" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
-                                        <PagerStyle HorizontalAlign="Center" />
-                                        <RowStyle HorizontalAlign="Center" />
-<AlternatingRowStyle HorizontalAlign="Center" />
-                                    </asp:GridView>
-                                </div>
+                        <div class="form-group has-feedback">
+                            <p ID="LabelSecurityQ1" contenteditable="false" runat="server"> </p>
+                            <asp:Label  runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="Pass1" runat="server" TextMode="Password" class="form-control sty1" placeholder="הזן סיסמה"></asp:TextBox>
+               <asp:RegularExpressionValidator ID="valPassword" runat="server" BorderStyle="Groove" Font-Size="Medium" ControlToValidate="Pass1"
+                                                ErrorMessage="סיסמא צריכה להכיל לפחות 4 תוים" ValidationExpression=".{4}.*" />
+                            <br />
+                            <p ID="LabelSecurityQ2"  contenteditable="false" runat="server"> </p>
+                            <asp:TextBox ID="Pass2" runat="server" class="form-control sty1" TextMode="Password" placeholder="הזן סיסמה בשנית"></asp:TextBox>
+                        </div>
+                          <div>
+                            <div class="col-xs-4 m-t-1">
+                  <asp:Button ID="Button1" runat="server" class="btn btn-primary btn-block btn-flat" Text="שנה סיסמה" OnClick="ChangePasswordBTN" />
+
+                            </div>
+                            <!-- /.col -->
+                              <br /><br />
+                              <div class="col-xs-4 m-t-1">
+                                  <fieldset class="form-group" runat="server">
+                                                <label class="custom-file center-block block">
+                                                    <asp:FileUpload ID="FileUpload1" runat="server" class="custom-file-input" />
+                                                    <span class="custom-file-control"></span>
+                                                </label>
+                                            </fieldset>
+                  <asp:Button ID="Button2" runat="server" class="btn btn-primary btn-block btn-flat" Text="העלאת תמונה" OnClick="UploadImgBTN" />
+
                             </div>
                         </div>
                     </form>
                 </div>
+                <!-- /.login-box-body -->
+            </div>
             </section>
-
             <!-- /.content -->
         </div>
-
+        <!-- /.content-wrapper -->
     </div>
     <!-- ./wrapper -->
+
     <!-- jQuery 3 -->
     <script src="dist/js/jquery.min.js"></script>
 
@@ -222,30 +231,5 @@
     <!-- template -->
     <script src="dist/js/niche.js"></script>
 
-    <!-- DataTable -->
-    <script src="dist/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="dist/plugins/datatables/dataTables.bootstrap.min.js"></script>
-
-
-    <script src="dist/plugins/table-expo/filesaver.min.js"></script>
-    <script src="dist/plugins/table-expo/xls.core.min.js"></script>
-    <script src="dist/plugins/table-expo/tableexport.js"></script>
-    <script>
-        var title = 'דף קשר '+$('#ChooseClassDLL').val() + ' ' + $('#FilterNotes option:selected').text();
-        //$("#").tableExport({ formats: ["xlsx", "xls"], });
-          $("#GridView1").tableExport({
-        headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
-        footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
-        formats: ["xlsx", "xls"],    // (String[]), filetypes for the export
-        fileName: title,                    // (id, String), filename for the downloaded file
-        bootstrap: true,                   // (Boolean), style buttons using bootstrap
-        position: "bottom",                 // (top, bottom), position of the caption element relative to table
-        ignoreRows: null,                  // (Number, Number[]), row indices to exclude from the exported file(s)
-        ignoreCols: null,                  // (Number, Number[]), column indices to exclude from the exported file(s)
-        ignoreCSS: ".tableexport-ignore",  // (selector, selector[]), selector(s) to exclude from the exported file(s)
-        emptyCSS: ".tableexport-empty",    // (selector, selector[]), selector(s) to replace cells with an empty string in the exported file(s)
-        trimWhitespace: false              // (Boolean), remove all leading/trailing newlines, spaces, and tabs from cell text in the exported file(s)
-    });
-    </script>
 </body>
 </html>

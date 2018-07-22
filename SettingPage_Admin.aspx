@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Admin_Add_lessons.aspx.cs" Inherits="Admin_Add_lessons" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SettingPage_Admin.aspx.cs" Inherits="SettingPage_Admin" %>
 
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
@@ -123,13 +123,7 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-        <%--        <div class="user-panel">
-                    <div class="image text-center"></div>
-                    <div class="info">
-                        <a href="#">ברוך הבא ☺</a>
-                    </div>
-                </div>--%>
-                <!-- sidebar menu: : style can be found in sidebar.less -->
+                   <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
@@ -149,9 +143,9 @@
                             <li><a href="Admin_Add_Class.aspx"><i class="fa fa-plus"></i><span>הוספת כיתה</span> </a>
                         </ul>
                     </li>
-                    <li class="active treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ניהול מקצועות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                    <li class="treeview"><a href="#"><i class="fa fa-briefcase"></i><span>ניהול מקצועות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li class="active"><a href="Admin_Add_lessons.aspx"><i class="fa fa-plus"></i><span>הוספת מקצוע</span> </a>
+                            <li ><a href="Admin_Add_lessons.aspx"><i class="fa fa-plus"></i><span>הוספת מקצוע</span> </a>
                         </ul>
                     </li>
                     <li class="treeview"><a href="#"><i class="fa fa-envelope-o "></i><span>הודעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -169,61 +163,49 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header sty-one">
-                <h1>הוספת מקצוע</h1>
+                <h1>הגדרות</h1>
             </section>
 
             <!-- Main content -->
             <section class="content">
-                <div class="info-box">
-                    <form runat="server">
-                        <table class="auto-style1" align="center">
-                            <tr>
-                                <td style="text-align: right">הזן שם מקצוע
-                                </td>
-                                <td style="text-align: right">
-                                    <asp:TextBox ID="LessonsNameTB" class="form-control" runat="server"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right">
-                                    <br />
-                                    <br />
-                                    מקצועות קיימים
-                                </td>
-                                <td style="text-align: right">
-                                    <br />
-                                    <br />
-                                    <asp:DropDownList ID="DDLlessons" CssClass="form-control" Style="direction: rtl;" runat="server" DataSourceID="subjects" DataTextField="LessonName" DataValueField="CodeLesson" AutoPostBack="True"></asp:DropDownList>
-                                    <asp:SqlDataSource ID="subjects" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [CodeLesson], [LessonName] FROM [Lessons] ORDER BY [LessonName]"></asp:SqlDataSource>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right">
-                                    <br />
-                                    <br />
-                                    אנא בחר מורים<br />המלמדים מקצוע זה
-                                </td>
-                                <td>
-                                    <br />
-                                    <br />
-                                    <asp:Panel ID="checkBoxPanel" runat="server" CssClass="scrollingControlContainer scrollingCheckBoxList form-control">
-                                        <asp:CheckBoxList ID="teachersSubject" runat="server" style="WIDTH:120px; HEIGHT:50px" DataSourceID="teachers" DataTextField="TeacherFullName" DataValueField="UserID"></asp:CheckBoxList>
-                                        <asp:SqlDataSource ID="teachers" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT UserID, UserLName + ' ' + UserFName AS TeacherFullName FROM Users WHERE (CodeUserType = 2)"></asp:SqlDataSource>
-                                    </asp:Panel>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right"></td>
-                                <td style="text-align: right">
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <asp:Button ID="AddLessonsBTN" runat="server" CssClass="btn btn-outline-primary" Text="הוסף מקצוע" OnClick="AddLessonsBTN_Click" />
-                                </td>
-                            </tr>
-                        </table>
+            <div class="login-box">
+                <div class="login-box-body">
+                
+                    <p>בחר סיסמה חדשה והזן אותה פעמיים </p>
+                    <form action="index.html" method="post" runat="server">
+
+                        <div class="form-group has-feedback">
+                            <p ID="LabelSecurityQ1" contenteditable="false" runat="server"> </p>
+                            <asp:Label  runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="Pass1" runat="server" TextMode="Password" class="form-control sty1" placeholder="הזן סיסמה"></asp:TextBox>
+               <asp:RegularExpressionValidator ID="valPassword" runat="server" BorderStyle="Groove" Font-Size="Medium" ControlToValidate="Pass1"
+                                                ErrorMessage="סיסמא צריכה להכיל לפחות 4 תוים" ValidationExpression=".{4}.*" />
+                            <br />
+                            <p ID="LabelSecurityQ2"  contenteditable="false" runat="server"> </p>
+                            <asp:TextBox ID="Pass2" runat="server" class="form-control sty1" TextMode="Password" placeholder="הזן סיסמה בשנית"></asp:TextBox>
+                        </div>
+                          <div>
+                            <div class="col-xs-4 m-t-1">
+                  <asp:Button ID="Button1" runat="server" class="btn btn-primary btn-block btn-flat" Text="שנה סיסמה" OnClick="ChangePasswordBTN" />
+
+                            </div>
+                            <!-- /.col -->
+                              <br /><br />
+                              <div class="col-xs-4 m-t-1">
+                                  <fieldset class="form-group" runat="server">
+                                                <label class="custom-file center-block block">
+                                                    <asp:FileUpload ID="FileUpload1" runat="server" class="custom-file-input" />
+                                                    <span class="custom-file-control"></span>
+                                                </label>
+                                            </fieldset>
+                  <asp:Button ID="Button2" runat="server" class="btn btn-primary btn-block btn-flat" Text="העלאת תמונה" OnClick="UploadImgBTN" />
+
+                            </div>
+                        </div>
                     </form>
                 </div>
+                <!-- /.login-box-body -->
+            </div>
             </section>
             <!-- /.content -->
         </div>

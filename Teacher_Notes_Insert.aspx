@@ -97,7 +97,7 @@
                                 <span class="hidden-xs" runat="server" id="UserNameSpan"></span></a>
                             <ul class="dropdown-menu right">
                                 <li class="user-header right">
-                                    <li><a href="SettingPage.aspx" class="text-right"><i class="icon-gears"></i>הגדרות משתמש</a></li>
+                                    <li><a href="SettingPage_Teacher.aspx" class="text-right"><i class="icon-gears"></i>הגדרות משתמש</a></li>
                                     <li><a href="login.aspx" class="text-right"><i class="fa fa-power-off"></i>התנתק </a></li>
                                 </li>
 
