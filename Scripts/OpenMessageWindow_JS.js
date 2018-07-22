@@ -13,7 +13,6 @@
 
 function ShowAllConversation(results) {
     res = $.parseJSON(results.d);
-  //  localStorage.setItem("SenderID", res[0].SenderID); // for know who the person you should send him answer.
 
     var str = '<div class="direct- chat-messages" id = "addToHereNewMessage">';
     var me = localStorage.getItem("UserID").toString();

@@ -30,7 +30,8 @@ public partial class pages_security : System.Web.UI.Page
 
         if (a1 =="" || a2== "")
         {
-            Response.Write("<script LANGUAGE='JavaScript' >Erroralert('אחת או יותר מהתשובות ריקות, הקלד תשובותך')</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('אחת או יותר מהתשובות ריקות, הקלד תשובותך');", true);
+            
         }
         else
         {
@@ -60,10 +61,20 @@ public partial class pages_security : System.Web.UI.Page
     
     protected void CheckQ2(object sender, EventArgs e)
     {
+        if (int.Parse(DropDownList_Qlist1.SelectedItem.Value) == 0)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert( 'עליך לבחור 2 שאלות');", true);
+            LinkButton_continue.Visible = false;
+            return;
+        }
         if (int.Parse(DropDownList_Qlist2.SelectedItem.Value) == int.Parse(DropDownList_Qlist1.SelectedItem.Value))
         {
-            Response.Write("<script LANGUAGE='JavaScript' >Erroralert('אסור 2 שאלות זהות, בחר שאלה אחרת')</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert( 'אסור 2 שאלות זהות, בחר שאלה אחרת');", true);
+            LinkButton_continue.Visible = false;
+            return;
         }
+        LinkButton_continue.Visible = true;
+
     }
 
     protected void FillFirstItem(object sender, EventArgs e)
