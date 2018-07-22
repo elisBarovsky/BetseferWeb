@@ -59,7 +59,19 @@ public partial class Admin_Add_lessons : System.Web.UI.Page
         else
         {
             int answer = newS.AddNewSubject(newSubject);
-            if (answer > 0)
+            List<string> teachersSubject2 = new List<string>();
+            //list box multi select
+            foreach (ListItem li in teachersSubject.Items)
+            {
+                if (li.Selected)
+                {
+                    teachersSubject2.Add(li.Value);
+                }
+            }
+
+            answer += newS.SaveTeachersToSubject(teachersSubject2, newSubject);
+
+            if (answer == teachersSubject2.Count() + 1)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('המקצוע נוסף בהצלחה');", true);
 

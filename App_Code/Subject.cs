@@ -58,4 +58,10 @@ public class Subject
     {
         return db.GetsubjectsByClassandTeacherID( TeacherID,  ClassCode);
     }
+
+    public int SaveTeachersToSubject(List<string> teachersSubject, string newSubject)
+    {
+        string subjectCode = GetSubjectCodeBySubjectName(newSubject);
+        return dbt.SaveTeachersToSubject(teachersSubject, subjectCode);
+    }
 }

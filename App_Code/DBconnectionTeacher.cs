@@ -1890,4 +1890,15 @@ public class DBconnectionTeacher
         }
     }
 
+    public int SaveTeachersToSubject(List<string> teachersSubject, string newSubject)
+    {
+        string cStr = ""; 
+
+        foreach (var item in teachersSubject)
+        {
+            cStr += "INSERT INTO [dbo].[TeachersTeachesSubjects] ([TeacherID] ,[CodeLessons]) " +
+            " VALUES ('"+ item + "', '" + newSubject + "'); ";
+        }
+        return ExecuteNonQuery(cStr);
+    }
 }

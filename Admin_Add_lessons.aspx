@@ -57,6 +57,23 @@
             };
 
     </script>
+    <style type="text/css">
+        .auto-style1 {
+            height: 184px;
+        }
+
+        .scrollingControlContainer
+        {
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .scrollingCheckBoxList
+        {
+            margin: 10px 0px 10px 10px;
+            height: 110px;
+        }
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
@@ -181,6 +198,21 @@
                                     <br />
                                     <asp:DropDownList ID="DDLlessons" CssClass="form-control" Style="direction: rtl;" runat="server" DataSourceID="subjects" DataTextField="LessonName" DataValueField="CodeLesson" AutoPostBack="True"></asp:DropDownList>
                                     <asp:SqlDataSource ID="subjects" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [CodeLesson], [LessonName] FROM [Lessons] ORDER BY [LessonName]"></asp:SqlDataSource>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">
+                                    <br />
+                                    <br />
+                                    אנא בחר מורים<br />המלמדים מקצוע זה
+                                </td>
+                                <td>
+                                    <br />
+                                    <br />
+                                    <asp:Panel ID="checkBoxPanel" runat="server" CssClass="scrollingControlContainer scrollingCheckBoxList form-control">
+                                        <asp:CheckBoxList ID="teachersSubject" runat="server" style="WIDTH:120px; HEIGHT:50px" DataSourceID="teachers" DataTextField="TeacherFullName" DataValueField="UserID"></asp:CheckBoxList>
+                                        <asp:SqlDataSource ID="teachers" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT UserID, UserLName + ' ' + UserFName AS TeacherFullName FROM Users WHERE (CodeUserType = 2)"></asp:SqlDataSource>
+                                    </asp:Panel>
                                 </td>
                             </tr>
                             <tr>
