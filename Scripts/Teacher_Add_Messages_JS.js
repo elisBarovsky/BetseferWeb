@@ -5,8 +5,7 @@ $(document).ready(function () {
     var z = getUserImg();
     var userName = localStorage.getItem("UserFullName");
     document.getElementById('imgUser').src = z;
-    document.getElementById('imgUser1').src = z;
-    document.getElementById('UserName').innerHTML = userName;
+    document.getElementById('UserNameSpan').innerHTML = userName;
 
     $("#childrenDDL").hide();
     $("#parentsDDL").hide();
