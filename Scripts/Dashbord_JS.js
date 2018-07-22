@@ -85,7 +85,6 @@ function DisplaySchedule(results) {
             if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
                 tableString += "<tr><td> " + res[counter].lessonHours + "</td>";
             }
-            else tableString += "<tr><td> - </td>";
 
             if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
 

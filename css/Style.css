@@ -9,6 +9,10 @@
     border-radius: 5px;
 }
 
+.swal-text {
+    text-align: center;
+   
+}
 /*select {
     padding: 8px 10px;
     border: none;
