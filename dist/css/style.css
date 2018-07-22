@@ -1407,7 +1407,7 @@ ul.list-inline li {
 	border-bottom-right-radius: 4px;
 }
 .navbar-nav > .user-menu > .dropdown-menu > li.user-header {
-	height: 110px;
+	/*height: 110px;*/
 	padding: 10px;
 	text-align: center;
 }
