@@ -14,6 +14,8 @@
 function ShowAllConversation(results) {
     res = $.parseJSON(results.d);
 
+    var path = "http://proj.ruppin.ac.il/bgroup52/prod/";
+    
     var str = '<div class="direct- chat-messages" id = "addToHereNewMessage">';
     var me = localStorage.getItem("UserID").toString();
     var myImg = localStorage.getItem("UserImg") ? localStorage.getItem("UserImg").toString() : "/Images/NoImg.png";
@@ -40,7 +42,7 @@ function ShowAllConversation(results) {
                 '<span class="direct-chat-name pull-right">' + res[i].SenderName +'</span>' +
                 '<span class="direct-chat-timestamp pull-left" >' + res[i].MessageDate +'</span >' +
                 '</div >' +
-                '<img class="direct-chat-img" alt="user image" src="' + res[i].SenderIMG +'">' +
+                '<img class="direct-chat-img" alt="user image" src="' + path + res[i].SenderIMG +'">' +
                 '<div class="direct-chat-text">' +
                 '<div><u>' + res[i].Subject + '</u></div>' +
                 res[i].Content + '</div>' +
