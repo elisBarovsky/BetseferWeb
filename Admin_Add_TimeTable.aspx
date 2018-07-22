@@ -114,10 +114,10 @@
                             <ul class="dropdown-menu right">
                                 <li class="user-header right">
                                     <div class="pull-left user-img" runat="server">
-                                        <asp:Image ID="UserImgimg" runat="server" class="img-responsive" />
+                                        <asp:Image ID="UserImgimg" runat="server" class="img-responsive" height="40"/>
                                     </div>
                                 </li>
-                                 <li><a href="#" class="view-link text-right"> <h2 class="view-link text-right" id="UserName" runat="server"><small></small> </h2></a></li>
+                                 <li><a href="#" class="view-link text-right"> <h4 class="view-link text-right" id="UserName" runat="server"><small></small> </h4></a></li>
                                 <li><a href="SettingPage.aspx" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
                                 <li><a href="login.aspx" class="view-link text-right">התנתק  <i class="fa fa-power-off"></i></a></li>
                               </ul>
