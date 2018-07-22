@@ -47,35 +47,35 @@
             border-radius: 20px;
         }
     </style>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-  <script type="text/javascript">
+    <script type="text/javascript">
 
-           function Succesesalert(msg) {
+        function Succesesalert(msg) {
             swal({
                 title: 'בוצע!',
                 text: msg,
                 type: 'success',
                 icon: "success",
                 showConfirmButton: true
-                });
-                 setTimeout(function () {
-                     window.location.href = "Admin_Saved_TimeTable.aspx";
-                 }, 700);
-            };
-     
-            function Erroralert(msg) {
+            });
+            setTimeout(function () {
+                window.location.href = "Admin_Saved_TimeTable.aspx";
+            }, 700);
+        };
+
+        function Erroralert(msg) {
             swal({
                 title: 'שגיאה!',
                 text: msg,
                 type: 'error',
                 icon: "error",
                 showConfirmButton: true
-                });
-                 setTimeout(function () {
-                     window.location.href = "Admin_Saved_TimeTable.aspx";
-                 }, 1000);
-            };
+            });
+            setTimeout(function () {
+                window.location.href = "Admin_Saved_TimeTable.aspx";
+            }, 1000);
+        };
 
     </script>
 
@@ -105,22 +105,19 @@
                                 <i class="fa fa-home"></i>
                                 <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
                             </a>
-                        </li>                  
+                        </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu p-ph-res">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <asp:Image ID="UserImg1" runat="server" class="user-image" />
-                            <span class="hidden-xs"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                <asp:Image ID="UserImg1" runat="server" class="user-image" />
+                                <span class="hidden-xs" runat="server" id="UserNameSpan"></span></a>
                             <ul class="dropdown-menu right">
                                 <li class="user-header right">
-                                    <div class="pull-left user-img" runat="server">
-                                        <asp:Image ID="UserImgimg" runat="server" class="img-responsive" height="40"/>
-                                    </div>
+                                    <li><a href="SettingPage.aspx" class="text-right"><i class="icon-gears"></i>הגדרות משתמש</a></li>
+                                    <li><a href="login.aspx" class="text-right"><i class="fa fa-power-off"></i>התנתק </a></li>
                                 </li>
-                                 <li><a href="#" class="view-link text-right"> <h4 class="view-link text-right" id="UserName" runat="server"><small></small> </h4></a></li>
-                                <li><a href="SettingPage.aspx" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
-                                <li><a href="login.aspx" class="view-link text-right">התנתק  <i class="fa fa-power-off"></i></a></li>
-                              </ul>
+
+                            </ul>
                         </li>
                     </ul>
                 </div>

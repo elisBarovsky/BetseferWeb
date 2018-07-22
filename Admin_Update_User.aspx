@@ -89,20 +89,15 @@
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu p-ph-res">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                 <asp:Image ID="UserImg1" runat="server" class="user-image" />
-                                <span class="hidden-xs"></span></a>
+                                <span class="hidden-xs" runat="server" id="UserNameSpan"></span></a>
                             <ul class="dropdown-menu right">
                                 <li class="user-header right">
-                                    <div class="pull-left user-img" runat="server">
-                                        <asp:Image ID="UserImgimg" runat="server" class="img-responsive" height="40"/>
-                                    </div>
+                                    <li><a href="SettingPage.aspx" class="text-right"><i class="icon-gears"></i>הגדרות משתמש</a></li>
+                                    <li><a href="login.aspx" class="text-right"><i class="fa fa-power-off"></i>התנתק </a></li>
                                 </li>
-                                <li><a href="#" class="view-link text-right">
-                                    <h4 class="view-link text-right" id="UserName" runat="server"><small></small></h4>
-                                </a></li>
-                                <li><a href="SettingPage.aspx" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
-                                <li><a href="login.aspx" class="view-link text-right">התנתק  <i class="fa fa-power-off"></i></a></li>
+
                             </ul>
                         </li>
                     </ul>
@@ -262,7 +257,7 @@
                                         <td>
                                             <asp:DropDownList ID="TBaddNewChild" runat="server" Visible="false" OnDataBound="FillFirstItem" CssClass="btn btn-default dropdown-toggle"></asp:DropDownList>
                                             <asp:CheckBox ID="MainTeacherCB" runat="server" AutoPostBack="true" OnCheckedChanged="MainTeacherCB_CheckedChanged" />
-                                            <asp:Button ID="SaveChild" runat="server" Text="הוסף" Visible="false" OnClick="SaveNewChildToParent" class="btn btn-outline-primary"/>
+                                            <asp:Button ID="SaveChild" runat="server" Text="הוסף" Visible="false" OnClick="SaveNewChildToParent" class="btn btn-outline-primary" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -275,8 +270,7 @@
                                             <asp:DropDownList ID="ClassOt2DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataValueField="ClassCode" OnSelectedIndexChanged="FillPupils" DataSourceID="classesWithoutMainTeacher" DataTextField="ClassCode"></asp:DropDownList>
                                             <asp:SqlDataSource ID="classesWithoutMainTeacher" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class] WHERE ([MainTeacherID] IS NULL)"></asp:SqlDataSource>
                                         </td>
-                                        <td>
-                                        </td>
+                                        <td></td>
                                     </tr>
                                 </table>
                             </div>

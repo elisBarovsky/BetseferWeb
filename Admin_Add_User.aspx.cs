@@ -28,15 +28,13 @@ public partial class Admin_Add_User : System.Web.UI.Page
         List<string> UserInfo = new List<string>();
         UserInfo = UserInfo_.GetUserInfo(AdminId);
 
-        UserName.InnerText = UserInfo[1] + " " + UserInfo[2];
+        UserNameSpan.InnerText = UserInfo[1] + " " + UserInfo[2];
         if (UserInfo[6] == "")
         {
-            UserImgimg.ImageUrl = "/Images/NoImg.png";
             UserImg1.ImageUrl = "/Images/NoImg.png";
         }
         else
         {
-            UserImgimg.ImageUrl = UserInfo[6];
             UserImg1.ImageUrl = UserInfo[6];
         }
     }
