@@ -96,4 +96,22 @@ function DisplaySchedule(results) {
         }
         $('#looze').append(tableString);
     }
+
+    var AlreadyLogged = sessionStorage.getItem('Loged');
+    if (AlreadyLogged != "1") {
+
+        if (localStorage.getItem("PasswordTB") == '1234') {
+            swal({
+                position: 'top-end',
+                type: 'error',
+                icon: "error",
+                title: 'בעיית אבטחה',
+                text: 'אתה עדיין משתמש בסיסמה הראשונית, תחליף אותה בהגדרות כאמצעי זהירות',
+                showConfirmButton: true,
+
+            });
+        }
+        sessionStorage.setItem("Loged", 1);
+
+    }
 };

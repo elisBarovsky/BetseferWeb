@@ -33,6 +33,7 @@
     <script src="Scripts/Login_AJAX.js"></script>
     <script type="text/javascript">
         function onDeviceReady() {
+            sessionStorage.setItem("Loged", 0);
 
             var Remember = localStorage.getItem("rememberME");
             if (Remember != null) {
@@ -43,9 +44,12 @@
       
         function SaveUserIdInLocalStorage() {
             var id = document.getElementById("IDTB").value;
+            var PS = document.getElementById("passwordTB").value;
+            localStorage.setItem("PasswordTB", PS);
+
             localStorage.setItem("UserID", id);
 
-                var checkBox = document.getElementById("rememberME");
+            var checkBox = document.getElementById("rememberME");
 
             if (checkBox.checked == true) {
                 localStorage.setItem("rememberME", document.getElementById("IDTB").value); //saving in localS
@@ -66,6 +70,8 @@
         function SaveUserFullName(results) {
             res = $.parseJSON(results.d);
             localStorage.setItem("UserFullName", res);
+          
+
         };
 
             function Erroralert(msg) {
