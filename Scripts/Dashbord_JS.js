@@ -99,15 +99,33 @@ function DisplaySchedule(results) {
     if (AlreadyLogged != "1") {
 
         if (localStorage.getItem("PasswordTB") == '1234') {
+           
             swal({
-                position: 'top-end',
-                type: 'error',
-                icon: "error",
-                title: 'בעיית אבטחה',
-                text: 'אתה עדיין משתמש בסיסמה הראשונית, תחליף אותה בהגדרות כאמצעי זהירות',
-                showConfirmButton: true,
+                title: "בעיית אבטחה",
+                text: 'אתה עדיין משתמש בסיסמה הראשונית, תרצה להחליף אותה כעת?',
+                icon: "info",
+                buttons: ["כן", "לא"],
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("נזכיר לך שוב בהתחברות הבאה!");
+                    } else {
 
-            });
+                        var currentLocation = window.location;
+                        var n = currentLocation['pathname'].search(/TeacherDashbord/);
+                        //alert(currentLocation);
+                        //alert(n);
+                        if (n > 0) {
+                            window.location.href = "SettingPage_Teacher.aspx"
+                        }
+                        else {
+
+                            window.location.href = "SettingPage_Admin.aspx"
+                        }
+                       
+                    }
+                });
         }
         sessionStorage.setItem("Loged", 1);
 
