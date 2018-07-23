@@ -62,6 +62,9 @@ body {
 	box-shadow: 0 0 8px rgba(0,0,0,0.5);
 	position: relative
 }
+.swal-text {
+    text-align: center;
+}
 .layout-boxed {
 	background: url('../img/boxed-bg.jpg') repeat fixed;
 }

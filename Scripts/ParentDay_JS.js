@@ -36,13 +36,14 @@ function ShowParentsDay(results) {
         var td1 = document.createElement('td');
         var td2 = document.createElement('td');
 
-        tr1.setAttribute("style", "text-align:center;");
-        td1.setAttribute("style", "text-align:center;");
-        td2.setAttribute("style", "text-align:center;");
+        tr1.setAttribute("style", "text-align:right;");
+        td1.setAttribute("style", "text-align:right;");
+        td2.setAttribute("style", "text-align:right;");
 
         var text = document.createTextNode('בחר מועד:');
         var input = document.createElement('input');
         input.type = "date";
+        
         input.className = "form-control";
         input.id = "parentsDayDate";
 
@@ -56,13 +57,15 @@ function ShowParentsDay(results) {
         var tr2 = document.createElement('tr');
         var td3 = document.createElement('td');
         var td4 = document.createElement('td');
-        tr2.setAttribute("style", "text-align:center;");
-        td3.setAttribute("style", "text-align:center;");
-        td4.setAttribute("style", "text-align:center;");
+        tr2.setAttribute("style", "text-align:right;");
+        td3.setAttribute("style", "text-align:right;");
+        td4.setAttribute("style", "text-align:right;");
 
         var text2 = document.createTextNode('שעת התחלה:');
         var input2 = document.createElement("select");
+        input2.setAttribute("style", "width:100px;");
         input2.setAttribute("Class", "btn btn-default dropdown-toggle");
+        
         input2.id = "from";
 
         var list = "<option>בחר</option>";
@@ -82,12 +85,13 @@ function ShowParentsDay(results) {
         var tr3 = document.createElement('tr');
         var td5 = document.createElement('td');
         var td6 = document.createElement('td');
-        tr3.setAttribute("style", "text-align:center;");
-        td5.setAttribute("style", "text-align:center;");
-        td6.setAttribute("style", "text-align:center;");
+        tr3.setAttribute("style", "text-align:right;");
+        td5.setAttribute("style", "text-align:right;");
+        td6.setAttribute("style", "text-align:right;");
 
         var text3 = document.createTextNode('שעת סיום:');
         var input3 = document.createElement('select');
+        input3.setAttribute("style", "width:100px;");
         input3.setAttribute("Class", "btn btn-default dropdown-toggle");
 
         input3.id = "to";
@@ -104,12 +108,13 @@ function ShowParentsDay(results) {
         var td7 = document.createElement('td');
         var td8 = document.createElement('td');
 
-        tr4.setAttribute("style", "text-align:center;");
-        td7.setAttribute("style", "text-align:center;");
-        td8.setAttribute("style", "text-align:center;");
+        tr4.setAttribute("style", "text-align:right;");
+        td7.setAttribute("style", "text-align:right;");
+        td8.setAttribute("style", "text-align:right;");
 
         var text4 = document.createTextNode('משך פגישה (דקות):');
         var input4 = document.createElement('select');
+        input4.setAttribute("style", "width:100px;");
         input4.setAttribute("Class", "btn btn-default dropdown-toggle");
         input4.id = "long";
 
@@ -128,8 +133,9 @@ function ShowParentsDay(results) {
         $("#createNewDay").append(tr4);
 
         var submitButton = document.createElement('button');
+        //submitButton.setAttribute("style", "width:100px;");
         submitButton.textContent = "צור";
-        submitButton.style = "float: left";
+        submitButton.style = "float: left;width:200px;";
         submitButton.id = "submitPD";
         submitButton.setAttribute("class", "btn btn-rounded btn-outline-primary");
 
@@ -169,6 +175,7 @@ function ShowParentsDay(results) {
                 "</td></tr>";
     }
     var title1 = 'יום הורים ' + title;
+
     $("#parentsDayTable").append(strParentsDay);
     $("#parentsDayTable").tableExport({
         headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
