@@ -109,12 +109,6 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-           <%--         <div class="user-panel">
-                 <div class="image text-center"></div>
-                    <div class="info">
-                        <a href="#">ברוך הבא ☺</a>
-                    </div>
-                </div>--%>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="treeview"><a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -192,6 +186,7 @@
                             </td>
                         </tr>
                     </table>
+                    <asp:Button Text="text" runat="server" OnClick="Unnamed_Click" />
                 </form>
                     </div>
             </section>

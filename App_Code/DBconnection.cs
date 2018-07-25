@@ -3505,7 +3505,56 @@ public class DBconnection
         }
     }
 
-    
+    public List<Users> getSpesificUserList(Dictionary<string,string> UserList)
+    {
+        String selectSTR = "";
+        List<Users> userList = new List<Users>();
+
+        foreach (var item in UserList)
+        {
+            selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where [PushRegID] != 'null' and [UserID] ='" + item.Key + "'";
+
+            try
+            {
+                con = connect("Betsefer"); // create the connection
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+            try
+            {
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+                SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (dr.Read())
+                {
+                    Users u = new Users();
+                    u.UserID1 = dr["UserID"].ToString();
+                    u.RegId = dr["PushRegID"].ToString();
+
+                    userList.Add(u);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+            }
+        }
+        return userList;
+
+
+    }
+
     public int GetCodeWeekDayByDate(string date)
     {
         int year = int.Parse(date.Substring(6)), mont = int.Parse(date.Substring(3, 2)), day = int.Parse(date.Substring(0,2));

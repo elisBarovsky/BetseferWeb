@@ -179,6 +179,15 @@ public class Users
 
     }
 
+
+    public List<Users> getSpesificUserList(Dictionary<string, string> USers)
+    {
+        db = new DBconnection();
+        List<Users> listUser = new List<Users>();
+        return listUser = db.getSpesificUserList(USers);
+
+
+    }
     public string GetNumChild(string UserID)
     {
         return db.GetNumChild(UserID);

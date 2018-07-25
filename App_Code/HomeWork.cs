@@ -52,4 +52,9 @@ public class HomeWork
     {
         return dbT.FillBySubjectHomeWork(PupilID, ChooseSubjectCode);
     }
+
+    public Dictionary<string, string> GetPupilIdWhiceDidntMakeHWYet()
+    {
+        return dbT.GetPupilIdWhiceDidntMakeHWYet();
+    }
 }

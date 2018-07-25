@@ -1906,4 +1906,48 @@ public class DBconnectionTeacher
         }
         return ExecuteNonQuery(cStr);
     }
+
+    public Dictionary<string,string> GetPupilIdWhiceDidntMakeHWYet()
+    {
+
+        string selectSTR = "SELECT  PupilID,LessonName FROM    dbo.HomeWork INNER JOIN    dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN "+
+                            "  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson  where IsDone = 0 and HWDueDate = CONVERT(nvarchar, GETDATE() + 2, 103) ";
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            Dictionary<string, string> PupilsId = new Dictionary<string, string>();
+            string ID, LessonName;
+            while (dr.Read())
+            {
+                ID = dr["PupilID"].ToString();
+                LessonName = dr["LessonName"].ToString();
+
+                PupilsId.Add(ID, LessonName);
+            }
+            return PupilsId;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 }
