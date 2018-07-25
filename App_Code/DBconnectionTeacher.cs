@@ -158,10 +158,10 @@ public class DBconnectionTeacher
 
     public DataTable FilterGrade(string GradeCode) //NEW
     {
-        string selectSTR = " SELECT  dbo.Lessons.LessonName, ab.ExamDate, dbo.Grades.Grade ,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as TeacherName " +
+        string selectSTR = " SELECT  dbo.Lessons.LessonName,dbo.Grades.PupilID, ab.ExamDate, dbo.Grades.Grade ,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as TeacherName " +
                           "   FROM    dbo.Exams ab INNER JOIN  dbo.Grades ON dbo.Grades.ExamCode = ab.ExamCode INNER JOIN  " +
                           "     dbo.Users ON dbo.Grades.PupilID = dbo.Users.UserID  INNER JOIN   dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID INNER JOIN " +
-                          "   dbo.Lessons ON ab.SubjectCode = dbo.Lessons.CodeLesson where ab.ExamCode='" + GradeCode + "' group by dbo.Lessons.LessonName,ab.ExamDate,dbo.Users.UserFName,dbo.Users.UserLName ,dbo.Grades.Grade";
+                          "   dbo.Lessons ON ab.SubjectCode = dbo.Lessons.CodeLesson where ab.ExamCode='" + GradeCode + "' group by dbo.Lessons.LessonName,ab.ExamDate,dbo.Users.UserFName,dbo.Users.UserLName,dbo.Grades.PupilID ,dbo.Grades.Grade order by dbo.Grades.Grade asc  ";
         DataTable dtt = new DataTable();
         DataSet ds;
         try

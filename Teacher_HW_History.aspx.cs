@@ -101,7 +101,6 @@ public partial class Teacher_HW_History : System.Web.UI.Page
             string LessonCode = KeyByValue(LessonsList, ChooseLessonsDLL.SelectedValue);
             HomeWork FilterHomeWork = new HomeWork();
             dtt = FilterHomeWork.FilterHomeWork(TeacherId, LessonCode, ClassCode);
-
             if (dtt.Rows.Count == 0)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('אין היסטוריית שיעורים שהוזנה על ידך עבור הכיתה והמקצוע שנבחר'); ", true);
@@ -109,6 +108,10 @@ public partial class Teacher_HW_History : System.Web.UI.Page
             }
             else
             {
+                for (int i = 0; i < dtt.Rows.Count; i++)
+                {
+                    dtt.Rows[i][3]= dtt.Rows[i][3].ToString().Replace("<br />", "\n");
+                }  
                 GridView1.DataSource = dtt;
             }
             GridView1.DataBind();

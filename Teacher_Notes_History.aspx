@@ -169,7 +169,7 @@
                             </table>
                             <div class="table-responsive">
                                 <table  style="align: center">
-                                            <asp:GridView ID="GridView1" runat="server" class="table table-bordered table-striped" AllowPaging="True" BorderStyle="Dashed" HeaderStyle-HorizontalAlign="Right">
+                                            <asp:GridView ID="GridView1" runat="server" class="table table-bordered table-striped" AllowPaging="False" BorderStyle="Dashed" HeaderStyle-HorizontalAlign="Right"  >
                                                 <PagerStyle HorizontalAlign="Right" />
                                                 <RowStyle HorizontalAlign="Right" />
                                             </asp:GridView>

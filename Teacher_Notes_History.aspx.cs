@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -184,7 +185,23 @@ public partial class Teacher_Notes_History : System.Web.UI.Page
         }
 
         Notes FilterNote = new Notes();
-        GridView1.DataSource = FilterNote.FilterNotes(FilterType, ValueFilter, teacherID);
+        
+        DataTable dtt = new DataTable();
+        dtt= FilterNote.FilterNotes(FilterType, ValueFilter, teacherID);
+
+        if (dtt.Rows.Count == 0)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('אין היסטוריית הערות משמעת שהוזנה על ידך עבור לפי הסינון והמקצוע שנבחר'); ", true);
+            GridView1.DataSource = null;
+        }
+        else
+        {
+            for (int i = 0; i < dtt.Rows.Count; i++)
+            {
+                dtt.Rows[i][5] = dtt.Rows[i][5].ToString().Replace("<br />", "\n");
+            }
+            GridView1.DataSource = dtt;
+        }      
         GridView1.DataBind();
     }
 }
