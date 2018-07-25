@@ -46,6 +46,7 @@ function DisplayMessages(results) {
     }
     $('#messagesTable').append(tableString);
 };
+
 var a = null;
 
 function OpenMessage(obj) {
@@ -105,7 +106,7 @@ function DisplaySchedule(results) {
                 text: 'אתה עדיין משתמש בסיסמה הראשונית, תרצה להחליף אותה כעת?',
                 icon: "info",
                 buttons: ["כן", "לא"],
-                dangerMode: true,
+                dangerMode: true
             })
                 .then((willDelete) => {
                     if (willDelete) {
@@ -117,11 +118,11 @@ function DisplaySchedule(results) {
                         //alert(currentLocation);
                         //alert(n);
                         if (n > 0) {
-                            window.location.href = "SettingPage_Teacher.aspx"
+                            window.location.href = "SettingPage_Teacher.aspx";
                         }
                         else {
 
-                            window.location.href = "SettingPage_Admin.aspx"
+                            window.location.href = "SettingPage_Admin.aspx";
                         }
                        
                     }

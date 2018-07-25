@@ -3,10 +3,7 @@ var isCordovaApp = document.URL.indexOf('http://') === -1 && document.URL.indexO
 if (isCordovaApp) {
     path = "https://proj.ruppin.ac.il/bgroup52/prod/";
 }
-else
-    path = "";
-
-
+else path = "";
 
 function LoadAllMessagesById(Id, DisplayMessages) {
     $.ajax({
