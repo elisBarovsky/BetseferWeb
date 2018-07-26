@@ -13,11 +13,11 @@ public partial class SettingPage_Admin : System.Web.UI.Page
     Users u = new Users();
 
     protected void Page_Load(object sender, EventArgs e)
-    {   
-        //if (Request.Cookies["UserID"] == null || Request.Cookies["UserPassword"] == null)
-        //{
-        //    Response.Redirect("login.aspx");
-        //}
+    {
+        if (Request.Cookies["UserID"] == null || Request.Cookies["UserPassword"] == null)
+        {
+            Response.Redirect("login.aspx");
+        }
         if (!IsPostBack)
         {
             LoadUser();
@@ -48,11 +48,11 @@ public partial class SettingPage_Admin : System.Web.UI.Page
         string folderPath = Server.MapPath("~/Images/");
 
         string userID = Request.Cookies["UserID"].Value;
-        FileUpload1.SaveAs(folderPath + FileUpload1.FileName);
+        FileUpload1.SaveAs(folderPath + userID);
 
         Users user = new Users();
 
-        int res = user.UploadImg(userID, "Images/"+ FileUpload1.FileName);
+        int res = user.UploadImg(userID, "Images/"+ userID);
         if (res >0)
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('התמונה הועלתה בהצלחה. תתעדכן בהתחברות הבאה שלך'); ", true);
