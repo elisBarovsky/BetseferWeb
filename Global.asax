@@ -7,29 +7,43 @@
 
     void Application_Start(object sender, EventArgs e)
     {
-        timer.Interval = 2000;
-        timer.Elapsed += tm_Tick;
 
-        BetseferWS ws = new BetseferWS();
-        TextFromAsax = ws.HelloWorld();
+        timer.Interval = CalculateInterval();
+        timer.Elapsed += tm_Tick;
+        TextFromAsax = "timer started";
+    }
+
+    private static double CalculateInterval()
+    {
+        return (DateTime.Now.AddDays(1).Date.AddHours(8.5) - DateTime.Now).TotalMilliseconds;
     }
 
     void tm_Tick(object sender, EventArgs e)
     {
         //go to db and check 
+        CheckHW();
+    }
 
+    public static void CheckHW()
+    {
         HomeWork HW = new HomeWork();
-         Dictionary<string,string> USers= HW.GetPupilIdWhiceDidntMakeHWYet();
+        Dictionary<string,string> USers= HW.GetPupilIdWhiceDidntMakeHWYet();
 
-        Users user = new Users();
-        List<Users> userList = user.getSpesificUserList(USers);
+        List<Users> userList = new List<Users>();
 
-        string message = "נוספו שיעורי בית ב" ;
+        foreach (var item in USers)
+        {
+            Users u = new Users();
+            u.UserID1 = item.Key.ToString();
+            u.RegId = item.Value.ToString();
+            userList.Add(u);
+        }
+
+        string message = "טרם ביצעת שיעורי בית ב" +userList[0].UserID1 +", הם למחר חבל ):";
         string title = "תזכורת";
 
         myPushNot pushNot = new myPushNot(message, title, "1", 7, "default");
         pushNot.RunPushNotification(userList, pushNot);
-       // Console.Beep(3000, 1000);
     }
 
     public static void StartTimer()

@@ -1910,8 +1910,9 @@ public class DBconnectionTeacher
     public Dictionary<string,string> GetPupilIdWhiceDidntMakeHWYet()
     {
 
-        string selectSTR = "SELECT  PupilID,LessonName FROM    dbo.HomeWork INNER JOIN    dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN "+
-                            "  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson  where IsDone = 0 and HWDueDate = CONVERT(nvarchar, GETDATE() + 2, 103) ";
+        string selectSTR = "SELECT  PupilID,LessonName, dbo.Users.PushRegID FROM    dbo.HomeWork INNER JOIN    dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN "+
+                            " dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson  INNER JOIN dbo.Users ON  dbo.HWPupil.PupilID = dbo.Users.UserID where IsDone = 0 "+
+                            " and HWDueDate = CONVERT(nvarchar, GETDATE() + 1, 103)  and dbo.Users.PushRegID != 'null' ";
 
         try
         {
@@ -1927,13 +1928,13 @@ public class DBconnectionTeacher
             SqlCommand cmd = new SqlCommand(selectSTR, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             Dictionary<string, string> PupilsId = new Dictionary<string, string>();
-            string ID, LessonName;
+            string ID, LessonName, RegId;
             while (dr.Read())
             {
-                ID = dr["PupilID"].ToString();
+              //  ID = dr["LessonName"].ToString();
                 LessonName = dr["LessonName"].ToString();
-
-                PupilsId.Add(ID, LessonName);
+                RegId = dr["PushRegID"].ToString();
+                PupilsId.Add( LessonName, RegId);
             }
             return PupilsId;
         }

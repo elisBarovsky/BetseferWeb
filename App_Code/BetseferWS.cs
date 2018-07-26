@@ -23,13 +23,6 @@ public class BetseferWS : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string HelloWorld()
-    {
-        return "Hello World from web service";
-    }
-
-
-    [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string SaveNewPassword(string Id, string password)
     {
