@@ -58,8 +58,7 @@ public class BetseferWS : System.Web.Services.WebService
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string getPupilsTeachersParents(string TeacherID)
     {
-        // Classes c = new Classes();
-        //string classCode = c.GetClassCodeAccordingToClassFullName(TeacherID);
+
         Users u = new Users();
         List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
         s = u.getPupilsTeachersParents(TeacherID);
