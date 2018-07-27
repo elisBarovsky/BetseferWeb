@@ -22,7 +22,10 @@ function DisplayMessages(results) {
     res = $.parseJSON(results.d);
 
     $('#messagesTable').empty();
-
+    if (res.length === 0) {
+        $("#noMassage").show();
+    }
+    else $("#noMassage").hide();
     var tableString = "";
 
     for (var i = 0; i < res.length; i++) {
