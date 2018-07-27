@@ -105,13 +105,53 @@ function DisplayPaiNoteDate(results) {
 
     for (var i = 0; i < res.length; i++) {
         if (i < res.length / 2) {
-            monthList[i] = res[i];
+            var monthName = res[i];
+            switch (res[i]) {
+                case "01":
+                    monthName = "ינואר";
+                    break;
+                case "02":
+                    monthName = "פברואר";
+                    break;
+                case "03":
+                    monthName = "מרץ";
+                    break;
+                case "04":
+                    monthName = "אפריל";
+                    break;
+                case "05":
+                    monthName = "מאי";
+                    break;
+                case "06":
+                    monthName = "יוני";
+                    break;
+                case "07":
+                    monthName = "יולי";
+                    break;
+                case "08":
+                    monthName = "אוגוסט";
+                    break;
+                case "09":
+                    monthName = "ספטמבר";
+                    break;
+                case "10":
+                    monthName = "אוקטובר";
+                    break;
+                case "11":
+                    monthName = "נובמבר";
+                    break;
+                case "12":
+                    monthName = "דצמבר";
+                    break;
+            }
+            monthList[i] = monthName;
         }
         else {
             amountList[counter] = res[i];
             counter++;
         }
-    }   
+    } 
+    
 
     var dynamicColors = function () {
         var r = Math.floor(Math.random() * 255);
