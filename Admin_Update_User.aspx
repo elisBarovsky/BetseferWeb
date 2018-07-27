@@ -218,7 +218,7 @@
                                     <tr>
                                         <td>תעודת זהות</td>
                                         <td>
-                                            <asp:TextBox ID="UserIDTB" runat="server" required="required" class="form-control" OnPreRender="FillChildren"></asp:TextBox></td>
+                                            <asp:TextBox ID="UserIDTB" ReadOnly value="" runat="server" required="required" class="form-control" OnPreRender="FillChildren"></asp:TextBox></td>
                                         <td>תאריך לידה</td>
                                         <td>
                                             <asp:TextBox ID="BDAYtb" ReadOnly value="" class="form-control" runat="server" required="required"></asp:TextBox>
