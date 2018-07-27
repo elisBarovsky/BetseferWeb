@@ -3031,6 +3031,11 @@ public class DBconnection
 
             classCode = Cl.GetClassCodeAccordingToClassFullName(userClass);
         }
+        if (classCode == "")
+        {
+            classCode = userClass;
+        }
+
         switch (userType)
         {
             case "pupils":

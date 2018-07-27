@@ -39,7 +39,7 @@
                 showConfirmButton: true
                 });
                  setTimeout(function () {
-                     window.location.href = "Admin_Add_lessons.aspx";
+                     window.location.href = "AdminDashbord.html";
                  }, 700);
             };
      
@@ -172,7 +172,7 @@
                 <div class="login-box-body">
                 
                     <p>בחר סיסמה חדשה והזן אותה פעמיים </p>
-                    <form action="index.html" method="post" runat="server">
+                    <form method="post" runat="server">
 
                         <div class="form-group has-feedback">
                             <p ID="LabelSecurityQ1" contenteditable="false" runat="server"> </p>

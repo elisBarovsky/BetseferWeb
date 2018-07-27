@@ -8,7 +8,8 @@
     void Application_Start(object sender, EventArgs e)
     {
 
-        timer.Interval = CalculateInterval();
+        timer.Interval = 600000;
+            //CalculateInterval();
         timer.Elapsed += tm_Tick;
         TextFromAsax = "timer started";
     }
