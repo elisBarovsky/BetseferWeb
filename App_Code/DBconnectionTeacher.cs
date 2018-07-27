@@ -1075,7 +1075,7 @@ public class DBconnectionTeacher
         return ExecuteNonQuery(cStr);
     }
 
-    public int InserHomeWork(string LessonsCode, string HWInfo, string TeacherID, string CodeClass, string HWDate, bool IsLehagasha)
+    public int InserHomeWork(string LessonsCode, string HWInfo, string TeacherID, string CodeClass, string HWDate, bool IsLehagasha, string GivenDate)
     {
         int num = 0;
         string contentToHtml = HWInfo.Replace("\n", "<br />");
@@ -1089,7 +1089,7 @@ public class DBconnectionTeacher
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@LessonsCode", LessonsCode);
                     cmd.Parameters.AddWithValue("@HWInfo", tipulBeGeresh);
-                    cmd.Parameters.AddWithValue("@GivenDate", DateTime.Today.ToShortDateString());
+                    cmd.Parameters.AddWithValue("@GivenDate", GivenDate);
                     cmd.Parameters.AddWithValue("@TeacherID", TeacherID);
                     cmd.Parameters.AddWithValue("@CodeClass", CodeClass);
                     cmd.Parameters.AddWithValue("@WDate", HWDate);

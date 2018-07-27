@@ -18,9 +18,9 @@ public class HomeWork
         db = new DBconnection();
     }
 
-    public int InserHomeWork(string LessonsCode, string HWInfo, string TeacherID, string CodeClass, string HWDate, bool IsLehagasha)
+    public int InserHomeWork(string LessonsCode, string HWInfo, string TeacherID, string CodeClass, string HWDate, bool IsLehagasha, string GivenDate)
     {
-        return dbT.InserHomeWork(LessonsCode, HWInfo, TeacherID, CodeClass, HWDate, IsLehagasha);
+        return dbT.InserHomeWork(LessonsCode, HWInfo, TeacherID, CodeClass, HWDate, IsLehagasha,GivenDate);
     }
 
     public DataTable FilterHomeWork(string TeacherID, string LessonsCode, string ClassCode)
