@@ -193,14 +193,7 @@ where dbo.TimetableLesson.TeacherId=@TID order by dbo.Class.TotalName">
                                             <label class="control-label">בחר מקצוע</label>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ChooseLessonsDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" DataSourceID="DDLsubjectsAccordingToTeacher" DataTextField="LessonName" DataValueField="CodeLesson"  OnDataBound="FillFirstItem"></asp:DropDownList>
-                                            <asp:SqlDataSource ID="DDLsubjectsAccordingToTeacher" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT  dbo.Lessons.CodeLesson, dbo.Lessons.LessonName
-FROM  dbo.Lessons INNER JOIN dbo.TeachersTeachesSubjects ON dbo.Lessons.CodeLesson = dbo.TeachersTeachesSubjects.CodeLessons
-where  dbo.TeachersTeachesSubjects.TeacherID=@TID">
-                                                <SelectParameters>
-                                                    <asp:CookieParameter CookieName="UserID" Name="TID" />
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>
+                                            <asp:DropDownList ID="ChooseLessonsDLL" CssClass="btn btn-default dropdown-toggle" data-toggle="dropdown" Style="direction: rtl;" runat="server" OnDataBound="FillFirstItem"></asp:DropDownList>
                                         </td>
                                     </tr>
                                     <tr>
