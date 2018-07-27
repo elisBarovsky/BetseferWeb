@@ -52,3 +52,35 @@ function LoadScheduleForToday(obj, DisplaySchedule) {
         }
     });
 }
+
+function GetNumbersOfUsers(DisplayPieUsers) {
+    $.ajax({
+        url: path + 'BetseferWS.asmx/GetNumbersOfUsersForPie',
+        data: JSON.stringify({ }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            DisplayPieUsers(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
+function GetTeachersToSubjects(DisplayBarTeachersSubjects) {
+    $.ajax({
+        url: path + 'BetseferWS.asmx/GetTeachersToSubjectsBar',
+        data: JSON.stringify({}),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            DisplayBarTeachersSubjects(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}

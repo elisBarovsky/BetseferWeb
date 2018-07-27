@@ -1239,5 +1239,28 @@ public class BetseferWS : System.Web.Services.WebService
         string jsonString = js.Serialize(res);
         return jsonString;
     }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetNumbersOfUsersForPie()
+    {
+        Users user = new Users();
+        List<int> res = user.GetNumbersOfUsersForPie();
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetTeachersToSubjectsBar()
+    {
+        Users user = new Users();
+        List<string> res = user.GetTeachersToSubjectsBar();
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+    
 }
 

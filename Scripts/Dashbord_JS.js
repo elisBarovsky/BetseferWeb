@@ -14,7 +14,140 @@
     LoadAllMessagesById(Id, DisplayMessages);
 
     LoadScheduleForToday(obj, DisplaySchedule);
+    GetNumbersOfUsers(DisplayPieUsers);
+    GetTeachersToSubjects(DisplayBarTeachersSubjects);
 });
+
+function DisplayPieUsers(results) {
+    var res = $.parseJSON(results.d);
+
+    new Chart(document.getElementById("pie-chart"), {
+        type: 'pie',
+        data: {
+            labels:
+                ['מנהלה', 'מורים', 'הורים', 'תלמידים'],
+            datasets:
+                [{
+                    'label': 'מנהלה',
+                    data:
+                        [res[0], res[1], res[2], res[3]],
+                    backgroundColor:
+                        ['rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)',
+                            'rgb(211, 247, 6)']
+                }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'התפלגות משתמשים'
+            }
+        }
+    });
+}
+
+function DisplayBarTeachersSubjects(results) {
+    var res = $.parseJSON(results.d);
+    var subjects = [];
+    var numbers = [];
+    var counter = 0;
+    for (var i = 0; i < res.length; i++) {
+        if (i < res.length / 2) {
+            subjects[i] = res[i];
+        }
+        else {
+            numbers[counter] = res[i];
+            counter++;
+        }
+    }
+
+    var ctx = document.getElementById('bar-chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'horizontalBar',
+
+        // The data for our dataset
+        data: {
+            labels: subjects,
+            datasets: [{
+                label: "מורים בכל מקצוע",
+                backgroundColor: 'rgb(255, 105, 100)',
+                borderColor: 'rgb(88, 103, 221)',
+                data: numbers,
+                fill: false
+
+            }],
+         
+        
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1,
+                    }
+                }]
+               
+            },
+            title: {
+                display: true,
+                text: 'פילוח מקצועות ומורים'
+            }
+        }
+    });
+
+
+    //var chart = new CanvasJS.Chart("chartContainer", {
+    //    animationEnabled: true,
+    //    responsive: false,
+    //    title: {
+    //        text: "Fortune 500 Companies by Country"
+    //    },
+    //    axisX: {
+    //        interval: 1
+    //    },
+    //    axisY2: {
+    //        interlacedColor: "rgba(1,77,101,.2)",
+    //        gridColor: "rgba(1,77,101,.1)",
+    //        title: "Number of Companies"
+    //    },
+    //    data: [{
+    //        type: "bar",
+    //        name: "companies",
+    //        axisYType: "secondary",
+    //        color: "#014D65",
+    //        dataPoints: [
+    //            { y: 3, label: "Sweden" },
+    //            { y: 7, label: "Taiwan" },
+    //            { y: 5, label: "Russia" },
+    //            { y: 9, label: "Spain" },
+    //            { y: 7, label: "Brazil" },
+    //            { y: 7, label: "India" },
+    //            { y: 9, label: "Italy" },
+    //            { y: 8, label: "Australia" },
+    //            { y: 11, label: "Canada" },
+    //            { y: 15, label: "South Korea" },
+    //            { y: 12, label: "Netherlands" },
+    //            { y: 15, label: "Switzerland" },
+    //            { y: 25, label: "Britain" },
+    //            { y: 28, label: "Germany" },
+    //            { y: 29, label: "France" },
+    //            { y: 52, label: "Japan" },
+    //            { y: 103, label: "China" },
+    //            { y: 134, label: "US" }
+    //        ]
+    //    }]
+    //});
+    //chart.render();
+
+  
+   
+
+
+}
 
 function DisplayMessages(results) {
 

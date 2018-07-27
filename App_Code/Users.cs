@@ -417,5 +417,17 @@ public class Users
     {
         return db.UploadImg(UserID, Img);
     }
+
+    public List<int> GetNumbersOfUsersForPie()
+    {
+        return db.GetNumbersOfUsersForPie();
+    }
+
+    public List<string> GetTeachersToSubjectsBar()
+    {
+        return db.GetTeachersToSubjectsBar();
+    }
+
+
 }
 

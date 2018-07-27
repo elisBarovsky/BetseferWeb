@@ -3943,4 +3943,96 @@ public class DBconnection
             }
         }
     }
+
+    public List<int> GetNumbersOfUsersForPie()
+    {
+        String selectSTR = "SELECT count(UserID) from Users where CodeUserType is not null group by CodeUserType";
+
+        List<int> users = new List<int>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                users.Add(int.Parse(dr[0].ToString()));
+            }
+            return users;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<string> GetTeachersToSubjectsBar()
+    {
+        String selectSTR = "SELECT Lessons.LessonName, count(TeachersTeachesSubjects.TeacherID) as NumberOfTeachers " +
+"FROM Lessons INNER JOIN TeachersTeachesSubjects ON " +
+"Lessons.CodeLesson=TeachersTeachesSubjects.CodeLessons group by Lessons.LessonName " +
+"order by NumberOfTeachers desc";
+
+        List<string> subjects = new List<string>();
+        List<int> numbers = new List<int>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                subjects.Add(dr["LessonName"].ToString());
+                numbers.Add(int.Parse(dr["NumberOfTeachers"].ToString()));
+            }
+
+            List<string> together = new List<string>();
+            for (int i = 0; i < subjects.Count; i++)
+            {
+                together.Add(subjects[i]);
+            }
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                together.Add(numbers[i].ToString());
+            }
+            return together;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 }
