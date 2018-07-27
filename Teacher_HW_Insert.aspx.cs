@@ -114,7 +114,8 @@ public partial class Teacher_HW_Insert : System.Web.UI.Page
     {
         string classCode = ChooseClassDLL.SelectedItem.Value;
         Subject s = new Subject();
-        Dictionary<string, string> l = s.GetSubjectsByClassCode(classCode);
+        string teacherID = Request.Cookies["UserID"].Value;
+        datatable l = s.GetsubjectsByClassandTeacherID(teacherID, classCode);
         //ChooseLessonsDLL.DataSource = l.Values;
         //ChooseLessonsDLL.DataBind();
         //ChooseLessonsDLL.Enabled = true;
