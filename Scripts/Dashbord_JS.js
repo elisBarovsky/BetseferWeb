@@ -227,7 +227,7 @@ function DisplayBarCharAvgGradesPerClass(results) {
             },
             title: {
                 display: true,
-                text: 'ממוצע ציונים בכיתות שלי'
+                text: 'ממוצע ציונים בכיתות שאני מלמד'
             }
         }
     });
