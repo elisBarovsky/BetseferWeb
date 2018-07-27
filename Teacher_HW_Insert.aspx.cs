@@ -114,10 +114,15 @@ public partial class Teacher_HW_Insert : System.Web.UI.Page
     {
         string classCode = ChooseClassDLL.SelectedItem.Value;
         Subject s = new Subject();
-        Dictionary<string, string> l = s.GetSubjectsByClassCode(classCode);
-        //ChooseLessonsDLL.DataSource = l.Values;
-        //ChooseLessonsDLL.DataBind();
-        //ChooseLessonsDLL.Enabled = true;
+        string teacherID = Request.Cookies["UserID"].Value;
+       
+        Dictionary<string, string> Lessons = new Dictionary<string, string>();
+        Teacher ClassesBySubject = new Teacher();
+        Lessons = ClassesBySubject.FillLessonsAccordingTeacherIdAndClassCode(teacherID, classCode);
+        ChooseLessonsDLL.DataSource = Lessons;
+        ChooseLessonsDLL.DataTextField = "value";
+        ChooseLessonsDLL.DataValueField = "key";
+        ChooseLessonsDLL.DataBind();
     }
 
     protected void FillFirstItem(object sender, EventArgs e)

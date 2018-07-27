@@ -100,7 +100,6 @@
                                     <li><a href="SettingPage_Teacher.aspx" class="text-right"><i class="icon-gears"></i>הגדרות משתמש</a></li>
                                     <li><a href="login.aspx" class="text-right"><i class="fa fa-power-off"></i>התנתק </a></li>
                                 </li>
-
                             </ul>
                         </li>
                     </ul>
