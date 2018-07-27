@@ -16,6 +16,8 @@
     LoadScheduleForToday(obj, DisplaySchedule);
     GetNumbersOfUsers(DisplayPieUsers);
     GetTeachersToSubjects(DisplayBarTeachersSubjects);
+    GetTeacherNotePerMonth(Id, DisplayPaiNoteDate);
+    //GetAvgByClassesByTeacherID(Id, DisplayBarCharAvgGradesPerClass);
 });
 
 function DisplayPieUsers(results) {
@@ -78,9 +80,7 @@ function DisplayBarTeachersSubjects(results) {
                 data: numbers,
                 fill: false
 
-            }],
-         
-        
+            }]
         },
         options: {
             scales: {
@@ -90,7 +90,6 @@ function DisplayBarTeachersSubjects(results) {
                         stepSize: 1,
                     }
                 }]
-               
             },
             title: {
                 display: true,
@@ -98,55 +97,100 @@ function DisplayBarTeachersSubjects(results) {
             }
         }
     });
+}
 
+function GetTeacherNotePerMonth(results) {
+    var res = $.parseJSON(results.d),
+        monthList = [], amountList = [], counter = 0, coloR = [];
 
-    //var chart = new CanvasJS.Chart("chartContainer", {
-    //    animationEnabled: true,
-    //    responsive: false,
-    //    title: {
-    //        text: "Fortune 500 Companies by Country"
-    //    },
-    //    axisX: {
-    //        interval: 1
-    //    },
-    //    axisY2: {
-    //        interlacedColor: "rgba(1,77,101,.2)",
-    //        gridColor: "rgba(1,77,101,.1)",
-    //        title: "Number of Companies"
-    //    },
-    //    data: [{
-    //        type: "bar",
-    //        name: "companies",
-    //        axisYType: "secondary",
-    //        color: "#014D65",
-    //        dataPoints: [
-    //            { y: 3, label: "Sweden" },
-    //            { y: 7, label: "Taiwan" },
-    //            { y: 5, label: "Russia" },
-    //            { y: 9, label: "Spain" },
-    //            { y: 7, label: "Brazil" },
-    //            { y: 7, label: "India" },
-    //            { y: 9, label: "Italy" },
-    //            { y: 8, label: "Australia" },
-    //            { y: 11, label: "Canada" },
-    //            { y: 15, label: "South Korea" },
-    //            { y: 12, label: "Netherlands" },
-    //            { y: 15, label: "Switzerland" },
-    //            { y: 25, label: "Britain" },
-    //            { y: 28, label: "Germany" },
-    //            { y: 29, label: "France" },
-    //            { y: 52, label: "Japan" },
-    //            { y: 103, label: "China" },
-    //            { y: 134, label: "US" }
-    //        ]
-    //    }]
-    //});
-    //chart.render();
+    for (var i = 0; i < res.length; i++) {
+        if (i < res.length / 2) {
+            monthList[i] = res[i];
+        }
+        else {
+            amountList[counter] = res[i];
+            counter++;
+        }
+    }   
 
-  
-   
+    var dynamicColors = function () {
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    };
 
+    for (var i in monthList) {
+        coloR.push(dynamicColors());
+    }
 
+    new Chart(document.getElementById("pie-chart2"), {
+        type: 'pie',
+        data: {
+            labels: monthList,
+            datasets:
+                [{
+                    'label': 'כמות',
+                    data: amountList,
+                    backgroundColor: coloR
+                }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'מספר הערות משמעת לפי חודשים'
+            }
+        }
+    });
+}
+
+function DisplayBarCharAvgGradesPerClass(results) {
+    var res = $.parseJSON(results.d);
+    var classes = [];
+    var avgGrades = [];
+    var counter = 0;
+    for (var i = 0; i < res.length; i++) {
+        if (i < res.length / 2) {
+            classes[i] = res[i];
+        }
+        else {
+            avgGrades[counter] = res[i];
+            counter++;
+        }
+    }
+
+    var ctx = document.getElementById('bar-chart2').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'horizontalBar',
+
+        // The data for our dataset
+        data: {
+            labels: classes,
+            datasets: [{
+                label: "ממוצע",
+                backgroundColor: 'rgb(255, 105, 100)',
+                borderColor: 'rgb(88, 103, 221)',
+                data: avgGrades,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1,
+                    }
+                }]
+            },
+            title: {
+                display: true,
+                text: 'ממוצע ציונים בכיתות שלי'
+            }
+        }
+    });
 }
 
 function DisplayMessages(results) {
@@ -262,6 +306,5 @@ function DisplaySchedule(results) {
                 });
         }
         sessionStorage.setItem("Loged", 1);
-
     }
 };

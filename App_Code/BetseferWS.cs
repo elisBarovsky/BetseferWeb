@@ -1286,6 +1286,27 @@ public class BetseferWS : System.Web.Services.WebService
         string jsonString = js.Serialize(res);
         return jsonString;
     }
-    
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetNoteByMonth(string teacherID)
+    {
+        Teacher t = new Teacher();
+        List<string> res = t.GetNoteByMonth(teacherID);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetAvgByClasses(string teacherID)
+    {
+        Teacher t = new Teacher();
+        List<string> res = t.GetAvgByClasses(teacherID);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
 }
 

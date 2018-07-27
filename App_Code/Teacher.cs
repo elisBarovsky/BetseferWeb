@@ -9,6 +9,7 @@ using System.Web;
 public class Teacher : Users
 {
     DBconnection db = new DBconnection();
+    DBconnectionTeacher dbt = new DBconnectionTeacher();
 
     public string classMainTeacher { get; set; }
     public bool isMainTeacher { get; set; }
@@ -25,7 +26,6 @@ public class Teacher : Users
     public Dictionary<string, string> FillClassOtAccordingTeacherIdAndSubjectCode(string teacherID, string LessonCode)
     {
         Dictionary<string, string> d = new Dictionary<string, string>();
-        DBconnectionTeacher dbt = new DBconnectionTeacher();
 
         return dbt.FillClassOtAccordingTeacherIdAndSubjectCode(teacherID, LessonCode);
     }
@@ -33,7 +33,6 @@ public class Teacher : Users
     public Dictionary<string, string> FillLessonsAccordingTeacherIdAndClassCode(string teacherID, string classCode)
     {
         Dictionary<string, string> d = new Dictionary<string, string>();
-        DBconnectionTeacher dbt = new DBconnectionTeacher();
 
         return dbt.FillLessonsAccordingTeacherIdAndClassCode(teacherID, classCode);
     }
@@ -41,7 +40,6 @@ public class Teacher : Users
     public Dictionary<string, string> FillLessonsAccordingTeacherId(string teacherID)
     {
         Dictionary<string, string> d = new Dictionary<string, string>();
-        DBconnectionTeacher dbt = new DBconnectionTeacher();
 
         return dbt.FillLessonsAccordingTeacherId(teacherID);
     }
@@ -50,7 +48,6 @@ public class Teacher : Users
     public Dictionary<string, string> FillClassOtAccordingTeacherId(string teacherID)
     {
         Dictionary<string, string> d = new Dictionary<string, string>();
-        DBconnectionTeacher dbt = new DBconnectionTeacher();
 
         return dbt.FillClassOtAccordingTeacherId(teacherID);
     }
@@ -58,7 +55,6 @@ public class Teacher : Users
     public List<string> FillClassOtAccordingTeacherId_List(string teacherID)
     {
         Dictionary<string, string> d = new Dictionary<string, string>();
-        DBconnectionTeacher dbt = new DBconnectionTeacher();
 
         return dbt.FillClassOtAccordingTeacherId_List(teacherID);
     }
@@ -68,4 +64,15 @@ public class Teacher : Users
         string lessonCode = db.GetLessonCodeByLessonName(Lesson);
         return FillClassOtAccordingTeacherIdAndSubjectCode(teacherID, lessonCode);
     }
+
+    public List<string> GetNoteByMonth(string teacherID)
+    {
+        return dbt.GetNoteByMonth(teacherID);
+    }
+
+    public List<string> GetAvgByClasses(string teacherID)
+    {
+        return dbt.GetAvgByClasses(teacherID);
+    }
+    
 }

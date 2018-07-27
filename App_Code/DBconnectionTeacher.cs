@@ -1951,4 +1951,103 @@ public class DBconnectionTeacher
             }
         }
     }
+
+    public List<string> GetNoteByMonth(string teacherID)
+    {
+        string selectSTR = "select count(CodeGivenNote) as 'amountsOfNotes', SUBSTRING(GivenNotes.NoteDate, 4, 2) as 'monthDate' " +
+                        "from GivenNotes " +
+                        "where TeacherID = '"+ teacherID + "' " +
+                        "group by SUBSTRING(GivenNotes.NoteDate, 4, 2) " +
+                        "order by SUBSTRING(GivenNotes.NoteDate, 4, 2) "; 
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            List<string> noteAmounts = new List<string>();
+            List<string> noteMonth = new List<string>();
+
+            while (dr.Read())
+            {
+                noteAmounts.Add(dr["amountsOfNotes"].ToString());
+                noteMonth.Add(dr["monthDate"].ToString());
+            }
+
+            for (int i = 0; i < noteAmounts.Count; i++)
+            {
+                noteMonth.Add(noteAmounts[i]);
+            }
+            return noteMonth;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<string> GetAvgByClasses(string teacherID)
+    {
+        string selectSTR = "SELECT dbo.Class.TotalName+' - '+ dbo.Lessons.LessonName as 'TotalDesc', AVG( dbo.Grades.Grade) " +
+                "as AvgGradeClass FROM dbo.Exams INNER JOIN   dbo.Grades ON dbo.Exams.ExamCode = dbo.Grades.ExamCode " +
+                "INNER JOIN dbo.Lessons ON dbo.Exams.SubjectCode = dbo.Lessons.CodeLesson INNER JOIN  dbo.Class ON " +
+                "dbo.Exams.ClassCode = dbo.Class.ClassCode where dbo.Exams.TeacherID ='989898988' group by dbo.Class.TotalName, " +
+                "dbo.Lessons.LessonName";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            List<string> gradeAvg = new List<string>();
+            List<string> classes = new List<string>();
+
+            while (dr.Read())
+            {
+                classes.Add(dr["TotalDesc"].ToString());
+                gradeAvg.Add(dr["AvgGradeClass"].ToString());
+            }
+
+            for (int i = 0; i < gradeAvg.Count; i++)
+            {
+                classes.Add(gradeAvg[i]);
+            }
+            return classes;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
 }

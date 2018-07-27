@@ -33,6 +33,16 @@
 
     <script src="dist/js/jquery.min.js"></script>
 
+    <link href="dist/plugins/chartist-js/chartist.min.css" rel="stylesheet">
+    <link href="dist/plugins/chartist-js/chartist-init.css" rel="stylesheet">
+    <link href="dist/plugins/chartist-js/chartist-plugin-tooltip.css" rel="stylesheet">
+
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script src="dist/plugins/chartjs/chart.min.js"></script>
+    <script src="dist/plugins/chartjs/chart-int.js"></script>
+
     <script src="Scripts/Dashbord_JS.js"></script>
     <script src="Scripts/Dashbord_AJAX.js"></script>
 
@@ -175,6 +185,22 @@
                                                 <table class="table table-hover no-wrap table-striped" style="width:100%; color: black" id="looze"></table>
                                             </div>
                                         </div>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="info-box" style="height:350px;">
+                                                        <canvas id="pie-chart2" height="200"></canvas>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="info-box" style="width: 100%">
+                                                        <canvas id="bar-chart2" height="100"></canvas>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

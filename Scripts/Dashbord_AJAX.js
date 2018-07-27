@@ -84,3 +84,35 @@ function GetTeachersToSubjects(DisplayBarTeachersSubjects) {
         }
     });
 }
+
+function GetTeacherNotePerMonth(Id, DisplayPaiNoteDate) {
+    $.ajax({
+        url: path + 'BetseferWS.asmx/GetNoteByMonth',
+        data: JSON.stringify({ 'teacherID': Id }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            DisplayPaiNoteDate(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
+function GetAvgByClassesByTeacherID(Id, DisplayBarCharAvgGradesPerClass) {
+    $.ajax({
+        url: path + 'BetseferWS.asmx/GetAvgByClasses',
+        data: JSON.stringify({ 'teacherID': Id }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            DisplayBarCharAvgGradesPerClass(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
