@@ -133,7 +133,7 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header sty-one">
-                <div style="text-align: center; /*color: palevioletred; */ font-size: 20px" runat="server">
+                <div style="text-align: right; /*color: palevioletred; */ font-size: 20px" runat="server">
                     <asp:Label ID="className" runat="server" Text="" CssClass="glyphicon-text-color:red"></asp:Label>
                 </div>
             </section>
