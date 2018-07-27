@@ -267,8 +267,12 @@
 
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ClassOt2DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataValueField="ClassCode" OnSelectedIndexChanged="FillPupils" DataSourceID="classesWithoutMainTeacher" DataTextField="ClassCode"></asp:DropDownList>
-                                            <asp:SqlDataSource ID="classesWithoutMainTeacher" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class] WHERE ([MainTeacherID] IS NULL)"></asp:SqlDataSource>
+                                            <asp:DropDownList ID="ClassOt2DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataValueField="ClassCode" OnSelectedIndexChanged="FillPupils" DataSourceID="classesWithoutMainTeacher" DataTextField="TotalName"></asp:DropDownList>
+                                            <asp:SqlDataSource ID="classesWithoutMainTeacher" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class] where MainTeacherID is null order by [TotalName]"></asp:SqlDataSource>
+                                        
+                                              <asp:DropDownList ID="ClassOt3DLL" Style="direction: rtl;" runat="server" CssClass="form-control" data-toggle="dropdown" DataValueField="ClassCode" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="FillPupils"  DataTextField="TotalName"></asp:DropDownList>
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [ClassCode], [TotalName] FROM [Class]  order by [TotalName]"></asp:SqlDataSource>
+                                     
                                         </td>
                                         <td></td>
                                     </tr>

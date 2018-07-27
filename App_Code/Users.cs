@@ -263,6 +263,11 @@ public class Users
         return db.FillClassOt();
     }
 
+    public Dictionary<string, string> FillClassOtWithoutMainTheacher()
+    {
+        return db.FillClassOtWithoutMainTheacher();
+
+    }
     public List<string>  GetUserType(string UserID, string password)
     {
         return db.GetUserType(UserID, password);

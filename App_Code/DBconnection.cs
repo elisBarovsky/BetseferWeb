@@ -2112,6 +2112,48 @@ public class DBconnection
         }
     }
 
+    public Dictionary<string, string> FillClassOtWithoutMainTheacher()
+    {
+        String selectSTR = "SELECT ClassCode,TotalName FROM Class where MainTeacherID is null order by TotalName";
+        string ClassCode, TotalName;
+        Dictionary<string, string> l = new Dictionary<string, string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            l.Add("0", "בחר");
+            while (dr.Read())
+            {
+                ClassCode = dr["ClassCode"].ToString();
+                TotalName = dr["TotalName"].ToString();
+                l.Add(ClassCode, TotalName);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+
+    }
     public Dictionary<string, string> FillClassOt()
     {
         String selectSTR = "SELECT ClassCode,TotalName FROM Class order by TotalName";

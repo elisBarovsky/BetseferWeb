@@ -87,7 +87,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
             VisiblePupil(false);
             VisibleOtherUsers(true);
             FillUsers();
-            tempList = "2";
+            tempList = "2";       
         }
         else
         {
@@ -162,12 +162,21 @@ public partial class Admin_Update_User : System.Web.UI.Page
 
                 if (IsMain)
                 {
+                   
                     MainTeacherCB.Checked = true;
                     Class2LBL.Visible = true;
-                    ClassOt2DLL.Visible = true;
+                    ClassOt3DLL.Visible = true;
                     Users TeacherMainClass = new Users();
-                    ClassOt2DLL.SelectedValue = TeacherMainClass.GetTeacherMainClass(UserID);
+                    ClassOt3DLL.SelectedValue = TeacherMainClass.GetTeacherMainClass(UserID);
                 }
+                else
+                {
+                    Class2LBL.Visible = false;
+                    MainTeacherCB.Checked = false;
+                    ClassOt2DLL.Visible = false;
+                    ClassOt3DLL.Visible = false;
+                }
+
             }
             else if (UserTypeDLL.SelectedValue == "3")
             {
@@ -276,13 +285,13 @@ public partial class Admin_Update_User : System.Web.UI.Page
         MainTeacher.Visible = false;
         MainTeacherCB.Visible = false;
         MainTeacherCB.Checked = false;
-
+        ClassOt3DLL.Visible= false;
         DeleteChild.Visible = false;
         AddChild.Visible = false;
         ChildDDL.Visible = false;
         TBaddNewChild.Visible = false;
         TBaddNewChild.Text = "";
-
+    
         ChildIDLBL.Visible = false;
     }
 
@@ -360,6 +369,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
         }
         else
         {
+            ClassOt3DLL.Visible = false;
             ClassOt2DLL.Visible = false;
             Class2LBL.Visible = false;
         }
