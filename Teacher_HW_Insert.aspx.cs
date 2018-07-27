@@ -84,7 +84,7 @@ public partial class Teacher_HW_Insert : System.Web.UI.Page
         }
         else
         {
-            todaydate = DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year;
+            todaydate = DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year ;
         }
         string Bday = newBDATe.Substring(8, 2) + "/" + newBDATe.Substring(5, 2) + "/" + newBDATe.Substring(0, 4);
 

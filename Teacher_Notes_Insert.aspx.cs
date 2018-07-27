@@ -84,7 +84,17 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
         {
 
 
-            string date = DateTime.Today.ToShortDateString();
+            string todaydate = DateTime.Today.ToShortDateString();
+            if (DateTime.Today.Month < 10)
+            {
+                todaydate = DateTime.Today.Day + "/0" + DateTime.Today.Month + "/" + DateTime.Today.Year;
+
+            }
+            else
+            {
+                todaydate = DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year;
+            }
+
             string TeacherId = Request.Cookies["UserID"].Value;
             Dictionary<string, string> NotesList = new Dictionary<string, string>();
             NotesList = (Dictionary<string, string>)(Session["NotesList"]);
@@ -98,7 +108,7 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
 
             Notes InsertPupilNote = new Notes();
 
-            int res1 = InsertPupilNote.InsertNotes(PupilID, NoteID, date, TeacherId, LessonID, TNoteTB.Text);
+            int res1 = InsertPupilNote.InsertNotes(PupilID, NoteID, todaydate, TeacherId, LessonID, TNoteTB.Text);
             if (res1 == 1)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Succesesalert('הערה נוספה בהצלחה');", true);
