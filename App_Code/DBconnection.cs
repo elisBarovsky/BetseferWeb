@@ -3013,9 +3013,10 @@ public class DBconnection
     {
         string contentToHtml = content.Replace("\n", "<br />");
         string tipulBeGeresh = contentToHtml.Replace("'", "''");
+        string date = DateTime.Now.ToShortDateString();
 
         string cStr = "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage)" +
-            " VALUES ('" + DateTime.Now + "', '" + SenderID + "', '" + RecieientID + "', '" + tipulBeGeresh + "', '" + Subject + "')";
+            " VALUES ('" + date + "', '" + SenderID + "', '" + RecieientID + "', '" + tipulBeGeresh + "', '" + Subject + "')";
         return ExecuteNonQuery(cStr);
     }
 
@@ -3052,11 +3053,13 @@ public class DBconnection
                 break;
         }
 
+        string date = DateTime.Now.ToShortDateString();
+
         for (int i = 0; i < usersIds.Count; i++)
         {
             if (SenderID != usersIds[i])
             {
-                cStr += "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage) VALUES ('" + DateTime.Now + "','" + SenderID + "', '" + usersIds[i] +
+                cStr += "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage) VALUES ('" + date + "','" + SenderID + "', '" + usersIds[i] +
             "', '" + content + "','" + Subject + "')";
             }
         }
