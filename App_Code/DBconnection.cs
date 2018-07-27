@@ -3013,7 +3013,7 @@ public class DBconnection
     {
         string contentToHtml = content.Replace("\n", "<br />");
         string tipulBeGeresh = contentToHtml.Replace("'", "''");
-        string date = DateTime.Now.ToShortDateString();
+        string date = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
 
         string cStr = "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage)" +
             " VALUES ('" + date + "', '" + SenderID + "', '" + RecieientID + "', '" + tipulBeGeresh + "', '" + Subject + "')";
@@ -3053,7 +3053,7 @@ public class DBconnection
                 break;
         }
 
-        string date = DateTime.Now.ToShortDateString();
+        string date = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
 
         for (int i = 0; i < usersIds.Count; i++)
         {
