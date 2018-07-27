@@ -31,7 +31,7 @@ function ShowAllConversation(results) {
                 '</div >' +
                 '<img class="direct-chat-img" alt="user image" src="' + myImg + '">' +
                 '<div class="direct-chat-text">' +
-                '<div><u>' + res[i].Subject + '</u></div>' +
+                '<div><u>' + res[i].Subject + '</u></div >' +
                 res[i].Content + '</div > ' +
                 '</div > ';
                 
@@ -44,7 +44,7 @@ function ShowAllConversation(results) {
                 '</div >' +
                 '<img class="direct-chat-img" alt="user image" src="' + path + res[i].SenderIMG +'">' +
                 '<div class="direct-chat-text">' +
-                '<div><u>' + res[i].Subject + '</u></div>' +
+                '<div><u>' + res[i].Subject + '</u></div  >' +
                 res[i].Content + '</div>' +
                 '</div>';                  
         }
