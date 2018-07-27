@@ -146,7 +146,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
             Dictionary<string, string> pupils = new Dictionary<string, string>();
             pupils = (Dictionary<string, string>)(Session["PupilsList"]);
             UserID = KeyByValue(pupils, UserID);
-            ClassOt2DLL.SelectedValue = Pupil.GetPupilOtClass(UserID);
+            ClassOt3DLL.SelectedValue = Pupil.GetPupilOtClass(UserID);
         }
         else
         {
@@ -427,7 +427,7 @@ public partial class Admin_Update_User : System.Web.UI.Page
                 int num = p.SaveChildAndParent(parentID, childID);
                 if (num > 0)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "sweetAlert('ילד נמחק בהצלחה!');", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "sweetAlert('ילד נוסף בהצלחה!');", true);
                     ChildDDL.DataBind();
                     TBaddNewChild.Visible = false;
                     SaveChild.Visible = false;
