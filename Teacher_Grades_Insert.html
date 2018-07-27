@@ -130,7 +130,7 @@
                         <a href="#"><i class="fa fa-envelope-o "></i><span>הודעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li><a href="Teacher_History_Messages.html">הודעות נכנסות</a></li>
-                            <li > <a href="Teacher_Add_Messages.html">הודעה חדשה</a></li>
+                            <li> <a href="Teacher_Add_Messages.html">הודעה חדשה</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -144,53 +144,56 @@
             </section>
 
             <section class="content">
-                
-                    <div class="info-box" style="height:90%">
-                        <!-- Small boxes (Stat box) -->
-                        <br /> <br />
-                        <div class="row">
+
+                <div class="info-box" style="height:90%">
+                    <!-- Small boxes (Stat box) -->
+                    <br /> <br />
+                    <div class="row">
+                        <div>
+
                             <div>
-
-                                <div>
-                                    <table class="table" style="width:100%;">
-                                        <tr>
-                                            <td>
-                                                <label class="control-label">תאריך בחינה</label>
-                                            </td>
-                                            <td>
-                                                <input class="form-control" id="date1" type="date">
-                                            </td>
-                                            <td>
-                                                <label class="control-label">בחר מקצוע</label>
-                                            </td>
-                                            <td>
-                                                <select ID="DDLsubjectsAccordingToTeacherID" class="btn btn-default dropdown-toggle" data-toggle="dropdown" onchange="SubjectSelected()"></select>
-                                            </td>
-                                            <td>
-                                                <label ID="ChooseClassLBL" class="control-label">בחר כיתה</label>
-                                            </td>
-                                            <td>
-                                                <select ID="ChooseClassDLL" class="btn btn-default dropdown-toggle" onchange="ClassSelected()"></select>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div style="width:100%;height:400px;overflow: auto">
-                                <table class="table table-hover no-wrap table-striped" style="width:70%; color: black;margin:auto;text-align:center;" id="pupilList"></table>
-
+                                <table class="table" style="width:100%;">
+                                    <tr>
+                                        <td>
+                                            <label class="control-label">תאריך בחינה</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" id="date1" type="date">
+                                        </td>
+                                        <td>
+                                            <label class="control-label">בחר מקצוע</label>
+                                        </td>
+                                        <td>
+                                            <select ID="DDLsubjectsAccordingToTeacherID" class="btn btn-default dropdown-toggle" data-toggle="dropdown" onchange="SubjectSelected()"></select>
+                                        </td>
+                                        <td>
+                                            <label ID="ChooseClassLBL" class="control-label">בחר כיתה</label>
+                                        </td>
+                                        <td>
+                                            <select ID="ChooseClassDLL" class="btn btn-default dropdown-toggle" onchange="ClassSelected()"></select>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
-                        <div style="margin-right:50%">
-                            <br />
-                            <button id="save" onclick="SaveGrades()" class="btn btn-rounded btn-outline-primary" style="height:50px;width:80px">שמור</button>
+                        <div style="width:100%;height:400px;overflow: auto">
+                            <table class="table table-hover no-wrap table-striped" style="width:70%; color: black;margin:auto;text-align:center;" id="pupilList"></table>
 
                         </div>
                     </div>
+                    <div style="margin-right:50%">
+                        <br />
+                        <button id="save" onclick="SaveGrades()" class="btn btn-rounded btn-outline-primary" style="height:50px;width:80px">שמור</button>
 
-</section>
+                    </div>
+                </div>
+
+            </section>
         </div>
         <!-- /.content-wrapper -->
+        <footer>
+            <div class="pull-left hidden-xs">Copyright © 2018 Ellis & Dikla. All rights reserved</div>
+        </footer>
     </div>
     <!-- jQuery 3 -->
     <!-- v4.0.0-alpha.6 -->

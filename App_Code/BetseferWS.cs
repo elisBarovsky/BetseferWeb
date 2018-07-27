@@ -23,13 +23,6 @@ public class BetseferWS : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string HelloWorld()
-    {
-        return "Hello World from web service";
-    }
-
-
-    [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string SaveNewPassword(string Id, string password)
     {
@@ -50,6 +43,20 @@ public class BetseferWS : System.Web.Services.WebService
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string getPupilsTeachersParents(string TeacherID)
+    {
+
+        Users u = new Users();
+        List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
+        s = u.getPupilsTeachersParents(TeacherID);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(s);
         return jsonString;
     }
 
@@ -805,16 +812,15 @@ public class BetseferWS : System.Web.Services.WebService
         Messages message = new Messages();
         int answer; string stringAnswer = "bad";
         Classes c = new Classes();
-        if (m.UserClass=="null" & m.UserType== "pupils")
+        if (m.UserClass == "null" & m.UserType == "pupils")
         {
             m.UserClass = c.GetClassCodeByUserID(m.SenderID);
-            //m.UserClass = classCode;
         }
         else if (m.UserClass == "null" & m.UserType == "parents")
         {
-            Dictionary<string, string> ClassAndParent =c.GetClassCodeAndParentIDByPupilID(m.SenderID);
+            Dictionary<string, string> ClassAndParent = c.GetClassCodeAndParentIDByPupilID(m.SenderID);
 
-            m.SenderID = ClassAndParent["ParentID"]; 
+            m.SenderID = ClassAndParent["ParentID"];
             m.UserClass = ClassAndParent["codeClass"];
         }
 
@@ -830,6 +836,7 @@ public class BetseferWS : System.Web.Services.WebService
         if (answer > 0)
         {
             stringAnswer = "good";
+
 
             if (m.MessageType == "private")
             {
@@ -848,8 +855,16 @@ public class BetseferWS : System.Web.Services.WebService
                 Users user = new Users();
 
                 List<Users> userList = new List<Users>();
+                List<Users> userListWithoutMe = new List<Users>();
+
                 Classes clas = new Classes();
-               string classCode= clas.GetClassCodeAccordingToClassFullName(m.UserClass);
+                string classCode = clas.GetClassCodeAccordingToClassFullName(m.UserClass);
+
+                if (classCode == "")
+                {
+                    classCode = m.UserClass;
+                }
+
                 switch (m.UserType)
                 {
                     case "pupils":
@@ -866,16 +881,26 @@ public class BetseferWS : System.Web.Services.WebService
                         break;
                 }
 
-                string Pushmessage = " התקבלה הודעה חדשה בנושא "+ m.Subject;
+                string Pushmessage = " התקבלה הודעה חדשה בנושא " + m.Subject;
                 string title = "הודעה";
 
-                myPushNot pushNot = new myPushNot(Pushmessage, title, "1", 7, "default");
-                pushNot.RunPushNotification(userList, pushNot);
-            }
-    
-        }
 
+                for (int i = 0; i < userList.Count; i++)
+                {
+                    if (userList[i].UserID1 != m.SenderID)
+                    {
+                        userListWithoutMe.Add(userList[i]);
+                    }
+
+                }
+                myPushNot pushNot = new myPushNot(Pushmessage, title, "1", 7, "default");
+
+                pushNot.RunPushNotification(userListWithoutMe, pushNot);
+            }
+
+        }
         return stringAnswer;
+
     }
 
     public static string KeyByValue(Dictionary<string, string> dict, string val)

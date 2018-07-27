@@ -186,16 +186,16 @@
                             </td>
                         </tr>
                     </table>
-                    <asp:Button Text="text" runat="server" OnClick="Unnamed_Click" />
+                 
                 </form>
                     </div>
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <%-- <footer class="main-footer">
+         <footer >
     <div class="pull-left hidden-xs">Copyright © 2018 Ellis & Dikla. All rights reserved</div>
-    </footer>--%>
+    </footer>
     </div>
     <!-- ./wrapper -->
 
@@ -208,12 +208,5 @@
     <!-- template -->
     <script src="dist/js/niche.js"></script>
 
-    <!-- Chartjs JavaScript -->
-    <script src="dist/plugins/chartjs/chart.min.js"></script>
-    <script src="dist/plugins/chartjs/chart-int.js"></script>
-
-    <!-- Chart Peity JavaScript -->
-    <script src="dist/plugins/peity/jquery.peity.min.js"></script>
-    <script src="dist/plugins/functions/jquery.peity.init.js"></script>
 </body>
 </html>

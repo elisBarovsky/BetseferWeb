@@ -223,6 +223,11 @@ public class Users
         return db.getPupilsByClassCodeDictionary(ClassCode);
     }
 
+    public List<Dictionary<string, string>> getPupilsTeachersParents(string TeacherID)
+    {
+        return db.getPupilsTeachersParents(TeacherID);
+    }
+
     public List<Dictionary<string, string>> getPupilsByClassCodeGrades(string ClassCode)
     {
         return db.getPupilsByClassCodeGrades(ClassCode);
