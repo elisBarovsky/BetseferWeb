@@ -55,7 +55,7 @@ public partial class Teacher_TimeTable : System.Web.UI.Page
         //show time table
         Classes c = new Classes();
         string classFullName = c.GetClassNameByCodeClass(classCode);
-        className.Text = "מערכת השעות של כיתה " + classFullName;
+        className.Text = "מערכת השעות של כיתת החינוך שלך " + classFullName;
         CreateEmptyTimeTable();
         FillTimeTableAccordingToClassCode(classCode);
     }
