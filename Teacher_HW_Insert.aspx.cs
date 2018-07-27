@@ -76,10 +76,19 @@ public partial class Teacher_HW_Insert : System.Web.UI.Page
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "success", "Erroralert('תאריך לא יכול להיות ריק');", true);
             return;
         }
+        string todaydate = "";
+        if (DateTime.Today.Month<10)
+        {
+            todaydate = DateTime.Today.Day + "/0" + DateTime.Today.Month + "/" + DateTime.Today.Year;
 
+        }
+        else
+        {
+            todaydate = DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year;
+        }
         string Bday = newBDATe.Substring(8, 2) + "/" + newBDATe.Substring(5, 2) + "/" + newBDATe.Substring(0, 4);
 
-        int res1 = HW.InserHomeWork(LessonsCode, HomeWorkDesc.Text, TeacherId, ClassCode, Bday, ChangeHagashaCB.Checked);
+        int res1 = HW.InserHomeWork(LessonsCode, HomeWorkDesc.Text, TeacherId, ClassCode, Bday, ChangeHagashaCB.Checked, todaydate);
 
         if (res1 == 1)
         {
