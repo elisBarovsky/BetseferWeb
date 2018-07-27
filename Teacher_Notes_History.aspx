@@ -182,7 +182,9 @@
 
             <!-- /.content -->
         </div>
-
+                 <footer >
+    <div class="pull-left hidden-xs">Copyright © 2018 Ellis & Dikla. All rights reserved</div>
+    </footer>
     </div>
     <!-- ./wrapper -->
   <!-- jQuery 3 -->

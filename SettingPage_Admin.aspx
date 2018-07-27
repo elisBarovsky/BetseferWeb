@@ -168,8 +168,9 @@
 
             <!-- Main content -->
             <section class="content">
-            <div class="login-box">
-                <div class="login-box-body">
+            <div class="info-box">
+                <center> 
+                <div class="login-box-body" style="width:400px">
                 
                     <p>בחר סיסמה חדשה והזן אותה פעמיים </p>
                     <form method="post" runat="server">
@@ -186,11 +187,12 @@
                         </div>
                           <div>
                             <div class="col-xs-4 m-t-1">
-                  <asp:Button ID="Button1" runat="server" class="btn btn-primary btn-block btn-flat" Text="שנה סיסמה" OnClick="ChangePasswordBTN" />
+                  <asp:Button ID="Button1" runat="server" class="btn btn-outline-primary" Width="250px" Text="שנה סיסמה" OnClick="ChangePasswordBTN" />
 
                             </div>
                             <!-- /.col -->
                               <br /><br />
+                                 <p>בחר תמונת פרופיל חדשה  </p>
                               <div class="col-xs-4 m-t-1">
                                   <fieldset class="form-group" runat="server">
                                                 <label class="custom-file center-block block">
@@ -198,18 +200,21 @@
                                                     <span class="custom-file-control"></span>
                                                 </label>
                                             </fieldset>
-                  <asp:Button ID="Button2" runat="server" class="btn btn-primary btn-block btn-flat" Text="העלאת תמונה" OnClick="UploadImgBTN" />
+                  <asp:Button ID="Button2" runat="server" class="btn btn-outline-primary" Width="250px" Text="העלאת תמונה" OnClick="UploadImgBTN" />
 
                             </div>
                         </div>
                     </form>
-                </div>
+                </div></center>
                 <!-- /.login-box-body -->
             </div>
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+                 <footer >
+    <div class="pull-left hidden-xs">Copyright © 2018 Ellis & Dikla. All rights reserved</div>
+    </footer>
     </div>
     <!-- ./wrapper -->
 

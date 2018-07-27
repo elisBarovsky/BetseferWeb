@@ -90,9 +90,4 @@ public partial class Admin_Add_Class : System.Web.UI.Page
     }
 
 
-    protected void Unnamed_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Source.aspx");
-
-    }
 }

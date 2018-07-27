@@ -230,9 +230,9 @@ where  dbo.TimetableLesson.TeacherId =@TID order by dbo.Class.TotalName">
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <%-- <footer class="main-footer">
+         <footer >
     <div class="pull-left hidden-xs">Copyright © 2018 Ellis & Dikla. All rights reserved</div>
-    </footer>--%>
+    </footer>
     </div>
     <!-- ./wrapper -->
 
@@ -245,37 +245,5 @@ where  dbo.TimetableLesson.TeacherId =@TID order by dbo.Class.TotalName">
     <!-- template -->
     <script src="dist/js/niche.js"></script>
 
-    <!-- Chartjs JavaScript -->
-    <script src="dist/plugins/chartjs/chart.min.js"></script>
-    <script src="dist/plugins/chartjs/chart-int.js"></script>
-
-    <!-- Chart Peity JavaScript -->
-    <script src="dist/plugins/peity/jquery.peity.min.js"></script>
-    <script src="dist/plugins/functions/jquery.peity.init.js"></script>
-
-    <%--  <div class="w3-sidebar w3-bar-block w3-card w3-dark-grey w3-xlarge" style="width: 10%; right: 0;">
-            <h3 class="w3-bar-item"></h3>
-            <a href="Admin.aspx" class="w3-bar-item w3-button"><i class="fa fa-home" style="padding-left: 50%"></i></a>
-            <a href="ATimeTable.aspx" class="w3-bar-item w3-button w3-hover-green" style="text-align: right">מערכת שעות</a>
-            <a href="AdminMasseges.aspx" class="w3-bar-item w3-button w3-hover-blue" style="text-align: right">הודעות</a>
-            <a href="AAddNewUser.aspx" class="w3-bar-item w3-button w3-hover-red" style="text-align: right">ניהול משתמשים</a>
-            <a href="AAddClasses.aspx" class="w3-bar-item w3-button w3-hover-blue" style="text-align: right">ניהול כיתות</a>
-            <a href="AAddLessons.aspx" class="w3-bar-item w3-button w3-hover-red" style="text-align: right">ניהול מקצועות</a>
-            <a href="Login.aspx" class="w3-bar-item w3-button"><i class="fa fa-sign-out" style="padding-left: 50%"></i></a>
-
-        </div>
-
-
-        <div style="margin-right: 10%">
-
-            <div class="w3-container w3-dark-grey" style="height: 50px">
-                <img src="Images/Betsefer.png" style="padding-top: 5px; height: 50px">
-            </div>
-
-            <br />
-            <br />
-            <br />--%>
-
-    <%--</div>--%>
 </body>
 </html>

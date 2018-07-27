@@ -84,11 +84,11 @@
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!--<div class="user-panel">
-                    <div class="image text-center"></div>
-                    <div class="info">
-                        <a href="#">ברוך הבא ☺</a>
-                    </div>
-                </div>-->
+                <div class="image text-center"></div>
+                <div class="info">
+                    <a href="#">ברוך הבא ☺</a>
+                </div>
+            </div>-->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="treeview">
@@ -152,26 +152,24 @@
                                             <div style="padding-right:80px">
 
                                                 <fieldset id="messageTypeRBL">
-                                                    <input type="radio" value="private" name="msgType" id="private" checked="checked" onclick="MessageType('private')"/> אישי
+                                                    <input type="radio" value="private" name="msgType" id="private" checked="checked" onclick="MessageType('private')" /> אישי
                                                     <br />
-                                                    <input type="radio" value="kolektive" name="msgType" id="kolektive" onclick="MessageType('kolektive')"/> קולקטיבי
+                                                    <input type="radio" value="kolektive" name="msgType" id="kolektive" onclick="MessageType('kolektive')" /> קולקטיבי
                                                 </fieldset>
                                             </div>
                                         </div>
-                                        <div >
+                                        <div>
                                             <div style="float:right;margin-left:20px">
                                                 <Label ID="classLBL">כיתה: </Label>
                                             </div>
                                             <div style="padding-right:150px">
-                                                <select ID="classDDL"  Class="btn btn-default dropdown-toggle"  data-toggle="dropdown" onchange="FillUsers()">
+                                                <select ID="classDDL" Class="btn btn-default dropdown-toggle" data-toggle="dropdown" onchange="FillUsers()">
                                                     <option value="0">בחר</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-
-                                    </td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -195,9 +193,9 @@
                                                 <Label ID="forLBL">נמען:</Label>
                                             </div>
                                             <div style="padding-right:150px">
-                                                <select ID="childrenDDL"  Class="btn btn-default dropdown-toggle" ></select>
-                                                <select ID="parentsDDL"  Class="btn btn-default dropdown-toggle" ></select>
-                                                <select ID="teachersDDL"  Class="btn btn-default dropdown-toggle" ></select>
+                                                <select ID="childrenDDL" Class="btn btn-default dropdown-toggle"></select>
+                                                <select ID="parentsDDL" Class="btn btn-default dropdown-toggle"></select>
+                                                <select ID="teachersDDL" Class="btn btn-default dropdown-toggle"></select>
                                             </div>
                                         </div>
                                     </td>
@@ -212,17 +210,17 @@
                                             <textarea id="messageContent" class="form-control" style="height: 250px;  white-space: pre-wrap;                                                "></textarea>
                                         </div>
                                         <!--<div style="float:right;margin-left:20px">
-                                            <h6><i class="fa fa-paperclip"></i> נספחים</h6>
-                                        </div>
-                                        <div style="float:right">
-                                            <div action="#" class="dropzone">
-                                                <div class="fallback">
-                                                    <input name="file" type="file" multiple />
-                                                </div>
+                                        <h6><i class="fa fa-paperclip"></i> נספחים</h6>
+                                    </div>
+                                    <div style="float:right">
+                                        <div action="#" class="dropzone">
+                                            <div class="fallback">
+                                                <input name="file" type="file" multiple />
                                             </div>
-                                        </div>-->
+                                        </div>
+                                    </div>-->
                                         <div style="float:left">
-                                            <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)"><img src="Images/paperPlane.png" Height="50"/></button>
+                                            <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)"><img src="Images/paperPlane.png" Height="50" /></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -230,11 +228,14 @@
                             </Table>
                         </div>
                     </div>
-                        </div>
-</section>
+                </div>
+            </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+        <footer>
+            <div class="pull-left hidden-xs">Copyright © 2018 Ellis & Dikla. All rights reserved</div>
+        </footer>
     </div>
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
@@ -245,12 +246,5 @@
     <!-- template -->
     <script src="dist/js/niche.js"></script>
 
-    <!-- Chartjs JavaScript -->
-    <script src="dist/plugins/chartjs/chart.min.js"></script>
-    <script src="dist/plugins/chartjs/chart-int.js"></script>
-
-    <!-- Chart Peity JavaScript -->
-    <script src="dist/plugins/peity/jquery.peity.min.js"></script>
-    <script src="dist/plugins/functions/jquery.peity.init.js"></script>
 </body>
 </html>

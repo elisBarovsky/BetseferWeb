@@ -237,6 +237,9 @@ where  dbo.TeachersTeachesSubjects.TeacherID=@TID">
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+                 <footer >
+    <div class="pull-left hidden-xs">Copyright © 2018 Ellis & Dikla. All rights reserved</div>
+    </footer>
     </div>
     <!-- ./wrapper -->
 
@@ -248,14 +251,5 @@ where  dbo.TeachersTeachesSubjects.TeacherID=@TID">
 
     <!-- template -->
     <script src="dist/js/niche.js"></script>
-
-    <!-- Chartjs JavaScript -->
-    <script src="dist/plugins/chartjs/chart.min.js"></script>
-    <script src="dist/plugins/chartjs/chart-int.js"></script>
-
-    <!-- Chart Peity JavaScript -->
-    <script src="dist/plugins/peity/jquery.peity.min.js"></script>
-    <script src="dist/plugins/functions/jquery.peity.init.js"></script>
-   
 </body>
 </html>
