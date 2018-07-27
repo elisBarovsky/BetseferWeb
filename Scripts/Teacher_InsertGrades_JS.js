@@ -31,7 +31,7 @@ function DisplaySubjects(results) {
 
 function SubjectSelected() {
     var subject = $('#DDLsubjectsAccordingToTeacherID').val();
-    if (subject !== "בחר") {
+    if (subject !== "בחר" && subject !== "0"){
         LoadClassesAccordingToTeacherIdAndSubject(localStorage.getItem("UserID"), subject, DisplayClasses);
     }
 };
