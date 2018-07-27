@@ -92,9 +92,6 @@ public partial class Teacher_Notes_Insert : System.Web.UI.Page
             Dictionary<string, string> PupilList = new Dictionary<string, string>();
             PupilList = (Dictionary<string, string>)(Session["PupilsList"]);
 
-            //Dictionary<string, string> LessonsList = new Dictionary<string, string>();
-            //LessonsList = (Dictionary<string, string>)(Session["LessonsList"]);
-
             string PupilID = KeyByValue(PupilList, PupilsDLL.SelectedValue);
             string NoteID = KeyByValue(NotesList, NotesDLL.SelectedValue);
             string LessonID = ChooseLessonsDLL.SelectedValue;
