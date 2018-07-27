@@ -745,7 +745,7 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string SubmitHWInfo( string HWContent, string DueDate ,string ChoosenClass, string ChoosenSubject, string IsLehagasha, string TeacherID)
+    public string SubmitHWInfo( string HWContent, string DueDate ,string ChoosenClass, string ChoosenSubject, string IsLehagasha, string TeacherID, string GivenDate)
     {
         int answer = 0;
         string stringAnswer = "bad";
@@ -762,7 +762,7 @@ public class BetseferWS : System.Web.Services.WebService
             IsLehag = true;
         }
 
-        answer= InsertHomeW.InserHomeWork(Lesson, HWContent, TeacherID, ClassCode, DueDate, IsLehag);
+        answer= InsertHomeW.InserHomeWork(Lesson, HWContent, TeacherID, ClassCode, DueDate, IsLehag, GivenDate);
 
         if (answer > 0)
         {
@@ -778,7 +778,7 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string SubmitNoteInfo(string Pupil, string CodeNoteType, string TeacherID, string LessonsCode, string Comment)
+    public string SubmitNoteInfo(string Pupil, string CodeNoteType, string TeacherID, string LessonsCode, string Comment, string GivenDate)
     {
         int answer = 0;
         string stringAnswer = "bad";
@@ -792,8 +792,8 @@ public class BetseferWS : System.Web.Services.WebService
         Student student = new Student();
         string StudID = student.GetUserIDByFullName(Pupil);
 
-        string todayDate = DateTime.Today.ToShortDateString();
-        answer = InsertNote.InsertNotes(StudID, NoteCode, todayDate, TeacherID, Lesson, Comment);
+ 
+        answer = InsertNote.InsertNotes(StudID, NoteCode, GivenDate, TeacherID, Lesson, Comment);
 
         if (answer > 0)
         {
