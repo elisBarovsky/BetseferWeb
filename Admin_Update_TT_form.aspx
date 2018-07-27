@@ -85,12 +85,12 @@
             <section class="content">
                 <div class="info-box">
                     <form runat="server">
-                        <table class="auto-style1" align="center">
+             <table class="auto-style1" align="center">
                             <tr>
                                 <td style="text-align: right">בחר מקצוע
                                 </td>
                                 <td style="text-align: right">
-                                    <asp:DropDownList ID="DDLlessons" CssClass="form-control" Style="direction: rtl;" runat="server" DataSourceID="subjects" DataTextField="LessonName" DataValueField="CodeLesson" ></asp:DropDownList>
+                                    <asp:DropDownList ID="DDLlessons" CssClass="form-control" Style="direction: rtl;" runat="server" DataSourceID="subjects" DataTextField="LessonName" DataValueField="CodeLesson" AutoPostBack="true" OnDataBound="FillFirstItem"></asp:DropDownList>
                                     <asp:SqlDataSource ID="subjects" runat="server" ConnectionString="<%$ ConnectionStrings:Betsefer %>" SelectCommand="SELECT [CodeLesson], [LessonName] FROM [Lessons] ORDER BY [LessonName]"></asp:SqlDataSource>
                                 </td>
                             </tr>
@@ -103,8 +103,7 @@
                                 <td style="text-align: right">
                                     <br />
                                     <br />
-                                    <asp:DropDownList ID="TeachersDDL" CssClass="form-control" data-toggle="dropdown" runat="server"  DataTextField="TeacherName" DataValueField="UserID"></asp:DropDownList>
-                                  
+                                    <asp:DropDownList ID="TeachersDDL" CssClass="form-control" data-toggle="dropdown" runat="server"   AutoPostBack="true" OnDataBound="FillFirstItem"></asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>

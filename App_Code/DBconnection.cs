@@ -2156,7 +2156,7 @@ public class DBconnection
 
     public Dictionary<string, string> FillTeacherNotBusy(int WeekDay, int LessonNum )
     {
-        String selectSTR = "select [UserID],[UserFName]+' '+ [UserLName] as FullName from [dbo].[Users] where [CodeUserType]=2 and [UserID] not in (select [TeacherId] from [dbo].[TimetableLesson] "+
+        String selectSTR = "select [UserID],[UserFName]+' '+ [UserLName] as FullName from [dbo].[Users] where [CodeUserType]=2 and [UserID] not in (select [TeacherId] from [dbo].[TimetableLesson] " +
                            " where [CodeWeekDay] = "+WeekDay+" and [ClassTimeCode] = "+ LessonNum+" union select [TeacherId] from [dbo].[TempTimetableLesson] where [CodeWeekDay] = "+ WeekDay+" and [ClassTimeCode] = "+ LessonNum+" )";
         string UserID, TotalName;
         Dictionary<string, string> l = new Dictionary<string, string>();
