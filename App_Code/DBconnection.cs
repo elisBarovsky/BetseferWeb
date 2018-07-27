@@ -3055,10 +3055,20 @@ public class DBconnection
     {
         string contentToHtml = content.Replace("\n", "<br />");
         string tipulBeGeresh = contentToHtml.Replace("'", "''");
-        string date = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+        string dateTime = "";
+        if (DateTime.Today.Month < 10)
+        {
+            dateTime = DateTime.Today.Day + "/0" + DateTime.Today.Month + "/" + DateTime.Today.Year + " " +
+            DateTime.Now.Hour + ":" + DateTime.Now.Minute;
+        }
+        else
+        {
+            dateTime = DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year + " " +
+            DateTime.Now.Hour + ":" + DateTime.Now.Minute;
+        }
 
         string cStr = "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage)" +
-            " VALUES ('" + date + "', '" + SenderID + "', '" + RecieientID + "', '" + tipulBeGeresh + "', '" + Subject + "')";
+            " VALUES ('" + dateTime + "', '" + SenderID + "', '" + RecieientID + "', '" + tipulBeGeresh + "', '" + Subject + "')";
         return ExecuteNonQuery(cStr);
     }
 
@@ -3066,7 +3076,7 @@ public class DBconnection
     {
         List<string> usersIds = new List<string>();
         String cStr = "";
-        string classCode = "";
+        string classCode = "", dateTime = "";
 
         if (userClass!= "" )
         {
@@ -3094,14 +3104,22 @@ public class DBconnection
                 usersIds = getParentsAndPupilsIdByClassCode(classCode);
                 break;
         }
-
-        string date = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+        if (DateTime.Today.Month < 10)
+        {
+            dateTime = DateTime.Today.Day + "/0" + DateTime.Today.Month + "/" + DateTime.Today.Year + " " +
+            DateTime.Now.Hour + ":" + DateTime.Now.Minute;
+        }
+        else
+        {
+            dateTime = DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year + " " +
+            DateTime.Now.Hour + ":" + DateTime.Now.Minute;
+        }
 
         for (int i = 0; i < usersIds.Count; i++)
         {
             if (SenderID != usersIds[i])
             {
-                cStr += "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage) VALUES ('" + date + "','" + SenderID + "', '" + usersIds[i] +
+                cStr += "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage) VALUES ('" + dateTime + "','" + SenderID + "', '" + usersIds[i] +
             "', '" + content + "','" + Subject + "')";
             }
         }
