@@ -224,15 +224,25 @@ function SaveParentsDay() {
 
         var yyyy = today.getFullYear();
         today = dd + '/' + mm + '/' + yyyy;
-        if (mm > chosenDate[1] || dd > chosenDate[2]) {
+
+        if (mm > chosenDate[1]) {
             swal({
                 position: 'top-end',
                 type: 'error',
                 icon: "error",
                 title: 'תאריך זה כבר עבר'
             });
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("myDiv").style.display = "block";
+
+            return;
+        }
+        else if (mm < chosenDate[1] && dd > chosenDate[2]) {
+            swal({
+                position: 'top-end',
+                type: 'error',
+                icon: "error",
+                title: 'תאריך זה כבר עבר'
+            });
+
             return;
         }
 

@@ -420,9 +420,9 @@ public class DBconnectionTeacher
 
     public DataTable FillAllHomeWork(string Id)//WebService  
     {
-        string selectSTR = "SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha ,(select ( UserFName+ ' '+ UserLName)  from dbo.Users where [UserID]= dbo.HomeWork.TeacherID) as Teacher_FullName , dbo.HWPupil.IsDone" +
-            " FROM  dbo.HomeWork INNER JOIN  dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson " +
-            "  where dbo.HWPupil.PupilID = '" + Id + "'  and dbo.HomeWork.HWDueDate > CONVERT(nvarchar(10), getdate(), 103) and dbo.HWPupil.IsDone=0 order by dbo.HomeWork.HWDueDate asc";
+        string selectSTR = " SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha ,(select(UserFName + ' ' + UserLName)  from dbo.Users where [UserID] = dbo.HomeWork.TeacherID) as Teacher_FullName , dbo.HWPupil.IsDone "+
+                            " FROM  dbo.HomeWork INNER JOIN dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson "+
+                            " where dbo.HWPupil.PupilID = '"+ Id+ "'  and CAST(SUBSTRING(dbo.HomeWork.HWDueDate, 4, 2)+'/' + SUBSTRING(dbo.HomeWork.HWDueDate, 1, 2) + '/' + SUBSTRING(dbo.HomeWork.HWDueDate, 7, 4) AS DATE) > CONVERT(nvarchar(10), getdate(), 101) and dbo.HWPupil.IsDone = 0 order by CAST(SUBSTRING(dbo.HomeWork.HWDueDate, 4, 2)+'/'+SUBSTRING(dbo.HomeWork.HWDueDate, 1, 2) +'/'+SUBSTRING(dbo.HomeWork.HWDueDate, 7, 4) AS DATE) asc ";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
@@ -457,9 +457,9 @@ public class DBconnectionTeacher
 
     public DataTable FillAllHomeWork_history(string Id)//WebService 
     {
-        string selectSTR = "SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha ,(select ( UserFName+ ' '+ UserLName)  from dbo.Users where [UserID]= dbo.HomeWork.TeacherID) as Teacher_FullName , dbo.HWPupil.IsDone" +
-            " FROM  dbo.HomeWork INNER JOIN  dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson " +
-            "  where dbo.HWPupil.PupilID = '" + Id + "'  and dbo.HomeWork.HWDueDate < CONVERT(nvarchar(10), getdate(), 103) or dbo.HWPupil.IsDone=1 order by dbo.HomeWork.HWDueDate asc";
+        string selectSTR = " SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha ,(select ( UserFName+ ' '+ UserLName)  from dbo.Users where [UserID]= dbo.HomeWork.TeacherID) as Teacher_FullName , dbo.HWPupil.IsDone "+
+                            " FROM dbo.HomeWork INNER JOIN dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson "+
+                          " where dbo.HWPupil.PupilID = '"+ Id+"'  and CAST(SUBSTRING(dbo.HomeWork.HWDueDate, 4, 2)+' /' + SUBSTRING(dbo.HomeWork.HWDueDate, 1, 2) + '/' + SUBSTRING(dbo.HomeWork.HWDueDate, 7, 4) AS DATE) < CONVERT(nvarchar(10), getdate(), 101) or dbo.HWPupil.IsDone = 1 order by CAST(SUBSTRING(dbo.HomeWork.HWDueDate, 4, 2) + '/' + SUBSTRING(dbo.HomeWork.HWDueDate, 1, 2) + '/' + SUBSTRING(dbo.HomeWork.HWDueDate, 7, 4) AS DATE) asc  ";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
@@ -1719,11 +1719,14 @@ public class DBconnectionTeacher
 
     public DataTable getHwInfoForProgBar(string Id)//WebService
     {
-        string selectSTR = " SELECT  count(dbo.HomeWork.HWCode) as 'Made_HW', (select count(dbo.HomeWork.HWCode) "
-                            + " FROM dbo.HomeWork INNER JOIN dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson "
-                            + " where dbo.HWPupil.PupilID = '" + Id + "'  and CONVERT(datetime, dbo.HomeWork.HWDueDate, 103)> CONVERT(datetime, getdate(), 103)) as 'total_HW' "
-                            + " FROM dbo.HomeWork INNER JOIN dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson "
-                            + " where dbo.HWPupil.PupilID = '" + Id + "'  and CONVERT(datetime, dbo.HomeWork.HWDueDate, 103)> CONVERT(datetime, getdate(), 103) and dbo.HWPupil.IsDone = 1 ";
+        string selectSTR =" SELECT  count(dbo.HomeWork.HWCode) as 'Made_HW', (select count(dbo.HomeWork.HWCode) "+
+                         " FROM dbo.HomeWork INNER JOIN dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson "+
+                        " where dbo.HWPupil.PupilID = '"+ Id+"'  and CAST(SUBSTRING(dbo.HomeWork.HWDueDate, 4, 2)+' /' + SUBSTRING(dbo.HomeWork.HWDueDate, 1, 2) + '/' + SUBSTRING(dbo.HomeWork.HWDueDate, 7, 4) AS DATE)> CONVERT(datetime, getdate(), 101)) as 'total_HW' " +
+                         " FROM dbo.HomeWork INNER JOIN dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson "+
+                        " where dbo.HWPupil.PupilID = '"+ Id+"'  and CAST(SUBSTRING(dbo.HomeWork.HWDueDate, 4, 2)+' /' + SUBSTRING(dbo.HomeWork.HWDueDate, 1, 2) + '/' + SUBSTRING(dbo.HomeWork.HWDueDate, 7, 4) AS DATE)> CONVERT(datetime, getdate(), 101) and dbo.HWPupil.IsDone = 1";
+
+
+
         DataTable dtt = new DataTable();
         DataSet ds;
         try
